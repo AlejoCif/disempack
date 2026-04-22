@@ -65,10 +65,27 @@
 
     .nav-search { font-size: 1rem; color: #555; cursor: pointer; padding: .4rem .6rem; border: none; background: none; }
 
+    .search-overlay {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 500;
+      align-items: flex-start; justify-content: center; padding-top: 80px;
+    }
+    .search-overlay.open { display: flex; }
+    .search-box {
+      background: #fff; border-radius: 8px; display: flex; width: 100%; max-width: 600px;
+      box-shadow: 0 8px 32px rgba(0,0,0,.2); overflow: hidden;
+    }
+    .search-box input {
+      flex: 1; border: none; outline: none; padding: .9rem 1.2rem; font-size: 1rem; font-family: inherit;
+    }
+    .search-box button {
+      background: #1c2f5e; color: #fff; border: none; padding: 0 1.4rem; font-size: 1.1rem; cursor: pointer;
+    }
+    .search-box button:hover { background: #8dc63f; }
+
     /* ── HERO SLIDER ── */
-    .hero { position: relative; width: 100%; height: 520px; overflow: hidden; }
-    .slide { position: absolute; inset: 0; opacity: 0; transition: opacity .8s ease; }
-    .slide.active { opacity: 1; }
+    .hero { position: relative; width: 100%; height: 700px; overflow: hidden; }
+    .slide { position: absolute; inset: 0; opacity: 0; transition: opacity .8s ease; pointer-events: none; }
+    .slide.active { opacity: 1; pointer-events: auto; }
     .slide-bg { width: 100%; height: 100%; object-fit: cover; display: block; }
     .slide-overlay {
       position: absolute; inset: 0;
@@ -77,11 +94,11 @@
       text-align: center; padding: 2rem;
     }
     .slide-overlay h2 {
-      font-size: 2.5rem; font-weight: 700; color: #8dc63f; margin-bottom: 1rem;
+      font-size: 3.1rem; font-weight: 700; color: #8dc63f; margin-bottom: 1rem;
       text-shadow: 0 2px 8px rgba(0,0,0,.4);
     }
     .slide-overlay p {
-      font-size: 1.1rem; color: #fff; max-width: 780px; line-height: 1.7; margin-bottom: 1.8rem;
+      font-size: 1.5rem; color: #fff; max-width: 780px; line-height: 1.7; margin-bottom: 1.8rem;
       text-shadow: 0 1px 4px rgba(0,0,0,.5);
     }
     .slide-overlay p strong { color: #8dc63f; }
@@ -208,15 +225,8 @@
 <!-- NAVBAR -->
 <nav>
   <a href="#" class="logo-wrap">
-    <img src="https://disempack.com.co/wp-content/uploads/2025/11/LOGO-WEB-HEAD-BLANCO-e1768929160286-1024x403.png"
-         alt="Disempack"
-         onerror="this.style.display='none'"/>
-    <!-- Fallback logo if image fails -->
-    <svg viewBox="0 0 44 44" width="40" height="40" style="flex-shrink:0">
-      <polygon points="22,3 41,13 41,31 22,41 3,31 3,13" fill="#1c2f5e"/>
-      <polygon points="22,10 34,17 34,27 22,34 10,27 10,17" fill="#8dc63f"/>
-    </svg>
-    <span style="font-weight:800;font-size:1.1rem;color:#1c2f5e;margin-left:.4rem;">dis<span style="color:#8dc63f;">empack</span></span>
+    <img src="https://disempack.com.co/wp-content/uploads/2025/11/GENERICO-USOS-scaled.png"
+         alt="Disempack"/>
   </a>
 
   <ul class="nav-links">
@@ -256,13 +266,21 @@
     <li><a href="#">Contacto</a></li>
     <li><a href="#">Cotizar</a></li>
   </ul>
-  <button class="nav-search">🔍</button>
+  <button class="nav-search" id="searchBtn">🔍</button>
 </nav>
+
+<!-- SEARCH OVERLAY -->
+<div class="search-overlay" id="searchOverlay">
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Buscar en Disempack…"/>
+    <button id="searchSubmit">🔍</button>
+  </div>
+</div>
 
 <!-- HERO SLIDER -->
 <div class="hero" id="heroSlider">
   <div class="slide active">
-    <img class="slide-bg" src="https://disempack.com.co/wp-content/uploads/2025/11/GENERICO-USOS-1-scaled.png" alt="Impresión Digital"/>
+    <img class="slide-bg" src="https://disempack.com.co/wp-content/uploads/2025/12/SLIDER-1-IMPRESION.png" alt="Impresión Digital"/>
     <div class="slide-overlay">
       <h2>Impresión Digital</h2>
       <p>Sobre materiales rígidos y flexibles, creando texturas únicas que realzan tu marca o proyecto.
@@ -271,7 +289,7 @@
     </div>
   </div>
   <div class="slide">
-    <img class="slide-bg" src="https://disempack.com.co/wp-content/uploads/2025/11/GENERICO-USOS-1-scaled.png" alt="Eco Friendly"/>
+    <img class="slide-bg" src="https://disempack.com.co/wp-content/uploads/2025/12/SLIDER-2-ECONOMIA-CIRCULAR.png" alt="Eco Friendly"/>
     <div class="slide-overlay">
       <h2>Somos Eco Friendly</h2>
       <p>El uso de materiales de bajo peso, alta resistencia y libre de contaminantes asegura duración, funcionalidad y <strong>sostenibilidad.</strong></p>
@@ -279,7 +297,7 @@
     </div>
   </div>
   <div class="slide">
-    <img class="slide-bg" src="https://disempack.com.co/wp-content/uploads/2025/11/GENERICO-USOS-1-scaled.png" alt="20 Años"/>
+    <img class="slide-bg" src="https://disempack.com.co/wp-content/uploads/2025/12/SLIDER-3-20-ANOS-DE-EXPERIENCIA.png" alt="20 Años"/>
     <div class="slide-overlay">
       <h2>20 Años De Experiencia</h2>
       <p>Atendiendo a grandes marcas, ofreciendo diseño orientado al detalle y su materialización en productos personalizados y de alta recordación.</p>
@@ -287,11 +305,18 @@
     </div>
   </div>
   <div class="slide">
-    <img class="slide-bg" src="https://disempack.com.co/wp-content/uploads/2025/11/GENERICO-USOS-1-scaled.png" alt="Lápiz de Acero"/>
+    <img class="slide-bg" src="https://disempack.com.co/wp-content/uploads/2026/04/barbarian_banner.jpg" alt="Lápiz de Acero"/>
     <div class="slide-overlay">
       <h2>Nominados A Los Premios Lápiz De Acero</h2>
       <p>Nuestros desarrollos fueron nominados en los premios <strong>Lápiz de Acero 2023 categoría POP,</strong> un respaldo significativo a su calidad y diseño.</p>
       <a href="https://www.lapizdeacero.org/nominado/tap-handle-barbarian/" class="btn-info" target="_blank">Más Información</a>
+    </div>
+  </div>
+  <div class="slide">
+    <img class="slide-bg" src="https://disempack.com.co/wp-content/uploads/2025/12/SLIDER-4-ACTUALIZACION.png" alt="Experiencia"/>
+    <div class="slide-overlay">
+      <p>En Disempack una nueva experiencia <strong>digital</strong> está en camino.</p>
+      <a href="https://www.lapizdeacero.org/nominado/tap-handle-barbarian/" class="btn-info" target="_blank">Contactar</a>
     </div>
   </div>
 
@@ -448,6 +473,29 @@
 </a>
 
 <script>
+  /* ── SEARCH ── */
+  const searchBtn = document.getElementById('searchBtn');
+  const searchOverlay = document.getElementById('searchOverlay');
+  const searchInput = document.getElementById('searchInput');
+  const searchSubmit = document.getElementById('searchSubmit');
+
+  searchBtn.addEventListener('click', () => {
+    searchOverlay.classList.add('open');
+    searchInput.focus();
+  });
+  searchOverlay.addEventListener('click', (e) => {
+    if (e.target === searchOverlay) searchOverlay.classList.remove('open');
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') searchOverlay.classList.remove('open');
+  });
+  function doSearch() {
+    const q = searchInput.value.trim();
+    if (q) window.open('https://disempack.com.co/?s=' + encodeURIComponent(q), '_blank');
+  }
+  searchSubmit.addEventListener('click', doSearch);
+  searchInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') doSearch(); });
+
   /* ── HERO SLIDER ── */
   const slides = document.querySelectorAll('.slide');
   const dotsWrap = document.getElementById('sliderDots');
