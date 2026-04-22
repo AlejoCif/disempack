@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Disempack SAS - Diseño, Personalización e Impresión Digital</title>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -125,31 +126,42 @@
 
     /* ── VALUE SECTION ── */
     .value-section { background: #fff; padding: 4rem 2rem 2rem; text-align: center; }
-    .value-intro { font-size: .92rem; color: #555; max-width: 780px; margin: 0 auto 3rem; line-height: 1.85; }
+    .value-intro { font-size: 1.1rem; color: #1c2f5e; max-width: 780px; margin: 0 auto 3rem; line-height: 1.85; }
     .value-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; max-width: 880px; margin: 0 auto 3.5rem; }
     .value-item { text-align: center; padding: 1rem .5rem; }
-    .value-icon { width: 80px; height: 80px; margin: 0 auto 1.3rem; display: flex; align-items: center; justify-content: center; }
-    .value-icon svg { width: 72px; height: 72px; fill: #1c2f5e; }
-    .value-item p { font-size: .88rem; color: #555; line-height: 1.75; max-width: 210px; margin: 0 auto; }
+    .value-icon {
+      width: 90px; height: 90px; margin: 0 auto 1.3rem;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .value-icon i {
+      font-size: 5.8rem;
+      color: #1c2f5e;
+    }
+    .value-item p { font-size: .88rem; color: #1c2f5e; line-height: 1.75; max-width: 210px; margin: 0 auto; }
     .value-item p strong { color: #1c2f5e; font-weight: 700; }
 
     /* ── FUSION SECTION ── */
-    .fusion-wrap { padding: 0 2rem 4rem; max-width: 1200px; margin: 0 auto; }
-    .fusion-title { text-align: center; font-size: 1.2rem; font-weight: 700; color: #1c2f5e; margin-bottom: 1.4rem; }
+    .fusion-wrap { padding: 0 2rem 1rem; max-width: 1200px; margin: 0 auto; }
+    .fusion-title { text-align: center; font-size: 2.5rem; font-weight: 700; color: #1c2f5e; margin-bottom: 1.4rem; }
     .fusion-banner { position: relative; border-radius: 6px; overflow: hidden; }
-    .fusion-banner .fusion-bg { width: 100%; height: 200px; object-fit: cover; display: block; filter: brightness(.5) saturate(.7); }
+    .fusion-banner .fusion-bg { width: 100%; height: 220px; object-fit: cover; display: block; filter: brightness(.45) saturate(.7); }
     .fusion-overlay { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(4,1fr); }
     .fusion-item {
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      gap: .75rem; padding: 1rem; border-right: 1px solid rgba(255,255,255,.12);
+      gap: .9rem; padding: 1rem; border-right: 1px solid rgba(255,255,255,.12);
     }
     .fusion-item:last-child { border-right: none; }
-    .fusion-item svg { width: 50px; height: 50px; fill: #8dc63f; }
-    .fusion-item span { color: #8dc63f; font-size: .85rem; font-weight: 700; }
+    .fusion-item i {
+      font-size: 6.0rem;
+      color: #8dc63f;
+      /* match the screenshot style: slightly drop-shadowed */
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,.4));
+    }
+    .fusion-item span { color: #8dc63f; font-size: .88rem; font-weight: 700; letter-spacing: .02em; }
 
     /* ── ALLIES ── */
-    .allies-section { padding: 3.5rem 2rem; background: #fff; text-align: center; border-top: 3px solid #1c2f5e; }
-    .allies-title { font-size: 1.35rem; font-weight: 700; color: #1c2f5e; margin-bottom: 2.5rem; }
+    .allies-section { padding: 1rem 2rem 3.5rem; background: #fff; text-align: center; }
+    .allies-title { font-size: 2.8rem; font-weight: 700; color: #1c2f5e; margin-bottom: 2.5rem; }
     .allies-carousel-wrap { position: relative; display: flex; align-items: center; max-width: 1100px; margin: 0 auto; gap: .8rem; }
     .allies-carousel { overflow: hidden; flex: 1; }
     .allies-track { display: flex; gap: 0; align-items: center; transition: transform .5s ease; }
@@ -162,19 +174,6 @@
       justify-content: center; flex-shrink: 0; transition: border-color .15s, color .15s;
     }
     .ally-btn:hover { border-color: #1c2f5e; color: #1c2f5e; }
-
-    /* ── CTA STRIP ── */
-    .cta-strip {
-      background: #1c2f5e; color: #fff; text-align: center;
-      padding: 3rem 2rem;
-    }
-    .cta-strip h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 1.2rem; }
-    .cta-btn {
-      display: inline-block; background: #8dc63f; color: #fff; font-weight: 700;
-      padding: .7rem 2.2rem; border-radius: 4px; text-decoration: none; font-size: .9rem;
-      transition: background .2s;
-    }
-    .cta-btn:hover { background: #74a832; }
 
     /* ── FOOTER ── */
     footer { background: #1c2f5e; color: #a8bbd8; padding: 3rem 3rem 1.5rem; }
@@ -225,8 +224,7 @@
 <!-- NAVBAR -->
 <nav>
   <a href="#" class="logo-wrap">
-    <img src="https://disempack.com.co/wp-content/uploads/2025/11/GENERICO-USOS-scaled.png"
-         alt="Disempack"/>
+    <img src="https://disempack.com.co/wp-content/uploads/2025/11/GENERICO-USOS-scaled.png" alt="Disempack"/>
   </a>
 
   <ul class="nav-links">
@@ -313,10 +311,10 @@
     </div>
   </div>
   <div class="slide">
-    <img class="slide-bg" src="https://disempack.com.co/wp-content/uploads/2025/12/SLIDER-4-ACTUALIZACION.png" alt="Experiencia"/>
+    <img class="slide-bg" src="https://disempack.com.co/wp-content/uploads/2025/12/SLIDER-4-ACTUALIZACION.png" alt="Experiencia Digital"/>
     <div class="slide-overlay">
       <p>En Disempack una nueva experiencia <strong>digital</strong> está en camino.</p>
-      <a href="https://www.lapizdeacero.org/nominado/tap-handle-barbarian/" class="btn-info" target="_blank">Contactar</a>
+      <a href="https://wa.link/2ka87h" class="btn-info" target="_blank">Contactar</a>
     </div>
   </div>
 
@@ -332,48 +330,21 @@
   </p>
 
   <div class="value-grid">
-    <!-- Cotizaciones 24h -->
     <div class="value-item">
       <div class="value-icon">
-        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-          <!-- History/clock with arrow -->
-          <circle cx="34" cy="34" r="22" fill="none" stroke="#1c2f5e" stroke-width="4"/>
-          <polyline points="34,20 34,34 42,40" fill="none" stroke="#1c2f5e" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M12 34 C12 21 21 11 34 11" fill="none" stroke="#1c2f5e" stroke-width="4" stroke-linecap="round"/>
-          <polyline points="8,8 12,14 18,10" fill="none" stroke="#1c2f5e" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+        <i class="fa-solid fa-clock-rotate-left"></i>
       </div>
       <p><strong>Cotizaciones en 24 horas</strong>, para una toma de decisiones rápida y eficiente.</p>
     </div>
-    <!-- Muestras rápidas -->
     <div class="value-item">
       <div class="value-icon">
-        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-          <!-- Three boxes/cubes -->
-          <rect x="4" y="34" width="22" height="22" rx="2" fill="#1c2f5e"/>
-          <rect x="38" y="34" width="22" height="22" rx="2" fill="#1c2f5e"/>
-          <rect x="21" y="10" width="22" height="22" rx="2" fill="#1c2f5e"/>
-          <!-- highlights -->
-          <rect x="4" y="34" width="22" height="5" rx="2" fill="#2a4080" opacity=".6"/>
-          <rect x="38" y="34" width="22" height="5" rx="2" fill="#2a4080" opacity=".6"/>
-          <rect x="21" y="10" width="22" height="5" rx="2" fill="#2a4080" opacity=".6"/>
-        </svg>
+        <i class="fa-solid fa-cubes"></i>
       </div>
       <p><strong>Muestras rápidas</strong>, que permiten validar ideas y asegurar resultados antes de la producción final.</p>
     </div>
-    <!-- Alta calidad -->
     <div class="value-item">
       <div class="value-icon">
-        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-          <!-- Open box -->
-          <path d="M8 30 L32 42 L56 30 L32 18 Z" fill="#1c2f5e"/>
-          <path d="M8 30 L8 50 L32 62 L56 50 L56 30 L32 42 Z" fill="#1c2f5e" opacity=".85"/>
-          <!-- open flaps -->
-          <path d="M16 16 L32 8 L48 16 L32 24 Z" fill="#1c2f5e"/>
-          <line x1="32" y1="8" x2="32" y2="2" stroke="#1c2f5e" stroke-width="3" stroke-linecap="round"/>
-          <path d="M8 22 L16 16 L32 24 L24 30 Z" fill="#2a4080"/>
-          <path d="M56 22 L48 16 L32 24 L40 30 Z" fill="#2a4080"/>
-        </svg>
+        <i class="fa-solid fa-box-open"></i>
       </div>
       <p><strong>Productos de alta calidad en tiempos récord</strong>, garantizando cumplimiento, precisión y valor en cada entrega.</p>
     </div>
@@ -383,33 +354,27 @@
   <div class="fusion-wrap">
     <p class="fusion-title">En Disempack fusionamos:</p>
     <div class="fusion-banner">
-      <img class="fusion-bg" src="https://disempack.com.co/wp-content/uploads/2025/11/GENERICO-USOS-1-scaled.png" alt="Fusionamos"/>
+      <img class="fusion-bg" src="https://disempack.com.co/wp-content/uploads/2026/01/1dc6a4ba-41eb-4281-99c6-0a424bbf7589.png" alt="Fusionamos"/>
       <div class="fusion-overlay">
         <div class="fusion-item">
-          <svg viewBox="0 0 64 64"><path d="M32 4C16.5 4 4 16.5 4 32s12.5 28 28 28 28-12.5 28-28S47.5 4 32 4zm0 50C19.3 54 10 44.7 10 32S19.3 10 32 10s22 9.3 22 22-9.3 22-22 22z" fill="#8dc63f" opacity=".3"/><path d="M46 28h-4v-4c0-5.5-4.5-10-10-10s-10 4.5-10 10v4h-4v20h28V28zm-18-4c0-2.2 1.8-4 4-4s4 1.8 4 4v4H28v-4zm14 20H22V34h20v10z" fill="#8dc63f"/><circle cx="32" cy="39" r="2.5" fill="#8dc63f"/></svg>
+          <i class="fa-solid fa-gears"></i>
           <span>Ingenierías</span>
         </div>
         <div class="fusion-item">
-          <svg viewBox="0 0 64 64"><path d="M32 4L8 18v28l24 14 24-14V18L32 4zm0 6.4l17 9.9L32 30.2 15 20.3 32 10.4zM12 24.2l18 10.5v21L12 45.2V24.2zm22 31.4v-21l18-10.5v21L34 55.6z" fill="#8dc63f"/></svg>
+          <i class="fa-solid fa-drafting-compass"></i>
           <span>Diseño Industrial</span>
         </div>
         <div class="fusion-item">
-          <svg viewBox="0 0 64 64"><path d="M48 8c-2.2 0-4.3.9-5.9 2.4L14 38.5 12 58l19.5-2 28.1-28.1C61.1 26.3 62 24.2 62 22c0-7.7-7-14-14-14zM27.5 50l5.5 5.5-7.6.8.7-7.5 1.4 1.2zM44 24L26 42l-8-8 18-18 8 8zm8-3l-5-5 2.1-2.1c1-.9 2.4-1.5 3.9-1.5 3.3 0 6 2.7 6 6 0 1.5-.6 2.9-1.5 3.9L56 24l-4-3z" fill="#8dc63f"/></svg>
+          <i class="fa-solid fa-pen-nib"></i>
           <span>Diseño Gráfico</span>
         </div>
         <div class="fusion-item">
-          <svg viewBox="0 0 64 64"><path d="M52 8L28 32c-2-1-4.4-.7-6.1.9C19.7 35 19 39 20 42c-4 0-8 4-8 10h4c0-3 2-6 4-6 .5 3.5 3 6.5 6.5 7.5C30 55 35 52 35 48c3 1 6.5.3 8.5-1.9 1.6-1.7 1.9-4.1.9-6.1L58 16V8H52zm-4 4h4v4L30 38l-4-4 22-22z" fill="#8dc63f"/></svg>
+          <i class="fa-solid fa-paintbrush"></i>
           <span>Procesos Artísticos</span>
         </div>
       </div>
     </div>
   </div>
-</div>
-
-<!-- CTA STRIP -->
-<div class="cta-strip">
-  <h3>En Disempack una nueva experiencia digital está en camino.</h3>
-  <a href="https://wa.link/2ka87h" class="cta-btn" target="_blank">Contactar</a>
 </div>
 
 <!-- ALLIES -->
