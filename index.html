@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Disempack SAS - Diseño, Personalización e Impresión Digital</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Open Sans', sans-serif; color: #333; background: #fff; overflow-x: hidden; }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      background: #1c2f5e;
+      padding: .35rem 2rem;
+      display: flex;
+      justify-content: flex-end;
+      gap: 1.5rem;
+    }
+    .topbar a { color: #ccd6f0; font-size: .75rem; text-decoration: none; transition: color .15s; }
+    .topbar a:hover { color: #fff; }
+
+    /* ── NAVBAR ── */
+    nav {
+      background: #fff;
+      border-bottom: 1px solid #e8e8e8;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .6rem 2.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      box-shadow: 0 2px 8px rgba(0,0,0,.07);
+    }
+    .logo-wrap { display: flex; align-items: center; text-decoration: none; }
+    .logo-wrap img { height: 52px; object-fit: contain; }
+
+    .nav-links { display: flex; align-items: center; gap: .05rem; list-style: none; }
+    .nav-links > li { position: relative; }
+    .nav-links > li > a {
+      display: flex; align-items: center; gap: .3rem;
+      padding: .5rem .85rem;
+      font-size: .83rem; color: #333; text-decoration: none; font-weight: 600;
+      border-radius: 4px; transition: color .15s, background .15s;
+    }
+    .nav-links > li > a:hover { color: #1c2f5e; background: #f5f6fa; }
+    .nav-links > li > a .arrow { font-size: .6rem; color: #888; }
+
+    .dropdown {
+      display: none; position: absolute; top: 100%; left: 0;
+      background: #fff; border: 1px solid #e0e0e0;
+      border-top: 3px solid #8dc63f;
+      border-radius: 0 0 6px 6px; min-width: 210px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.12); list-style: none; z-index: 300;
+    }
+    .nav-links > li:hover .dropdown { display: block; }
+    .dropdown li a {
+      display: block; padding: .6rem 1.2rem; font-size: .82rem; color: #444;
+      text-decoration: none; border-bottom: 1px solid #f0f0f0; transition: background .12s, color .12s;
+    }
+    .dropdown li:last-child a { border-bottom: none; }
+    .dropdown li a:hover { background: #f5f9ec; color: #8dc63f; }
+
+    .nav-search { font-size: 1rem; color: #555; cursor: pointer; padding: .4rem .6rem; border: none; background: none; }
+
+    /* ── HERO SLIDER ── */
+    .hero { position: relative; width: 100%; height: 520px; overflow: hidden; }
+    .slide { position: absolute; inset: 0; opacity: 0; transition: opacity .8s ease; }
+    .slide.active { opacity: 1; }
+    .slide-bg { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .slide-overlay {
+      position: absolute; inset: 0;
+      background: rgba(20,30,60,.45);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 2rem;
+    }
+    .slide-overlay h2 {
+      font-size: 2.5rem; font-weight: 700; color: #8dc63f; margin-bottom: 1rem;
+      text-shadow: 0 2px 8px rgba(0,0,0,.4);
+    }
+    .slide-overlay p {
+      font-size: 1.1rem; color: #fff; max-width: 780px; line-height: 1.7; margin-bottom: 1.8rem;
+      text-shadow: 0 1px 4px rgba(0,0,0,.5);
+    }
+    .slide-overlay p strong { color: #8dc63f; }
+    .btn-info {
+      display: inline-block; background: #fff; color: #8dc63f; font-weight: 700; font-size: .88rem;
+      padding: .65rem 2rem; border-radius: 4px; text-decoration: none; border: 2px solid #fff;
+      transition: background .2s, color .2s;
+    }
+    .btn-info:hover { background: #8dc63f; color: #fff; border-color: #8dc63f; }
+
+    .slider-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,.2); border: none; color: #fff; font-size: 1.5rem;
+      width: 44px; height: 44px; border-radius: 50%; cursor: pointer; z-index: 10;
+      display: flex; align-items: center; justify-content: center; transition: background .2s;
+    }
+    .slider-arrow:hover { background: rgba(255,255,255,.38); }
+    .slider-arrow.prev { left: 1.2rem; }
+    .slider-arrow.next { right: 1.2rem; }
+
+    .slider-dots { position: absolute; bottom: 1.1rem; left: 50%; transform: translateX(-50%); display: flex; gap: .5rem; z-index: 10; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,.45); cursor: pointer; border: none; transition: background .2s; }
+    .dot.active { background: #8dc63f; }
+
+    /* ── VALUE SECTION ── */
+    .value-section { background: #fff; padding: 4rem 2rem 2rem; text-align: center; }
+    .value-intro { font-size: .92rem; color: #555; max-width: 780px; margin: 0 auto 3rem; line-height: 1.85; }
+    .value-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; max-width: 880px; margin: 0 auto 3.5rem; }
+    .value-item { text-align: center; padding: 1rem .5rem; }
+    .value-icon { width: 80px; height: 80px; margin: 0 auto 1.3rem; display: flex; align-items: center; justify-content: center; }
+    .value-icon svg { width: 72px; height: 72px; fill: #1c2f5e; }
+    .value-item p { font-size: .88rem; color: #555; line-height: 1.75; max-width: 210px; margin: 0 auto; }
+    .value-item p strong { color: #1c2f5e; font-weight: 700; }
+
+    /* ── FUSION SECTION ── */
+    .fusion-wrap { padding: 0 2rem 4rem; max-width: 1200px; margin: 0 auto; }
+    .fusion-title { text-align: center; font-size: 1.2rem; font-weight: 700; color: #1c2f5e; margin-bottom: 1.4rem; }
+    .fusion-banner { position: relative; border-radius: 6px; overflow: hidden; }
+    .fusion-banner .fusion-bg { width: 100%; height: 200px; object-fit: cover; display: block; filter: brightness(.5) saturate(.7); }
+    .fusion-overlay { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(4,1fr); }
+    .fusion-item {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: .75rem; padding: 1rem; border-right: 1px solid rgba(255,255,255,.12);
+    }
+    .fusion-item:last-child { border-right: none; }
+    .fusion-item svg { width: 50px; height: 50px; fill: #8dc63f; }
+    .fusion-item span { color: #8dc63f; font-size: .85rem; font-weight: 700; }
+
+    /* ── ALLIES ── */
+    .allies-section { padding: 3.5rem 2rem; background: #fff; text-align: center; border-top: 3px solid #1c2f5e; }
+    .allies-title { font-size: 1.35rem; font-weight: 700; color: #1c2f5e; margin-bottom: 2.5rem; }
+    .allies-carousel-wrap { position: relative; display: flex; align-items: center; max-width: 1100px; margin: 0 auto; gap: .8rem; }
+    .allies-carousel { overflow: hidden; flex: 1; }
+    .allies-track { display: flex; gap: 0; align-items: center; transition: transform .5s ease; }
+    .ally-item { flex: 0 0 20%; display: flex; align-items: center; justify-content: center; padding: 0 1.5rem; }
+    .ally-item img { max-height: 52px; max-width: 140px; object-fit: contain; filter: grayscale(1) brightness(.6); transition: filter .2s; }
+    .ally-item img:hover { filter: grayscale(0) brightness(1); }
+    .ally-btn {
+      width: 34px; height: 34px; border-radius: 50%; border: 1px solid #ccc; background: #fff;
+      cursor: pointer; font-size: 1.1rem; color: #555; display: flex; align-items: center;
+      justify-content: center; flex-shrink: 0; transition: border-color .15s, color .15s;
+    }
+    .ally-btn:hover { border-color: #1c2f5e; color: #1c2f5e; }
+
+    /* ── CTA STRIP ── */
+    .cta-strip {
+      background: #1c2f5e; color: #fff; text-align: center;
+      padding: 3rem 2rem;
+    }
+    .cta-strip h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 1.2rem; }
+    .cta-btn {
+      display: inline-block; background: #8dc63f; color: #fff; font-weight: 700;
+      padding: .7rem 2.2rem; border-radius: 4px; text-decoration: none; font-size: .9rem;
+      transition: background .2s;
+    }
+    .cta-btn:hover { background: #74a832; }
+
+    /* ── FOOTER ── */
+    footer { background: #1c2f5e; color: #a8bbd8; padding: 3rem 3rem 1.5rem; }
+    .footer-top { display: flex; gap: 3rem; align-items: flex-start; margin-bottom: 2.5rem; flex-wrap: wrap; }
+    .footer-logo img { height: 56px; object-fit: contain; }
+    .footer-right { display: flex; flex-wrap: wrap; gap: 2rem; flex: 1; }
+    .footer-col h5 { font-size: .75rem; font-weight: 700; color: #fff; margin-bottom: .6rem; text-transform: uppercase; letter-spacing: .06em; }
+    .footer-col p, .footer-col a { font-size: .84rem; color: #a8bbd8; text-decoration: none; line-height: 1.8; display: block; }
+    .footer-col a:hover { color: #8dc63f; }
+    .footer-divider { border: none; border-top: 1px solid rgba(255,255,255,.1); margin: 1.5rem 0; }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .footer-bottom p { font-size: .78rem; color: #7a90b5; }
+    .footer-socials { display: flex; gap: .8rem; }
+    .footer-socials a {
+      color: #a8bbd8; text-decoration: none; font-size: .8rem; font-weight: 600;
+      border: 1px solid rgba(255,255,255,.2); border-radius: 4px; padding: .3rem .8rem;
+      transition: border-color .15s, color .15s;
+    }
+    .footer-socials a:hover { border-color: #8dc63f; color: #8dc63f; }
+
+    /* ── WHATSAPP FAB ── */
+    .wa-fab {
+      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 999;
+      width: 58px; height: 58px; border-radius: 50%; background: #25d366;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,.5); text-decoration: none;
+      font-size: 1.8rem; transition: transform .2s;
+    }
+    .wa-fab:hover { transform: scale(1.1); }
+    .wa-fab img { width: 36px; height: 36px; border-radius: 50%; }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .value-grid { grid-template-columns: 1fr; max-width: 340px; }
+      .fusion-overlay { grid-template-columns: repeat(2,1fr); }
+      .footer-top { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <a href="#">Terms & Conditions</a>
+  <a href="#">Privacy Policy</a>
+</div>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="#" class="logo-wrap">
+    <img src="https://disempack.com.co/wp-content/uploads/2025/11/LOGO-WEB-HEAD-BLANCO-e1768929160286-1024x403.png"
+         alt="Disempack"
+         onerror="this.style.display='none'"/>
+    <!-- Fallback logo if image fails -->
+    <svg viewBox="0 0 44 44" width="40" height="40" style="flex-shrink:0">
+      <polygon points="22,3 41,13 41,31 22,41 3,31 3,13" fill="#1c2f5e"/>
+      <polygon points="22,10 34,17 34,27 22,34 10,27 10,17" fill="#8dc63f"/>
+    </svg>
+    <span style="font-weight:800;font-size:1.1rem;color:#1c2f5e;margin-left:.4rem;">dis<span style="color:#8dc63f;">empack</span></span>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#">Home</a></li>
+    <li>
+      <a href="#">Exhibición Comercial <span class="arrow">▾</span></a>
+      <ul class="dropdown">
+        <li><a href="#">P.O.P</a></li>
+        <li><a href="#">Señalización Corporativa</a></li>
+        <li><a href="#">Alcancías</a></li>
+        <li><a href="#">Recubrimientos</a></li>
+      </ul>
+    </li>
+    <li><a href="#">Impresión Digital</a></li>
+    <li>
+      <a href="#">Empaques <span class="arrow">▾</span></a>
+      <ul class="dropdown">
+        <li><a href="#">Organizadores</a></li>
+        <li><a href="#">Cajas Plegadizas</a></li>
+        <li><a href="#">Blister</a></li>
+        <li><a href="#">Clam Shell</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">Procesos <span class="arrow">▾</span></a>
+      <ul class="dropdown">
+        <li><a href="#">Impresión Digital</a></li>
+        <li><a href="#">Diseño y Desarrollo</a></li>
+        <li><a href="#">Termoformado</a></li>
+        <li><a href="#">Troquelado</a></li>
+        <li><a href="#">Corte CNC</a></li>
+        <li><a href="#">Acondicionamiento De Productos</a></li>
+        <li><a href="#">Termosellado</a></li>
+        <li><a href="#">Venta De Materia Prima</a></li>
+      </ul>
+    </li>
+    <li><a href="#">Contacto</a></li>
+    <li><a href="#">Cotizar</a></li>
+  </ul>
+  <button class="nav-search">🔍</button>
+</nav>
+
+<!-- HERO SLIDER -->
+<div class="hero" id="heroSlider">
+  <div class="slide active">
+    <img class="slide-bg" src="https://disempack.com.co/wp-content/uploads/2025/11/GENERICO-USOS-1-scaled.png" alt="Impresión Digital"/>
+    <div class="slide-overlay">
+      <h2>Impresión Digital</h2>
+      <p>Sobre materiales rígidos y flexibles, creando texturas únicas que realzan tu marca o proyecto.
+        Usamos tintas UV con certificación <strong>GREENGUARD GOLD,</strong> garantizando calidad y bajo impacto ambiental.</p>
+      <a href="https://disempack.com.co/impresion-digital/" class="btn-info" target="_blank">Más Información</a>
+    </div>
+  </div>
+  <div class="slide">
+    <img class="slide-bg" src="https://disempack.com.co/wp-content/uploads/2025/11/GENERICO-USOS-1-scaled.png" alt="Eco Friendly"/>
+    <div class="slide-overlay">
+      <h2>Somos Eco Friendly</h2>
+      <p>El uso de materiales de bajo peso, alta resistencia y libre de contaminantes asegura duración, funcionalidad y <strong>sostenibilidad.</strong></p>
+      <a href="https://disempack.com.co/somos-eco-friendly/" class="btn-info" target="_blank">Más Información</a>
+    </div>
+  </div>
+  <div class="slide">
+    <img class="slide-bg" src="https://disempack.com.co/wp-content/uploads/2025/11/GENERICO-USOS-1-scaled.png" alt="20 Años"/>
+    <div class="slide-overlay">
+      <h2>20 Años De Experiencia</h2>
+      <p>Atendiendo a grandes marcas, ofreciendo diseño orientado al detalle y su materialización en productos personalizados y de alta recordación.</p>
+      <a href="https://disempack.com.co/sobre-disempack/" class="btn-info" target="_blank">Más Información</a>
+    </div>
+  </div>
+  <div class="slide">
+    <img class="slide-bg" src="https://disempack.com.co/wp-content/uploads/2025/11/GENERICO-USOS-1-scaled.png" alt="Lápiz de Acero"/>
+    <div class="slide-overlay">
+      <h2>Nominados A Los Premios Lápiz De Acero</h2>
+      <p>Nuestros desarrollos fueron nominados en los premios <strong>Lápiz de Acero 2023 categoría POP,</strong> un respaldo significativo a su calidad y diseño.</p>
+      <a href="https://www.lapizdeacero.org/nominado/tap-handle-barbarian/" class="btn-info" target="_blank">Más Información</a>
+    </div>
+  </div>
+
+  <button class="slider-arrow prev" id="prevBtn">&#8249;</button>
+  <button class="slider-arrow next" id="nextBtn">&#8250;</button>
+  <div class="slider-dots" id="sliderDots"></div>
+</div>
+
+<!-- VALUE PROPS -->
+<div class="value-section">
+  <p class="value-intro">
+    Desarrollamos productos innovadores que impulsan la experiencia de nuestros clientes y potencian el posicionamiento de las marcas en escenarios de alto valor. Nuestra propuesta se basa en:
+  </p>
+
+  <div class="value-grid">
+    <!-- Cotizaciones 24h -->
+    <div class="value-item">
+      <div class="value-icon">
+        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+          <!-- History/clock with arrow -->
+          <circle cx="34" cy="34" r="22" fill="none" stroke="#1c2f5e" stroke-width="4"/>
+          <polyline points="34,20 34,34 42,40" fill="none" stroke="#1c2f5e" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 34 C12 21 21 11 34 11" fill="none" stroke="#1c2f5e" stroke-width="4" stroke-linecap="round"/>
+          <polyline points="8,8 12,14 18,10" fill="none" stroke="#1c2f5e" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <p><strong>Cotizaciones en 24 horas</strong>, para una toma de decisiones rápida y eficiente.</p>
+    </div>
+    <!-- Muestras rápidas -->
+    <div class="value-item">
+      <div class="value-icon">
+        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+          <!-- Three boxes/cubes -->
+          <rect x="4" y="34" width="22" height="22" rx="2" fill="#1c2f5e"/>
+          <rect x="38" y="34" width="22" height="22" rx="2" fill="#1c2f5e"/>
+          <rect x="21" y="10" width="22" height="22" rx="2" fill="#1c2f5e"/>
+          <!-- highlights -->
+          <rect x="4" y="34" width="22" height="5" rx="2" fill="#2a4080" opacity=".6"/>
+          <rect x="38" y="34" width="22" height="5" rx="2" fill="#2a4080" opacity=".6"/>
+          <rect x="21" y="10" width="22" height="5" rx="2" fill="#2a4080" opacity=".6"/>
+        </svg>
+      </div>
+      <p><strong>Muestras rápidas</strong>, que permiten validar ideas y asegurar resultados antes de la producción final.</p>
+    </div>
+    <!-- Alta calidad -->
+    <div class="value-item">
+      <div class="value-icon">
+        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+          <!-- Open box -->
+          <path d="M8 30 L32 42 L56 30 L32 18 Z" fill="#1c2f5e"/>
+          <path d="M8 30 L8 50 L32 62 L56 50 L56 30 L32 42 Z" fill="#1c2f5e" opacity=".85"/>
+          <!-- open flaps -->
+          <path d="M16 16 L32 8 L48 16 L32 24 Z" fill="#1c2f5e"/>
+          <line x1="32" y1="8" x2="32" y2="2" stroke="#1c2f5e" stroke-width="3" stroke-linecap="round"/>
+          <path d="M8 22 L16 16 L32 24 L24 30 Z" fill="#2a4080"/>
+          <path d="M56 22 L48 16 L32 24 L40 30 Z" fill="#2a4080"/>
+        </svg>
+      </div>
+      <p><strong>Productos de alta calidad en tiempos récord</strong>, garantizando cumplimiento, precisión y valor en cada entrega.</p>
+    </div>
+  </div>
+
+  <!-- FUSIONAMOS -->
+  <div class="fusion-wrap">
+    <p class="fusion-title">En Disempack fusionamos:</p>
+    <div class="fusion-banner">
+      <img class="fusion-bg" src="https://disempack.com.co/wp-content/uploads/2025/11/GENERICO-USOS-1-scaled.png" alt="Fusionamos"/>
+      <div class="fusion-overlay">
+        <div class="fusion-item">
+          <svg viewBox="0 0 64 64"><path d="M32 4C16.5 4 4 16.5 4 32s12.5 28 28 28 28-12.5 28-28S47.5 4 32 4zm0 50C19.3 54 10 44.7 10 32S19.3 10 32 10s22 9.3 22 22-9.3 22-22 22z" fill="#8dc63f" opacity=".3"/><path d="M46 28h-4v-4c0-5.5-4.5-10-10-10s-10 4.5-10 10v4h-4v20h28V28zm-18-4c0-2.2 1.8-4 4-4s4 1.8 4 4v4H28v-4zm14 20H22V34h20v10z" fill="#8dc63f"/><circle cx="32" cy="39" r="2.5" fill="#8dc63f"/></svg>
+          <span>Ingenierías</span>
+        </div>
+        <div class="fusion-item">
+          <svg viewBox="0 0 64 64"><path d="M32 4L8 18v28l24 14 24-14V18L32 4zm0 6.4l17 9.9L32 30.2 15 20.3 32 10.4zM12 24.2l18 10.5v21L12 45.2V24.2zm22 31.4v-21l18-10.5v21L34 55.6z" fill="#8dc63f"/></svg>
+          <span>Diseño Industrial</span>
+        </div>
+        <div class="fusion-item">
+          <svg viewBox="0 0 64 64"><path d="M48 8c-2.2 0-4.3.9-5.9 2.4L14 38.5 12 58l19.5-2 28.1-28.1C61.1 26.3 62 24.2 62 22c0-7.7-7-14-14-14zM27.5 50l5.5 5.5-7.6.8.7-7.5 1.4 1.2zM44 24L26 42l-8-8 18-18 8 8zm8-3l-5-5 2.1-2.1c1-.9 2.4-1.5 3.9-1.5 3.3 0 6 2.7 6 6 0 1.5-.6 2.9-1.5 3.9L56 24l-4-3z" fill="#8dc63f"/></svg>
+          <span>Diseño Gráfico</span>
+        </div>
+        <div class="fusion-item">
+          <svg viewBox="0 0 64 64"><path d="M52 8L28 32c-2-1-4.4-.7-6.1.9C19.7 35 19 39 20 42c-4 0-8 4-8 10h4c0-3 2-6 4-6 .5 3.5 3 6.5 6.5 7.5C30 55 35 52 35 48c3 1 6.5.3 8.5-1.9 1.6-1.7 1.9-4.1.9-6.1L58 16V8H52zm-4 4h4v4L30 38l-4-4 22-22z" fill="#8dc63f"/></svg>
+          <span>Procesos Artísticos</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA STRIP -->
+<div class="cta-strip">
+  <h3>En Disempack una nueva experiencia digital está en camino.</h3>
+  <a href="https://wa.link/2ka87h" class="cta-btn" target="_blank">Contactar</a>
+</div>
+
+<!-- ALLIES -->
+<div class="allies-section">
+  <h2 class="allies-title">Aliados que confían en Disempack</h2>
+  <div class="allies-carousel-wrap">
+    <button class="ally-btn" id="allyPrev">&#8249;</button>
+    <div class="allies-carousel">
+      <div class="allies-track" id="alliesTrack"></div>
+    </div>
+    <button class="ally-btn" id="allyNext">&#8250;</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-logo">
+      <img src="https://disempack.com.co/wp-content/uploads/2025/11/LOGO-WEB-HEAD-BLANCO-e1768929160286-1024x403.png"
+           alt="Disempack"
+           onerror="this.outerHTML='<span style=\'font-size:1.3rem;font-weight:800;color:#fff;\'>dis<span style=\'color:#8dc63f;\'>empack</span></span>'"/>
+    </div>
+    <div class="footer-right">
+      <div class="footer-col">
+        <h5>Servicio al Cliente</h5>
+        <a href="tel:+573183820863">🇨🇴 318 382 0863</a>
+      </div>
+      <div class="footer-col">
+        <h5>Calidad</h5>
+        <a href="tel:+573011664304">🇨🇴 301 166 4304</a>
+      </div>
+      <div class="footer-col">
+        <h5>Diseño y Desarrollo</h5>
+        <a href="tel:+573005582389">🇨🇴 300 558 2389</a>
+      </div>
+      <div class="footer-col">
+        <h5>Dirección</h5>
+        <p>37A sur No. 72L-95</p>
+      </div>
+      <div class="footer-col">
+        <h5>Horarios</h5>
+        <p>Lunes a Viernes<br/>7:00am – 4:00pm</p>
+      </div>
+    </div>
+  </div>
+  <hr class="footer-divider"/>
+  <div class="footer-bottom">
+    <p>By Disempack S.A.S - 2026</p>
+    <div class="footer-socials">
+      <a href="https://www.facebook.com/profile.php?id=100054201593487" target="_blank">Facebook</a>
+      <a href="https://www.instagram.com/disempack" target="_blank">Instagram</a>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FAB -->
+<a href="https://wa.link/2ka87h" class="wa-fab" target="_blank" title="WhatsApp">
+  <img src="https://disempack.com.co/wp-content/uploads/2026/01/Logo-Whtsapp-Disempack-scaled.png"
+       alt="WhatsApp"
+       onerror="this.outerHTML='<span style=\'color:#fff;font-size:1.9rem;\'>💬</span>'"/>
+</a>
+
+<script>
+  /* ── HERO SLIDER ── */
+  const slides = document.querySelectorAll('.slide');
+  const dotsWrap = document.getElementById('sliderDots');
+  let current = 0, timer;
+
+  slides.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', () => goTo(i));
+    dotsWrap.appendChild(d);
+  });
+
+  function goTo(n) {
+    slides[current].classList.remove('active');
+    dotsWrap.children[current].classList.remove('active');
+    current = (n + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    dotsWrap.children[current].classList.add('active');
+    clearInterval(timer);
+    timer = setInterval(() => goTo(current + 1), 5500);
+  }
+
+  document.getElementById('prevBtn').addEventListener('click', () => goTo(current - 1));
+  document.getElementById('nextBtn').addEventListener('click', () => goTo(current + 1));
+  timer = setInterval(() => goTo(current + 1), 5500);
+
+  /* ── ALLIES CAROUSEL ── */
+  const track = document.getElementById('alliesTrack');
+  const totalLogos = 17;
+  let allyIndex = 0;
+  const visible = 5;
+
+  for (let i = 1; i <= totalLogos; i++) {
+    const div = document.createElement('div');
+    div.className = 'ally-item';
+    const img = document.createElement('img');
+    img.src = `https://disempack.com.co/wp-content/uploads/2025/11/${i}-1.png`;
+    img.alt = `Aliado ${i}`;
+    div.appendChild(img);
+    track.appendChild(div);
+  }
+
+  function moveAllies() {
+    const item = track.querySelector('.ally-item');
+    const w = item ? item.offsetWidth : 160;
+    track.style.transform = `translateX(-${allyIndex * w}px)`;
+  }
+
+  document.getElementById('allyPrev').addEventListener('click', () => {
+    if (allyIndex > 0) { allyIndex--; moveAllies(); }
+  });
+  document.getElementById('allyNext').addEventListener('click', () => {
+    if (allyIndex < totalLogos - visible) { allyIndex++; moveAllies(); }
+  });
+</script>
+</body>
+</html>
