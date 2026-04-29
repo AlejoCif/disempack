@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>P.O.P - Disempack SAS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Open Sans', sans-serif; color: #333; background: #fff; overflow-x: hidden; }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      background: #1c2f5e;
+      padding: .35rem 2rem;
+      display: flex;
+      justify-content: flex-end;
+      gap: 1.5rem;
+    }
+    .topbar a { color: #ccd6f0; font-size: .75rem; text-decoration: none; transition: color .15s; }
+    .topbar a:hover { color: #fff; }
+
+    /* ── NAVBAR ── */
+    nav {
+      background: #fff;
+      border-bottom: 1px solid #e8e8e8;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .6rem 2.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      box-shadow: 0 2px 8px rgba(0,0,0,.07);
+    }
+    .logo-wrap { display: flex; align-items: center; text-decoration: none; }
+    .logo-wrap img { height: 52px; object-fit: contain; }
+
+    .nav-links { display: flex; align-items: center; gap: .05rem; list-style: none; }
+    .nav-links > li { position: relative; }
+    .nav-links > li > a {
+      display: flex; align-items: center; gap: .3rem;
+      padding: .5rem .85rem;
+      font-size: .83rem; color: #333; text-decoration: none; font-weight: 600;
+      border-radius: 4px; transition: color .15s, background .15s;
+    }
+    .nav-links > li > a:hover { color: #1c2f5e; background: #f5f6fa; }
+    .nav-links > li > a .arrow { font-size: .6rem; color: #888; }
+
+    .dropdown {
+      display: none; position: absolute; top: 100%; left: 0;
+      background: #fff; border: 1px solid #e0e0e0;
+      border-top: 3px solid #8dc63f;
+      border-radius: 0 0 6px 6px; min-width: 210px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.12); list-style: none; z-index: 300;
+    }
+    .nav-links > li:hover .dropdown { display: block; }
+    .dropdown li a {
+      display: block; padding: .6rem 1.2rem; font-size: .82rem; color: #444;
+      text-decoration: none; border-bottom: 1px solid #f0f0f0; transition: background .12s, color .12s;
+    }
+    .dropdown li:last-child a { border-bottom: none; }
+    .dropdown li a:hover { background: #f0f0f0; color: #555; }
+
+    .nav-search { font-size: 1rem; color: #555; cursor: pointer; padding: .4rem .6rem; border: none; background: none; }
+
+    .search-overlay {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 500;
+      align-items: flex-start; justify-content: center; padding-top: 80px;
+    }
+    .search-overlay.open { display: flex; }
+    .search-box {
+      background: #fff; border-radius: 8px; display: flex; width: 100%; max-width: 600px;
+      box-shadow: 0 8px 32px rgba(0,0,0,.2); overflow: hidden;
+    }
+    .search-box input {
+      flex: 1; border: none; outline: none; padding: .9rem 1.2rem; font-size: 1rem; font-family: inherit;
+    }
+    .search-box button {
+      background: #1c2f5e; color: #fff; border: none; padding: 0 1.4rem; font-size: 1.1rem; cursor: pointer;
+    }
+    .search-box button:hover { background: #8dc63f; }
+
+    /* ── PAGE HERO ── */
+    .pop-hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2.5rem;
+    }
+    .pop-hero-text h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: #1c2f5e;
+      margin-bottom: 1.2rem;
+      line-height: 1.1;
+    }
+    .pop-hero-text p {
+      font-size: 1rem;
+      color: #444;
+      line-height: 1.85;
+      text-align: justify;
+    }
+    .pop-hero-text p strong { color: #8dc63f; }
+    .pop-hero-img img {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 8px 32px rgba(0,0,0,.12);
+      display: block;
+    }
+
+    /* ── ESENCIA DEL POP ── */
+    .pop-essence {
+      background: #f7f9fc;
+      padding: 4rem 2.5rem;
+    }
+    .pop-essence-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      align-items: start;
+    }
+    .pop-essence-left h4 {
+      font-size: .95rem;
+      font-weight: 700;
+      color: #8dc63f;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      margin-bottom: .5rem;
+    }
+    .pop-essence-left h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #1c2f5e;
+      margin-bottom: 1.2rem;
+    }
+    .pop-essence-left p {
+      font-size: .95rem;
+      color: #444;
+      line-height: 1.85;
+      margin-bottom: 1.5rem;
+      text-align: justify;
+    }
+    .pop-essence-left p strong { color: #1c2f5e; }
+    .pop-essence-left img {
+      width: 100%;
+      border-radius: 6px;
+      display: block;
+      box-shadow: 0 4px 16px rgba(0,0,0,.1);
+    }
+    .pop-essence-right img {
+      width: 100%;
+      border-radius: 6px;
+      display: block;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,.1);
+    }
+    .pop-essence-right p {
+      font-size: .95rem;
+      color: #444;
+      line-height: 1.85;
+      text-align: justify;
+    }
+    .pop-essence-right p strong { color: #8dc63f; }
+
+    /* ── GALLERY SECTION ── */
+    .pop-gallery {
+      padding: 4rem 2.5rem;
+      background: #fff;
+    }
+    .pop-gallery-header {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 3rem;
+    }
+    .pop-gallery-header h4 {
+      font-size: .95rem;
+      font-weight: 700;
+      color: #8dc63f;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      margin-bottom: .5rem;
+    }
+    .pop-gallery-header h2 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #1c2f5e;
+    }
+
+    .pop-carousel-group {
+      max-width: 1200px;
+      margin: 0 auto 3rem;
+    }
+    .pop-carousel-group h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #1c2f5e;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 1rem;
+      padding-left: .5rem;
+      border-left: 4px solid #8dc63f;
+      padding-left: .8rem;
+    }
+    .pop-carousel-wrap {
+      overflow: hidden;
+      position: relative;
+    }
+    .pop-carousel-track {
+      display: flex;
+      gap: 0;
+      align-items: center;
+      will-change: transform;
+    }
+    .pop-carousel-item {
+      flex: 0 0 25%;
+      padding: 0 .75rem;
+    }
+    .pop-carousel-item img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      border-radius: 6px;
+      display: block;
+      box-shadow: 0 2px 12px rgba(0,0,0,.08);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .pop-carousel-item img:hover {
+      transform: scale(1.02);
+      box-shadow: 0 6px 20px rgba(0,0,0,.15);
+    }
+
+    /* ── APPLICATIONS ── */
+    .pop-applications {
+      background: #f7f9fc;
+      padding: 4rem 2.5rem;
+    }
+    .pop-applications h2 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #1c2f5e;
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .pop-apps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .pop-app-item {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      padding: .7rem 0;
+      border-bottom: 1px solid #e8ecf4;
+      font-size: .92rem;
+      color: #333;
+    }
+    .pop-app-item::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #8dc63f;
+      flex-shrink: 0;
+    }
+
+    /* ── BENEFITS ── */
+    .pop-benefits {
+      padding: 4rem 2.5rem;
+      background: #fff;
+    }
+    .pop-benefits h2 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #1c2f5e;
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .pop-benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .pop-benefit-item {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      border-radius: 8px;
+      border: 1px solid #e8ecf4;
+      box-shadow: 0 2px 12px rgba(0,0,0,.05);
+    }
+    .pop-benefit-item i {
+      font-size: 2.8rem;
+      color: #8dc63f;
+      margin-bottom: 1rem;
+    }
+    .pop-benefit-item h4 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #1c2f5e;
+    }
+
+    /* ── FAQ ── */
+    .pop-faq {
+      background: #f7f9fc;
+      padding: 4rem 2.5rem;
+    }
+    .pop-faq-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .pop-faq-header h2 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #1c2f5e;
+      margin-bottom: .8rem;
+    }
+    .pop-faq-header p {
+      font-size: .95rem;
+      color: #555;
+    }
+    .pop-faq-header p strong { color: #8dc63f; }
+    .pop-faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .faq-item {
+      border-bottom: 1px solid #dde3ef;
+    }
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.1rem 0;
+      cursor: pointer;
+      font-size: .93rem;
+      font-weight: 700;
+      color: #1c2f5e;
+    }
+    .faq-question .faq-icon {
+      font-size: .75rem;
+      color: #8dc63f;
+      flex-shrink: 0;
+      transition: transform .25s;
+    }
+    .faq-item.open .faq-icon { transform: rotate(180deg); }
+    .faq-answer {
+      display: none;
+      font-size: .9rem;
+      color: #555;
+      line-height: 1.8;
+      padding-bottom: 1.1rem;
+      text-align: justify;
+    }
+    .faq-item.open .faq-answer { display: block; }
+
+    /* ── CTA BANNER ── */
+    .pop-cta-wrap {
+      padding: 2rem 2.5rem 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .pop-cta-banner {
+      position: relative;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .pop-cta-bg {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+      filter: brightness(.35) saturate(.6);
+    }
+    .pop-cta-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      text-align: center;
+      padding: 2rem;
+    }
+    .pop-cta-overlay h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .pop-cta-btn {
+      display: inline-block;
+      background: #8dc63f;
+      color: #fff;
+      font-weight: 700;
+      font-size: .95rem;
+      padding: .75rem 2.2rem;
+      border-radius: 4px;
+      text-decoration: none;
+      border: 2px solid #8dc63f;
+      transition: background .2s, color .2s;
+    }
+    .pop-cta-btn:hover { background: #fff; color: #8dc63f; }
+
+    /* ── FOOTER ── */
+    footer { background: #1c2f5e; color: #a8bbd8; padding: 3rem 3rem 1.5rem; }
+    .footer-top { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3rem; align-items: start; margin-bottom: 2.5rem; }
+    .footer-col { display: flex; justify-content: center; }
+    .footer-col-inner { text-align: left; }
+    .footer-col h5 { font-size: .75rem; font-weight: 700; color: #fff; margin-bottom: .6rem; text-transform: uppercase; letter-spacing: .06em; }
+    .footer-col p, .footer-col a { font-size: .84rem; color: #a8bbd8; text-decoration: none; line-height: 1.8; display: block; }
+    .footer-col a:hover { color: #8dc63f; }
+    .footer-col-logo { display: flex; justify-content: center; align-items: center; }
+    .footer-col-logo img { height: 112px; object-fit: contain; }
+    .footer-divider { border: none; border-top: 1px solid rgba(255,255,255,.1); margin: 1.5rem 0; }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .footer-bottom p { font-size: .78rem; color: #7a90b5; }
+    .footer-socials { display: flex; gap: .8rem; }
+    .footer-socials a {
+      color: #a8bbd8; text-decoration: none; font-size: 1.4rem;
+      border: 1px solid rgba(255,255,255,.2); border-radius: 50%; width: 38px; height: 38px;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color .15s, color .15s;
+    }
+    .footer-socials a:hover { border-color: #8dc63f; color: #8dc63f; }
+
+    /* ── WHATSAPP FAB ── */
+    .wa-fab {
+      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 999;
+      width: 58px; height: 58px; border-radius: 50%; background: #25d366;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,.5); text-decoration: none;
+      font-size: 1.8rem; transition: transform .2s;
+    }
+    .wa-fab:hover { transform: scale(1.1); }
+    .wa-fab img { width: 36px; height: 36px; border-radius: 50%; }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .pop-hero { grid-template-columns: 1fr; }
+      .pop-essence-inner { grid-template-columns: 1fr; }
+      .pop-apps-grid { grid-template-columns: 1fr 1fr; }
+      .pop-benefits-grid { grid-template-columns: 1fr; max-width: 360px; }
+      .pop-faq-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+      .pop-carousel-item { flex: 0 0 50%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <a href="#">Terms &amp; Conditions</a>
+  <a href="#">Privacy Policy</a>
+</div>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="index.html" class="logo-wrap">
+    <img src="https://disempack.com.co/wp-content/uploads/2025/11/GENERICO-USOS-scaled.png" alt="Disempack"/>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li>
+      <a href="#">Exhibición Comercial <span class="arrow">▾</span></a>
+      <ul class="dropdown">
+        <li><a href="pop.html">P.O.P</a></li>
+        <li><a href="senalizacion-corporativa.html">Señalización Corporativa</a></li>
+        <li><a href="#">Alcancías</a></li>
+        <li><a href="#">Recubrimientos</a></li>
+      </ul>
+    </li>
+    <li><a href="#">Impresión Digital</a></li>
+    <li>
+      <a href="#">Empaques <span class="arrow">▾</span></a>
+      <ul class="dropdown">
+        <li><a href="#">Organizadores</a></li>
+        <li><a href="#">Cajas Plegadizas</a></li>
+        <li><a href="#">Blister</a></li>
+        <li><a href="#">Clam Shell</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">Procesos <span class="arrow">▾</span></a>
+      <ul class="dropdown">
+        <li><a href="#">Impresión Digital</a></li>
+        <li><a href="#">Diseño y Desarrollo</a></li>
+        <li><a href="#">Termoformado</a></li>
+        <li><a href="#">Troquelado</a></li>
+        <li><a href="#">Corte CNC</a></li>
+        <li><a href="#">Acondicionamiento De Productos</a></li>
+        <li><a href="#">Termosellado</a></li>
+        <li><a href="#">Venta De Materia Prima</a></li>
+      </ul>
+    </li>
+    <li><a href="#">Contacto</a></li>
+    <li><a href="#">Cotizar</a></li>
+  </ul>
+  <button class="nav-search" id="searchBtn">🔍</button>
+</nav>
+
+<!-- SEARCH OVERLAY -->
+<div class="search-overlay" id="searchOverlay">
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Buscar en Disempack…"/>
+    <button id="searchSubmit">🔍</button>
+  </div>
+</div>
+
+<!-- ══ PAGE HERO ══ -->
+<section class="pop-hero">
+  <div class="pop-hero-text">
+    <h1>P.O.P</h1>
+    <p>Desarrollamos soluciones estratégicas de exhibición y empaque que combinan funcionalidad, eficiencia logística y diseño. Creamos piezas a medida con materiales adecuados para cada entorno comercial. Contamos con experiencia en <strong>exhibidores, empaques promocionales y material publicitario,</strong> y trabajamos con materiales reciclados postconsumo para ofrecer productos de alta calidad con menor impacto ambiental.</p>
+  </div>
+  <div class="pop-hero-img">
+    <img src="https://disempack.com.co/wp-content/uploads/2026/01/POP-BEBIDAS.png" alt="P.O.P Bebidas"/>
+  </div>
+</section>
+
+<!-- ══ ESENCIA DEL POP ══ -->
+<section class="pop-essence">
+  <div class="pop-essence-inner">
+    <div class="pop-essence-left">
+      <h4>¿Qué es P.O.P?</h4>
+      <h2>La Esencia del P.O.P</h2>
+      <p>Es el <strong>material publicitario y de exhibición</strong> que se utiliza directamente en el lugar donde el consumidor toma la decisión de compra. Su objetivo es <strong>atraer la atención, comunicar valor y destacar la marca o el producto</strong> dentro del entorno comercial.</p>
+      <img src="https://disempack.com.co/wp-content/uploads/2026/01/PICKET.png" alt="Picket P.O.P"/>
+    </div>
+    <div class="pop-essence-right">
+      <img src="https://disempack.com.co/wp-content/uploads/2026/01/portada-P.O.P.png" alt="Portada P.O.P"/>
+      <p><strong style="color:#8dc63f;">La esencia del P.O.P</strong> está en transformar el punto de venta en una oportunidad de conexión y decisión. A través de soluciones visuales estratégicas, impresión directa de alta calidad y procesos productivos eficientes, hacemos más atractiva y poderosa la promesa de venta de nuestros clientes, logrando que sus marcas destaquen, <strong style="color:#8dc63f;">comuniquen valor y conviertan la atención del consumidor en compra.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ GALLERY ══ -->
+<section class="pop-gallery">
+  <div class="pop-gallery-header">
+    <h4>Explora Nuestra Selección de Productos</h4>
+    <h2>Galería de Productos Destacados</h2>
+  </div>
+
+  <!-- FLANYER -->
+  <div class="pop-carousel-group">
+    <h4>Flanyer</h4>
+    <div class="pop-carousel-wrap">
+      <div class="pop-carousel-track" id="track-flanyer"></div>
+    </div>
+  </div>
+
+  <!-- EXHIBIDORES -->
+  <div class="pop-carousel-group">
+    <h4>Exhibidores</h4>
+    <div class="pop-carousel-wrap">
+      <div class="pop-carousel-track" id="track-exhibidores"></div>
+    </div>
+  </div>
+
+  <!-- PÓSTERS Y AFICHES -->
+  <div class="pop-carousel-group">
+    <h4>Pósters y Afiches</h4>
+    <div class="pop-carousel-wrap">
+      <div class="pop-carousel-track" id="track-posters"></div>
+    </div>
+  </div>
+
+  <!-- CENEFAS, MEDALLONES Y CUP MAPS -->
+  <div class="pop-carousel-group">
+    <h4>Cenefas, Medallones y Cup Maps</h4>
+    <div class="pop-carousel-wrap">
+      <div class="pop-carousel-track" id="track-cenefas"></div>
+    </div>
+  </div>
+
+  <!-- DISPLAYS -->
+  <div class="pop-carousel-group">
+    <h4>Displays</h4>
+    <div class="pop-carousel-wrap">
+      <div class="pop-carousel-track" id="track-displays"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ APPLICATIONS ══ -->
+<section class="pop-applications">
+  <h2>Aplicaciones del Servicio</h2>
+  <div class="pop-apps-grid">
+    <!-- Col 1 -->
+    <div class="pop-app-item">Exhibidores de cartón</div>
+    <div class="pop-app-item">Porta folletos</div>
+    <div class="pop-app-item">Tiras de anaquel</div>
+
+    <div class="pop-app-item">Displays de mostrador</div>
+    <div class="pop-app-item">Afiches promocionales</div>
+    <div class="pop-app-item">Dispensadores de producto</div>
+
+    <div class="pop-app-item">Stoppers de góndola</div>
+    <div class="pop-app-item">Vinilos adhesivos</div>
+    <div class="pop-app-item">Islas promocionales</div>
+
+    <div class="pop-app-item">Cenefa publicitaria</div>
+    <div class="pop-app-item">Floor graphics (gráficos de piso)</div>
+    <div class="pop-app-item">Tótems publicitarios</div>
+
+    <div class="pop-app-item">Habladores de precio</div>
+    <div class="pop-app-item">Roll up publicitario</div>
+    <div class="pop-app-item">Displays luminosos</div>
+
+    <div class="pop-app-item">Wobblers (material colgante)</div>
+    <div class="pop-app-item">Banderolas</div>
+    <div class="pop-app-item">Móviles colgantes</div>
+  </div>
+</section>
+
+<!-- ══ BENEFITS ══ -->
+<section class="pop-benefits">
+  <h2>Beneficios para el Cliente</h2>
+  <div class="pop-benefits-grid">
+    <div class="pop-benefit-item">
+      <i class="fa-solid fa-sliders"></i>
+      <h4>Personalización Total</h4>
+    </div>
+    <div class="pop-benefit-item">
+      <i class="fa-solid fa-truck-fast"></i>
+      <h4>Entrega Rápida</h4>
+    </div>
+    <div class="pop-benefit-item">
+      <i class="fa-solid fa-medal"></i>
+      <h4>Calidad Superior</h4>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FAQ ══ -->
+<section class="pop-faq">
+  <div class="pop-faq-header">
+    <h2>Preguntas Frecuentes sobre P.O.P</h2>
+    <p><strong>Conoce las respuestas a las preguntas más frecuentes sobre nuestros P.O.P.</strong><br/>
+    Diseñados para brindar <strong>alta visibilidad</strong>, ideales para destacar tu producto en el punto de venta.</p>
+  </div>
+  <div class="pop-faq-grid">
+    <!-- Columna izquierda -->
+    <div>
+      <div class="faq-item open">
+        <div class="faq-question">
+          ¿En qué negocios se puede usar el material P.O.P?
+          <i class="fa-solid fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">Se puede utilizar en supermercados, tiendas minoristas, farmacias, ferreterías, centros comerciales, eventos, ferias y cualquier espacio físico donde se ofrezcan productos o servicios.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">
+          ¿El material P.O.P se puede personalizar?
+          <i class="fa-solid fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">Sí. Todo el material P.O.P puede diseñarse y producirse de forma personalizada, adaptándose a la imagen de marca, objetivos de campaña, espacio disponible y tipo de público objetivo.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">
+          ¿Cómo elegir el material P.O.P adecuado para mi marca?
+          <i class="fa-solid fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">La elección depende del producto, el punto de venta, el presupuesto y el objetivo de comunicación. Un buen material P.O.P debe ser visualmente atractivo, funcional, resistente y coherente con la estrategia de marketing.</div>
+      </div>
+    </div>
+    <!-- Columna derecha -->
+    <div>
+      <div class="faq-item open">
+        <div class="faq-question">
+          ¿Cómo contribuye el P.O.P a la sostenibilidad?
+          <i class="fa-solid fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">Cuando se diseña y produce de forma responsable. Esto se logra mediante el uso de materiales reciclables o biodegradables, la reducción de desperdicios en los procesos de producción, la optimización de tamaños y estructuras, y la creación de piezas reutilizables o de larga duración. Además, un P.O.P bien planificado minimiza reemplazos innecesarios y promueve una comunicación eficiente en el punto de venta.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">
+          ¿Qué opciones de impresión ofrecen para P.O.P?
+          <i class="fa-solid fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">En <strong>Disempack</strong> ofrecemos opciones de impresión para material P.O.P con altos estándares de calidad, utilizando <strong>tecnología de impresión digital directa UV</strong> sobre materiales rígidos y flexibles. Esto nos permite lograr gráficos nítidos, colores vibrantes y acabados durables. Todas las piezas son <strong>100% personalizables</strong>, alineadas con la identidad de marca y pensadas para generar alto impacto visual.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">
+          ¿Cuál es el tiempo de entrega para una producción de P.O.P?
+          <i class="fa-solid fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">Puede variar según la <strong>complejidad del diseño, tamaño del pedido y personalización requerida</strong>. En general, los plazos de producción se coordinan caso por caso para garantizar calidad y cumplimiento. Te recomendamos <strong>contactar directamente con nuestro equipo para una cotización y plazo de entrega personalizados</strong> según tu proyecto.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<div class="pop-cta-wrap">
+  <div class="pop-cta-banner">
+    <img class="pop-cta-bg" src="https://disempack.com.co/wp-content/uploads/2026/01/POP-BEBIDAS.png" alt="Contáctanos"/>
+    <div class="pop-cta-overlay">
+      <h2>Contáctanos para Soluciones Personalizadas</h2>
+      <a href="https://disempack.com.co/cotizar/" target="_blank" class="pop-cta-btn">Solicitar Información</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-col">
+      <div class="footer-col-inner">
+        <h5>Servicio al Cliente</h5>
+        <a href="tel:+573183820863">🇨🇴 318 382 0863</a>
+        <h5 style="margin-top:1.2rem;">Calidad</h5>
+        <a href="tel:+573011664304">🇨🇴 301 166 4304</a>
+        <h5 style="margin-top:1.2rem;">Diseño y Desarrollo</h5>
+        <a href="tel:+573005582389">🇨🇴 300 558 2389</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-inner">
+        <h5>Dirección</h5>
+        <p>37A sur No. 72L-95</p>
+        <h5 style="margin-top:1.2rem;">Horarios</h5>
+        <p>Lunes a Viernes<br/>7:00am – 4:00pm</p>
+      </div>
+    </div>
+    <div class="footer-col-logo">
+      <img src="https://disempack.com.co/wp-content/uploads/2025/11/LOGO-WEB-HEAD-BLANCO-e1768929160286-1024x403.png" alt="Disempack"/>
+    </div>
+  </div>
+  <hr class="footer-divider"/>
+  <div class="footer-bottom">
+    <p>By Disempack S.A.S - 2026</p>
+    <div class="footer-socials">
+      <a href="https://www.facebook.com/profile.php?id=100054201593487" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/disempack" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FAB -->
+<a href="https://wa.link/2ka87h" class="wa-fab" target="_blank" title="WhatsApp">
+  <img src="https://disempack.com.co/wp-content/uploads/2026/01/Logo-Whtsapp-Disempack-scaled.png"
+       alt="WhatsApp"
+       onerror="this.outerHTML='<span style=\'color:#fff;font-size:1.9rem;\'>💬</span>'"/>
+</a>
+
+<script>
+  /* ── SEARCH ── */
+  const searchBtn = document.getElementById('searchBtn');
+  const searchOverlay = document.getElementById('searchOverlay');
+  const searchInput = document.getElementById('searchInput');
+  const searchSubmit = document.getElementById('searchSubmit');
+
+  searchBtn.addEventListener('click', () => {
+    searchOverlay.classList.add('open');
+    searchInput.focus();
+  });
+  searchOverlay.addEventListener('click', (e) => {
+    if (e.target === searchOverlay) searchOverlay.classList.remove('open');
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') searchOverlay.classList.remove('open');
+  });
+  function doSearch() {
+    const q = searchInput.value.trim();
+    if (q) window.open('https://disempack.com.co/?s=' + encodeURIComponent(q), '_blank');
+  }
+  searchSubmit.addEventListener('click', doSearch);
+  searchInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') doSearch(); });
+
+  /* ── GALLERY CAROUSELS ── */
+  const BASE = 'https://disempack.com.co/wp-content/uploads/2026/01/';
+
+  const carousels = [
+    {
+      id: 'track-flanyer',
+      images: [
+        'IMAGENES-FLANGER-P.O.P_ZEN.png',
+        'IMAGENES-FLANGER-P.O.P_SAVILOE-1.png',
+        'IMAGENES-FLANGER-P.O.P_SAVILOE-2.png',
+        'IMAGENES-FLANGER-P.O.P_PICKIT.png',
+        'IMAGENES-FLANGER-P.O.P_LIKE.png'
+      ]
+    },
+    {
+      id: 'track-exhibidores',
+      images: [
+        'MOSTRADORES_CUATES.png',
+        'MOSTRADORES_INAFER.png',
+        'MOSTRADORES_LIKE-AZUL.png',
+        'MOSTRADORES_LIKE-LUZ.png',
+        'MOSTRADORES_SCHNEIDER.png'
+      ]
+    },
+    {
+      id: 'track-posters',
+      images: [
+        'IMAGENES-FLANGER-P.O.P_TERROCUATES.png',
+        'IMAGENES-FLANGER-P.O.P_PUAVE.png',
+        'IMAGENES-FLANGER-P.O.P_CUSTOM.png'
+      ]
+    },
+    {
+      id: 'track-cenefas',
+      images: [
+        'IMAGENES-FLANGER-P.O.P_LUKER.png',
+        'IMAGENES-FLANGER-P.O.P_LUKAFE.png',
+        'IMAGENES-FLANGER-P.O.P_LOS-CUATES.png',
+        'IMAGENES-FLANGER-P.O.P_BBC-MEDALLONES.png',
+        'IMAGENES-FLANGER-P.O.P_BBC.png',
+        'IMAGENES-FLANGER-P.O.P_CUP-MAT-22.png',
+        'IMAGENES-FLANGER-P.O.P_CUP-MAT-23.png'
+      ]
+    },
+    {
+      id: 'track-displays',
+      images: [
+        'IMAGENES-FLANGER-P.O.P_COMPLETISIMO.png',
+        'IMAGENES-FLANGER-P.O.P_IGORA.png',
+        'IMAGENES-FLANGER-P.O.P_SAWY.png'
+      ]
+    }
+  ];
+
+  carousels.forEach(({ id, images }) => {
+    const track = document.getElementById(id);
+    // Duplicate images for seamless loop (need at least 4 visible)
+    const copies = images.length < 4 ? 3 : 2;
+    for (let pass = 0; pass < copies; pass++) {
+      images.forEach(src => {
+        const item = document.createElement('div');
+        item.className = 'pop-carousel-item';
+        const img = document.createElement('img');
+        img.src = BASE + src;
+        img.alt = src.replace(/\.png$/, '').replace(/_/g, ' ');
+        item.appendChild(img);
+        track.appendChild(item);
+      });
+    }
+
+    let pos = 0;
+    let paused = false;
+    const speed = 0.6;
+
+    track.addEventListener('mouseenter', () => paused = true);
+    track.addEventListener('mouseleave', () => paused = false);
+
+    function animate() {
+      if (!paused) {
+        pos += speed;
+        const item = track.querySelector('.pop-carousel-item');
+        const itemW = item ? item.offsetWidth : 300;
+        const loopAt = itemW * images.length;
+        if (pos >= loopAt) pos = 0;
+        track.style.transform = `translateX(-${pos}px)`;
+      }
+      requestAnimationFrame(animate);
+    }
+    animate();
+  });
+
+  /* ── FAQ ACCORDION ── */
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      item.classList.toggle('open');
+    });
+  });
+</script>
+</body>
+</html>
