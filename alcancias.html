@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Señalización Corporativa - Disempack SAS</title>
+  <title>Alcancías - Disempack SAS</title>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <style>
@@ -60,28 +60,24 @@
     .search-box button { background: #1c2f5e; color: #fff; border: none; padding: 0 1.4rem; font-size: 1.1rem; cursor: pointer; }
     .search-box button:hover { background: #8dc63f; }
 
-    /* ── PAGE HERO ── */
-    .sc-hero {
+    /* ── HERO ── */
+    .al-hero {
       position: relative;
       width: 100%;
       height: 600px;
-      background-image: url('https://disempack.com.co/wp-content/uploads/2026/01/retroilminada.png');
+      background-image: url('https://disempack.com.co/wp-content/uploads/2026/01/ALCANCIAS-HEAD.png');
       background-size: cover;
-      background-position: center 70%;
+      background-position: center 40%;
       overflow: hidden;
     }
-    .sc-hero-overlay {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 2rem 2.5rem;
-      background: rgba(28, 47, 94, .3);
+    .al-hero-overlay {
+      position: absolute; inset: 0;
+      background: rgba(28, 47, 94, .5);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 2rem 2.5rem;
     }
-    .sc-hero-text-box {
+    .al-hero-text-box {
       background: rgba(10, 20, 50, .65);
       backdrop-filter: blur(4px);
       -webkit-backdrop-filter: blur(4px);
@@ -89,81 +85,64 @@
       padding: 2.5rem 3rem;
       max-width: 820px;
     }
-    .sc-hero-overlay h1 {
-      font-size: 3rem;
-      font-weight: 800;
-      color: #fff;
-      margin-bottom: 1.2rem;
-      letter-spacing: .03em;
+    .al-hero-text-box h1 {
+      font-size: 3rem; font-weight: 800; color: #fff;
+      margin-bottom: 1.2rem; letter-spacing: .03em;
     }
-    .sc-hero-overlay h1 span { color: #8dc63f; }
-    .sc-hero-overlay p {
-      font-size: 1.05rem;
-      color: #e0e8f8;
-      line-height: 1.85;
-    }
-
-    /* ── ESENCIA ── */
-    .sc-essence { padding: 4rem 2.5rem; background: #f7f9fc; }
-    .sc-essence-inner {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 3rem; max-width: 1200px; margin: 0 auto; align-items: start;
-    }
-    .sc-essence-left h4 { font-size: .9rem; font-weight: 700; color: #8dc63f; text-transform: uppercase; letter-spacing: .1em; margin-bottom: .5rem; }
-    .sc-essence-left h2 { font-size: 1.9rem; font-weight: 700; color: #1c2f5e; margin-bottom: 1.2rem; }
-    .sc-essence-left p { font-size: .95rem; color: #444; line-height: 1.85; margin-bottom: 1.5rem; text-align: justify; }
-    .sc-essence-left p strong { color: #1c2f5e; }
-    .sc-essence-left img { width: 100%; border-radius: 6px; display: block; box-shadow: 0 4px 16px rgba(0,0,0,.1); }
-    .sc-essence-right img { width: 100%; border-radius: 6px; display: block; margin-bottom: 1.5rem; box-shadow: 0 4px 16px rgba(0,0,0,.1); }
-    .sc-essence-right p { font-size: .95rem; color: #444; line-height: 1.85; text-align: justify; }
-    .sc-essence-right p strong { color: #1c2f5e; }
+    .al-hero-text-box h1 span { color: #8dc63f; }
+    .al-hero-text-box p { font-size: 1rem; color: #e0e8f8; line-height: 1.85; }
+    .al-hero-text-box p strong { color: #8dc63f; }
 
     /* ── GALLERY ── */
-    .sc-gallery { padding: 4rem 2.5rem; background: #fff; }
-    .sc-gallery-header { text-align: center; max-width: 800px; margin: 0 auto 3rem; }
-    .sc-gallery-header h4 { font-size: .9rem; font-weight: 700; color: #8dc63f; text-transform: uppercase; letter-spacing: .1em; margin-bottom: .5rem; }
-    .sc-gallery-header h2 { font-size: 2.2rem; font-weight: 700; color: #1c2f5e; }
-
-    .sc-carousel-wrap { max-width: 1200px; margin: 0 auto; overflow: hidden; }
-    .sc-carousel-track { display: flex; gap: 0; align-items: center; will-change: transform; }
-    .sc-carousel-item { flex: 0 0 25%; padding: 0 .75rem; }
-    .sc-carousel-item img {
+    .al-gallery { padding: 4rem 2.5rem; background: #fff; }
+    .al-gallery-header { text-align: center; max-width: 800px; margin: 0 auto 3rem; }
+    .al-gallery-header h4 { font-size: .9rem; font-weight: 700; color: #8dc63f; text-transform: uppercase; letter-spacing: .1em; margin-bottom: .5rem; }
+    .al-gallery-header h2 { font-size: 2.2rem; font-weight: 700; color: #1c2f5e; }
+    .al-carousel-wrap { max-width: 1200px; margin: 0 auto; overflow: hidden; }
+    .al-carousel-track { display: flex; gap: 0; align-items: center; will-change: transform; }
+    .al-carousel-item { flex: 0 0 25%; padding: 0 .75rem; }
+    .al-carousel-item img {
       width: 100%; height: 260px; object-fit: cover; border-radius: 6px; display: block;
       box-shadow: 0 2px 12px rgba(0,0,0,.08); transition: transform .2s, box-shadow .2s;
     }
-    .sc-carousel-item img:hover { transform: scale(1.02); box-shadow: 0 6px 20px rgba(0,0,0,.15); }
+    .al-carousel-item img:hover { transform: scale(1.02); box-shadow: 0 6px 20px rgba(0,0,0,.15); }
 
-    /* ── PROCESS ── */
-    .sc-process { background: #1c2f5e; padding: 4rem 2.5rem; }
-    .sc-process-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 1100px; margin: 0 auto; }
-    .sc-process-item { text-align: center; padding: 2rem 1.5rem; }
-    .sc-process-item i { font-size: 2.8rem; color: #8dc63f; margin-bottom: 1.2rem; display: block; }
-    .sc-process-item h4 { font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: .8rem; }
-    .sc-process-item p { font-size: .88rem; color: #a8bbd8; line-height: 1.75; text-align: justify; }
-    .sc-process-item p strong { color: #8dc63f; }
+    /* ── ESSENCE ── */
+    .al-essence { padding: 4rem 2.5rem; background: #f7f9fc; }
+    .al-essence-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 3rem; max-width: 1200px; margin: 0 auto; align-items: start;
+    }
+    .al-essence-left h4 { font-size: .9rem; font-weight: 700; color: #8dc63f; text-transform: uppercase; letter-spacing: .1em; margin-bottom: .5rem; }
+    .al-essence-left h2 { font-size: 1.9rem; font-weight: 700; color: #1c2f5e; margin-bottom: 1.2rem; }
+    .al-essence-left p { font-size: .95rem; color: #444; line-height: 1.85; text-align: justify; }
+    .al-essence-left p strong { color: #1c2f5e; }
+    .al-essence-right p { font-size: .95rem; color: #444; line-height: 1.85; margin-bottom: 1.5rem; text-align: justify; }
+    .al-essence-right p strong { color: #8dc63f; }
+    .al-essence-right img { width: 100%; border-radius: 6px; display: block; box-shadow: 0 4px 16px rgba(0,0,0,.1); }
 
     /* ── APPLICATIONS ── */
-    .sc-applications { background: #f7f9fc; padding: 4rem 2.5rem; }
-    .sc-applications h2 { font-size: 2.2rem; font-weight: 700; color: #1c2f5e; text-align: center; margin-bottom: 2.5rem; }
-    .sc-apps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 2rem; max-width: 900px; margin: 0 auto; }
-    .sc-app-item {
+    .al-applications { background: #fff; padding: 4rem 2.5rem; }
+    .al-applications h2 { font-size: 2.2rem; font-weight: 700; color: #1c2f5e; text-align: center; margin-bottom: 2.5rem; }
+    .al-apps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 2rem; max-width: 900px; margin: 0 auto; }
+    .al-app-item {
       display: flex; align-items: center; gap: .75rem;
       padding: .7rem 0; border-bottom: 1px solid #e8ecf4; font-size: .92rem; color: #333;
     }
-    .sc-app-item::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #8dc63f; flex-shrink: 0; }
+    .al-app-item::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #8dc63f; flex-shrink: 0; }
 
     /* ── BENEFITS ── */
-    .sc-benefits { padding: 4rem 2.5rem; background: #fff; }
-    .sc-benefits h2 { font-size: 2.2rem; font-weight: 700; color: #1c2f5e; text-align: center; margin-bottom: 2.5rem; }
-    .sc-benefits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 900px; margin: 0 auto; }
-    .sc-benefit-item { text-align: center; padding: 2rem 1.5rem; border-radius: 8px; border: 1px solid #e8ecf4; box-shadow: 0 2px 12px rgba(0,0,0,.05); }
-    .sc-benefit-item i { font-size: 2.8rem; color: #8dc63f; margin-bottom: 1rem; }
-    .sc-benefit-item h4 { font-size: 1.05rem; font-weight: 700; color: #1c2f5e; }
+    .al-benefits { padding: 4rem 2.5rem; background: #f7f9fc; }
+    .al-benefits h2 { font-size: 2.2rem; font-weight: 700; color: #1c2f5e; text-align: center; margin-bottom: 2.5rem; }
+    .al-benefits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 900px; margin: 0 auto; }
+    .al-benefit-item { text-align: center; padding: 2rem 1.5rem; border-radius: 8px; border: 1px solid #e8ecf4; box-shadow: 0 2px 12px rgba(0,0,0,.05); background: #fff; }
+    .al-benefit-item i { font-size: 2.8rem; color: #8dc63f; margin-bottom: 1rem; }
+    .al-benefit-item h4 { font-size: 1.05rem; font-weight: 700; color: #1c2f5e; }
 
     /* ── FAQ ── */
-    .sc-faq { background: #f7f9fc; padding: 4rem 2.5rem; }
-    .sc-faq h2 { font-size: 2.2rem; font-weight: 700; color: #1c2f5e; text-align: center; margin-bottom: 2.5rem; }
-    .sc-faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 3rem; max-width: 1100px; margin: 0 auto; }
+    .al-faq { background: #fff; padding: 4rem 2.5rem; }
+    .al-faq h2 { font-size: 2.2rem; font-weight: 700; color: #1c2f5e; text-align: center; margin-bottom: 2.5rem; }
+    .al-faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 3rem; max-width: 1100px; margin: 0 auto; }
     .faq-item { border-bottom: 1px solid #dde3ef; }
     .faq-question {
       display: flex; justify-content: space-between; align-items: center; gap: 1rem;
@@ -171,25 +150,25 @@
     }
     .faq-question .faq-icon { font-size: .75rem; color: #8dc63f; flex-shrink: 0; transition: transform .25s; }
     .faq-item.open .faq-icon { transform: rotate(180deg); }
-    .faq-answer { display: none; font-size: .9rem; color: #555; line-height: 1.8; padding-bottom: 1.1rem; }
+    .faq-answer { display: none; font-size: .9rem; color: #555; line-height: 1.8; padding-bottom: 1.1rem; text-align: justify; }
     .faq-item.open .faq-answer { display: block; }
 
     /* ── CTA BANNER ── */
-    .sc-cta-wrap { padding: 2rem 2.5rem 4rem; max-width: 1200px; margin: 0 auto; }
-    .sc-cta-banner { position: relative; border-radius: 6px; overflow: hidden; }
-    .sc-cta-bg { width: 100%; height: 220px; object-fit: cover; display: block; filter: brightness(.35) saturate(.6); }
-    .sc-cta-overlay {
+    .al-cta-wrap { padding: 2rem 2.5rem 4rem; max-width: 1200px; margin: 0 auto; }
+    .al-cta-banner { position: relative; border-radius: 6px; overflow: hidden; }
+    .al-cta-bg { width: 100%; height: 220px; object-fit: cover; display: block; filter: brightness(.35) saturate(.6); }
+    .al-cta-overlay {
       position: absolute; inset: 0;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       gap: 1.5rem; text-align: center; padding: 2rem;
     }
-    .sc-cta-overlay h2 { font-size: 2rem; font-weight: 700; color: #fff; }
-    .sc-cta-btn {
+    .al-cta-overlay h2 { font-size: 2rem; font-weight: 700; color: #fff; }
+    .al-cta-btn {
       display: inline-block; background: #8dc63f; color: #fff; font-weight: 700;
       font-size: .95rem; padding: .75rem 2.2rem; border-radius: 4px;
       text-decoration: none; border: 2px solid #8dc63f; transition: background .2s, color .2s;
     }
-    .sc-cta-btn:hover { background: #fff; color: #8dc63f; }
+    .al-cta-btn:hover { background: #fff; color: #8dc63f; }
 
     /* ── FOOTER ── */
     footer { background: #1c2f5e; color: #a8bbd8; padding: 3rem 3rem 1.5rem; }
@@ -225,13 +204,12 @@
 
     @media (max-width: 900px) {
       .nav-links { display: none; }
-      .sc-essence-inner { grid-template-columns: 1fr; }
-      .sc-process-grid { grid-template-columns: 1fr; }
-      .sc-apps-grid { grid-template-columns: 1fr 1fr; }
-      .sc-benefits-grid { grid-template-columns: 1fr; max-width: 360px; }
-      .sc-faq-grid { grid-template-columns: 1fr; }
+      .al-essence-inner { grid-template-columns: 1fr; }
+      .al-apps-grid { grid-template-columns: 1fr 1fr; }
+      .al-benefits-grid { grid-template-columns: 1fr; max-width: 360px; }
+      .al-faq-grid { grid-template-columns: 1fr; }
       .footer-top { grid-template-columns: 1fr; }
-      .sc-carousel-item { flex: 0 0 50%; }
+      .al-carousel-item { flex: 0 0 50%; }
     }
   </style>
 </head>
@@ -297,96 +275,73 @@
 </div>
 
 <!-- ══ HERO ══ -->
-<section class="sc-hero">
-  <div class="sc-hero-overlay">
-    <div class="sc-hero-text-box">
-      <h1>Señalización <span>Corporativa</span></h1>
-      <p>Fabricamos señalización industrial que cumple con la legislación vigente en seguridad, accesibilidad e inclusión. Ofrecemos soluciones con sistema Braille, impresión digital de alta calidad y materiales duraderos para todo tipo de entornos. Visibilidad, funcionalidad y cumplimiento en un solo producto.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ══ ESENCIA ══ -->
-<section class="sc-essence">
-  <div class="sc-essence-inner">
-    <div class="sc-essence-left">
-      <h4>¿Qué es señalización corporativa?</h4>
-      <h2>La Esencia De Usar Señalización Corporativa</h2>
-      <p>Es la señalización que <strong>habla el mismo lenguaje visual de la empresa</strong>. <strong>Elementos visuales</strong> que una empresa utiliza para <strong>identificarse, comunicar y orientar</strong> dentro de sus espacios físicos, manteniendo siempre su <strong>identidad de marca</strong>.</p>
-      <img src="https://disempack.com.co/wp-content/uploads/2026/01/SALIDA-SENALIZACION.png" alt="Señalización Salida"/>
-    </div>
-    <div class="sc-essence-right">
-      <img src="https://disempack.com.co/wp-content/uploads/2026/01/IMAGENES-FLANGER-P.O.P_SENA3.png" alt="Señalización Corporativa"/>
-      <p><strong>Identifica</strong> la empresa con nombre, logo y colores corporativos. <strong>Orienta</strong> a los clientes y empleados en direcciones, áreas y accesos. <strong>Refuerza la marca</strong> y su profesionalismo. <strong>Mejora la experiencia</strong> del usuario y <strong>cumple las normas</strong> de seguridad y señalización.</p>
-      <br/>
-      <p>Fabricamos señalización industrial con sistema Braille, <strong>impresión digital de alta calidad</strong> y materiales duraderos. Soluciones que garantizan visibilidad, funcionalidad y <strong>cumplimiento normativo</strong> en cualquier entorno.</p>
+<section class="al-hero">
+  <div class="al-hero-overlay">
+    <div class="al-hero-text-box">
+      <h1>Alcancías <span>Corporativas</span></h1>
+      <p>En <strong>Disempack</strong> creamos <strong>alcancías corporativas personalizadas</strong> que combinan funcionalidad, creatividad y un alto valor simbólico. Cada pieza es elaborada con <strong>técnicas artesanales cuidadosamente aplicadas</strong>, reflejando la identidad de tu marca en objetos únicos, de gran impacto emocional y estético.</p>
     </div>
   </div>
 </section>
 
 <!-- ══ GALLERY ══ -->
-<section class="sc-gallery">
-  <div class="sc-gallery-header">
+<section class="al-gallery">
+  <div class="al-gallery-header">
     <h4>Explora Nuestra Selección de Productos</h4>
     <h2>Galería de Productos Destacados</h2>
   </div>
-  <div class="sc-carousel-wrap">
-    <div class="sc-carousel-track" id="sc-track"></div>
+  <div class="al-carousel-wrap">
+    <div class="al-carousel-track" id="al-track"></div>
   </div>
 </section>
 
-<!-- ══ PROCESS ══ -->
-<section class="sc-process">
-  <div class="sc-process-grid">
-    <div class="sc-process-item">
-      <i class="fa-solid fa-drafting-compass"></i>
-      <h4>Diseño y personalización</h4>
-      <p>De <strong>señalización corporativa</strong>, desarrollada de acuerdo con la normativa aplicable y las necesidades operativas de la empresa.</p>
+<!-- ══ ESSENCE ══ -->
+<section class="al-essence">
+  <div class="al-essence-inner">
+    <div class="al-essence-left">
+      <h4>¿Para qué sirven las alcancías corporativas?</h4>
+      <h2>La Esencia De Las Alcancías Corporativas</h2>
+      <p>Las alcancías corporativas refuerzan la identidad visual de la marca al integrar de forma creativa elementos como el logo, los colores y personajes representativos, convirtiéndose en un objeto tangible que acompaña al usuario en su día a día y mantiene la marca siempre presente. Gracias a su utilidad y valor percibido, generan una alta recordación a largo plazo, ya que no suelen desecharse fácilmente. Además, se utilizan con gran efectividad como merchandising en ferias, lanzamientos, campañas BTL y activaciones, y resultan ideales como obsequio corporativo para clientes, aliados estratégicos o colaboradores, fortaleciendo el vínculo y la afinidad con la marca.</p>
     </div>
-    <div class="sc-process-item">
-      <i class="fa-solid fa-eye"></i>
-      <h4>Muestras para aprobación</h4>
-      <p>El proceso incluye <strong>propuesta gráfica</strong> y ajustes finales para producción de acuerdo a los requerimientos y cantidad solicitada.</p>
-    </div>
-    <div class="sc-process-item">
-      <i class="fa-solid fa-truck-fast"></i>
-      <h4>Entrega de la producción</h4>
-      <p><strong>Entrega de la producción</strong>, garantizando calidad, cumplimiento normativo y coherencia con la identidad corporativa.</p>
+    <div class="al-essence-right">
+      <p>La <strong>esencia de las alcancías corporativas</strong> está en convertir la marca en una <strong>experiencia tangible y duradera</strong>. Representan valores como el ahorro, el crecimiento y la proyección a futuro, mientras fortalecen la identidad visual y emocional de la empresa. Más que un objeto promocional, son un recordatorio constante de la marca en la vida cotidiana del usuario, capaces de generar cercanía, recordación y vínculo a largo plazo, transformando un simple hábito en una conexión significativa con la empresa.</p>
+      <br/>
+      <img src="https://disempack.com.co/wp-content/uploads/2026/01/ALCANCIA.png" alt="Alcancía Corporativa"/>
     </div>
   </div>
 </section>
 
 <!-- ══ APPLICATIONS ══ -->
-<section class="sc-applications">
+<section class="al-applications">
   <h2>Aplicaciones del Servicio</h2>
-  <div class="sc-apps-grid">
-    <div class="sc-app-item">Avisos</div>
-    <div class="sc-app-item">Logos en fachadas o interiores</div>
-    <div class="sc-app-item">Señales de áreas internas</div>
+  <div class="al-apps-grid">
+    <div class="al-app-item">Bancos y cooperativas</div>
+    <div class="al-app-item">Fintech</div>
+    <div class="al-app-item">Fondos de ahorro</div>
 
-    <div class="sc-app-item">Directorios empresariales</div>
-    <div class="sc-app-item">Señalización de seguridad personalizada</div>
-    <div class="sc-app-item">Señales retroiluminadas</div>
+    <div class="al-app-item">Aseguradoras</div>
+    <div class="al-app-item">Programas educativos</div>
+    <div class="al-app-item">Programas sociales</div>
 
-    <div class="sc-app-item">Sistema Braille</div>
-    <div class="sc-app-item">Espacios comerciales</div>
-    <div class="sc-app-item">Espacios Institucionales</div>
+    <div class="al-app-item">Universidades</div>
+    <div class="al-app-item">Cajas de compensación</div>
+    <div class="al-app-item">Startups de impacto social</div>
   </div>
 </section>
 
 <!-- ══ BENEFITS ══ -->
-<section class="sc-benefits">
+<section class="al-benefits">
   <h2>Beneficios para el Cliente</h2>
-  <div class="sc-benefits-grid">
-    <div class="sc-benefit-item">
+  <div class="al-benefits-grid">
+    <div class="al-benefit-item">
       <i class="fa-solid fa-sliders"></i>
       <h4>Personalización Total</h4>
     </div>
-    <div class="sc-benefit-item">
+    <div class="al-benefit-item">
       <i class="fa-solid fa-truck-fast"></i>
       <h4>Entrega Rápida</h4>
     </div>
-    <div class="sc-benefit-item">
+    <div class="al-benefit-item">
       <i class="fa-solid fa-medal"></i>
       <h4>Calidad Superior</h4>
     </div>
@@ -394,67 +349,47 @@
 </section>
 
 <!-- ══ FAQ ══ -->
-<section class="sc-faq">
-  <h2>Preguntas Frecuentes Sobre Señalización</h2>
-  <div class="sc-faq-grid">
-    <!-- Columna izquierda -->
+<section class="al-faq">
+  <h2>Preguntas Frecuentes Sobre Alcancías</h2>
+  <div class="al-faq-grid">
     <div>
       <div class="faq-item open">
-        <div class="faq-question">
-          ¿Qué tipos de señalización corporativa existen?
-          <i class="fa-solid fa-chevron-down faq-icon"></i>
-        </div>
-        <div class="faq-answer">Incluye señalización informativa, direccional, de seguridad, normativa, accesible (Braille) y de identificación de áreas.</div>
+        <div class="faq-question">¿Para qué tipo de empresas son ideales las alcancías corporativas?<i class="fa-solid fa-chevron-down faq-icon"></i></div>
+        <div class="faq-answer">Son especialmente útiles para bancos, cooperativas, fintech, aseguradoras, fondos de ahorro, programas educativos y empresas con campañas de responsabilidad social o fidelización.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-question">
-          ¿La señalización corporativa debe cumplir alguna norma?
-          <i class="fa-solid fa-chevron-down faq-icon"></i>
-        </div>
-        <div class="faq-answer">Sí. Dependiendo del uso y sector, debe cumplir normas de seguridad, accesibilidad, evacuación y señalización industrial vigentes.</div>
+        <div class="faq-question">¿Se pueden personalizar las alcancías?<i class="fa-solid fa-chevron-down faq-icon"></i></div>
+        <div class="faq-answer">Sí. Las alcancías pueden personalizarse en forma, colores, logotipo, mensajes y acabados, adaptándose a la identidad visual y objetivos de cada marca.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-question">
-          ¿Se puede personalizar con la imagen de la empresa?
-          <i class="fa-solid fa-chevron-down faq-icon"></i>
-        </div>
-        <div class="faq-answer">Sí. Se adapta a colores corporativos, tipografías, logotipo y necesidades específicas de cada espacio.</div>
+        <div class="faq-question">¿Qué beneficios aportan a los clientes?<i class="fa-solid fa-chevron-down faq-icon"></i></div>
+        <div class="faq-answer">Fomentan el hábito del ahorro, ofrecen un objeto útil y duradero, generan conexión emocional y mantienen la marca presente en el día a día del usuario.</div>
       </div>
     </div>
-    <!-- Columna derecha -->
     <div>
       <div class="faq-item open">
-        <div class="faq-question">
-          ¿En qué materiales se fabrica?
-          <i class="fa-solid fa-chevron-down faq-icon"></i>
-        </div>
-        <div class="faq-answer">Se fabrica en acrílico, aluminio, PVC, acero, vinilo y materiales fotoluminiscentes o retroiluminados, según el entorno.</div>
+        <div class="faq-question">¿Qué es una alcancía corporativa?<i class="fa-solid fa-chevron-down faq-icon"></i></div>
+        <div class="faq-answer">Es un producto promocional personalizado con la identidad de una marca, diseñado para fomentar el ahorro y fortalecer la recordación y el vínculo con clientes, colaboradores o aliados.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-question">
-          ¿Es apta para interiores y exteriores?
-          <i class="fa-solid fa-chevron-down faq-icon"></i>
-        </div>
-        <div class="faq-answer">Sí. Los materiales y acabados se seleccionan según el ambiente y condiciones de uso.</div>
+        <div class="faq-question">¿Por qué elegir una alcancía como material promocional?<i class="fa-solid fa-chevron-down faq-icon"></i></div>
+        <div class="faq-answer">Porque es un producto de alto valor percibido, larga vida útil y gran impacto emocional, que convierte a la marca en parte de la rutina cotidiana del cliente.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-question">
-          ¿Incluye señalización accesible?
-          <i class="fa-solid fa-chevron-down faq-icon"></i>
-        </div>
-        <div class="faq-answer">Sí. Se puede integrar sistema Braille y elementos táctiles para cumplir criterios de accesibilidad.</div>
+        <div class="faq-question">¿En qué tipo de campañas se utilizan las alcancías?<i class="fa-solid fa-chevron-down faq-icon"></i></div>
+        <div class="faq-answer">Se utilizan en lanzamientos de marca, ferias, activaciones BTL, programas de fidelización, campañas educativas y acciones de responsabilidad social empresarial.</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ══ CTA ══ -->
-<div class="sc-cta-wrap">
-  <div class="sc-cta-banner">
-    <img class="sc-cta-bg" src="https://disempack.com.co/wp-content/uploads/2026/01/SALIDA-SENALIZACION.png" alt="Contáctanos"/>
-    <div class="sc-cta-overlay">
+<div class="al-cta-wrap">
+  <div class="al-cta-banner">
+    <img class="al-cta-bg" src="https://disempack.com.co/wp-content/uploads/2026/01/ALCANCIA2.png" alt="Contáctanos"/>
+    <div class="al-cta-overlay">
       <h2>Contáctanos para Soluciones Personalizadas</h2>
-      <a href="https://disempack.com.co/cotizar/" target="_blank" class="sc-cta-btn">Solicitar Información</a>
+      <a href="https://disempack.com.co/cotizar/" target="_blank" class="al-cta-btn">Solicitar Información</a>
     </div>
   </div>
 </div>
@@ -517,34 +452,32 @@
   /* ── GALLERY CAROUSEL ── */
   const BASE = 'https://disempack.com.co/wp-content/uploads/2026/01/';
   const images = [
-    'IMAGENES-FLANGER-P.O.P_SENA1.png',
-    'IMAGENES-FLANGER-P.O.P_SENA2.png',
-    'senalizacion-segundo-piso.png',
-    'IMAGENES-FLANGER-P.O.P_SENA3.png'
+    'ALCANCIAAGUA.png',
+    'ALCANCIAS-HEAD.png',
+    'ALCANCIA-LOGO.png',
+    'ALCANCIA2.png'
   ];
 
-  const track = document.getElementById('sc-track');
+  const track = document.getElementById('al-track');
   for (let pass = 0; pass < 3; pass++) {
     images.forEach(src => {
       const item = document.createElement('div');
-      item.className = 'sc-carousel-item';
+      item.className = 'al-carousel-item';
       const img = document.createElement('img');
       img.src = BASE + src;
-      img.alt = 'Señalización';
+      img.alt = 'Alcancía';
       item.appendChild(img);
       track.appendChild(item);
     });
   }
 
-  let pos = 0;
-  let paused = false;
+  let pos = 0, paused = false;
   track.addEventListener('mouseenter', () => paused = true);
   track.addEventListener('mouseleave', () => paused = false);
-
   function animate() {
     if (!paused) {
       pos += 0.6;
-      const item = track.querySelector('.sc-carousel-item');
+      const item = track.querySelector('.al-carousel-item');
       const loopAt = (item ? item.offsetWidth : 300) * images.length;
       if (pos >= loopAt) pos = 0;
       track.style.transform = `translateX(-${pos}px)`;
