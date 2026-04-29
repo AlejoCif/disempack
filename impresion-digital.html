@@ -124,20 +124,50 @@
     .id-benefit-item i { font-size: 2.8rem; color: #8dc63f; margin-bottom: 1rem; }
     .id-benefit-item h4 { font-size: 1.05rem; font-weight: 700; color: #1c2f5e; }
 
-    /* ── COMPARISON TABLE ── */
-    .id-compare { padding: 4rem 2.5rem; background: #fff; }
-    .id-compare h2 { font-size: 2.2rem; font-weight: 700; color: #1c2f5e; text-align: center; margin-bottom: 2.5rem; }
-    .id-compare-wrap { max-width: 900px; margin: 0 auto; overflow-x: auto; }
-    .id-compare-table { width: 100%; border-collapse: collapse; font-size: .9rem; }
-    .id-compare-table th, .id-compare-table td { padding: .85rem 1.2rem; text-align: center; border: 1px solid #e0e8f0; }
-    .id-compare-table thead tr { background: #1c2f5e; color: #fff; }
-    .id-compare-table thead th:first-child { text-align: left; }
-    .id-compare-table tbody tr:nth-child(even) { background: #f7f9fc; }
-    .id-compare-table tbody tr:nth-child(odd) { background: #fff; }
-    .id-compare-table tbody td:first-child { font-weight: 700; color: #1c2f5e; text-align: left; }
-    .id-compare-table .best { color: #8dc63f; font-weight: 700; }
-    .id-compare-table .worst { color: #c0392b; }
-    .id-compare-table .mid { color: #888; }
+    /* ── COMPARISON CARDS ── */
+    .id-compare { padding: 4rem 2.5rem; background: #f7f9fc; }
+    .id-compare-header { text-align: center; max-width: 700px; margin: 0 auto 3rem; }
+    .id-compare-header h4 { font-size: .9rem; font-weight: 700; color: #8dc63f; text-transform: uppercase; letter-spacing: .1em; margin-bottom: .5rem; }
+    .id-compare-header h2 { font-size: 2.2rem; font-weight: 700; color: #1c2f5e; }
+    .id-compare-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; max-width: 1000px; margin: 0 auto; align-items: start; }
+    .id-cmp-card {
+      background: #fff; border-radius: 10px; overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,.08); border: 2px solid transparent;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .id-cmp-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,.13); }
+    .id-cmp-card.featured { border-color: #8dc63f; transform: translateY(-8px); box-shadow: 0 12px 40px rgba(141,198,63,.25); }
+    .id-cmp-card.featured:hover { transform: translateY(-12px); }
+    .id-cmp-head {
+      padding: 1.8rem 1.5rem; text-align: center;
+      background: #1c2f5e; color: #fff;
+    }
+    .id-cmp-card.featured .id-cmp-head { background: #8dc63f; }
+    .id-cmp-head i { font-size: 2.2rem; margin-bottom: .7rem; display: block; opacity: .9; }
+    .id-cmp-head h3 { font-size: 1.1rem; font-weight: 800; letter-spacing: .02em; }
+    .id-cmp-badge {
+      display: inline-block; background: rgba(255,255,255,.25);
+      font-size: .7rem; font-weight: 700; padding: .2rem .7rem; border-radius: 20px;
+      margin-top: .5rem; letter-spacing: .05em; text-transform: uppercase;
+    }
+    .id-cmp-card.featured .id-cmp-badge { background: rgba(28,47,94,.2); }
+    .id-cmp-body { padding: 1.2rem 1.5rem; }
+    .id-cmp-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .85rem 0; border-bottom: 1px solid #edf0f7; gap: 1rem;
+    }
+    .id-cmp-row:last-child { border-bottom: none; }
+    .id-cmp-label { font-size: .78rem; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: .05em; flex-shrink: 0; }
+    .id-cmp-val { font-size: .9rem; font-weight: 700; text-align: right; }
+    .id-cmp-val.best { color: #8dc63f; }
+    .id-cmp-val.mid { color: #1c2f5e; }
+    .id-cmp-val.worst { color: #c0392b; }
+    .id-cmp-val i { margin-right: .3rem; }
+
+    @media (max-width: 760px) {
+      .id-compare-cards { grid-template-columns: 1fr; }
+      .id-cmp-card.featured { transform: none; }
+    }
 
     /* ── CTA ── */
     .id-cta { background: #1c2f5e; padding: 4rem 2.5rem; text-align: center; }
@@ -323,46 +353,95 @@
   </div>
 </section>
 
-<!-- ══ COMPARISON TABLE ══ -->
+<!-- ══ COMPARISON CARDS ══ -->
 <section class="id-compare">
-  <h2>Comparativa de Impresión Digital</h2>
-  <div class="id-compare-wrap">
-    <table class="id-compare-table">
-      <thead>
-        <tr>
-          <th></th>
-          <th>Tinta Base Agua</th>
-          <th>Tinta UV</th>
-          <th>Tinta Solvente</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Tipo de Tinta</td>
-          <td class="mid">Base Agua</td>
-          <td class="best">UV</td>
-          <td class="mid">Solvente</td>
-        </tr>
-        <tr>
-          <td>Tiempo de Secado</td>
-          <td class="mid">Rápido</td>
-          <td class="best">Instantáneo</td>
-          <td class="worst">Lento</td>
-        </tr>
-        <tr>
-          <td>Durabilidad</td>
-          <td class="mid">Moderada</td>
-          <td class="best">Alta</td>
-          <td class="worst">Baja</td>
-        </tr>
-        <tr>
-          <td>Calidad del Color</td>
-          <td class="mid">Buena</td>
-          <td class="best">Excelente</td>
-          <td class="worst">Aceptable</td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="id-compare-header">
+    <h4>Tecnología de Impresión</h4>
+    <h2>Comparativa de Impresión Digital</h2>
+  </div>
+  <div class="id-compare-cards">
+
+    <!-- TINTA BASE AGUA -->
+    <div class="id-cmp-card">
+      <div class="id-cmp-head">
+        <i class="fa-solid fa-droplet"></i>
+        <h3>Tinta Base Agua</h3>
+        <span class="id-cmp-badge">Ecoamigable</span>
+      </div>
+      <div class="id-cmp-body">
+        <div class="id-cmp-row">
+          <span class="id-cmp-label">Secado</span>
+          <span class="id-cmp-val mid"><i class="fa-solid fa-clock"></i>Rápido</span>
+        </div>
+        <div class="id-cmp-row">
+          <span class="id-cmp-label">Durabilidad</span>
+          <span class="id-cmp-val mid"><i class="fa-solid fa-shield-halved"></i>Moderada</span>
+        </div>
+        <div class="id-cmp-row">
+          <span class="id-cmp-label">Color</span>
+          <span class="id-cmp-val mid"><i class="fa-solid fa-palette"></i>Buena</span>
+        </div>
+        <div class="id-cmp-row">
+          <span class="id-cmp-label">Exterior</span>
+          <span class="id-cmp-val worst"><i class="fa-solid fa-xmark"></i>Limitado</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TINTA UV — DESTACADA -->
+    <div class="id-cmp-card featured">
+      <div class="id-cmp-head">
+        <i class="fa-solid fa-sun"></i>
+        <h3>Tinta UV</h3>
+        <span class="id-cmp-badge">Recomendada</span>
+      </div>
+      <div class="id-cmp-body">
+        <div class="id-cmp-row">
+          <span class="id-cmp-label">Secado</span>
+          <span class="id-cmp-val best"><i class="fa-solid fa-bolt"></i>Instantáneo</span>
+        </div>
+        <div class="id-cmp-row">
+          <span class="id-cmp-label">Durabilidad</span>
+          <span class="id-cmp-val best"><i class="fa-solid fa-shield"></i>Alta</span>
+        </div>
+        <div class="id-cmp-row">
+          <span class="id-cmp-label">Color</span>
+          <span class="id-cmp-val best"><i class="fa-solid fa-star"></i>Excelente</span>
+        </div>
+        <div class="id-cmp-row">
+          <span class="id-cmp-label">Exterior</span>
+          <span class="id-cmp-val best"><i class="fa-solid fa-check"></i>Óptimo</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TINTA SOLVENTE -->
+    <div class="id-cmp-card">
+      <div class="id-cmp-head">
+        <i class="fa-solid fa-flask"></i>
+        <h3>Tinta Solvente</h3>
+        <span class="id-cmp-badge">Tradicional</span>
+      </div>
+      <div class="id-cmp-body">
+        <div class="id-cmp-row">
+          <span class="id-cmp-label">Secado</span>
+          <span class="id-cmp-val worst"><i class="fa-solid fa-hourglass-half"></i>Lento</span>
+        </div>
+        <div class="id-cmp-row">
+          <span class="id-cmp-label">Durabilidad</span>
+          <span class="id-cmp-val worst"><i class="fa-solid fa-shield-halved"></i>Baja</span>
+        </div>
+        <div class="id-cmp-row">
+          <span class="id-cmp-label">Color</span>
+          <span class="id-cmp-val worst"><i class="fa-solid fa-palette"></i>Aceptable</span>
+        </div>
+        <div class="id-cmp-row">
+          <span class="id-cmp-label">Exterior</span>
+          <span class="id-cmp-val mid"><i class="fa-solid fa-minus"></i>Moderado</span>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
