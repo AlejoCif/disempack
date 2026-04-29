@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Organizadores - Disempack SAS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Open Sans', sans-serif; color: #333; background: #fff; overflow-x: hidden; }
+
+    /* ── TOP BAR ── */
+    .topbar { background: #1c2f5e; padding: .35rem 2rem; display: flex; justify-content: flex-end; gap: 1.5rem; }
+    .topbar a { color: #ccd6f0; font-size: .75rem; text-decoration: none; transition: color .15s; }
+    .topbar a:hover { color: #fff; }
+
+    /* ── NAVBAR ── */
+    nav {
+      background: #fff; border-bottom: 1px solid #e8e8e8;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .6rem 2.5rem; position: sticky; top: 0; z-index: 200;
+      box-shadow: 0 2px 8px rgba(0,0,0,.07);
+    }
+    .logo-wrap { display: flex; align-items: center; text-decoration: none; }
+    .logo-wrap img { height: 52px; object-fit: contain; }
+    .nav-links { display: flex; align-items: center; gap: .05rem; list-style: none; }
+    .nav-links > li { position: relative; }
+    .nav-links > li > a {
+      display: flex; align-items: center; gap: .3rem; padding: .5rem .85rem;
+      font-size: .83rem; color: #333; text-decoration: none; font-weight: 600;
+      border-radius: 4px; transition: color .15s, background .15s;
+    }
+    .nav-links > li > a:hover { color: #1c2f5e; background: #f5f6fa; }
+    .nav-links > li > a .arrow { font-size: .6rem; color: #888; }
+    .dropdown {
+      display: none; position: absolute; top: 100%; left: 0;
+      background: #fff; border: 1px solid #e0e0e0; border-top: 3px solid #8dc63f;
+      border-radius: 0 0 6px 6px; min-width: 210px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.12); list-style: none; z-index: 300;
+    }
+    .nav-links > li:hover .dropdown { display: block; }
+    .dropdown li a {
+      display: block; padding: .6rem 1.2rem; font-size: .82rem; color: #444;
+      text-decoration: none; border-bottom: 1px solid #f0f0f0; transition: background .12s, color .12s;
+    }
+    .dropdown li:last-child a { border-bottom: none; }
+    .dropdown li a:hover { background: #f0f0f0; color: #555; }
+    .nav-search { font-size: 1rem; color: #555; cursor: pointer; padding: .4rem .6rem; border: none; background: none; }
+
+    /* ── SEARCH OVERLAY ── */
+    .search-overlay {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 500;
+      align-items: flex-start; justify-content: center; padding-top: 80px;
+    }
+    .search-overlay.open { display: flex; }
+    .search-box { background: #fff; border-radius: 8px; display: flex; width: 100%; max-width: 600px; box-shadow: 0 8px 32px rgba(0,0,0,.2); overflow: hidden; }
+    .search-box input { flex: 1; border: none; outline: none; padding: .9rem 1.2rem; font-size: 1rem; font-family: inherit; }
+    .search-box button { background: #1c2f5e; color: #fff; border: none; padding: 0 1.4rem; font-size: 1.1rem; cursor: pointer; }
+    .search-box button:hover { background: #8dc63f; }
+
+    /* ── HERO ── */
+    .or-hero {
+      position: relative; width: 100%; height: 600px; overflow: hidden;
+      background-image: url('https://images.unsplash.com/photo-1764083680353-0de3e959a375?ixlib=rb-4.1.0&fm=webp&fit=crop&crop=entropy&w=1920&h=1080&q=80');
+      background-size: cover; background-position: center 50%;
+    }
+    .or-hero-overlay {
+      position: absolute; inset: 0; background: rgba(28,47,94,.6);
+      display: flex; align-items: center; padding: 3rem 5rem;
+    }
+    .or-hero-content { max-width: 620px; }
+    .or-hero-content h4 { font-size: .9rem; font-weight: 700; color: #8dc63f; text-transform: uppercase; letter-spacing: .12em; margin-bottom: .8rem; }
+    .or-hero-content h1 { font-size: 2.6rem; font-weight: 800; color: #fff; line-height: 1.2; margin-bottom: 1.2rem; }
+    .or-hero-content p { font-size: .98rem; color: #d0ddf5; line-height: 1.85; margin-bottom: 2rem; }
+    .or-hero-btn {
+      display: inline-block; background: #8dc63f; color: #fff; font-weight: 700;
+      font-size: .92rem; padding: .75rem 2rem; border-radius: 4px;
+      text-decoration: none; border: 2px solid #8dc63f; transition: background .2s, color .2s;
+    }
+    .or-hero-btn:hover { background: #fff; color: #8dc63f; }
+
+    /* ── INTRO ── */
+    .or-intro { padding: 3.5rem 2.5rem; background: #fff; text-align: center; }
+    .or-intro h4 { font-size: .9rem; font-weight: 700; color: #8dc63f; text-transform: uppercase; letter-spacing: .1em; margin-bottom: .5rem; }
+    .or-intro h2 { font-size: 2rem; font-weight: 700; color: #1c2f5e; }
+
+    /* ── DESIGN + ACCORDION ── */
+    .or-design { padding: 3rem 2.5rem 4rem; background: #f7f9fc; }
+    .or-design-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; max-width: 1200px; margin: 0 auto; align-items: start; }
+    .or-design-left h2 { font-size: 1.7rem; font-weight: 700; color: #1c2f5e; margin-bottom: 1rem; }
+    .or-design-left p { font-size: .93rem; color: #444; line-height: 1.85; margin-bottom: 1.5rem; text-align: justify; }
+    .or-design-left img { width: 100%; border-radius: 6px; display: block; box-shadow: 0 4px 16px rgba(0,0,0,.1); }
+    .or-design-right img { width: 100%; border-radius: 6px; display: block; box-shadow: 0 4px 16px rgba(0,0,0,.1); margin-bottom: 1.5rem; }
+    /* accordion */
+    .or-accordion .faq-item { border-bottom: 1px solid #dde3ef; }
+    .or-accordion .faq-question {
+      display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+      padding: 1rem 0; cursor: pointer; font-size: .93rem; font-weight: 700; color: #1c2f5e;
+    }
+    .or-accordion .faq-icon { font-size: .75rem; color: #8dc63f; flex-shrink: 0; transition: transform .25s; }
+    .or-accordion .faq-item.open .faq-icon { transform: rotate(180deg); }
+    .or-accordion .faq-answer { display: none; font-size: .88rem; color: #555; line-height: 1.8; padding-bottom: 1rem; text-align: justify; }
+    .or-accordion .faq-item.open .faq-answer { display: block; }
+
+    /* ── PROCESS 3-COL ── */
+    .or-process { padding: 4rem 2.5rem; background: #1c2f5e; }
+    .or-process-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 1100px; margin: 0 auto; }
+    .or-process-card { padding: 2rem; border-left: 3px solid #8dc63f; }
+    .or-process-card h4 { font-size: 1rem; font-weight: 800; color: #8dc63f; margin-bottom: 1rem; }
+    .or-process-card p { font-size: .88rem; color: #a8bbd8; line-height: 1.85; text-align: justify; }
+
+    /* ── MATERIALS ── */
+    .or-materials { padding: 4rem 2.5rem; background: #fff; }
+    .or-materials h2 { font-size: 2.2rem; font-weight: 700; color: #1c2f5e; text-align: center; margin-bottom: 2.5rem; }
+    .or-materials-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 3rem; max-width: 1100px; margin: 0 auto; }
+    .or-mat-item { padding: 1.1rem 0; border-bottom: 1px solid #e8ecf4; }
+    .or-mat-item h4 { font-size: .93rem; font-weight: 700; color: #1c2f5e; margin-bottom: .3rem; display: flex; align-items: center; gap: .6rem; }
+    .or-mat-item h4::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #8dc63f; flex-shrink: 0; }
+    .or-mat-item p { font-size: .86rem; color: #666; line-height: 1.7; padding-left: 1.4rem; }
+
+    /* ── BENEFITS ── */
+    .or-benefits { padding: 4rem 2.5rem; background: #f7f9fc; }
+    .or-benefits h2 { font-size: 2.2rem; font-weight: 700; color: #1c2f5e; text-align: center; margin-bottom: 2.5rem; }
+    .or-benefits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 1100px; margin: 0 auto; }
+    .or-benefit-card { background: #fff; border-radius: 8px; padding: 2rem 1.5rem; border: 1px solid #e8ecf4; box-shadow: 0 2px 12px rgba(0,0,0,.05); }
+    .or-benefit-card i { font-size: 2.4rem; color: #8dc63f; margin-bottom: 1rem; display: block; }
+    .or-benefit-card h4 { font-size: 1rem; font-weight: 700; color: #1c2f5e; margin-bottom: .6rem; }
+    .or-benefit-card p { font-size: .86rem; color: #666; line-height: 1.75; }
+
+    /* ── CTA BANNER ── */
+    .or-cta-wrap { padding: 2rem 2.5rem 4rem; max-width: 1200px; margin: 0 auto; }
+    .or-cta-banner { position: relative; border-radius: 6px; overflow: hidden; }
+    .or-cta-bg { width: 100%; height: 240px; object-fit: cover; display: block; filter: brightness(.3) saturate(.5); }
+    .or-cta-overlay {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 1rem; text-align: center; padding: 2rem;
+    }
+    .or-cta-overlay h2 { font-size: 2rem; font-weight: 700; color: #fff; }
+    .or-cta-overlay p { font-size: .92rem; color: #d0ddf5; max-width: 640px; line-height: 1.7; }
+    .or-cta-btn {
+      display: inline-block; background: #8dc63f; color: #fff; font-weight: 700;
+      font-size: .95rem; padding: .75rem 2.2rem; border-radius: 4px;
+      text-decoration: none; border: 2px solid #8dc63f; transition: background .2s, color .2s;
+      margin-top: .5rem;
+    }
+    .or-cta-btn:hover { background: #fff; color: #8dc63f; }
+
+    /* ── FOOTER ── */
+    footer { background: #1c2f5e; color: #a8bbd8; padding: 3rem 3rem 1.5rem; }
+    .footer-top { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3rem; align-items: start; margin-bottom: 2.5rem; }
+    .footer-col { display: flex; justify-content: center; }
+    .footer-col-inner { text-align: left; }
+    .footer-col h5 { font-size: .75rem; font-weight: 700; color: #fff; margin-bottom: .6rem; text-transform: uppercase; letter-spacing: .06em; }
+    .footer-col p, .footer-col a { font-size: .84rem; color: #a8bbd8; text-decoration: none; line-height: 1.8; display: block; }
+    .footer-col a:hover { color: #8dc63f; }
+    .footer-col-logo { display: flex; justify-content: center; align-items: center; }
+    .footer-col-logo img { height: 112px; object-fit: contain; }
+    .footer-divider { border: none; border-top: 1px solid rgba(255,255,255,.1); margin: 1.5rem 0; }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .footer-bottom p { font-size: .78rem; color: #7a90b5; }
+    .footer-socials { display: flex; gap: .8rem; }
+    .footer-socials a {
+      color: #a8bbd8; text-decoration: none; font-size: 1.4rem;
+      border: 1px solid rgba(255,255,255,.2); border-radius: 50%; width: 38px; height: 38px;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color .15s, color .15s;
+    }
+    .footer-socials a:hover { border-color: #8dc63f; color: #8dc63f; }
+
+    /* ── WHATSAPP FAB ── */
+    .wa-fab {
+      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 999;
+      width: 58px; height: 58px; border-radius: 50%; background: #25d366;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,.5); text-decoration: none; font-size: 1.8rem; transition: transform .2s;
+    }
+    .wa-fab:hover { transform: scale(1.1); }
+    .wa-fab img { width: 36px; height: 36px; border-radius: 50%; }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .or-hero-overlay { padding: 2rem; }
+      .or-hero-content h1 { font-size: 1.9rem; }
+      .or-design-inner { grid-template-columns: 1fr; }
+      .or-process-grid { grid-template-columns: 1fr; }
+      .or-materials-grid { grid-template-columns: 1fr; }
+      .or-benefits-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <a href="#">Terms &amp; Conditions</a>
+  <a href="#">Privacy Policy</a>
+</div>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="index.html" class="logo-wrap">
+    <img src="https://disempack.com.co/wp-content/uploads/2025/11/GENERICO-USOS-scaled.png" alt="Disempack"/>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li>
+      <a href="#">Exhibición Comercial <span class="arrow">▾</span></a>
+      <ul class="dropdown">
+        <li><a href="pop.html">P.O.P</a></li>
+        <li><a href="senalizacion-corporativa.html">Señalización Corporativa</a></li>
+        <li><a href="alcancias.html">Alcancías</a></li>
+        <li><a href="recubrimientos.html">Recubrimientos</a></li>
+      </ul>
+    </li>
+    <li><a href="impresion-digital.html">Impresión Digital</a></li>
+    <li>
+      <a href="#">Empaques <span class="arrow">▾</span></a>
+      <ul class="dropdown">
+        <li><a href="organizadores.html">Organizadores</a></li>
+        <li><a href="#">Cajas Plegadizas</a></li>
+        <li><a href="#">Blister</a></li>
+        <li><a href="#">Clam Shell</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">Procesos <span class="arrow">▾</span></a>
+      <ul class="dropdown">
+        <li><a href="impresion-digital.html">Impresión Digital</a></li>
+        <li><a href="#">Diseño y Desarrollo</a></li>
+        <li><a href="#">Termoformado</a></li>
+        <li><a href="#">Troquelado</a></li>
+        <li><a href="#">Corte CNC</a></li>
+        <li><a href="#">Acondicionamiento De Productos</a></li>
+        <li><a href="#">Termosellado</a></li>
+        <li><a href="#">Venta De Materia Prima</a></li>
+      </ul>
+    </li>
+    <li><a href="#">Contacto</a></li>
+    <li><a href="#">Cotizar</a></li>
+  </ul>
+  <button class="nav-search" id="searchBtn">🔍</button>
+</nav>
+
+<!-- SEARCH OVERLAY -->
+<div class="search-overlay" id="searchOverlay">
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Buscar en Disempack…"/>
+    <button id="searchSubmit">🔍</button>
+  </div>
+</div>
+
+<!-- ══ HERO ══ -->
+<section class="or-hero">
+  <div class="or-hero-overlay">
+    <div class="or-hero-content">
+      <h4>Organizadores Personalizados para Cada Necesidad</h4>
+      <h1>Diseños Únicos y Funcionales para Tu Industria</h1>
+      <p>Descubre cómo nuestros organizadores personalizados transforman la eficiencia y el orden en tu negocio. Con un diseño innovador y materiales de alta calidad, ofrecemos soluciones adaptadas a tus necesidades específicas.</p>
+      <a href="https://disempack.com.co/cotizar/" target="_blank" class="or-hero-btn">Explora Nuestros Diseños</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ INTRO ══ -->
+<section class="or-intro">
+  <h4>¿Qué Son los Organizadores Personalizados?</h4>
+  <h2>Soluciones Adaptadas para Cada Industria</h2>
+</section>
+
+<!-- ══ DESIGN + ACCORDION ══ -->
+<section class="or-design">
+  <div class="or-design-inner">
+    <div class="or-design-left">
+      <h2>Diseño Estructural de Organizadores</h2>
+      <p>Nuestros organizadores están diseñados con precisión para maximizar el espacio y la funcionalidad. Ofrecemos una variedad de tamaños y configuraciones para adaptarse a cualquier aplicación, asegurando que cada organizador cumpla con los requisitos específicos de nuestros clientes.</p>
+      <img src="https://images.unsplash.com/photo-1706535849689-59e888460d10?ixlib=rb-4.1.0&fm=webp&fit=crop&crop=entropy&w=800&h=600&q=80" alt="Diseño estructural de organizadores"/>
+    </div>
+    <div class="or-design-right">
+      <img src="https://images.unsplash.com/photo-1558092535-648ec3c50158?ixlib=rb-4.1.0&fm=webp&fit=crop&crop=entropy&w=800&h=600&q=80" alt="Opciones de personalización"/>
+      <div class="or-accordion">
+        <div class="faq-item open">
+          <div class="faq-question">Opciones de Personalización <i class="fa-solid fa-chevron-down faq-icon"></i></div>
+          <div class="faq-answer">Personaliza tus organizadores con una amplia gama de colores, materiales y acabados. Desde impresiones digitales hasta grabados personalizados, cada detalle es cuidadosamente considerado para reflejar la identidad de tu marca.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">Usos Versátiles <i class="fa-solid fa-chevron-down faq-icon"></i></div>
+          <div class="faq-answer">Nuestros organizadores son ideales para sectores como logística, retail, y manufactura, ofreciendo soluciones prácticas y eficientes para el almacenamiento y transporte de productos.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">Medidas Precisas <i class="fa-solid fa-chevron-down faq-icon"></i></div>
+          <div class="faq-answer">Ofrecemos una variedad de medidas estándar y personalizadas para asegurar que cada organizador se ajuste perfectamente a tus necesidades operativas.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROCESS 3-COL ══ -->
+<section class="or-process">
+  <div class="or-process-grid">
+    <div class="or-process-card">
+      <h4><i class="fa-solid fa-cubes" style="margin-right:.5rem;"></i>Construcción de Organizadores</h4>
+      <p>La construcción de nuestros organizadores personalizados comienza con una cuidadosa selección de materiales de alta calidad. Utilizamos técnicas avanzadas para garantizar que cada organizador cumpla con los estándares más exigentes de durabilidad y funcionalidad. El proceso incluye corte preciso, ensamblaje meticuloso y acabados detallados, asegurando que cada pieza sea única y adaptada a las necesidades específicas de nuestros clientes.</p>
+    </div>
+    <div class="or-process-card">
+      <h4><i class="fa-solid fa-gears" style="margin-right:.5rem;"></i>Proceso de Fabricación</h4>
+      <p>Nuestro proceso de fabricación se centra en la eficiencia y la sostenibilidad. Empleamos maquinaria de última generación para optimizar el uso de materiales y reducir el desperdicio. Cada etapa del proceso es supervisada por expertos para asegurar que los organizadores no solo sean funcionales, sino también estéticamente agradables.</p>
+    </div>
+    <div class="or-process-card">
+      <h4><i class="fa-solid fa-leaf" style="margin-right:.5rem;"></i>Materiales de Calidad</h4>
+      <p>Los materiales que utilizamos son seleccionados por su resistencia y versatilidad. Desde plásticos reciclados hasta compuestos innovadores, cada componente es elegido para maximizar la vida útil del organizador y minimizar el impacto ambiental.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ MATERIALS ══ -->
+<section class="or-materials">
+  <h2>Materiales Utilizados</h2>
+  <div class="or-materials-grid">
+    <div>
+      <div class="or-mat-item">
+        <h4>PET</h4>
+        <p>El PET es un material reciclable y resistente, ideal para la fabricación de organizadores duraderos y ligeros.</p>
+      </div>
+      <div class="or-mat-item">
+        <h4>Plásticos Reciclados</h4>
+        <p>Utilizamos plásticos reciclados para promover la sostenibilidad y reducir el impacto ambiental de nuestros productos.</p>
+      </div>
+      <div class="or-mat-item">
+        <h4>Plásticos de Alta Densidad</h4>
+        <p>Este tipo de plástico ofrece una excelente resistencia a impactos, asegurando la protección de los contenidos del organizador.</p>
+      </div>
+      <div class="or-mat-item">
+        <h4>Compuestos Biodegradables</h4>
+        <p>Incorporamos materiales biodegradables para aquellos clientes que buscan una opción más ecológica.</p>
+      </div>
+    </div>
+    <div>
+      <div class="or-mat-item">
+        <h4>Polipropileno</h4>
+        <p>El polipropileno es conocido por su durabilidad y flexibilidad, siendo perfecto para aplicaciones industriales.</p>
+      </div>
+      <div class="or-mat-item">
+        <h4>Cartón Reciclado</h4>
+        <p>Para aplicaciones menos exigentes, el cartón reciclado ofrece una solución económica y sostenible.</p>
+      </div>
+      <div class="or-mat-item">
+        <h4>Espumas Técnicas</h4>
+        <p>Las espumas técnicas proporcionan amortiguación y protección adicional para productos delicados.</p>
+      </div>
+      <div class="or-mat-item">
+        <h4>Materiales Compostables</h4>
+        <p>Para un enfoque completamente eco-friendly, ofrecemos opciones de materiales compostables.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ BENEFITS ══ -->
+<section class="or-benefits">
+  <h2>Beneficios de los Organizadores Personalizados</h2>
+  <div class="or-benefits-grid">
+    <div class="or-benefit-card">
+      <i class="fa-solid fa-maximize"></i>
+      <h4>Optimización del Espacio</h4>
+      <p>Los organizadores personalizados permiten maximizar el uso del espacio disponible, adaptándose a las dimensiones específicas de cada entorno.</p>
+    </div>
+    <div class="or-benefit-card">
+      <i class="fa-solid fa-bolt"></i>
+      <h4>Mejora de la Eficiencia</h4>
+      <p>Al tener un lugar designado para cada artículo, se reduce el tiempo de búsqueda y se mejora la eficiencia operativa.</p>
+    </div>
+    <div class="or-benefit-card">
+      <i class="fa-solid fa-chart-line"></i>
+      <h4>Aumento de la Productividad</h4>
+      <p>Con un sistema de organización adecuado, los empleados pueden concentrarse en tareas más importantes, aumentando la productividad general.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<div class="or-cta-wrap">
+  <div class="or-cta-banner">
+    <img class="or-cta-bg" src="https://images.unsplash.com/photo-1764083680353-0de3e959a375?ixlib=rb-4.1.0&fm=webp&fit=crop&crop=entropy&w=1920&h=600&q=80" alt="Contáctanos"/>
+    <div class="or-cta-overlay">
+      <h2>Contáctanos para Soluciones Personalizadas</h2>
+      <p>En Disempack SAS estamos comprometidos a ofrecer organizadores que se adapten a sus necesidades específicas. Contáctenos hoy para discutir cómo podemos mejorar el orden y la eficiencia de su operación.</p>
+      <a href="https://disempack.com.co/cotizar/" target="_blank" class="or-cta-btn">Solicitar Información</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-col">
+      <div class="footer-col-inner">
+        <h5>Servicio al Cliente</h5>
+        <a href="tel:+573183820863">🇨🇴 318 382 0863</a>
+        <h5 style="margin-top:1.2rem;">Calidad</h5>
+        <a href="tel:+573011664304">🇨🇴 301 166 4304</a>
+        <h5 style="margin-top:1.2rem;">Diseño y Desarrollo</h5>
+        <a href="tel:+573005582389">🇨🇴 300 558 2389</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-inner">
+        <h5>Dirección</h5>
+        <p>37A sur No. 72L-95</p>
+        <h5 style="margin-top:1.2rem;">Horarios</h5>
+        <p>Lunes a Viernes<br/>7:00am – 4:00pm</p>
+      </div>
+    </div>
+    <div class="footer-col-logo">
+      <img src="https://disempack.com.co/wp-content/uploads/2025/11/LOGO-WEB-HEAD-BLANCO-e1768929160286-1024x403.png" alt="Disempack"/>
+    </div>
+  </div>
+  <hr class="footer-divider"/>
+  <div class="footer-bottom">
+    <p>By Disempack S.A.S - 2026</p>
+    <div class="footer-socials">
+      <a href="https://www.facebook.com/profile.php?id=100054201593487" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/disempack" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FAB -->
+<a href="https://wa.link/2ka87h" class="wa-fab" target="_blank" title="WhatsApp">
+  <img src="https://disempack.com.co/wp-content/uploads/2026/01/Logo-Whtsapp-Disempack-scaled.png"
+       alt="WhatsApp"
+       onerror="this.outerHTML='<span style=\'color:#fff;font-size:1.9rem;\'>💬</span>'"/>
+</a>
+
+<script>
+  /* ── SEARCH ── */
+  const searchBtn = document.getElementById('searchBtn');
+  const searchOverlay = document.getElementById('searchOverlay');
+  const searchInput = document.getElementById('searchInput');
+  const searchSubmit = document.getElementById('searchSubmit');
+  searchBtn.addEventListener('click', () => { searchOverlay.classList.add('open'); searchInput.focus(); });
+  searchOverlay.addEventListener('click', (e) => { if (e.target === searchOverlay) searchOverlay.classList.remove('open'); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') searchOverlay.classList.remove('open'); });
+  function doSearch() { const q = searchInput.value.trim(); if (q) window.open('https://disempack.com.co/?s=' + encodeURIComponent(q), '_blank'); }
+  searchSubmit.addEventListener('click', doSearch);
+  searchInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') doSearch(); });
+
+  /* ── ACCORDION ── */
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => btn.closest('.faq-item').classList.toggle('open'));
+  });
+</script>
+</body>
+</html>
