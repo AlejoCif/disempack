@@ -154,12 +154,19 @@
       .id-cmp-label-cell { grid-column: 1 / -1; border-right: none; border-bottom: 2px solid #f0f2f7; }
     }
 
-    /* ── CTA ── */
-    .id-cta { background: #1c2f5e; padding: 4rem 2.5rem; text-align: center; }
-    .id-cta h3 { font-size: 2rem; font-weight: 700; color: #fff; margin-bottom: 1.8rem; }
+    /* ── CTA BANNER ── */
+    .id-cta-wrap { padding: 2rem 2.5rem 4rem; max-width: 1200px; margin: 0 auto; }
+    .id-cta-banner { position: relative; border-radius: 6px; overflow: hidden; }
+    .id-cta-bg { width: 100%; height: 220px; object-fit: cover; display: block; filter: brightness(.35) saturate(.6); }
+    .id-cta-overlay {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 1.5rem; text-align: center; padding: 2rem;
+    }
+    .id-cta-overlay h2 { font-size: 2rem; font-weight: 700; color: #fff; }
     .id-cta-btn {
       display: inline-block; background: #8dc63f; color: #fff; font-weight: 700;
-      font-size: .95rem; padding: .85rem 2.5rem; border-radius: 4px;
+      font-size: .95rem; padding: .75rem 2.2rem; border-radius: 4px;
       text-decoration: none; border: 2px solid #8dc63f; transition: background .2s, color .2s;
     }
     .id-cta-btn:hover { background: #fff; color: #8dc63f; }
@@ -418,10 +425,15 @@
 </section>
 
 <!-- ══ CTA ══ -->
-<section class="id-cta">
-  <h3>Solicita Asesoría Personalizada</h3>
-  <a href="https://disempack.com.co/cotizar/" target="_blank" class="id-cta-btn">Contáctanos Ahora</a>
-</section>
+<div class="id-cta-wrap">
+  <div class="id-cta-banner">
+    <img class="id-cta-bg" src="https://disempack.com.co/wp-content/uploads/2026/01/0-ffcf752a-de9c-4fcc-b6fe-07b8f0072929-1000x1000.jpg" alt="Contáctanos"/>
+    <div class="id-cta-overlay">
+      <h2>Solicita Asesoría Personalizada</h2>
+      <a href="https://disempack.com.co/cotizar/" target="_blank" class="id-cta-btn">Contáctanos Ahora</a>
+    </div>
+  </div>
+</div>
 
 <!-- FOOTER -->
 <footer>
