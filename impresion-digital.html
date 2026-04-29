@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Impresión Digital - Disempack SAS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Open Sans', sans-serif; color: #333; background: #fff; overflow-x: hidden; }
+
+    /* ── TOP BAR ── */
+    .topbar { background: #1c2f5e; padding: .35rem 2rem; display: flex; justify-content: flex-end; gap: 1.5rem; }
+    .topbar a { color: #ccd6f0; font-size: .75rem; text-decoration: none; transition: color .15s; }
+    .topbar a:hover { color: #fff; }
+
+    /* ── NAVBAR ── */
+    nav {
+      background: #fff; border-bottom: 1px solid #e8e8e8;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .6rem 2.5rem; position: sticky; top: 0; z-index: 200;
+      box-shadow: 0 2px 8px rgba(0,0,0,.07);
+    }
+    .logo-wrap { display: flex; align-items: center; text-decoration: none; }
+    .logo-wrap img { height: 52px; object-fit: contain; }
+    .nav-links { display: flex; align-items: center; gap: .05rem; list-style: none; }
+    .nav-links > li { position: relative; }
+    .nav-links > li > a {
+      display: flex; align-items: center; gap: .3rem; padding: .5rem .85rem;
+      font-size: .83rem; color: #333; text-decoration: none; font-weight: 600;
+      border-radius: 4px; transition: color .15s, background .15s;
+    }
+    .nav-links > li > a:hover { color: #1c2f5e; background: #f5f6fa; }
+    .nav-links > li > a .arrow { font-size: .6rem; color: #888; }
+    .dropdown {
+      display: none; position: absolute; top: 100%; left: 0;
+      background: #fff; border: 1px solid #e0e0e0; border-top: 3px solid #8dc63f;
+      border-radius: 0 0 6px 6px; min-width: 210px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.12); list-style: none; z-index: 300;
+    }
+    .nav-links > li:hover .dropdown { display: block; }
+    .dropdown li a {
+      display: block; padding: .6rem 1.2rem; font-size: .82rem; color: #444;
+      text-decoration: none; border-bottom: 1px solid #f0f0f0; transition: background .12s, color .12s;
+    }
+    .dropdown li:last-child a { border-bottom: none; }
+    .dropdown li a:hover { background: #f0f0f0; color: #555; }
+    .nav-search { font-size: 1rem; color: #555; cursor: pointer; padding: .4rem .6rem; border: none; background: none; }
+
+    /* ── SEARCH OVERLAY ── */
+    .search-overlay {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 500;
+      align-items: flex-start; justify-content: center; padding-top: 80px;
+    }
+    .search-overlay.open { display: flex; }
+    .search-box { background: #fff; border-radius: 8px; display: flex; width: 100%; max-width: 600px; box-shadow: 0 8px 32px rgba(0,0,0,.2); overflow: hidden; }
+    .search-box input { flex: 1; border: none; outline: none; padding: .9rem 1.2rem; font-size: 1rem; font-family: inherit; }
+    .search-box button { background: #1c2f5e; color: #fff; border: none; padding: 0 1.4rem; font-size: 1.1rem; cursor: pointer; }
+    .search-box button:hover { background: #8dc63f; }
+
+    /* ── HERO ── */
+    .id-hero {
+      position: relative;
+      width: 100%;
+      height: 600px;
+      background-image: url('https://disempack.com.co/wp-content/uploads/2026/01/BBCFONDO.png');
+      background-size: cover;
+      background-position: center 50%;
+      overflow: hidden;
+    }
+    .id-hero-overlay {
+      position: absolute; inset: 0;
+      background: rgba(28, 47, 94, .55);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 2rem 2.5rem;
+    }
+    .id-hero-text-box {
+      background: rgba(10, 20, 50, .65);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: 10px;
+      padding: 2.5rem 3rem;
+      max-width: 860px;
+    }
+    .id-hero-text-box h1 {
+      font-size: 2.8rem; font-weight: 800; color: #fff;
+      margin-bottom: 1.2rem; letter-spacing: .03em; line-height: 1.2;
+    }
+    .id-hero-text-box h1 span { color: #8dc63f; }
+    .id-hero-text-box p { font-size: 1rem; color: #e0e8f8; line-height: 1.85; margin-bottom: 1.8rem; }
+    .id-hero-btn {
+      display: inline-block; background: #8dc63f; color: #fff; font-weight: 700;
+      font-size: .95rem; padding: .75rem 2.2rem; border-radius: 4px;
+      text-decoration: none; border: 2px solid #8dc63f; transition: background .2s, color .2s;
+    }
+    .id-hero-btn:hover { background: #fff; color: #8dc63f; }
+
+    /* ── WHAT IS IT ── */
+    .id-what { padding: 4rem 2.5rem; background: #f7f9fc; }
+    .id-what-inner { max-width: 1200px; margin: 0 auto; }
+    .id-what-inner h4 { font-size: .9rem; font-weight: 700; color: #8dc63f; text-transform: uppercase; letter-spacing: .1em; margin-bottom: .5rem; }
+    .id-what-inner h2 { font-size: 1.9rem; font-weight: 700; color: #1c2f5e; margin-bottom: 2rem; }
+    .id-what-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+    .id-what-cols p { font-size: .95rem; color: #444; line-height: 1.85; text-align: justify; }
+
+    /* ── APPLICATIONS ── */
+    .id-applications { background: #fff; padding: 4rem 2.5rem; }
+    .id-applications h2 { font-size: 2.2rem; font-weight: 700; color: #1c2f5e; text-align: center; margin-bottom: 2.5rem; }
+    .id-apps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 2rem; max-width: 1000px; margin: 0 auto; }
+    .id-app-item {
+      display: flex; align-items: center; gap: .75rem;
+      padding: .7rem 0; border-bottom: 1px solid #e8ecf4; font-size: .92rem; color: #333;
+    }
+    .id-app-item::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #8dc63f; flex-shrink: 0; }
+
+    /* ── BENEFITS ── */
+    .id-benefits { padding: 4rem 2.5rem; background: #f7f9fc; }
+    .id-benefits h2 { font-size: 2.2rem; font-weight: 700; color: #1c2f5e; text-align: center; margin-bottom: 2.5rem; }
+    .id-benefits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 900px; margin: 0 auto; }
+    .id-benefit-item { text-align: center; padding: 2rem 1.5rem; border-radius: 8px; border: 1px solid #e8ecf4; box-shadow: 0 2px 12px rgba(0,0,0,.05); background: #fff; }
+    .id-benefit-item i { font-size: 2.8rem; color: #8dc63f; margin-bottom: 1rem; }
+    .id-benefit-item h4 { font-size: 1.05rem; font-weight: 700; color: #1c2f5e; }
+
+    /* ── COMPARISON TABLE ── */
+    .id-compare { padding: 4rem 2.5rem; background: #fff; }
+    .id-compare h2 { font-size: 2.2rem; font-weight: 700; color: #1c2f5e; text-align: center; margin-bottom: 2.5rem; }
+    .id-compare-wrap { max-width: 900px; margin: 0 auto; overflow-x: auto; }
+    .id-compare-table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+    .id-compare-table th, .id-compare-table td { padding: .85rem 1.2rem; text-align: center; border: 1px solid #e0e8f0; }
+    .id-compare-table thead tr { background: #1c2f5e; color: #fff; }
+    .id-compare-table thead th:first-child { text-align: left; }
+    .id-compare-table tbody tr:nth-child(even) { background: #f7f9fc; }
+    .id-compare-table tbody tr:nth-child(odd) { background: #fff; }
+    .id-compare-table tbody td:first-child { font-weight: 700; color: #1c2f5e; text-align: left; }
+    .id-compare-table .best { color: #8dc63f; font-weight: 700; }
+    .id-compare-table .worst { color: #c0392b; }
+    .id-compare-table .mid { color: #888; }
+
+    /* ── CTA ── */
+    .id-cta { background: #1c2f5e; padding: 4rem 2.5rem; text-align: center; }
+    .id-cta h3 { font-size: 2rem; font-weight: 700; color: #fff; margin-bottom: 1.8rem; }
+    .id-cta-btn {
+      display: inline-block; background: #8dc63f; color: #fff; font-weight: 700;
+      font-size: .95rem; padding: .85rem 2.5rem; border-radius: 4px;
+      text-decoration: none; border: 2px solid #8dc63f; transition: background .2s, color .2s;
+    }
+    .id-cta-btn:hover { background: #fff; color: #8dc63f; }
+
+    /* ── FOOTER ── */
+    footer { background: #1c2f5e; color: #a8bbd8; padding: 3rem 3rem 1.5rem; }
+    .footer-top { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3rem; align-items: start; margin-bottom: 2.5rem; }
+    .footer-col { display: flex; justify-content: center; }
+    .footer-col-inner { text-align: left; }
+    .footer-col h5 { font-size: .75rem; font-weight: 700; color: #fff; margin-bottom: .6rem; text-transform: uppercase; letter-spacing: .06em; }
+    .footer-col p, .footer-col a { font-size: .84rem; color: #a8bbd8; text-decoration: none; line-height: 1.8; display: block; }
+    .footer-col a:hover { color: #8dc63f; }
+    .footer-col-logo { display: flex; justify-content: center; align-items: center; }
+    .footer-col-logo img { height: 112px; object-fit: contain; }
+    .footer-divider { border: none; border-top: 1px solid rgba(255,255,255,.1); margin: 1.5rem 0; }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .footer-bottom p { font-size: .78rem; color: #7a90b5; }
+    .footer-socials { display: flex; gap: .8rem; }
+    .footer-socials a {
+      color: #a8bbd8; text-decoration: none; font-size: 1.4rem;
+      border: 1px solid rgba(255,255,255,.2); border-radius: 50%; width: 38px; height: 38px;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color .15s, color .15s;
+    }
+    .footer-socials a:hover { border-color: #8dc63f; color: #8dc63f; }
+
+    /* ── WHATSAPP FAB ── */
+    .wa-fab {
+      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 999;
+      width: 58px; height: 58px; border-radius: 50%; background: #25d366;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,.5); text-decoration: none; font-size: 1.8rem; transition: transform .2s;
+    }
+    .wa-fab:hover { transform: scale(1.1); }
+    .wa-fab img { width: 36px; height: 36px; border-radius: 50%; }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .id-what-cols { grid-template-columns: 1fr; }
+      .id-apps-grid { grid-template-columns: 1fr 1fr; }
+      .id-benefits-grid { grid-template-columns: 1fr; max-width: 360px; }
+      .footer-top { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <a href="#">Terms &amp; Conditions</a>
+  <a href="#">Privacy Policy</a>
+</div>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="index.html" class="logo-wrap">
+    <img src="https://disempack.com.co/wp-content/uploads/2025/11/GENERICO-USOS-scaled.png" alt="Disempack"/>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li>
+      <a href="#">Exhibición Comercial <span class="arrow">▾</span></a>
+      <ul class="dropdown">
+        <li><a href="pop.html">P.O.P</a></li>
+        <li><a href="senalizacion-corporativa.html">Señalización Corporativa</a></li>
+        <li><a href="alcancias.html">Alcancías</a></li>
+        <li><a href="recubrimientos.html">Recubrimientos</a></li>
+      </ul>
+    </li>
+    <li><a href="impresion-digital.html">Impresión Digital</a></li>
+    <li>
+      <a href="#">Empaques <span class="arrow">▾</span></a>
+      <ul class="dropdown">
+        <li><a href="#">Organizadores</a></li>
+        <li><a href="#">Cajas Plegadizas</a></li>
+        <li><a href="#">Blister</a></li>
+        <li><a href="#">Clam Shell</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">Procesos <span class="arrow">▾</span></a>
+      <ul class="dropdown">
+        <li><a href="impresion-digital.html">Impresión Digital</a></li>
+        <li><a href="#">Diseño y Desarrollo</a></li>
+        <li><a href="#">Termoformado</a></li>
+        <li><a href="#">Troquelado</a></li>
+        <li><a href="#">Corte CNC</a></li>
+        <li><a href="#">Acondicionamiento De Productos</a></li>
+        <li><a href="#">Termosellado</a></li>
+        <li><a href="#">Venta De Materia Prima</a></li>
+      </ul>
+    </li>
+    <li><a href="#">Contacto</a></li>
+    <li><a href="#">Cotizar</a></li>
+  </ul>
+  <button class="nav-search" id="searchBtn">🔍</button>
+</nav>
+
+<!-- SEARCH OVERLAY -->
+<div class="search-overlay" id="searchOverlay">
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Buscar en Disempack…"/>
+    <button id="searchSubmit">🔍</button>
+  </div>
+</div>
+
+<!-- ══ HERO ══ -->
+<section class="id-hero">
+  <div class="id-hero-overlay">
+    <div class="id-hero-text-box">
+      <h1>Impresión Digital <span>Industrial de Alta Precisión</span></h1>
+      <p>Descubre cómo personalizar tus proyectos con calidad excepcional y un enfoque sostenible, utilizando tecnología de vanguardia en impresión digital.</p>
+      <a href="https://disempack.com.co/cotizar/" target="_blank" class="id-hero-btn">Cotiza tu proyecto</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ QUÉ ES ══ -->
+<section class="id-what">
+  <div class="id-what-inner">
+    <h4>¿Qué es la Impresión Digital en Disempack?</h4>
+    <h2>Tecnología de Vanguardia a tu Servicio</h2>
+    <div class="id-what-cols">
+      <p>La impresión digital en Disempack ofrece soluciones avanzadas que superan las limitaciones de la impresión tradicional. Nuestra tecnología permite una personalización total, rapidez en la entrega y una calidad de impresión superior. A diferencia de la impresión tradicional, nuestra técnica industrial garantiza durabilidad y resistencia, ideal para aplicaciones exigentes.</p>
+      <p>Las ventajas competitivas de nuestra impresión digital incluyen la capacidad de producir tiradas cortas con alta eficiencia, la posibilidad de imprimir sobre una amplia variedad de materiales y un compromiso con la sostenibilidad mediante el uso de tintas ecoamigables.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ APPLICATIONS ══ -->
+<section class="id-applications">
+  <h2>Aplicaciones del Servicio</h2>
+  <div class="id-apps-grid">
+    <div class="id-app-item">Empaques Personalizados</div>
+    <div class="id-app-item">Displays para Puntos de Venta</div>
+    <div class="id-app-item">Invitaciones Personalizadas</div>
+
+    <div class="id-app-item">Material POP</div>
+    <div class="id-app-item">Folletos y Catálogos</div>
+    <div class="id-app-item">Sobres y Papelería</div>
+
+    <div class="id-app-item">Señalización</div>
+    <div class="id-app-item">Tarjetas de Presentación</div>
+    <div class="id-app-item">Packaging de Productos</div>
+
+    <div class="id-app-item">Piezas Industriales</div>
+    <div class="id-app-item">Calendarios Corporativos</div>
+    <div class="id-app-item">Material Promocional</div>
+
+    <div class="id-app-item">Etiquetas y Stickers</div>
+    <div class="id-app-item">Revistas y Publicaciones</div>
+    <div class="id-app-item">Decoración de Interiores</div>
+
+    <div class="id-app-item">Carteles Publicitarios</div>
+    <div class="id-app-item">Posters y Banners</div>
+    <div class="id-app-item">Gráficos para Vehículos</div>
+  </div>
+</section>
+
+<!-- ══ BENEFITS ══ -->
+<section class="id-benefits">
+  <h2>Beneficios para el Cliente</h2>
+  <div class="id-benefits-grid">
+    <div class="id-benefit-item">
+      <i class="fa-solid fa-sliders"></i>
+      <h4>Personalización Total</h4>
+    </div>
+    <div class="id-benefit-item">
+      <i class="fa-solid fa-truck-fast"></i>
+      <h4>Entrega Rápida</h4>
+    </div>
+    <div class="id-benefit-item">
+      <i class="fa-solid fa-medal"></i>
+      <h4>Calidad Superior</h4>
+    </div>
+  </div>
+</section>
+
+<!-- ══ COMPARISON TABLE ══ -->
+<section class="id-compare">
+  <h2>Comparativa de Impresión Digital</h2>
+  <div class="id-compare-wrap">
+    <table class="id-compare-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Tinta Base Agua</th>
+          <th>Tinta UV</th>
+          <th>Tinta Solvente</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Tipo de Tinta</td>
+          <td class="mid">Base Agua</td>
+          <td class="best">UV</td>
+          <td class="mid">Solvente</td>
+        </tr>
+        <tr>
+          <td>Tiempo de Secado</td>
+          <td class="mid">Rápido</td>
+          <td class="best">Instantáneo</td>
+          <td class="worst">Lento</td>
+        </tr>
+        <tr>
+          <td>Durabilidad</td>
+          <td class="mid">Moderada</td>
+          <td class="best">Alta</td>
+          <td class="worst">Baja</td>
+        </tr>
+        <tr>
+          <td>Calidad del Color</td>
+          <td class="mid">Buena</td>
+          <td class="best">Excelente</td>
+          <td class="worst">Aceptable</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<section class="id-cta">
+  <h3>Solicita Asesoría Personalizada</h3>
+  <a href="https://disempack.com.co/cotizar/" target="_blank" class="id-cta-btn">Contáctanos Ahora</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-col">
+      <div class="footer-col-inner">
+        <h5>Servicio al Cliente</h5>
+        <a href="tel:+573183820863">🇨🇴 318 382 0863</a>
+        <h5 style="margin-top:1.2rem;">Calidad</h5>
+        <a href="tel:+573011664304">🇨🇴 301 166 4304</a>
+        <h5 style="margin-top:1.2rem;">Diseño y Desarrollo</h5>
+        <a href="tel:+573005582389">🇨🇴 300 558 2389</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-inner">
+        <h5>Dirección</h5>
+        <p>37A sur No. 72L-95</p>
+        <h5 style="margin-top:1.2rem;">Horarios</h5>
+        <p>Lunes a Viernes<br/>7:00am – 4:00pm</p>
+      </div>
+    </div>
+    <div class="footer-col-logo">
+      <img src="https://disempack.com.co/wp-content/uploads/2025/11/LOGO-WEB-HEAD-BLANCO-e1768929160286-1024x403.png" alt="Disempack"/>
+    </div>
+  </div>
+  <hr class="footer-divider"/>
+  <div class="footer-bottom">
+    <p>By Disempack S.A.S - 2026</p>
+    <div class="footer-socials">
+      <a href="https://www.facebook.com/profile.php?id=100054201593487" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/disempack" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FAB -->
+<a href="https://wa.link/2ka87h" class="wa-fab" target="_blank" title="WhatsApp">
+  <img src="https://disempack.com.co/wp-content/uploads/2026/01/Logo-Whtsapp-Disempack-scaled.png"
+       alt="WhatsApp"
+       onerror="this.outerHTML='<span style=\'color:#fff;font-size:1.9rem;\'>💬</span>'"/>
+</a>
+
+<script>
+  /* ── SEARCH ── */
+  const searchBtn = document.getElementById('searchBtn');
+  const searchOverlay = document.getElementById('searchOverlay');
+  const searchInput = document.getElementById('searchInput');
+  const searchSubmit = document.getElementById('searchSubmit');
+  searchBtn.addEventListener('click', () => { searchOverlay.classList.add('open'); searchInput.focus(); });
+  searchOverlay.addEventListener('click', (e) => { if (e.target === searchOverlay) searchOverlay.classList.remove('open'); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') searchOverlay.classList.remove('open'); });
+  function doSearch() { const q = searchInput.value.trim(); if (q) window.open('https://disempack.com.co/?s=' + encodeURIComponent(q), '_blank'); }
+  searchSubmit.addEventListener('click', doSearch);
+  searchInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') doSearch(); });
+</script>
+</body>
+</html>
