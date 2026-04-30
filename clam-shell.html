@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Clam Shell - Disempack SAS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Open Sans', sans-serif; color: #333; background: #fff; overflow-x: hidden; }
+
+    /* ── TOP BAR ── */
+    .topbar { background: #1c2f5e; padding: .35rem 2rem; display: flex; justify-content: flex-end; gap: 1.5rem; }
+    .topbar a { color: #ccd6f0; font-size: .75rem; text-decoration: none; transition: color .15s; }
+    .topbar a:hover { color: #fff; }
+
+    /* ── NAVBAR ── */
+    nav {
+      background: #fff; border-bottom: 1px solid #e8e8e8;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .6rem 2.5rem; position: sticky; top: 0; z-index: 200;
+      box-shadow: 0 2px 8px rgba(0,0,0,.07);
+    }
+    .logo-wrap { display: flex; align-items: center; text-decoration: none; }
+    .logo-wrap img { height: 52px; object-fit: contain; }
+    .nav-links { display: flex; align-items: center; gap: .05rem; list-style: none; }
+    .nav-links > li { position: relative; }
+    .nav-links > li > a {
+      display: flex; align-items: center; gap: .3rem; padding: .5rem .85rem;
+      font-size: .83rem; color: #333; text-decoration: none; font-weight: 600;
+      border-radius: 4px; transition: color .15s, background .15s;
+    }
+    .nav-links > li > a:hover { color: #1c2f5e; background: #f5f6fa; }
+    .nav-links > li > a .arrow { font-size: .6rem; color: #888; }
+    .dropdown {
+      display: none; position: absolute; top: 100%; left: 0;
+      background: #fff; border: 1px solid #e0e0e0; border-top: 3px solid #8dc63f;
+      border-radius: 0 0 6px 6px; min-width: 210px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.12); list-style: none; z-index: 300;
+    }
+    .nav-links > li:hover .dropdown { display: block; }
+    .dropdown li a {
+      display: block; padding: .6rem 1.2rem; font-size: .82rem; color: #444;
+      text-decoration: none; border-bottom: 1px solid #f0f0f0; transition: background .12s, color .12s;
+    }
+    .dropdown li:last-child a { border-bottom: none; }
+    .dropdown li a:hover { background: #f0f0f0; color: #555; }
+    .nav-search { font-size: 1rem; color: #555; cursor: pointer; padding: .4rem .6rem; border: none; background: none; }
+
+    /* ── SEARCH OVERLAY ── */
+    .search-overlay {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 500;
+      align-items: flex-start; justify-content: center; padding-top: 80px;
+    }
+    .search-overlay.open { display: flex; }
+    .search-box { background: #fff; border-radius: 8px; display: flex; width: 100%; max-width: 600px; box-shadow: 0 8px 32px rgba(0,0,0,.2); overflow: hidden; }
+    .search-box input { flex: 1; border: none; outline: none; padding: .9rem 1.2rem; font-size: 1rem; font-family: inherit; }
+    .search-box button { background: #1c2f5e; color: #fff; border: none; padding: 0 1.4rem; font-size: 1.1rem; cursor: pointer; }
+    .search-box button:hover { background: #8dc63f; }
+
+    /* ════════════════════════════════════
+       SECTION 0 · HERO (full-bg image + dark card)
+    ════════════════════════════════════ */
+    .cs-hero {
+      position: relative;
+      background-image:
+        linear-gradient(180deg, #1e3b74 0%, rgba(255,255,255,0) 100%),
+        url('https://images.unsplash.com/photo-1614735241165-6756e1df61ab?ixlib=rb-4.1.0&fm=webp&fit=crop&crop=entropy&w=1920&h=700&q=80');
+      background-size: cover;
+      background-position: center;
+      min-height: 520px;
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+      align-items: center;
+      padding: 5rem 4rem;
+    }
+    .cs-hero-empty { display: block; }
+    .cs-hero-card {
+      background-color: #1e3b74;
+      border-radius: 6px;
+      padding: 60px;
+    }
+    .cs-hero-card h1 {
+      font-size: 3rem; font-weight: 800; color: #fff;
+      letter-spacing: .06em; margin-bottom: 1.2rem; line-height: 1.1;
+    }
+    .cs-hero-card p {
+      font-size: .97rem; color: #c5d4f0; line-height: 1.8; margin-bottom: 2rem;
+      max-width: 640px;
+    }
+    .cs-hero-btn {
+      display: inline-block; background: #fff; color: #1e3b74; font-weight: 700;
+      font-size: .9rem; padding: .75rem 2rem; border-radius: 100px;
+      text-decoration: none; border: none; transition: background .2s, color .2s;
+    }
+    .cs-hero-btn:hover { background: #8dc63f; color: #fff; }
+
+    /* ════════════════════════════════════
+       SHARED UTILITIES
+    ════════════════════════════════════ */
+    .cs-btn {
+      display: inline-block; background: #8dc63f; color: #fff; font-weight: 700;
+      font-size: .88rem; padding: .7rem 1.8rem; border-radius: 100px;
+      text-decoration: none; transition: background .2s;
+    }
+    .cs-btn:hover { background: #7ab535; }
+    .cs-btn-dark {
+      display: inline-block; background: #1c2f5e; color: #fff; font-weight: 700;
+      font-size: .88rem; padding: .7rem 1.8rem; border-radius: 100px;
+      text-decoration: none; transition: background .2s;
+    }
+    .cs-btn-dark:hover { background: #152447; }
+
+    /* ════════════════════════════════════
+       SECTION 1 · ESENCIA
+    ════════════════════════════════════ */
+    .cs-esencia { padding: 5rem 5rem; background: #fff; }
+    .cs-esencia-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; max-width: 1200px; margin: 0 auto; align-items: start;
+    }
+    .cs-esencia-left h4 {
+      font-size: .8rem; font-weight: 700; color: #8dc63f;
+      text-transform: uppercase; letter-spacing: .14em; margin-bottom: .6rem;
+    }
+    .cs-esencia-left h2 { font-size: 2.1rem; font-weight: 700; color: #1c2f5e; margin-bottom: 1.2rem; line-height: 1.25; }
+    .cs-esencia-left p { font-size: .93rem; color: #444; line-height: 1.8; text-align: justify; }
+    .cs-esencia-right p { font-size: .93rem; color: #444; line-height: 1.8; text-align: justify; }
+
+    /* ════════════════════════════════════
+       SECTION 2 · DISEÑO PERSONALIZADO
+    ════════════════════════════════════ */
+    .cs-diseno { padding: 5rem 2.5rem; background: #f7f9fc; }
+    .cs-diseno-inner { max-width: 1200px; margin: 0 auto; }
+    .cs-diseno-inner h2 {
+      font-size: 2.1rem; font-weight: 700; color: #1c2f5e;
+      text-align: center; margin-bottom: 2rem;
+    }
+    .cs-diseno-img {
+      width: 100%; max-height: 500px; object-fit: cover; display: block;
+      border-radius: 8px; box-shadow: 0 40px 112px -24px rgba(0,0,0,.12);
+      margin-bottom: 2rem;
+    }
+    .cs-diseno-inner p {
+      font-size: .93rem; color: #555; line-height: 1.85; text-align: center;
+      max-width: 900px; margin: 0 auto;
+    }
+
+    /* ════════════════════════════════════
+       SECTION 3 · PROCESO 3-COL
+    ════════════════════════════════════ */
+    .cs-proceso { padding: 5rem 2.5rem; background: #fff; }
+    .cs-proceso-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem; max-width: 1200px; margin: 0 auto; align-items: stretch;
+    }
+    .cs-proceso-plain { padding: 1rem 0; }
+    .cs-proceso-plain h3 { font-size: 1.4rem; font-weight: 700; color: #1c2f5e; margin-bottom: 1rem; line-height: 1.3; }
+    .cs-proceso-plain p { font-size: .9rem; color: #555; line-height: 1.8; }
+    .cs-proceso-card {
+      background: #1c2f5e; border-radius: 8px; padding: 2.5rem;
+    }
+    .cs-proceso-card p { font-size: .9rem; color: #c5d4f0; line-height: 1.8; }
+
+    /* ════════════════════════════════════
+       SECTION 4 · CARACTERÍSTICAS
+    ════════════════════════════════════ */
+    .cs-caracteristicas { padding: 5rem 2.5rem; background: #f7f9fc; }
+    .cs-caracteristicas-inner { max-width: 900px; margin: 0 auto; }
+    .cs-caracteristicas-inner h4 {
+      font-size: .8rem; font-weight: 700; color: #1c2f5e;
+      text-transform: uppercase; letter-spacing: .14em; margin-bottom: .6rem;
+    }
+    .cs-caracteristicas-inner h2 { font-size: 2.1rem; font-weight: 700; color: #1c2f5e; margin-bottom: 1.2rem; line-height: 1.25; }
+    .cs-caracteristicas-inner p { font-size: .93rem; color: #555; line-height: 1.85; text-align: justify; }
+
+    /* ════════════════════════════════════
+       SECTION 5 · VENTAJAS (white card row)
+    ════════════════════════════════════ */
+    .cs-ventajas { padding: 5rem 2.5rem; background: #fff; }
+    .cs-ventajas-card {
+      display: grid; grid-template-columns: 3fr 2fr;
+      gap: 3rem; max-width: 1200px; margin: 0 auto;
+      background: #fff; border-radius: 8px;
+      box-shadow: 0 24px 72px -12px rgba(0,0,0,.12);
+      padding: 4rem; align-items: center;
+    }
+    .cs-ventajas-left h4 {
+      font-size: .8rem; font-weight: 700; color: #8dc63f;
+      text-transform: uppercase; letter-spacing: .14em; margin-bottom: .6rem;
+    }
+    .cs-ventajas-left h2 { font-size: 2.1rem; font-weight: 700; color: #1c2f5e; line-height: 1.25; }
+    .cs-ventajas-right p { font-size: .93rem; color: #555; line-height: 1.85; text-align: justify; }
+
+    /* ════════════════════════════════════
+       SECTION 6 · GALERÍA
+    ════════════════════════════════════ */
+    .cs-gallery { padding: 5rem 2.5rem; background: #f7f9fc; }
+    .cs-gallery-header { text-align: center; margin-bottom: 2.5rem; }
+    .cs-gallery-header h4 {
+      font-size: .8rem; font-weight: 700; color: #1c2f5e;
+      text-transform: uppercase; letter-spacing: .14em; margin-bottom: .4rem;
+    }
+    .cs-gallery-header h2 { font-size: 2.1rem; font-weight: 700; color: #1c2f5e; }
+    .cs-gallery-4 {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: .6rem; max-width: 1200px; margin: 0 auto;
+    }
+    .cs-gallery-item { position: relative; overflow: hidden; border-radius: 6px; cursor: pointer; }
+    .cs-gallery-item img { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; transition: transform .35s; }
+    .cs-gallery-item:hover img { transform: scale(1.06); }
+    .cs-gallery-overlay {
+      position: absolute; inset: 0; background: rgba(28,47,94,0);
+      display: flex; align-items: center; justify-content: center;
+      transition: background .25s;
+    }
+    .cs-gallery-item:hover .cs-gallery-overlay { background: rgba(28,47,94,.35); }
+    .cs-gallery-overlay i { font-size: 2rem; color: #fff; opacity: 0; transition: opacity .25s; }
+    .cs-gallery-item:hover .cs-gallery-overlay i { opacity: 1; }
+
+    /* Lightbox */
+    .cs-lightbox {
+      display: none; position: fixed; inset: 0; z-index: 800;
+      background: rgba(0,0,0,.88); align-items: center; justify-content: center;
+    }
+    .cs-lightbox.open { display: flex; }
+    .cs-lightbox img { max-width: 90vw; max-height: 90vh; border-radius: 6px; box-shadow: 0 8px 40px rgba(0,0,0,.5); }
+    .cs-lightbox-close {
+      position: absolute; top: 1.5rem; right: 2rem;
+      font-size: 2.5rem; color: #fff; cursor: pointer; line-height: 1;
+    }
+    .cs-lightbox-close:hover { color: #8dc63f; }
+
+    /* ════════════════════════════════════
+       SECTION 7 · FAQ (2 accordion cols)
+    ════════════════════════════════════ */
+    .cs-faq { padding: 5rem 2.5rem; background: #fff; }
+    .cs-faq-header { text-align: center; margin-bottom: 3rem; }
+    .cs-faq-header h2 { font-size: 2.1rem; font-weight: 700; color: #1c2f5e; margin-bottom: .8rem; }
+    .cs-faq-header p { font-size: .93rem; color: #666; max-width: 680px; margin: 0 auto; line-height: 1.8; }
+    .cs-faq-cols {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 2rem; max-width: 1200px; margin: 0 auto;
+    }
+    .cs-acc-item {
+      border: 2px solid rgba(0,0,0,.08); border-radius: 6px;
+      overflow: hidden; margin-bottom: 1rem;
+    }
+    .cs-acc-question {
+      display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+      padding: 1.1rem 1.4rem; cursor: pointer; font-size: .93rem;
+      font-weight: 700; color: #1c2f5e; background: #fff;
+    }
+    .cs-acc-icon {
+      font-size: .78rem; color: #1c2f5e; flex-shrink: 0; transition: transform .25s;
+    }
+    .cs-acc-item.open .cs-acc-icon { transform: rotate(45deg); }
+    .cs-acc-answer {
+      display: none; font-size: .88rem; color: #555; line-height: 1.8;
+      padding: .2rem 1.4rem 1.2rem;
+    }
+    .cs-acc-item.open .cs-acc-answer { display: block; }
+
+    /* ════════════════════════════════════
+       SECTION 8 · CTA BANNER (rounded, dark image)
+    ════════════════════════════════════ */
+    .cs-cta-wrap { padding: 3rem 2.5rem 5rem; }
+    .cs-cta-banner {
+      position: relative; border-radius: 8px; overflow: hidden;
+      max-width: 1200px; margin: 0 auto;
+      background-image:
+        linear-gradient(180deg, rgba(0,0,0,.75) 0%, rgba(0,0,0,.75) 100%),
+        url('https://images.unsplash.com/photo-1766040923580-16ad32fae8b4?ixlib=rb-4.1.0&fm=webp&fit=crop&crop=entropy&w=1920&h=700&q=80');
+      background-size: cover; background-position: center;
+      padding: 5rem 4rem; text-align: center;
+    }
+    .cs-cta-banner h2 { font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 1rem; line-height: 1.25; }
+    .cs-cta-banner p { font-size: 1rem; color: #d0ddf5; line-height: 1.8; max-width: 760px; margin: 0 auto 2rem; }
+    .cs-cta-banner-btn {
+      display: inline-block; background: #fff; color: #1c2f5e; font-weight: 700;
+      font-size: .9rem; padding: .75rem 2.2rem; border-radius: 100px;
+      text-decoration: none; border: none; transition: background .2s, color .2s;
+    }
+    .cs-cta-banner-btn:hover { background: #8dc63f; color: #fff; }
+
+    /* ── FOOTER ── */
+    footer { background: #1c2f5e; color: #a8bbd8; padding: 3rem 3rem 1.5rem; }
+    .footer-top { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3rem; align-items: start; margin-bottom: 2.5rem; }
+    .footer-col { display: flex; justify-content: center; }
+    .footer-col-inner { text-align: left; }
+    .footer-col h5 { font-size: .75rem; font-weight: 700; color: #fff; margin-bottom: .6rem; text-transform: uppercase; letter-spacing: .06em; }
+    .footer-col p, .footer-col a { font-size: .84rem; color: #a8bbd8; text-decoration: none; line-height: 1.8; display: block; }
+    .footer-col a:hover { color: #8dc63f; }
+    .footer-col-logo { display: flex; justify-content: center; align-items: center; }
+    .footer-col-logo img { height: 112px; object-fit: contain; }
+    .footer-divider { border: none; border-top: 1px solid rgba(255,255,255,.1); margin: 1.5rem 0; }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .footer-bottom p { font-size: .78rem; color: #7a90b5; }
+    .footer-socials { display: flex; gap: .8rem; }
+    .footer-socials a {
+      color: #a8bbd8; text-decoration: none; font-size: 1.4rem;
+      border: 1px solid rgba(255,255,255,.2); border-radius: 50%; width: 38px; height: 38px;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color .15s, color .15s;
+    }
+    .footer-socials a:hover { border-color: #8dc63f; color: #8dc63f; }
+
+    /* ── WHATSAPP FAB ── */
+    .wa-fab {
+      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 999;
+      width: 58px; height: 58px; border-radius: 50%; background: #25d366;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,.5); text-decoration: none; font-size: 1.8rem; transition: transform .2s;
+    }
+    .wa-fab:hover { transform: scale(1.1); }
+    .wa-fab img { width: 36px; height: 36px; border-radius: 50%; }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .cs-hero { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
+      .cs-hero-empty { display: none; }
+      .cs-hero-card { padding: 2.5rem 2rem; }
+      .cs-hero-card h1 { font-size: 2.2rem; }
+      .cs-esencia-inner { grid-template-columns: 1fr; }
+      .cs-esencia { padding: 4rem 2rem; }
+      .cs-proceso-grid { grid-template-columns: 1fr; }
+      .cs-ventajas-card { grid-template-columns: 1fr; padding: 2.5rem; }
+      .cs-gallery-4 { grid-template-columns: repeat(2, 1fr); }
+      .cs-faq-cols { grid-template-columns: 1fr; }
+      .cs-cta-banner { padding: 3rem 2rem; }
+      .cs-cta-banner h2 { font-size: 1.6rem; }
+      .footer-top { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <a href="#">Terms &amp; Conditions</a>
+  <a href="#">Privacy Policy</a>
+</div>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="index.html" class="logo-wrap">
+    <img src="https://disempack.com.co/wp-content/uploads/2025/11/GENERICO-USOS-scaled.png" alt="Disempack"/>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li>
+      <a href="#">Exhibición Comercial <span class="arrow">▾</span></a>
+      <ul class="dropdown">
+        <li><a href="pop.html">P.O.P</a></li>
+        <li><a href="senalizacion-corporativa.html">Señalización Corporativa</a></li>
+        <li><a href="alcancias.html">Alcancías</a></li>
+        <li><a href="recubrimientos.html">Recubrimientos</a></li>
+      </ul>
+    </li>
+    <li><a href="impresion-digital.html">Impresión Digital</a></li>
+    <li>
+      <a href="#">Empaques <span class="arrow">▾</span></a>
+      <ul class="dropdown">
+        <li><a href="organizadores.html">Organizadores</a></li>
+        <li><a href="cajas-plegadizas.html">Cajas Plegadizas</a></li>
+        <li><a href="blister.html">Blister</a></li>
+        <li><a href="clam-shell.html">Clam Shell</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">Procesos <span class="arrow">▾</span></a>
+      <ul class="dropdown">
+        <li><a href="impresion-digital.html">Impresión Digital</a></li>
+        <li><a href="#">Diseño y Desarrollo</a></li>
+        <li><a href="#">Termoformado</a></li>
+        <li><a href="#">Troquelado</a></li>
+        <li><a href="#">Corte CNC</a></li>
+        <li><a href="#">Acondicionamiento De Productos</a></li>
+        <li><a href="#">Termosellado</a></li>
+        <li><a href="#">Venta De Materia Prima</a></li>
+      </ul>
+    </li>
+    <li><a href="#">Contacto</a></li>
+    <li><a href="#">Cotizar</a></li>
+  </ul>
+  <button class="nav-search" id="searchBtn">🔍</button>
+</nav>
+
+<!-- SEARCH OVERLAY -->
+<div class="search-overlay" id="searchOverlay">
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Buscar en Disempack…"/>
+    <button id="searchSubmit">🔍</button>
+  </div>
+</div>
+
+<!-- ══ SECTION 0 · HERO ══ -->
+<section class="cs-hero">
+  <div class="cs-hero-empty"></div>
+  <div class="cs-hero-card">
+    <h1>CLAMSHELL</h1>
+    <p>Descubre cómo personalizar tus proyectos con calidad excepcional en empaques clam shell. Soluciones versátiles y resistentes que protegen y exhiben tus productos con estilo.</p>
+    <a href="https://disempack.com.co/cotizar/" target="_blank" class="cs-hero-btn">Cotiza tu proyecto</a>
+  </div>
+</section>
+
+<!-- ══ SECTION 1 · ESENCIA ══ -->
+<section class="cs-esencia">
+  <div class="cs-esencia-inner">
+    <div class="cs-esencia-left">
+      <h4>¿Qué es un Clam Shell?</h4>
+      <h2>La Esencia Del Clam Shell</h2>
+      <p>Un clam shell es un tipo de empaque termoformado de dos piezas unidas por una bisagra, que se cierra para proteger y exhibir el producto de forma segura. Su diseño en forma de almeja le da nombre y le permite abrirse y cerrarse fácilmente, facilitando el acceso al contenido sin dañar el empaque. Es ampliamente utilizado en el retail, la industria alimentaria, farmacéutica y de electrónica por su versatilidad y resistencia.</p>
+    </div>
+    <div class="cs-esencia-right">
+      <p>La principal ventaja del clam shell radica en su capacidad para ofrecer una protección robusta mientras mantiene una visibilidad total del producto. El plástico transparente de alta calidad que utilizamos garantiza que el contenido se vea con claridad, potenciando el impacto visual en el punto de venta. Además, su diseño hermético protege contra polvo, humedad y manipulación no autorizada, asegurando que el producto llegue al cliente en perfectas condiciones.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 2 · DISEÑO PERSONALIZADO ══ -->
+<section class="cs-diseno">
+  <div class="cs-diseno-inner">
+    <h2>Diseño Personalizado de Clam Shell</h2>
+    <img class="cs-diseno-img"
+         src="https://images.unsplash.com/photo-1668775589972-3aa874ea191b?ixlib=rb-4.1.0&fm=webp&fit=crop&crop=entropy&w=1920&h=600&q=80"
+         alt="Diseño personalizado de clam shell"/>
+    <p>Cada clam shell que fabricamos se diseña a la medida del producto. Analizamos dimensiones, peso y características específicas para termoformar una pieza que se ajuste perfectamente. Nuestro proceso incluye el diseño del molde, la selección del material plástico más adecuado y el acabado final, garantizando un empaque funcional, estético y alineado con la identidad de tu marca.</p>
+  </div>
+</section>
+
+<!-- ══ SECTION 3 · PROCESO 3-COL ══ -->
+<section class="cs-proceso">
+  <div class="cs-proceso-grid">
+    <div class="cs-proceso-plain">
+      <h3>Procesos de Construcción de Clam Shell</h3>
+      <p>El proceso de fabricación del clam shell inicia con el diseño del molde, donde se definen las cavidades y la bisagra que unirá ambas mitades del empaque. Esta etapa es fundamental para lograr un ajuste preciso y una apertura ergonómica que facilite el uso al consumidor final.</p>
+    </div>
+    <div class="cs-proceso-card">
+      <p>A continuación, el termoformado da forma al plástico mediante calor y presión controlados, creando las dos piezas simétricas del clam shell. Utilizamos materiales de alta transparencia como PET o PVC para garantizar una visibilidad óptima del producto y una resistencia adecuada para su manejo y transporte.</p>
+    </div>
+    <div class="cs-proceso-card">
+      <p>En la fase final, se realizan los acabados: corte de bordes, perforaciones para colgado, inserción de encartes de cartón y cierre del empaque con sistemas de clip o termosellado. Cada clam shell pasa por un riguroso control de calidad antes de ser entregado, asegurando que cumpla con los estándares más exigentes del mercado.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 4 · CARACTERÍSTICAS ══ -->
+<section class="cs-caracteristicas">
+  <div class="cs-caracteristicas-inner">
+    <h4>Características y Aplicaciones del Clam Shell</h4>
+    <h2>Versatilidad y Resistencia</h2>
+    <p>Los empaques clam shell de Disempack se destacan por su alta resistencia mecánica, su sellado hermético y su excelente presentación visual. Son ideales para una amplia variedad de sectores: alimentos frescos, prendas de vestir, accesorios electrónicos, artículos de ferretería, juguetes y productos de cuidado personal. Su diseño permite la reutilización por parte del consumidor, lo que añade valor percibido al producto y refuerza la imagen de marca. Además, trabajamos con materiales reciclables para minimizar el impacto ambiental y contribuir a una cadena de producción más sostenible.</p>
+  </div>
+</section>
+
+<!-- ══ SECTION 5 · VENTAJAS (white card) ══ -->
+<section class="cs-ventajas">
+  <div class="cs-ventajas-card">
+    <div class="cs-ventajas-left">
+      <h4>Beneficios para el Retail</h4>
+      <h2>Ventajas de los Empaques Clam Shell</h2>
+    </div>
+    <div class="cs-ventajas-right">
+      <p>Los clam shells ofrecen múltiples ventajas competitivas: protegen el producto durante toda la cadena logística, reducen las mermas por daños y mejoran la exhibición en anaquel. Su formato permite incorporar información de marca, instrucciones de uso y códigos de barra sin sacrificar la visibilidad del producto. La posibilidad de personalizar el diseño, el color del encarte y los sistemas de cierre hace de este empaque una solución premium que diferencia tu producto de la competencia y genera confianza en el consumidor.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 6 · GALERÍA ══ -->
+<section class="cs-gallery">
+  <div class="cs-gallery-header">
+    <h4>Explora Nuestra Selección de Productos</h4>
+    <h2>Galería de Productos Destacados</h2>
+  </div>
+  <div class="cs-gallery-4">
+    <div class="cs-gallery-item" data-src="https://images.unsplash.com/photo-1630734242356-a6f858790740?ixlib=rb-4.1.0&fm=webp&fit=crop&crop=entropy&w=1200&h=1200&q=80">
+      <img src="https://images.unsplash.com/photo-1630734242356-a6f858790740?ixlib=rb-4.1.0&fm=webp&fit=crop&crop=entropy&w=600&h=600&q=80" alt="Materiales de empaque"/>
+      <div class="cs-gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+    </div>
+    <div class="cs-gallery-item" data-src="https://images.unsplash.com/photo-1761125802333-d145773f4461?ixlib=rb-4.1.0&fm=webp&fit=crop&crop=entropy&w=1200&h=1200&q=80">
+      <img src="https://images.unsplash.com/photo-1761125802333-d145773f4461?ixlib=rb-4.1.0&fm=webp&fit=crop&crop=entropy&w=600&h=600&q=80" alt="Empaque eco-friendly"/>
+      <div class="cs-gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+    </div>
+    <div class="cs-gallery-item" data-src="https://images.unsplash.com/photo-1705484154110-8d5415643b37?ixlib=rb-4.1.0&fm=webp&fit=crop&crop=entropy&w=1200&h=1200&q=80">
+      <img src="https://images.unsplash.com/photo-1705484154110-8d5415643b37?ixlib=rb-4.1.0&fm=webp&fit=crop&crop=entropy&w=600&h=600&q=80" alt="Soluciones de empaque"/>
+      <div class="cs-gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+    </div>
+    <div class="cs-gallery-item" data-src="https://images.unsplash.com/photo-1728038761120-9bb76cbac906?ixlib=rb-4.1.0&fm=webp&fit=crop&crop=entropy&w=1200&h=1200&q=80">
+      <img src="https://images.unsplash.com/photo-1728038761120-9bb76cbac906?ixlib=rb-4.1.0&fm=webp&fit=crop&crop=entropy&w=600&h=600&q=80" alt="Display de empaque"/>
+      <div class="cs-gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="cs-lightbox" id="csLightbox">
+  <span class="cs-lightbox-close" id="csLightboxClose">&times;</span>
+  <img id="csLightboxImg" src="" alt=""/>
+</div>
+
+<!-- ══ SECTION 7 · FAQ ══ -->
+<section class="cs-faq">
+  <div class="cs-faq-header">
+    <h2>Preguntas Frecuentes sobre Clam Shell</h2>
+    <p>Encuentra respuestas a las preguntas más comunes sobre nuestros empaques clam shell, diseñados para proteger y exhibir tus productos con eficiencia.</p>
+  </div>
+  <div class="cs-faq-cols">
+    <!-- Accordion 1 -->
+    <div>
+      <div class="cs-acc-item open">
+        <div class="cs-acc-question">¿Para qué productos es ideal el empaque clam shell? <i class="fa-solid fa-plus cs-acc-icon"></i></div>
+        <div class="cs-acc-answer">El clam shell es ideal para productos de retail que requieren visibilidad y protección simultáneas: electrónicos, juguetes, accesorios, alimentos frescos, artículos de ferretería y cosméticos, entre muchos otros.</div>
+      </div>
+      <div class="cs-acc-item">
+        <div class="cs-acc-question">¿Puedo personalizar el diseño del clam shell con mi marca? <i class="fa-solid fa-plus cs-acc-icon"></i></div>
+        <div class="cs-acc-answer">Sí, ofrecemos personalización completa: diseño del molde a la medida, inserción de encarte de cartón impreso con tu branding, y opciones de cierre que refuerzan la imagen de tu marca.</div>
+      </div>
+      <div class="cs-acc-item">
+        <div class="cs-acc-question">¿Qué materiales se utilizan en los clam shells? <i class="fa-solid fa-plus cs-acc-icon"></i></div>
+        <div class="cs-acc-answer">Trabajamos principalmente con PET (tereftalato de polietileno) y PVC de alta transparencia, ambos disponibles en versiones reciclables. La elección del material depende del uso final, el peso del producto y los requisitos de resistencia.</div>
+      </div>
+    </div>
+    <!-- Accordion 2 -->
+    <div>
+      <div class="cs-acc-item open">
+        <div class="cs-acc-question">¿Los clam shells son reciclables? <i class="fa-solid fa-plus cs-acc-icon"></i></div>
+        <div class="cs-acc-answer">Sí, utilizamos materiales reciclables y ofrecemos opciones fabricadas con material reciclado post-consumo. Nos comprometemos con prácticas sostenibles y cumplimos con las normativas ambientales vigentes.</div>
+      </div>
+      <div class="cs-acc-item">
+        <div class="cs-acc-question">¿Cuál es el volumen mínimo de pedido para clam shells? <i class="fa-solid fa-plus cs-acc-icon"></i></div>
+        <div class="cs-acc-answer">El volumen mínimo varía según la complejidad del diseño y el tipo de molde requerido. Contáctanos con las especificaciones de tu producto y te asesoramos sobre la cantidad mínima y los costos asociados.</div>
+      </div>
+      <div class="cs-acc-item">
+        <div class="cs-acc-question">¿Cuánto tiempo toma la fabricación de un clam shell personalizado? <i class="fa-solid fa-plus cs-acc-icon"></i></div>
+        <div class="cs-acc-answer">El tiempo de producción depende del desarrollo del molde y el volumen del pedido. Para diseños nuevos, el proceso de molde toma entre 2 y 4 semanas; una vez aprobado, la producción en serie se realiza en los plazos acordados con el cliente.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 8 · CTA BANNER ══ -->
+<div class="cs-cta-wrap">
+  <div class="cs-cta-banner">
+    <h2>Contáctanos para Soluciones Personalizadas</h2>
+    <p>En Disempack SAS estamos listos para diseñar el clam shell perfecto para tu producto. Cuéntanos tus necesidades y te ofrecemos una solución a medida que combina funcionalidad, estética y sostenibilidad.</p>
+    <a href="https://disempack.com.co/cotizar/" target="_blank" class="cs-cta-banner-btn">Solicitar Información</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-col">
+      <div class="footer-col-inner">
+        <h5>Servicio al Cliente</h5>
+        <a href="tel:+573183820863">🇨🇴 318 382 0863</a>
+        <h5 style="margin-top:1.2rem;">Calidad</h5>
+        <a href="tel:+573011664304">🇨🇴 301 166 4304</a>
+        <h5 style="margin-top:1.2rem;">Diseño y Desarrollo</h5>
+        <a href="tel:+573005582389">🇨🇴 300 558 2389</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-inner">
+        <h5>Dirección</h5>
+        <p>37A sur No. 72L-95</p>
+        <h5 style="margin-top:1.2rem;">Horarios</h5>
+        <p>Lunes a Viernes<br/>7:00am – 4:00pm</p>
+      </div>
+    </div>
+    <div class="footer-col-logo">
+      <img src="https://disempack.com.co/wp-content/uploads/2025/11/LOGO-WEB-HEAD-BLANCO-e1768929160286-1024x403.png" alt="Disempack"/>
+    </div>
+  </div>
+  <hr class="footer-divider"/>
+  <div class="footer-bottom">
+    <p>By Disempack S.A.S - 2026</p>
+    <div class="footer-socials">
+      <a href="https://www.facebook.com/profile.php?id=100054201593487" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/disempack" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FAB -->
+<a href="https://wa.link/2ka87h" class="wa-fab" target="_blank" title="WhatsApp">
+  <img src="https://disempack.com.co/wp-content/uploads/2026/01/Logo-Whtsapp-Disempack-scaled.png"
+       alt="WhatsApp"
+       onerror="this.outerHTML='<span style=\'color:#fff;font-size:1.9rem;\'>💬</span>'"/>
+</a>
+
+<script>
+  /* ── SEARCH ── */
+  const searchBtn = document.getElementById('searchBtn');
+  const searchOverlay = document.getElementById('searchOverlay');
+  const searchInput = document.getElementById('searchInput');
+  const searchSubmit = document.getElementById('searchSubmit');
+  searchBtn.addEventListener('click', () => { searchOverlay.classList.add('open'); searchInput.focus(); });
+  searchOverlay.addEventListener('click', (e) => { if (e.target === searchOverlay) searchOverlay.classList.remove('open'); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') { searchOverlay.classList.remove('open'); csLightbox.classList.remove('open'); }
+  });
+  function doSearch() { const q = searchInput.value.trim(); if (q) window.open('https://disempack.com.co/?s=' + encodeURIComponent(q), '_blank'); }
+  searchSubmit.addEventListener('click', doSearch);
+  searchInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') doSearch(); });
+
+  /* ── ACCORDION ── */
+  document.querySelectorAll('.cs-acc-question').forEach(btn => {
+    btn.addEventListener('click', () => btn.closest('.cs-acc-item').classList.toggle('open'));
+  });
+
+  /* ── LIGHTBOX ── */
+  const csLightbox = document.getElementById('csLightbox');
+  const csLightboxImg = document.getElementById('csLightboxImg');
+  const csLightboxClose = document.getElementById('csLightboxClose');
+  document.querySelectorAll('.cs-gallery-item').forEach(item => {
+    item.addEventListener('click', () => { csLightboxImg.src = item.dataset.src; csLightbox.classList.add('open'); });
+  });
+  csLightboxClose.addEventListener('click', () => csLightbox.classList.remove('open'));
+  csLightbox.addEventListener('click', (e) => { if (e.target === csLightbox) csLightbox.classList.remove('open'); });
+</script>
+</body>
+</html>
