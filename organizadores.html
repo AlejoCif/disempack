@@ -115,10 +115,17 @@
     .or-materials { padding: 4rem 2.5rem; background: #fff; }
     .or-materials h2 { font-size: 2.2rem; font-weight: 700; color: #1c2f5e; text-align: center; margin-bottom: 2.5rem; }
     .or-materials-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 3rem; max-width: 1100px; margin: 0 auto; }
-    .or-mat-item { padding: 1.1rem 0; border-bottom: 1px solid #e8ecf4; }
-    .or-mat-item h4 { font-size: .93rem; font-weight: 700; color: #1c2f5e; margin-bottom: .3rem; display: flex; align-items: center; gap: .6rem; }
-    .or-mat-item h4::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #8dc63f; flex-shrink: 0; }
-    .or-mat-item p { font-size: .86rem; color: #666; line-height: 1.7; padding-left: 1.4rem; }
+    .or-mat-item {
+      display: flex; align-items: flex-start; gap: 1.1rem;
+      padding: 1.2rem 0; border-bottom: 1px solid #e8ecf4;
+    }
+    .or-mat-icon {
+      width: 42px; height: 42px; border-radius: 50%; background: #eef7e0;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .or-mat-icon i { font-size: 1.1rem; color: #8dc63f; }
+    .or-mat-text h4 { font-size: .93rem; font-weight: 700; color: #1c2f5e; margin-bottom: .25rem; }
+    .or-mat-text p { font-size: .85rem; color: #666; line-height: 1.7; }
 
     /* ── BENEFITS ── */
     .or-benefits { padding: 4rem 2.5rem; background: #f7f9fc; }
@@ -323,38 +330,62 @@
   <div class="or-materials-grid">
     <div>
       <div class="or-mat-item">
-        <h4>PET</h4>
-        <p>El PET es un material reciclable y resistente, ideal para la fabricación de organizadores duraderos y ligeros.</p>
+        <div class="or-mat-icon"><i class="fa-solid fa-recycle"></i></div>
+        <div class="or-mat-text">
+          <h4>PET</h4>
+          <p>El PET es un material reciclable y resistente, ideal para la fabricación de organizadores duraderos y ligeros.</p>
+        </div>
       </div>
       <div class="or-mat-item">
-        <h4>Plásticos Reciclados</h4>
-        <p>Utilizamos plásticos reciclados para promover la sostenibilidad y reducir el impacto ambiental de nuestros productos.</p>
+        <div class="or-mat-icon"><i class="fa-solid fa-arrows-rotate"></i></div>
+        <div class="or-mat-text">
+          <h4>Plásticos Reciclados</h4>
+          <p>Utilizamos plásticos reciclados para promover la sostenibilidad y reducir el impacto ambiental de nuestros productos.</p>
+        </div>
       </div>
       <div class="or-mat-item">
-        <h4>Plásticos de Alta Densidad</h4>
-        <p>Este tipo de plástico ofrece una excelente resistencia a impactos, asegurando la protección de los contenidos del organizador.</p>
+        <div class="or-mat-icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <div class="or-mat-text">
+          <h4>Plásticos de Alta Densidad</h4>
+          <p>Este tipo de plástico ofrece una excelente resistencia a impactos, asegurando la protección de los contenidos del organizador.</p>
+        </div>
       </div>
       <div class="or-mat-item">
-        <h4>Compuestos Biodegradables</h4>
-        <p>Incorporamos materiales biodegradables para aquellos clientes que buscan una opción más ecológica.</p>
+        <div class="or-mat-icon"><i class="fa-solid fa-seedling"></i></div>
+        <div class="or-mat-text">
+          <h4>Compuestos Biodegradables</h4>
+          <p>Incorporamos materiales biodegradables para aquellos clientes que buscan una opción más ecológica.</p>
+        </div>
       </div>
     </div>
     <div>
       <div class="or-mat-item">
-        <h4>Polipropileno</h4>
-        <p>El polipropileno es conocido por su durabilidad y flexibilidad, siendo perfecto para aplicaciones industriales.</p>
+        <div class="or-mat-icon"><i class="fa-solid fa-industry"></i></div>
+        <div class="or-mat-text">
+          <h4>Polipropileno</h4>
+          <p>El polipropileno es conocido por su durabilidad y flexibilidad, siendo perfecto para aplicaciones industriales.</p>
+        </div>
       </div>
       <div class="or-mat-item">
-        <h4>Cartón Reciclado</h4>
-        <p>Para aplicaciones menos exigentes, el cartón reciclado ofrece una solución económica y sostenible.</p>
+        <div class="or-mat-icon"><i class="fa-solid fa-box"></i></div>
+        <div class="or-mat-text">
+          <h4>Cartón Reciclado</h4>
+          <p>Para aplicaciones menos exigentes, el cartón reciclado ofrece una solución económica y sostenible.</p>
+        </div>
       </div>
       <div class="or-mat-item">
-        <h4>Espumas Técnicas</h4>
-        <p>Las espumas técnicas proporcionan amortiguación y protección adicional para productos delicados.</p>
+        <div class="or-mat-icon"><i class="fa-solid fa-layer-group"></i></div>
+        <div class="or-mat-text">
+          <h4>Espumas Técnicas</h4>
+          <p>Las espumas técnicas proporcionan amortiguación y protección adicional para productos delicados.</p>
+        </div>
       </div>
       <div class="or-mat-item">
-        <h4>Materiales Compostables</h4>
-        <p>Para un enfoque completamente eco-friendly, ofrecemos opciones de materiales compostables.</p>
+        <div class="or-mat-icon"><i class="fa-solid fa-leaf"></i></div>
+        <div class="or-mat-text">
+          <h4>Materiales Compostables</h4>
+          <p>Para un enfoque completamente eco-friendly, ofrecemos opciones de materiales compostables.</p>
+        </div>
       </div>
     </div>
   </div>
