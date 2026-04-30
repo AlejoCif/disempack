@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cajas Plegadizas - Disempack SAS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Open Sans', sans-serif; color: #333; background: #fff; overflow-x: hidden; }
+
+    /* ── TOP BAR ── */
+    .topbar { background: #1c2f5e; padding: .35rem 2rem; display: flex; justify-content: flex-end; gap: 1.5rem; }
+    .topbar a { color: #ccd6f0; font-size: .75rem; text-decoration: none; transition: color .15s; }
+    .topbar a:hover { color: #fff; }
+
+    /* ── NAVBAR ── */
+    nav {
+      background: #fff; border-bottom: 1px solid #e8e8e8;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .6rem 2.5rem; position: sticky; top: 0; z-index: 200;
+      box-shadow: 0 2px 8px rgba(0,0,0,.07);
+    }
+    .logo-wrap { display: flex; align-items: center; text-decoration: none; }
+    .logo-wrap img { height: 52px; object-fit: contain; }
+    .nav-links { display: flex; align-items: center; gap: .05rem; list-style: none; }
+    .nav-links > li { position: relative; }
+    .nav-links > li > a {
+      display: flex; align-items: center; gap: .3rem; padding: .5rem .85rem;
+      font-size: .83rem; color: #333; text-decoration: none; font-weight: 600;
+      border-radius: 4px; transition: color .15s, background .15s;
+    }
+    .nav-links > li > a:hover { color: #1c2f5e; background: #f5f6fa; }
+    .nav-links > li > a .arrow { font-size: .6rem; color: #888; }
+    .dropdown {
+      display: none; position: absolute; top: 100%; left: 0;
+      background: #fff; border: 1px solid #e0e0e0; border-top: 3px solid #8dc63f;
+      border-radius: 0 0 6px 6px; min-width: 210px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.12); list-style: none; z-index: 300;
+    }
+    .nav-links > li:hover .dropdown { display: block; }
+    .dropdown li a {
+      display: block; padding: .6rem 1.2rem; font-size: .82rem; color: #444;
+      text-decoration: none; border-bottom: 1px solid #f0f0f0; transition: background .12s, color .12s;
+    }
+    .dropdown li:last-child a { border-bottom: none; }
+    .dropdown li a:hover { background: #f0f0f0; color: #555; }
+    .nav-search { font-size: 1rem; color: #555; cursor: pointer; padding: .4rem .6rem; border: none; background: none; }
+
+    /* ── SEARCH OVERLAY ── */
+    .search-overlay {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 500;
+      align-items: flex-start; justify-content: center; padding-top: 80px;
+    }
+    .search-overlay.open { display: flex; }
+    .search-box { background: #fff; border-radius: 8px; display: flex; width: 100%; max-width: 600px; box-shadow: 0 8px 32px rgba(0,0,0,.2); overflow: hidden; }
+    .search-box input { flex: 1; border: none; outline: none; padding: .9rem 1.2rem; font-size: 1rem; font-family: inherit; }
+    .search-box button { background: #1c2f5e; color: #fff; border: none; padding: 0 1.4rem; font-size: 1.1rem; cursor: pointer; }
+    .search-box button:hover { background: #8dc63f; }
+
+    /* ════════════════════════════════════
+       SECTION 0 · HERO
+    ════════════════════════════════════ */
+    .cp-hero {
+      position: relative; width: 100%; min-height: 560px; overflow: hidden;
+      background-image: url('https://images.unsplash.com/photo-1623305466248-b0447de035e8?ixlib=rb-4.1.0&fm=webp&fit=crop&crop=entropy&w=1920&h=1080&q=80');
+      background-size: cover; background-position: center;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cp-hero-overlay { position: absolute; inset: 0; background: rgba(28,47,94,.65); }
+    .cp-hero-content {
+      position: relative; z-index: 2; text-align: center;
+      background: rgba(255,255,255,.08); backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,.15); border-radius: 10px;
+      padding: 3rem 3.5rem; max-width: 820px; margin: 0 2rem;
+    }
+    .cp-hero-content h1 {
+      font-size: 2.6rem; font-weight: 800; color: #fff; line-height: 1.25; margin-bottom: 1.2rem;
+    }
+    .cp-hero-content p {
+      font-size: 1rem; color: #d0ddf5; line-height: 1.85;
+    }
+
+    /* ════════════════════════════════════
+       SECTION 1 · TIPOS
+    ════════════════════════════════════ */
+    .cp-tipos { padding: 5rem 2.5rem; background: #fff; }
+    .cp-tipos-header { text-align: center; margin-bottom: .6rem; }
+    .cp-tipos-header h2 { font-size: 2rem; font-weight: 700; color: #1c2f5e; margin-bottom: .8rem; }
+    .cp-tipos-header p { font-size: .95rem; color: #666; max-width: 640px; margin: 0 auto 3rem; line-height: 1.8; }
+    .cp-tipos-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2rem; max-width: 1100px; margin: 0 auto 2.5rem;
+    }
+    .cp-blurb {
+      text-align: left; padding: 2rem 1.6rem;
+      border: 1px solid #e8ecf4; border-radius: 8px;
+      transition: box-shadow .2s, transform .2s;
+      background: #fff;
+    }
+    .cp-blurb:hover { box-shadow: 0 8px 28px rgba(28,47,94,.1); transform: translateY(-3px); }
+    .cp-blurb-icon {
+      font-size: 2.8rem; color: #8dc63f;
+      margin-bottom: 1.2rem; display: block;
+    }
+    .cp-blurb h4 { font-size: 1rem; font-weight: 700; color: #1c2f5e; margin-bottom: .7rem; }
+    .cp-blurb p { font-size: .88rem; color: #666; line-height: 1.75; }
+    .cp-btn-wrap { text-align: center; }
+    .cp-btn {
+      display: inline-block; background: #8dc63f; color: #fff; font-weight: 700;
+      font-size: .92rem; padding: .75rem 2.2rem; border-radius: 4px;
+      text-decoration: none; border: 2px solid #8dc63f; transition: background .2s, color .2s;
+    }
+    .cp-btn:hover { background: #fff; color: #8dc63f; }
+
+    /* ════════════════════════════════════
+       SECTION 2 · PERSONALIZACIÓN
+    ════════════════════════════════════ */
+    .cp-diseno { padding: 5rem 2.5rem; background: #fff; }
+    .cp-diseno-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; max-width: 1100px; margin: 0 auto; align-items: center;
+    }
+    .cp-diseno-img { width: 100%; border-radius: 6px; display: block; box-shadow: 0 4px 20px rgba(0,0,0,.1); }
+    .cp-diseno-right h4 {
+      font-size: .85rem; font-weight: 700; color: #8dc63f;
+      text-transform: uppercase; letter-spacing: .1em; margin-bottom: .5rem;
+    }
+    .cp-diseno-right h2 { font-size: 2rem; font-weight: 700; color: #1c2f5e; margin-bottom: 1.2rem; line-height: 1.3; }
+    .cp-diseno-right p { font-size: .93rem; color: #555; line-height: 1.85; text-align: justify; margin-bottom: 1.8rem; }
+
+    /* ════════════════════════════════════
+       SECTION 3 · PROCESO
+    ════════════════════════════════════ */
+    .cp-proceso { padding: 5rem 2.5rem; background: #f7f9fc; }
+    .cp-proceso-inner {
+      display: grid; grid-template-columns: 3fr 2fr;
+      gap: 4rem; max-width: 1100px; margin: 0 auto;
+      border: 1px solid #e0e6f0; border-radius: 8px;
+      padding: 3rem; background: #fff;
+    }
+    .cp-proceso-left h2 { font-size: 1.85rem; font-weight: 700; color: #1c2f5e; margin-bottom: 1.2rem; line-height: 1.3; }
+    .cp-proceso-left p { font-size: .92rem; color: #555; line-height: 1.85; text-align: justify; margin-bottom: 1rem; }
+    .cp-proceso-right p { font-size: .92rem; color: #555; line-height: 1.85; text-align: justify; margin-bottom: 1rem; }
+
+    /* ════════════════════════════════════
+       SECTION 4 · BENEFICIOS
+    ════════════════════════════════════ */
+    .cp-beneficios { padding: 5rem 2.5rem; background: #fff; }
+    .cp-beneficios h2 {
+      font-size: 2rem; font-weight: 700; color: #1c2f5e;
+      text-align: center; margin-bottom: 3rem;
+    }
+    .cp-beneficios-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem; max-width: 1100px; margin: 0 auto;
+    }
+    .cp-beneficios-col ul { list-style: none; }
+    .cp-beneficios-col li {
+      display: flex; align-items: flex-start; gap: .65rem;
+      font-size: .9rem; color: #444; line-height: 1.7;
+      padding: .55rem 0; border-bottom: 1px solid #eef0f5;
+    }
+    .cp-beneficios-col li:last-child { border-bottom: none; }
+    .cp-beneficios-col li::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
+      background: #8dc63f; flex-shrink: 0; margin-top: .48rem;
+    }
+
+    /* ════════════════════════════════════
+       SECTION 5 · GALERÍA
+    ════════════════════════════════════ */
+    .cp-gallery { padding: 4rem 2.5rem; background: #f7f9fc; }
+    .cp-gallery-header { text-align: center; margin-bottom: 2.5rem; }
+    .cp-gallery-header h4 {
+      font-size: .85rem; font-weight: 700; color: #8dc63f;
+      text-transform: uppercase; letter-spacing: .12em; margin-bottom: .4rem;
+    }
+    .cp-gallery-header h2 { font-size: 2rem; font-weight: 700; color: #1c2f5e; }
+
+    /* 4-col row */
+    .cp-gallery-4 {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: .6rem; max-width: 1200px; margin: 0 auto 0.6rem;
+    }
+    /* 6-col row */
+    .cp-gallery-6 {
+      display: grid; grid-template-columns: repeat(6, 1fr);
+      gap: .6rem; max-width: 1200px; margin: 0 auto;
+    }
+    .cp-gallery-item { position: relative; overflow: hidden; border-radius: 4px; cursor: pointer; }
+    .cp-gallery-item img {
+      width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block;
+      transition: transform .35s;
+    }
+    .cp-gallery-item:hover img { transform: scale(1.06); }
+    .cp-gallery-overlay {
+      position: absolute; inset: 0; background: rgba(28,47,94,.0);
+      display: flex; align-items: center; justify-content: center;
+      transition: background .25s;
+    }
+    .cp-gallery-item:hover .cp-gallery-overlay { background: rgba(28,47,94,.35); }
+    .cp-gallery-overlay i { font-size: 2rem; color: #fff; opacity: 0; transition: opacity .25s; }
+    .cp-gallery-item:hover .cp-gallery-overlay i { opacity: 1; }
+
+    /* Lightbox */
+    .cp-lightbox {
+      display: none; position: fixed; inset: 0; z-index: 800;
+      background: rgba(0,0,0,.88); align-items: center; justify-content: center;
+    }
+    .cp-lightbox.open { display: flex; }
+    .cp-lightbox img { max-width: 90vw; max-height: 90vh; border-radius: 6px; box-shadow: 0 8px 40px rgba(0,0,0,.5); }
+    .cp-lightbox-close {
+      position: absolute; top: 1.5rem; right: 2rem;
+      font-size: 2.5rem; color: #fff; cursor: pointer; line-height: 1;
+    }
+    .cp-lightbox-close:hover { color: #8dc63f; }
+
+    /* ════════════════════════════════════
+       SECTION 6 · FAQ
+    ════════════════════════════════════ */
+    .cp-faq { padding: 5rem 2.5rem; background: #fff; }
+    .cp-faq-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; max-width: 1100px; margin: 0 auto; align-items: start;
+    }
+    .cp-faq-left h2 { font-size: 1.9rem; font-weight: 700; color: #1c2f5e; margin-bottom: 1rem; line-height: 1.3; }
+    .cp-faq-left p { font-size: .93rem; color: #555; line-height: 1.85; margin-bottom: 1.8rem; }
+    .cp-faq-item { border-bottom: 1px solid #dde3ef; }
+    .cp-faq-question {
+      display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+      padding: 1rem 0; cursor: pointer; font-size: .93rem; font-weight: 700; color: #1c2f5e;
+    }
+    .cp-faq-icon { font-size: .75rem; color: #8dc63f; flex-shrink: 0; transition: transform .25s; }
+    .cp-faq-item.open .cp-faq-icon { transform: rotate(180deg); }
+    .cp-faq-answer { display: none; font-size: .88rem; color: #555; line-height: 1.8; padding-bottom: 1rem; }
+    .cp-faq-item.open .cp-faq-answer { display: block; }
+
+    /* ════════════════════════════════════
+       SECTION 7 · CTA ROW
+    ════════════════════════════════════ */
+    .cp-cta { padding: 3.5rem 2.5rem; background: #f7f9fc; border-top: 3px solid #8dc63f; }
+    .cp-cta-inner {
+      display: grid; grid-template-columns: 2fr 1fr;
+      gap: 2rem; max-width: 1100px; margin: 0 auto; align-items: center;
+    }
+    .cp-cta-blurb { display: flex; align-items: flex-start; gap: 1.4rem; }
+    .cp-cta-blurb-icon { font-size: 2.8rem; color: #8dc63f; flex-shrink: 0; margin-top: .1rem; }
+    .cp-cta-blurb-text h4 { font-size: 1.1rem; font-weight: 700; color: #1c2f5e; margin-bottom: .6rem; }
+    .cp-cta-blurb-text p { font-size: .9rem; color: #555; line-height: 1.8; }
+    .cp-cta-right { text-align: right; }
+    .cp-cta-btn {
+      display: inline-block; background: #8dc63f; color: #fff; font-weight: 700;
+      font-size: .95rem; padding: .8rem 2.2rem; border-radius: 4px;
+      text-decoration: none; border: 2px solid #8dc63f; transition: background .2s, color .2s;
+    }
+    .cp-cta-btn:hover { background: #fff; color: #8dc63f; }
+
+    /* ── FOOTER ── */
+    footer { background: #1c2f5e; color: #a8bbd8; padding: 3rem 3rem 1.5rem; }
+    .footer-top { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3rem; align-items: start; margin-bottom: 2.5rem; }
+    .footer-col { display: flex; justify-content: center; }
+    .footer-col-inner { text-align: left; }
+    .footer-col h5 { font-size: .75rem; font-weight: 700; color: #fff; margin-bottom: .6rem; text-transform: uppercase; letter-spacing: .06em; }
+    .footer-col p, .footer-col a { font-size: .84rem; color: #a8bbd8; text-decoration: none; line-height: 1.8; display: block; }
+    .footer-col a:hover { color: #8dc63f; }
+    .footer-col-logo { display: flex; justify-content: center; align-items: center; }
+    .footer-col-logo img { height: 112px; object-fit: contain; }
+    .footer-divider { border: none; border-top: 1px solid rgba(255,255,255,.1); margin: 1.5rem 0; }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .footer-bottom p { font-size: .78rem; color: #7a90b5; }
+    .footer-socials { display: flex; gap: .8rem; }
+    .footer-socials a {
+      color: #a8bbd8; text-decoration: none; font-size: 1.4rem;
+      border: 1px solid rgba(255,255,255,.2); border-radius: 50%; width: 38px; height: 38px;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color .15s, color .15s;
+    }
+    .footer-socials a:hover { border-color: #8dc63f; color: #8dc63f; }
+
+    /* ── WHATSAPP FAB ── */
+    .wa-fab {
+      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 999;
+      width: 58px; height: 58px; border-radius: 50%; background: #25d366;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,.5); text-decoration: none; font-size: 1.8rem; transition: transform .2s;
+    }
+    .wa-fab:hover { transform: scale(1.1); }
+    .wa-fab img { width: 36px; height: 36px; border-radius: 50%; }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .cp-hero h1 { font-size: 1.8rem; }
+      .cp-tipos-grid { grid-template-columns: 1fr; }
+      .cp-diseno-inner { grid-template-columns: 1fr; }
+      .cp-proceso-inner { grid-template-columns: 1fr; }
+      .cp-beneficios-grid { grid-template-columns: 1fr; }
+      .cp-gallery-4 { grid-template-columns: repeat(2, 1fr); }
+      .cp-gallery-6 { grid-template-columns: repeat(3, 1fr); }
+      .cp-faq-inner { grid-template-columns: 1fr; }
+      .cp-cta-inner { grid-template-columns: 1fr; }
+      .cp-cta-right { text-align: left; }
+      .footer-top { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <a href="#">Terms &amp; Conditions</a>
+  <a href="#">Privacy Policy</a>
+</div>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="index.html" class="logo-wrap">
+    <img src="https://disempack.com.co/wp-content/uploads/2025/11/GENERICO-USOS-scaled.png" alt="Disempack"/>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li>
+      <a href="#">Exhibición Comercial <span class="arrow">▾</span></a>
+      <ul class="dropdown">
+        <li><a href="pop.html">P.O.P</a></li>
+        <li><a href="senalizacion-corporativa.html">Señalización Corporativa</a></li>
+        <li><a href="alcancias.html">Alcancías</a></li>
+        <li><a href="recubrimientos.html">Recubrimientos</a></li>
+      </ul>
+    </li>
+    <li><a href="impresion-digital.html">Impresión Digital</a></li>
+    <li>
+      <a href="#">Empaques <span class="arrow">▾</span></a>
+      <ul class="dropdown">
+        <li><a href="organizadores.html">Organizadores</a></li>
+        <li><a href="cajas-plegadizas.html">Cajas Plegadizas</a></li>
+        <li><a href="#">Blister</a></li>
+        <li><a href="#">Clam Shell</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">Procesos <span class="arrow">▾</span></a>
+      <ul class="dropdown">
+        <li><a href="impresion-digital.html">Impresión Digital</a></li>
+        <li><a href="#">Diseño y Desarrollo</a></li>
+        <li><a href="#">Termoformado</a></li>
+        <li><a href="#">Troquelado</a></li>
+        <li><a href="#">Corte CNC</a></li>
+        <li><a href="#">Acondicionamiento De Productos</a></li>
+        <li><a href="#">Termosellado</a></li>
+        <li><a href="#">Venta De Materia Prima</a></li>
+      </ul>
+    </li>
+    <li><a href="#">Contacto</a></li>
+    <li><a href="#">Cotizar</a></li>
+  </ul>
+  <button class="nav-search" id="searchBtn">🔍</button>
+</nav>
+
+<!-- SEARCH OVERLAY -->
+<div class="search-overlay" id="searchOverlay">
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Buscar en Disempack…"/>
+    <button id="searchSubmit">🔍</button>
+  </div>
+</div>
+
+<!-- ══ SECTION 0 · HERO ══ -->
+<section class="cp-hero">
+  <div class="cp-hero-overlay"></div>
+  <div class="cp-hero-content">
+    <h1>Cajas Plegadizas Personalizadas para Empaques Comerciales</h1>
+    <p>Descubre cómo nuestras soluciones de empaque innovadoras pueden transformar tu negocio, combinando diseño, funcionalidad y sostenibilidad en cada caja plegadiza.</p>
+  </div>
+</section>
+
+<!-- ══ SECTION 1 · TIPOS ══ -->
+<section class="cp-tipos">
+  <div class="cp-tipos-header">
+    <h2>Tipos de Cajas Plegadizas</h2>
+    <p>Explora nuestra variedad de cajas plegadizas diseñadas para satisfacer las necesidades específicas de cada industria.</p>
+  </div>
+  <div class="cp-tipos-grid">
+    <div class="cp-blurb">
+      <i class="fa-solid fa-box-open cp-blurb-icon"></i>
+      <h4>Cajas Automáticas</h4>
+      <p>Ideales para líneas de producción rápidas, estas cajas se ensamblan fácilmente y ofrecen una gran resistencia.</p>
+    </div>
+    <div class="cp-blurb">
+      <i class="fa-solid fa-boxes-stacked cp-blurb-icon"></i>
+      <h4>Cajas de Fondo Automático</h4>
+      <p>Perfectas para productos pesados, estas cajas proporcionan estabilidad y seguridad adicional.</p>
+    </div>
+    <div class="cp-blurb">
+      <i class="fa-solid fa-lock cp-blurb-icon"></i>
+      <h4>Cajas de Cierre a Presión</h4>
+      <p>Ofrecen una solución de empaque segura y fácil de abrir, ideal para productos que requieren accesibilidad rápida.</p>
+    </div>
+  </div>
+  <div class="cp-btn-wrap">
+    <a href="https://disempack.com.co/cotizar/" target="_blank" class="cp-btn">Explora Nuestros Diseños</a>
+  </div>
+</section>
+
+<!-- ══ SECTION 2 · PERSONALIZACIÓN ══ -->
+<section class="cp-diseno">
+  <div class="cp-diseno-inner">
+    <div>
+      <img class="cp-diseno-img"
+           src="https://images.unsplash.com/photo-1544655228-46bcd720eaa5?ixlib=rb-4.1.0&fm=webp&fit=crop&crop=entropy&w=800&h=800&q=80"
+           alt="Diseño gráfico y estructural"/>
+    </div>
+    <div class="cp-diseno-right">
+      <h4>Diseño Gráfico y Estructural</h4>
+      <h2>Personalización de Cajas Plegadizas</h2>
+      <p>Nuestro proceso de diseño gráfico y estructural garantiza que cada caja plegadiza sea única y refleje la identidad de tu marca. Desde la selección de materiales hasta el acabado final, trabajamos contigo para crear empaques que no solo protejan tus productos, sino que también impresionen a tus clientes.</p>
+      <a href="https://disempack.com.co/cotizar/" target="_blank" class="cp-btn">Cotiza tu Caja Plegadiza</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 3 · PROCESO ══ -->
+<section class="cp-proceso">
+  <div class="cp-proceso-inner">
+    <div class="cp-proceso-left">
+      <h2>Proceso de Construcción de Cajas Plegadizas</h2>
+      <p>El proceso de construcción de nuestras cajas plegadizas comienza con el troquelado, una técnica precisa que permite cortar el cartón en formas específicas para asegurar un ajuste perfecto. Utilizamos maquinaria avanzada para garantizar cortes limpios y exactos, adaptándonos a las necesidades de cada cliente.</p>
+      <p>Una vez troqueladas, las cajas pasan por el proceso de doblado, donde se les da forma mediante pliegues estratégicos que aseguran su resistencia y funcionalidad. Este paso es crucial para maximizar la durabilidad y la capacidad de carga de las cajas, asegurando que puedan soportar el manejo y transporte sin comprometer su integridad.</p>
+    </div>
+    <div class="cp-proceso-right">
+      <p>Nuestras cajas plegadizas están diseñadas para ofrecer una resistencia excepcional. Utilizamos materiales de alta calidad que proporcionan una estructura sólida y duradera. Además, realizamos pruebas de resistencia para garantizar que cada caja cumpla con los estándares más exigentes del mercado.</p>
+      <p>La combinación de troquelado preciso, doblado eficiente y materiales robustos nos permite ofrecer soluciones de empaque que no solo protegen el contenido, sino que también optimizan el espacio y reducen costos logísticos. En Disempack SAS, nos comprometemos a ofrecer productos que superen las expectativas de nuestros clientes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 4 · BENEFICIOS ══ -->
+<section class="cp-beneficios">
+  <h2>Beneficios Logísticos de las Cajas Plegadizas</h2>
+  <div class="cp-beneficios-grid">
+    <div class="cp-beneficios-col">
+      <ul>
+        <li>Optimización del espacio de almacenamiento</li>
+        <li>Facilidad de transporte y manejo</li>
+        <li>Reducción de costos de envío</li>
+        <li>Versatilidad en el diseño y personalización</li>
+        <li>Mayor protección del producto</li>
+        <li>Sostenibilidad y reducción de residuos</li>
+      </ul>
+    </div>
+    <div class="cp-beneficios-col">
+      <ul>
+        <li>Reducción del tiempo de ensamblaje</li>
+        <li>Adaptabilidad a diferentes tamaños de producto</li>
+        <li>Mejora en la eficiencia logística</li>
+        <li>Facilidad para el reciclaje y reutilización</li>
+        <li>Compatibilidad con sistemas de automatización</li>
+        <li>Impacto positivo en la imagen de marca</li>
+      </ul>
+    </div>
+    <div class="cp-beneficios-col">
+      <ul>
+        <li>Aumento de la capacidad de carga</li>
+        <li>Reducción de daños durante el transporte</li>
+        <li>Facilidad para el almacenamiento en plano</li>
+        <li>Personalización para promociones y branding</li>
+        <li>Compatibilidad con diferentes métodos de impresión</li>
+        <li>Contribución a prácticas comerciales sostenibles</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 5 · GALERÍA ══ -->
+<section class="cp-gallery">
+  <div class="cp-gallery-header">
+    <h4>Galería de Productos Destacados</h4>
+    <h2>Cajas Plegadizas Personalizadas</h2>
+  </div>
+
+  <!-- Row 4 cols -->
+  <div class="cp-gallery-4">
+    <div class="cp-gallery-item" data-src="https://images.unsplash.com/photo-1732947655963-f9f9b964019c?ixlib=rb-4.1.0&fm=webp&fit=crop&crop=entropy&w=1200&h=1200&q=80">
+      <img src="https://images.unsplash.com/photo-1732947655963-f9f9b964019c?ixlib=rb-4.1.0&fm=webp&fit=crop&crop=entropy&w=600&h=600&q=80" alt="Empaque personalizado"/>
+      <div class="cp-gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+    </div>
+    <div class="cp-gallery-item" data-src="https://images.unsplash.com/photo-1533923378594-bbeb91030909?ixlib=rb-4.1.0&fm=webp&fit=crop&crop=entropy&w=1200&h=1200&q=80">
+      <img src="https://images.unsplash.com/photo-1533923378594-bbeb91030909?ixlib=rb-4.1.0&fm=webp&fit=crop&crop=entropy&w=600&h=600&q=80" alt="Display creativo"/>
+      <div class="cp-gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+    </div>
+    <div class="cp-gallery-item" data-src="https://images.unsplash.com/photo-1573875133384-07fe039214a4?ixlib=rb-4.1.0&fm=webp&fit=crop&crop=entropy&w=1200&h=1200&q=80">
+      <img src="https://images.unsplash.com/photo-1573875133384-07fe039214a4?ixlib=rb-4.1.0&fm=webp&fit=crop&crop=entropy&w=600&h=600&q=80" alt="Diseño de caja"/>
+      <div class="cp-gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+    </div>
+    <div class="cp-gallery-item" data-src="https://images.unsplash.com/photo-1612092554096-107746384543?ixlib=rb-4.1.0&fm=webp&fit=crop&crop=entropy&w=1200&h=1200&q=80">
+      <img src="https://images.unsplash.com/photo-1612092554096-107746384543?ixlib=rb-4.1.0&fm=webp&fit=crop&crop=entropy&w=600&h=600&q=80" alt="Empaque moderno"/>
+      <div class="cp-gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+    </div>
+  </div>
+
+  <!-- Row 6 cols -->
+  <div class="cp-gallery-6">
+    <div class="cp-gallery-item" data-src="https://images.unsplash.com/photo-1650964336589-96b3f1719a7b?ixlib=rb-4.1.0&fm=webp&fit=crop&crop=entropy&w=1200&h=1200&q=80">
+      <img src="https://images.unsplash.com/photo-1650964336589-96b3f1719a7b?ixlib=rb-4.1.0&fm=webp&fit=crop&crop=entropy&w=400&h=400&q=80" alt="Empaque eco"/>
+      <div class="cp-gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+    </div>
+    <div class="cp-gallery-item" data-src="https://images.unsplash.com/photo-1633717176166-cccfe114e26b?ixlib=rb-4.1.0&fm=webp&fit=crop&crop=entropy&w=1200&h=1200&q=80">
+      <img src="https://images.unsplash.com/photo-1633717176166-cccfe114e26b?ixlib=rb-4.1.0&fm=webp&fit=crop&crop=entropy&w=400&h=400&q=80" alt="Materiales de empaque"/>
+      <div class="cp-gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+    </div>
+    <div class="cp-gallery-item" data-src="https://images.unsplash.com/photo-1692606867300-7e88d859546e?ixlib=rb-4.1.0&fm=webp&fit=crop&crop=entropy&w=1200&h=1200&q=80">
+      <img src="https://images.unsplash.com/photo-1692606867300-7e88d859546e?ixlib=rb-4.1.0&fm=webp&fit=crop&crop=entropy&w=400&h=400&q=80" alt="Cajas coloridas"/>
+      <div class="cp-gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+    </div>
+    <div class="cp-gallery-item" data-src="https://images.unsplash.com/photo-1708746333853-2c3261852e91?ixlib=rb-4.1.0&fm=webp&fit=crop&crop=entropy&w=1200&h=1200&q=80">
+      <img src="https://images.unsplash.com/photo-1708746333853-2c3261852e91?ixlib=rb-4.1.0&fm=webp&fit=crop&crop=entropy&w=400&h=400&q=80" alt="Concepto artístico"/>
+      <div class="cp-gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+    </div>
+    <div class="cp-gallery-item" data-src="https://images.unsplash.com/photo-1719622144274-2408ecf6f6d9?ixlib=rb-4.1.0&fm=webp&fit=crop&crop=entropy&w=1200&h=1200&q=80">
+      <img src="https://images.unsplash.com/photo-1719622144274-2408ecf6f6d9?ixlib=rb-4.1.0&fm=webp&fit=crop&crop=entropy&w=400&h=400&q=80" alt="Empaque sostenible"/>
+      <div class="cp-gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+    </div>
+    <div class="cp-gallery-item" data-src="https://images.unsplash.com/photo-1732928729959-2e8fdb5a5cd7?ixlib=rb-4.1.0&fm=webp&fit=crop&crop=entropy&w=1200&h=1200&q=80">
+      <img src="https://images.unsplash.com/photo-1732928729959-2e8fdb5a5cd7?ixlib=rb-4.1.0&fm=webp&fit=crop&crop=entropy&w=400&h=400&q=80" alt="Empaque premium"/>
+      <div class="cp-gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="cp-lightbox" id="cpLightbox">
+  <span class="cp-lightbox-close" id="cpLightboxClose">&times;</span>
+  <img id="cpLightboxImg" src="" alt=""/>
+</div>
+
+<!-- ══ SECTION 6 · FAQ ══ -->
+<section class="cp-faq">
+  <div class="cp-faq-inner">
+    <div class="cp-faq-left">
+      <h2>Preguntas Frecuentes sobre Cajas Plegadizas</h2>
+      <p>Encuentra respuestas a las preguntas más comunes sobre nuestras cajas plegadizas y sus beneficios.</p>
+      <a href="https://disempack.com.co/cotizar/" target="_blank" class="cp-btn">Explorar Más</a>
+    </div>
+    <div class="cp-faq-right">
+      <div class="cp-faq-item open">
+        <div class="cp-faq-question">¿Qué son las cajas plegadizas? <i class="fa-solid fa-chevron-down cp-faq-icon"></i></div>
+        <div class="cp-faq-answer">Las cajas plegadizas son empaques versátiles que se pueden doblar para facilitar su almacenamiento y transporte, y se despliegan para ofrecer un empaque resistente y atractivo.</div>
+      </div>
+      <div class="cp-faq-item">
+        <div class="cp-faq-question">¿Qué materiales se utilizan para fabricar las cajas plegadizas? <i class="fa-solid fa-chevron-down cp-faq-icon"></i></div>
+        <div class="cp-faq-answer">Nuestras cajas plegadizas están fabricadas con materiales reciclables y ecológicos, como cartón kraft y cartulina, asegurando durabilidad y sostenibilidad.</div>
+      </div>
+      <div class="cp-faq-item">
+        <div class="cp-faq-question">¿Cómo puedo personalizar mis cajas plegadizas? <i class="fa-solid fa-chevron-down cp-faq-icon"></i></div>
+        <div class="cp-faq-answer">Ofrecemos opciones de personalización que incluyen impresión digital de alta calidad, selección de colores, y acabados especiales para reflejar la identidad de tu marca.</div>
+      </div>
+      <div class="cp-faq-item">
+        <div class="cp-faq-question">¿Cuáles son los beneficios logísticos de las cajas plegadizas? <i class="fa-solid fa-chevron-down cp-faq-icon"></i></div>
+        <div class="cp-faq-answer">Las cajas plegadizas optimizan el espacio de almacenamiento y reducen costos de transporte gracias a su diseño compacto y ligero.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 7 · CTA ROW ══ -->
+<section class="cp-cta">
+  <div class="cp-cta-inner">
+    <div class="cp-cta-blurb">
+      <i class="fa-solid fa-box cp-cta-blurb-icon"></i>
+      <div class="cp-cta-blurb-text">
+        <h4>Cotiza tu Caja Plegadiza Ahora</h4>
+        <p>Descubre cómo nuestras cajas plegadizas pueden mejorar la presentación y logística de tus productos. Personaliza tu empaque con Disempack SAS y destaca en el mercado.</p>
+      </div>
+    </div>
+    <div class="cp-cta-right">
+      <a href="https://disempack.com.co/cotizar/" target="_blank" class="cp-cta-btn">Solicitar Cotización</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-col">
+      <div class="footer-col-inner">
+        <h5>Servicio al Cliente</h5>
+        <a href="tel:+573183820863">🇨🇴 318 382 0863</a>
+        <h5 style="margin-top:1.2rem;">Calidad</h5>
+        <a href="tel:+573011664304">🇨🇴 301 166 4304</a>
+        <h5 style="margin-top:1.2rem;">Diseño y Desarrollo</h5>
+        <a href="tel:+573005582389">🇨🇴 300 558 2389</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-inner">
+        <h5>Dirección</h5>
+        <p>37A sur No. 72L-95</p>
+        <h5 style="margin-top:1.2rem;">Horarios</h5>
+        <p>Lunes a Viernes<br/>7:00am – 4:00pm</p>
+      </div>
+    </div>
+    <div class="footer-col-logo">
+      <img src="https://disempack.com.co/wp-content/uploads/2025/11/LOGO-WEB-HEAD-BLANCO-e1768929160286-1024x403.png" alt="Disempack"/>
+    </div>
+  </div>
+  <hr class="footer-divider"/>
+  <div class="footer-bottom">
+    <p>By Disempack S.A.S - 2026</p>
+    <div class="footer-socials">
+      <a href="https://www.facebook.com/profile.php?id=100054201593487" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/disempack" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FAB -->
+<a href="https://wa.link/2ka87h" class="wa-fab" target="_blank" title="WhatsApp">
+  <img src="https://disempack.com.co/wp-content/uploads/2026/01/Logo-Whtsapp-Disempack-scaled.png"
+       alt="WhatsApp"
+       onerror="this.outerHTML='<span style=\'color:#fff;font-size:1.9rem;\'>💬</span>'"/>
+</a>
+
+<script>
+  /* ── SEARCH ── */
+  const searchBtn = document.getElementById('searchBtn');
+  const searchOverlay = document.getElementById('searchOverlay');
+  const searchInput = document.getElementById('searchInput');
+  const searchSubmit = document.getElementById('searchSubmit');
+  searchBtn.addEventListener('click', () => { searchOverlay.classList.add('open'); searchInput.focus(); });
+  searchOverlay.addEventListener('click', (e) => { if (e.target === searchOverlay) searchOverlay.classList.remove('open'); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { searchOverlay.classList.remove('open'); cpLightbox.classList.remove('open'); } });
+  function doSearch() { const q = searchInput.value.trim(); if (q) window.open('https://disempack.com.co/?s=' + encodeURIComponent(q), '_blank'); }
+  searchSubmit.addEventListener('click', doSearch);
+  searchInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') doSearch(); });
+
+  /* ── FAQ ACCORDION ── */
+  document.querySelectorAll('.cp-faq-question').forEach(btn => {
+    btn.addEventListener('click', () => btn.closest('.cp-faq-item').classList.toggle('open'));
+  });
+
+  /* ── GALLERY LIGHTBOX ── */
+  const cpLightbox = document.getElementById('cpLightbox');
+  const cpLightboxImg = document.getElementById('cpLightboxImg');
+  const cpLightboxClose = document.getElementById('cpLightboxClose');
+  document.querySelectorAll('.cp-gallery-item').forEach(item => {
+    item.addEventListener('click', () => {
+      cpLightboxImg.src = item.dataset.src;
+      cpLightbox.classList.add('open');
+    });
+  });
+  cpLightboxClose.addEventListener('click', () => cpLightbox.classList.remove('open'));
+  cpLightbox.addEventListener('click', (e) => { if (e.target === cpLightbox) cpLightbox.classList.remove('open'); });
+</script>
+</body>
+</html>
