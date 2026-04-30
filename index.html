@@ -160,14 +160,14 @@
     .fusion-item span { color: #8dc63f; font-size: .88rem; font-weight: 700; letter-spacing: .02em; }
 
     /* ── ALLIES ── */
-    .allies-section { padding: 3.5rem 2rem; background: #fff; text-align: center; border-top: 3px solid #1c2f5e; }
-    .allies-title { font-size: 5.0rem; font-weight: 700; color: #1c2f5e; margin-bottom: 2.5rem; }
+    .allies-section { padding: 1rem 2rem 3.5rem; background: #fff; text-align: center; }
+    .allies-title { font-size: 2.8rem; font-weight: 700; color: #1c2f5e; margin-bottom: 2.5rem; }
     .allies-carousel-wrap { position: relative; display: flex; align-items: center; max-width: 1100px; margin: 0 auto; gap: .8rem; }
     .allies-carousel { overflow: hidden; flex: 1; }
-    .allies-track { display: flex; gap: 0; align-items: center; transition: transform .5s ease; }
+    .allies-track { display: flex; gap: 0; align-items: center; }
     .ally-item { flex: 0 0 20%; display: flex; align-items: center; justify-content: center; padding: 0 1.5rem; }
-    .ally-item img { max-height: 52px; max-width: 140px; object-fit: contain; filter: grayscale(1) brightness(.6); transition: filter .2s; }
-    .ally-item img:hover { filter: grayscale(0) brightness(1); }
+    .ally-item img { max-height: 80px; max-width: 180px; object-fit: contain; transition: opacity .2s; }
+    .ally-item img:hover { opacity: .8; }
     .ally-btn {
       width: 34px; height: 34px; border-radius: 50%; border: 1px solid #ccc; background: #fff;
       cursor: pointer; font-size: 1.1rem; color: #555; display: flex; align-items: center;
@@ -187,19 +187,22 @@
 
     /* ── FOOTER ── */
     footer { background: #1c2f5e; color: #a8bbd8; padding: 3rem 3rem 1.5rem; }
-    .footer-top { display: flex; gap: 3rem; align-items: flex-start; margin-bottom: 2.5rem; flex-wrap: wrap; }
-    .footer-logo img { height: 56px; object-fit: contain; }
-    .footer-right { display: flex; flex-wrap: wrap; gap: 2rem; flex: 1; }
+    .footer-top { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3rem; align-items: start; margin-bottom: 2.5rem; }
+    .footer-col { display: flex; justify-content: center; }
+    .footer-col-inner { text-align: left; }
     .footer-col h5 { font-size: .75rem; font-weight: 700; color: #fff; margin-bottom: .6rem; text-transform: uppercase; letter-spacing: .06em; }
     .footer-col p, .footer-col a { font-size: .84rem; color: #a8bbd8; text-decoration: none; line-height: 1.8; display: block; }
     .footer-col a:hover { color: #8dc63f; }
+    .footer-col-logo { display: flex; justify-content: center; align-items: center; }
+    .footer-col-logo img { height: 112px; object-fit: contain; }
     .footer-divider { border: none; border-top: 1px solid rgba(255,255,255,.1); margin: 1.5rem 0; }
     .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
     .footer-bottom p { font-size: .78rem; color: #7a90b5; }
     .footer-socials { display: flex; gap: .8rem; }
     .footer-socials a {
-      color: #a8bbd8; text-decoration: none; font-size: .8rem; font-weight: 600;
-      border: 1px solid rgba(255,255,255,.2); border-radius: 4px; padding: .3rem .8rem;
+      color: #a8bbd8; text-decoration: none; font-size: 1.4rem;
+      border: 1px solid rgba(255,255,255,.2); border-radius: 50%; width: 38px; height: 38px;
+      display: flex; align-items: center; justify-content: center;
       transition: border-color .15s, color .15s;
     }
     .footer-socials a:hover { border-color: #8dc63f; color: #8dc63f; }
@@ -408,40 +411,34 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-top">
-    <div class="footer-logo">
-      <img src="https://disempack.com.co/wp-content/uploads/2025/11/LOGO-WEB-HEAD-BLANCO-e1768929160286-1024x403.png"
-           alt="Disempack"
-           onerror="this.outerHTML='<span style=\'font-size:1.3rem;font-weight:800;color:#fff;\'>dis<span style=\'color:#8dc63f;\'>empack</span></span>'"/>
-    </div>
-    <div class="footer-right">
-      <div class="footer-col">
+    <div class="footer-col">
+      <div class="footer-col-inner">
         <h5>Servicio al Cliente</h5>
         <a href="tel:+573183820863">🇨🇴 318 382 0863</a>
-      </div>
-      <div class="footer-col">
-        <h5>Calidad</h5>
+        <h5 style="margin-top:1.2rem;">Calidad</h5>
         <a href="tel:+573011664304">🇨🇴 301 166 4304</a>
-      </div>
-      <div class="footer-col">
-        <h5>Diseño y Desarrollo</h5>
+        <h5 style="margin-top:1.2rem;">Diseño y Desarrollo</h5>
         <a href="tel:+573005582389">🇨🇴 300 558 2389</a>
       </div>
-      <div class="footer-col">
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-inner">
         <h5>Dirección</h5>
         <p>37A sur No. 72L-95</p>
-      </div>
-      <div class="footer-col">
-        <h5>Horarios</h5>
+        <h5 style="margin-top:1.2rem;">Horarios</h5>
         <p>Lunes a Viernes<br/>7:00am – 4:00pm</p>
       </div>
+    </div>
+    <div class="footer-col-logo">
+      <img src="https://disempack.com.co/wp-content/uploads/2025/11/LOGO-WEB-HEAD-BLANCO-e1768929160286-1024x403.png" alt="Disempack"/>
     </div>
   </div>
   <hr class="footer-divider"/>
   <div class="footer-bottom">
     <p>By Disempack S.A.S - 2026</p>
     <div class="footer-socials">
-      <a href="https://www.facebook.com/profile.php?id=100054201593487" target="_blank">Facebook</a>
-      <a href="https://www.instagram.com/disempack" target="_blank">Instagram</a>
+      <a href="https://www.facebook.com/profile.php?id=100054201593487" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/disempack" target="_blank"><i class="fa-brands fa-instagram"></i></a>
     </div>
   </div>
 </footer>
@@ -506,30 +503,49 @@
   /* ── ALLIES CAROUSEL ── */
   const track = document.getElementById('alliesTrack');
   const totalLogos = 17;
-  let allyIndex = 0;
-  const visible = 5;
 
-  for (let i = 1; i <= totalLogos; i++) {
-    const div = document.createElement('div');
-    div.className = 'ally-item';
-    const img = document.createElement('img');
-    img.src = `https://disempack.com.co/wp-content/uploads/2025/11/${i}-1.png`;
-    img.alt = `Aliado ${i}`;
-    div.appendChild(img);
-    track.appendChild(div);
+  // Duplicate logos for infinite loop
+  for (let pass = 0; pass < 2; pass++) {
+    for (let i = 1; i <= totalLogos; i++) {
+      const div = document.createElement('div');
+      div.className = 'ally-item';
+      const img = document.createElement('img');
+      img.src = `https://disempack.com.co/wp-content/uploads/2025/11/${i}.png`;
+      img.alt = `Aliado ${i}`;
+      div.appendChild(img);
+      track.appendChild(div);
+    }
   }
 
-  function moveAllies() {
-    const item = track.querySelector('.ally-item');
-    const w = item ? item.offsetWidth : 160;
-    track.style.transform = `translateX(-${allyIndex * w}px)`;
+  let allyPos = 0;
+  const allySpeed = 0.5;
+  let allyPaused = false;
+
+  function animateAllies() {
+    if (!allyPaused) {
+      allyPos += allySpeed;
+      const item = track.querySelector('.ally-item');
+      const itemW = item ? item.offsetWidth : 160;
+      const loopAt = itemW * totalLogos;
+      if (allyPos >= loopAt) allyPos = 0;
+      track.style.transform = `translateX(-${allyPos}px)`;
+    }
+    requestAnimationFrame(animateAllies);
   }
+  requestAnimationFrame(animateAllies);
+
+  track.addEventListener('mouseenter', () => { allyPaused = true; });
+  track.addEventListener('mouseleave', () => { allyPaused = false; });
 
   document.getElementById('allyPrev').addEventListener('click', () => {
-    if (allyIndex > 0) { allyIndex--; moveAllies(); }
+    const item = track.querySelector('.ally-item');
+    const itemW = item ? item.offsetWidth : 160;
+    allyPos = Math.max(0, allyPos - itemW);
   });
   document.getElementById('allyNext').addEventListener('click', () => {
-    if (allyIndex < totalLogos - visible) { allyIndex++; moveAllies(); }
+    const item = track.querySelector('.ally-item');
+    const itemW = item ? item.offsetWidth : 160;
+    allyPos += itemW;
   });
 </script>
 </body>
