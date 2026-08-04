@@ -535,7 +535,8 @@
       const div = document.createElement('div');
       div.className = 'ally-item';
       const img = document.createElement('img');
-      img.src = `https://disempack.com.co/wp-content/uploads/2025/11/${i}.png`;
+      img.loading = 'lazy';
+      img.src = `img/aliados/${i}.webp`;
       img.alt = `Aliado ${i}`;
       div.appendChild(img);
       track.appendChild(div);
