@@ -1,12 +1,25 @@
-# Setup — se sube una sola vez manualmente por File Manager, nunca via deploy
+# ── INTRANET: archivos que viven solo en el servidor ──
 intranet/setup.php
-
-# Lock file generado en el servidor — nunca debe pisarse con un deploy
 intranet/setup.lock
-
-# Imágenes subidas por la intranet (viven solo en el servidor)
 intranet/assets/*
 !intranet/assets/.htaccess
 
-# Mac
+# ── EDITORES ──
+.vscode/
+.idea/
+*.swp
+*.swo
+*.bak
+
+# ── ENTORNO ──
+.env
+.env.*
+*.env
+
+# ── LOGS ──
+*.log
+
+# ── SISTEMA OPERATIVO ──
 .DS_Store
+Thumbs.db
+desktop.ini
