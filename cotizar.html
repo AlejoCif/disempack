@@ -64,25 +64,31 @@
        SECTION 0 · HERO
     ════════════════════════════════════ */
     .cot-hero {
-      position: relative;
-      background-image:
-        linear-gradient(180deg, #1e3b74 0%, rgba(255,255,255,0) 100%),
-        url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.1.0&fm=webp&fit=crop&crop=entropy&w=1920&h=700&q=80');
-      background-size: cover; background-position: center;
-      min-height: 420px;
-      display: grid; grid-template-columns: 1fr 3fr;
-      align-items: center; padding: 4rem;
+      position: relative; width: 100%; height: 36.5vw; max-height: 700px; min-height: 380px; overflow: hidden;
     }
-    .cot-hero-empty { display: block; }
-    .cot-hero-card { background-color: #1e3b74; border-radius: 6px; padding: 50px 60px; }
-    .cot-hero-card h1 { font-size: 2.6rem; font-weight: 800; color: #fff; letter-spacing: .06em; margin-bottom: 1rem; line-height: 1.15; }
-    .cot-hero-card p { font-size: .97rem; color: #c5d4f0; line-height: 1.8; margin-bottom: 1.8rem; max-width: 580px; }
+    .cot-hero-bg { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .cot-hero-overlay {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 2rem;
+    }
+    .cot-hero-box {
+      background: rgba(20,30,60,.50);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: 10px;
+      padding: 2rem 2.5rem;
+      max-width: 700px;
+      display: flex; flex-direction: column; align-items: center; gap: .8rem;
+    }
+    .cot-hero-box h1 { font-size: 2.4rem; font-weight: 700; color: #8dc63f; margin: 0; }
+    .cot-hero-box p { font-size: 1.1rem; color: #fff; line-height: 1.7; margin: 0; }
     .cot-hero-btn {
-      display: inline-block; background: #fff; color: #1e3b74; font-weight: 700;
-      font-size: .9rem; padding: .75rem 2rem; border-radius: 100px;
-      text-decoration: none; transition: background .2s, color .2s;
+      display: inline-block; background: #fff; color: #8dc63f; font-weight: 700;
+      font-size: .88rem; padding: .65rem 2rem; border-radius: 4px;
+      text-decoration: none; border: 2px solid #fff; transition: background .2s, color .2s;
     }
-    .cot-hero-btn:hover { background: #8dc63f; color: #fff; }
+    .cot-hero-btn:hover { background: #8dc63f; color: #fff; border-color: #8dc63f; }
 
     /* ════════════════════════════════════
        SECTION 1 · FORMULARIO
@@ -218,10 +224,9 @@
       .nav-links > li > a { padding: .75rem 1.5rem; border-radius: 0; font-size: .9rem; }
       .dropdown { position: static; display: block; border: none; border-top: 1px solid #f0f0f0; box-shadow: none; min-width: 0; border-radius: 0; }
       .dropdown li a { padding-left: 2.5rem; }
-      .cot-hero { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
-      .cot-hero-empty { display: none; }
-      .cot-hero-card { padding: 2.5rem 2rem; }
-      .cot-hero-card h1 { font-size: 2rem; }
+      .cot-hero { height: 58.3vw; max-height: 420px; min-height: 280px; }
+      .cot-hero-box h1 { font-size: 1.8rem; }
+      .cot-hero-box { padding: 1.5rem 1.5rem; }
       .cot-form-wrap { padding: 2.5rem 1.5rem; }
       .cot-row { grid-template-columns: 1fr; }
       .cot-radio-grid { grid-template-columns: 1fr 1fr; }
@@ -299,11 +304,13 @@
 
 <!-- ══ SECTION 0 · HERO ══ -->
 <section class="cot-hero">
-  <div class="cot-hero-empty"></div>
-  <div class="cot-hero-card">
-    <h1>COTIZA CON NOSOTROS</h1>
-    <p>Descubre cómo personalizar tus proyectos con calidad excepcional y un enfoque sostenible, utilizando tecnología de vanguardia en impresión digital.</p>
-    <a href="#formulario" class="cot-hero-btn">Cotiza tu proyecto</a>
+  <img class="cot-hero-bg" src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.1.0&fm=webp&fit=crop&crop=entropy&w=1920&h=700&q=80" alt="Cotizar" loading="eager" fetchpriority="high"/>
+  <div class="cot-hero-overlay">
+    <div class="cot-hero-box">
+      <h1>COTIZA CON NOSOTROS</h1>
+      <p>Descubre cómo personalizar tus proyectos con calidad excepcional y un enfoque sostenible, utilizando tecnología de vanguardia en impresión digital.</p>
+      <a href="#formulario" class="cot-hero-btn">Cotiza tu proyecto</a>
+    </div>
   </div>
 </section>
 
