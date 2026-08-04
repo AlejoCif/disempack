@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Intranet - Disempack SAS</title>
+  <title>Catálogo Interno - Disempack SAS</title>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <style>
@@ -99,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <img src="https://disempack.com.co/wp-content/uploads/2025/11/GENERICO-USOS-scaled.png" alt="Disempack"/>
   </div>
   <div class="badge">Acceso Restringido</div>
-  <h1>Intranet</h1>
+  <h1>Catálogo Interno</h1>
   <p class="subtitle">Zona exclusiva para el equipo Disempack.</p>
 
   <?php if ($error): ?>
