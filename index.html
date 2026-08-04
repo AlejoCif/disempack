@@ -91,17 +91,23 @@
     .slide-bg { width: 100%; height: 100%; object-fit: cover; display: block; }
     .slide-overlay {
       position: absolute; inset: 0;
-      background: rgba(20,30,60,.45);
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       text-align: center; padding: 2rem;
     }
+    .slide-text-box {
+      background: rgba(20,30,60,.72);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: 10px;
+      padding: 2rem 2.5rem;
+      max-width: 700px;
+      display: flex; flex-direction: column; align-items: center; gap: .8rem;
+    }
     .slide-overlay h2 {
-      font-size: 3.1rem; font-weight: 700; color: #8dc63f; margin-bottom: 1rem;
-      text-shadow: 0 2px 8px rgba(0,0,0,.4);
+      font-size: 2.4rem; font-weight: 700; color: #8dc63f; margin: 0;
     }
     .slide-overlay p {
-      font-size: 1.5rem; color: #fff; max-width: 780px; line-height: 1.7; margin-bottom: 1.8rem;
-      text-shadow: 0 1px 4px rgba(0,0,0,.5);
+      font-size: 1.1rem; color: #fff; line-height: 1.7; margin: 0;
     }
     .slide-overlay p strong { color: #8dc63f; }
     .btn-info {
@@ -307,41 +313,51 @@
   <div class="slide active">
     <img class="slide-bg" src="img/banner/slide-1-impresion.webp" alt="Impresión Digital" loading="eager" fetchpriority="high"/>
     <div class="slide-overlay">
-      <h2>Impresión Digital</h2>
-      <p>Sobre materiales rígidos y flexibles, creando texturas únicas que realzan tu marca o proyecto.
-        Usamos tintas UV con certificación <strong>GREENGUARD GOLD,</strong> garantizando calidad y bajo impacto ambiental.</p>
-      <a href="impresion-digital.html" class="btn-info">Más Información</a>
+      <div class="slide-text-box">
+        <h2>Impresión Digital</h2>
+        <p>Sobre materiales rígidos y flexibles, creando texturas únicas que realzan tu marca o proyecto.
+          Usamos tintas UV con certificación <strong>GREENGUARD GOLD,</strong> garantizando calidad y bajo impacto ambiental.</p>
+        <a href="impresion-digital.html" class="btn-info">Más Información</a>
+      </div>
     </div>
   </div>
   <div class="slide">
     <img class="slide-bg" src="img/banner/slide-2-economia-circular.webp" alt="Eco Friendly" loading="lazy"/>
     <div class="slide-overlay">
-      <h2>Somos Eco Friendly</h2>
-      <p>El uso de materiales de bajo peso, alta resistencia y libre de contaminantes asegura duración, funcionalidad y <strong>sostenibilidad.</strong></p>
-      <a href="cotizar.html" class="btn-info">Más Información</a>
+      <div class="slide-text-box">
+        <h2>Somos Eco Friendly</h2>
+        <p>El uso de materiales de bajo peso, alta resistencia y libre de contaminantes asegura duración, funcionalidad y <strong>sostenibilidad.</strong></p>
+        <a href="cotizar.html" class="btn-info">Más Información</a>
+      </div>
     </div>
   </div>
   <div class="slide">
     <img class="slide-bg" src="img/banner/slide-3-barbarian.webp" alt="Lápiz de Acero" loading="lazy"/>
     <div class="slide-overlay">
-      <h2>Nominados A Los Premios Lápiz De Acero</h2>
-      <p>Nuestros desarrollos fueron nominados en los premios <strong>Lápiz de Acero 2023 categoría POP,</strong> un respaldo significativo a su calidad y diseño.</p>
-      <a href="https://www.lapizdeacero.org/nominado/tap-handle-barbarian/" class="btn-info" target="_blank">Más Información</a>
+      <div class="slide-text-box">
+        <h2>Nominados A Los Premios Lápiz De Acero</h2>
+        <p>Nuestros desarrollos fueron nominados en los premios <strong>Lápiz de Acero 2023 categoría POP,</strong> un respaldo significativo a su calidad y diseño.</p>
+        <a href="https://www.lapizdeacero.org/nominado/tap-handle-barbarian/" class="btn-info" target="_blank">Más Información</a>
+      </div>
     </div>
   </div>
   <div class="slide">
-    <img class="slide-bg" src="img/banner/slide-4-equipo.webp" alt="20 Años"/>
+    <img class="slide-bg" src="img/banner/slide-4-equipo.webp" alt="20 Años" loading="lazy"/>
     <div class="slide-overlay">
-      <h2>20 Años De Experiencia</h2>
-      <p>Atendiendo a grandes marcas, ofreciendo diseño orientado al detalle y su materialización en productos personalizados y de alta recordación.</p>
-      <a href="cotizar.html" class="btn-info">Más Información</a>
+      <div class="slide-text-box">
+        <h2>20 Años De Experiencia</h2>
+        <p>Atendiendo a grandes marcas, ofreciendo diseño orientado al detalle y su materialización en productos personalizados y de alta recordación.</p>
+        <a href="cotizar.html" class="btn-info">Más Información</a>
+      </div>
     </div>
   </div>
   <div class="slide">
     <img class="slide-bg" src="img/banner/slide-5-actualizacion.webp" alt="Experiencia Digital" loading="lazy"/>
     <div class="slide-overlay">
-      <p>En Disempack una nueva experiencia <strong>digital</strong> está en camino.</p>
-      <a href="https://wa.link/2ka87h" class="btn-info" target="_blank">Contactar</a>
+      <div class="slide-text-box">
+        <p>En Disempack una nueva experiencia <strong>digital</strong> está en camino.</p>
+        <a href="https://wa.link/2ka87h" class="btn-info" target="_blank">Contactar</a>
+      </div>
     </div>
   </div>
 
