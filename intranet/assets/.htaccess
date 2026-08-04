@@ -1,0 +1,7 @@
+# Bloquear ejecución de PHP dentro de assets (solo imágenes)
+<FilesMatch "\.php$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+Options -Indexes

@@ -130,6 +130,17 @@
     .cot-conditional { margin-bottom: 1.5rem; display: none; }
     .cot-conditional.visible { display: block; }
 
+    /* Tipo cliente (propio / empresa) */
+    .cot-type-grid { display: flex; gap: 1rem; margin-top: .4rem; }
+    .cot-type-option {
+      display: flex; align-items: center; gap: .6rem; cursor: pointer;
+      padding: .75rem 1.5rem; border: 2px solid #e0e4ef; border-radius: 6px;
+      transition: border-color .2s, background .2s; flex: 1;
+    }
+    .cot-type-option input[type="radio"] { accent-color: #8dc63f; width: 16px; height: 16px; cursor: pointer; }
+    .cot-type-option span { font-size: .9rem; color: #444; font-weight: 600; }
+    .cot-type-option:has(input:checked) { border-color: #8dc63f; background: #f0f9e8; }
+
     /* Submit */
     .cot-submit-row { display: flex; justify-content: flex-end; margin-top: 2rem; }
     .cot-submit-btn {
@@ -302,14 +313,37 @@
         </div>
       </div>
 
-      <!-- Conditional: shown when P.O.P is selected -->
-      <div class="cot-conditional cot-field" id="condNombre">
-        <label for="nombreEmpresa">¿Deseas Información a nombre de? *</label>
-        <select id="nombreEmpresa" name="nombreEmpresa">
-          <option value="">Selecciona una opción</option>
-          <option value="A Nombre Propio">A Nombre Propio</option>
-          <option value="A Nombre De Una Empresa">A Nombre De Una Empresa</option>
-        </select>
+      <!-- ¿A nombre de quién? -->
+      <div style="margin-bottom:1.5rem;">
+        <span class="cot-radio-label">¿Deseo información a nombre de? *</span>
+        <div class="cot-type-grid">
+          <label class="cot-type-option">
+            <input type="radio" name="tipoCliente" value="propio"/>
+            <span>A nombre propio</span>
+          </label>
+          <label class="cot-type-option">
+            <input type="radio" name="tipoCliente" value="empresa"/>
+            <span>A nombre de empresa</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Conditional: campos empresa -->
+      <div class="cot-conditional" id="condEmpresa">
+        <div class="cot-row">
+          <div class="cot-field">
+            <label for="empresaNombre">Nombre Empresa *</label>
+            <input type="text" id="empresaNombre" name="empresaNombre" placeholder="Nombre de la empresa"/>
+          </div>
+          <div class="cot-field">
+            <label for="cargo">Cargo *</label>
+            <input type="text" id="cargo" name="cargo" placeholder="Tu cargo en la empresa"/>
+          </div>
+          <div class="cot-field full">
+            <label for="telefono">Teléfono / WhatsApp *</label>
+            <input type="text" id="telefono" name="telefono" placeholder="Ej: 300 000 0000"/>
+          </div>
+        </div>
       </div>
 
       <div>
@@ -420,11 +454,10 @@
     }
   });
 
-  /* ── CONDITIONAL FIELD (P.O.P → mostrar campo empresa) ── */
-  document.querySelectorAll('input[name="producto"]').forEach(radio => {
+  /* ── TIPO CLIENTE (propio / empresa) ── */
+  document.querySelectorAll('input[name="tipoCliente"]').forEach(radio => {
     radio.addEventListener('change', () => {
-      const cond = document.getElementById('condNombre');
-      cond.classList.toggle('visible', radio.value === 'P.O.P');
+      document.getElementById('condEmpresa').classList.toggle('visible', radio.value === 'empresa');
     });
   });
 
@@ -434,18 +467,33 @@
     const nombre = document.getElementById('nombre').value.trim();
     const email  = document.getElementById('email').value.trim();
     const producto = document.querySelector('input[name="producto"]:checked');
+    const tipoCliente = document.querySelector('input[name="tipoCliente"]:checked');
 
-    if (!nombre || !email || !producto) {
+    if (!nombre || !email || !producto || !tipoCliente) {
       alert('Por favor completa todos los campos obligatorios.');
       return;
     }
 
-    const empresa = document.getElementById('nombreEmpresa').value;
+    const esEmpresa = tipoCliente.value === 'empresa';
+    const empresaNombre = esEmpresa ? document.getElementById('empresaNombre').value.trim() : '';
+    const cargo         = esEmpresa ? document.getElementById('cargo').value.trim() : '';
+    const telefono      = esEmpresa ? document.getElementById('telefono').value.trim() : '';
+
+    if (esEmpresa && (!empresaNombre || !cargo || !telefono)) {
+      alert('Por favor completa los datos de la empresa.');
+      return;
+    }
+
     let msg = `Hola Disempack, quiero cotizar:\n\n`;
     msg += `👤 Nombre: ${nombre}\n`;
     msg += `📧 Correo: ${email}\n`;
     msg += `📦 Producto: ${producto.value}\n`;
-    if (empresa) msg += `🏢 A nombre de: ${empresa}\n`;
+    msg += `🏷️ A nombre de: ${esEmpresa ? 'Empresa' : 'Propio'}\n`;
+    if (esEmpresa) {
+      msg += `🏢 Empresa: ${empresaNombre}\n`;
+      msg += `💼 Cargo: ${cargo}\n`;
+      msg += `📱 Teléfono: ${telefono}\n`;
+    }
 
     const waNumber = '573183820863';
     const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(msg)}`;
