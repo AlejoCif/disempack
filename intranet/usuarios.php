@@ -115,6 +115,10 @@ $miId = $_SESSION['usuario_id'];
       transition: background .15s;
     }
     .btn-del:hover { background: #fdd; }
+    .pwd-wrap { position: relative; }
+    .pwd-wrap input { padding-right: 2.8rem; width: 100%; }
+    .pwd-toggle { position: absolute; right: .75rem; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: #aaa; font-size: 1rem; padding: 0; display: flex; align-items: center; }
+    .pwd-toggle:hover { color: #555; }
     .btn-reset {
       background: #fff8e1; color: #b45309; border: none; border-radius: 6px;
       padding: .4rem .85rem; font-size: .78rem; font-weight: 700; cursor: pointer;
@@ -273,7 +277,10 @@ $miId = $_SESSION['usuario_id'];
         </div>
         <div class="m-field">
           <label for="n_password">Contraseña * (mín. 8 caracteres)</label>
-          <input type="password" id="n_password" name="password" placeholder="••••••••" required minlength="8"/>
+          <div class="pwd-wrap">
+            <input type="password" id="n_password" name="password" placeholder="••••••••" required minlength="8"/>
+            <button type="button" class="pwd-toggle" onclick="togglePwd(this)" tabindex="-1"><i class="fa-solid fa-eye"></i></button>
+          </div>
         </div>
         <div class="m-field">
           <label for="n_rol">Rol *</label>
@@ -312,7 +319,10 @@ $miId = $_SESSION['usuario_id'];
         </div>
         <div class="m-field">
           <label for="e_password">Nueva contraseña</label>
-          <input type="password" id="e_password" name="password" placeholder="Dejar en blanco para no cambiar" minlength="8"/>
+          <div class="pwd-wrap">
+            <input type="password" id="e_password" name="password" placeholder="Dejar en blanco para no cambiar" minlength="8"/>
+            <button type="button" class="pwd-toggle" onclick="togglePwd(this)" tabindex="-1"><i class="fa-solid fa-eye"></i></button>
+          </div>
           <span class="m-hint">Solo completa este campo si quieres cambiar la contraseña.</span>
         </div>
         <div class="m-field">
@@ -347,11 +357,17 @@ $miId = $_SESSION['usuario_id'];
         </p>
         <div class="m-field">
           <label for="r_password">Nueva contraseña * (mín. 8 caracteres)</label>
-          <input type="password" id="r_password" name="password" placeholder="••••••••" required minlength="8"/>
+          <div class="pwd-wrap">
+            <input type="password" id="r_password" name="password" placeholder="••••••••" required minlength="8"/>
+            <button type="button" class="pwd-toggle" onclick="togglePwd(this)" tabindex="-1"><i class="fa-solid fa-eye"></i></button>
+          </div>
         </div>
         <div class="m-field">
           <label for="r_confirm">Confirmar contraseña *</label>
-          <input type="password" id="r_confirm" name="confirm" placeholder="••••••••" required minlength="8"/>
+          <div class="pwd-wrap">
+            <input type="password" id="r_confirm" name="confirm" placeholder="••••••••" required minlength="8"/>
+            <button type="button" class="pwd-toggle" onclick="togglePwd(this)" tabindex="-1"><i class="fa-solid fa-eye"></i></button>
+          </div>
         </div>
       </div>
       <div class="modal-footer">
@@ -374,6 +390,13 @@ $miId = $_SESSION['usuario_id'];
     document.getElementById('e_password').value = '';
     document.getElementById('e_rol').value     = u.rol;
     document.getElementById('modalEditar').classList.add('open');
+  }
+
+  function togglePwd(btn) {
+    const input = btn.closest('.pwd-wrap').querySelector('input');
+    const show  = input.type === 'password';
+    input.type  = show ? 'text' : 'password';
+    btn.querySelector('i').className = show ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye';
   }
 
   function abrirModalReset(id, nombre) {

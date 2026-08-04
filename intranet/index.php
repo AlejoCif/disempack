@@ -86,6 +86,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       margin-bottom: 1.2rem; text-align: center;
     }
     .footer-note { text-align: center; font-size: .75rem; color: #aaa; margin-top: 1.8rem; }
+    .pwd-wrap { position: relative; }
+    .pwd-wrap input { padding-right: 2.8rem; width: 100%; }
+    .pwd-toggle { position: absolute; right: .75rem; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: #aaa; font-size: 1rem; padding: 0; display: flex; align-items: center; }
+    .pwd-toggle:hover { color: #555; }
   </style>
 </head>
 <body>
@@ -109,11 +113,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
     <div class="field">
       <label for="password">Contraseña</label>
-      <input type="password" id="password" name="password" placeholder="••••••••" required/>
+      <div class="pwd-wrap">
+        <input type="password" id="password" name="password" placeholder="••••••••" required/>
+        <button type="button" class="pwd-toggle" onclick="togglePwd(this)" tabindex="-1">
+          <i class="fa-solid fa-eye"></i>
+        </button>
+      </div>
     </div>
     <button type="submit" class="btn">Ingresar →</button>
   </form>
   <p class="footer-note">Disempack SAS · Uso interno</p>
 </div>
+<script>
+  function togglePwd(btn) {
+    const input = btn.closest('.pwd-wrap').querySelector('input');
+    const show  = input.type === 'password';
+    input.type  = show ? 'text' : 'password';
+    btn.querySelector('i').className = show ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye';
+  }
+</script>
 </body>
 </html>

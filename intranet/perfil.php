@@ -92,6 +92,10 @@ try {
     }
     input[type="password"]:focus { border-color: #1c2f5e; }
     .hint { font-size: .75rem; color: #999; margin-top: .2rem; }
+    .pwd-wrap { position: relative; }
+    .pwd-wrap input { padding-right: 2.8rem; width: 100%; }
+    .pwd-toggle { position: absolute; right: .75rem; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: #aaa; font-size: 1rem; padding: 0; display: flex; align-items: center; }
+    .pwd-toggle:hover { color: #555; }
     .btn-save {
       background: #8dc63f; color: #fff; font-weight: 700; font-size: .93rem;
       padding: .8rem 2rem; border-radius: 100px; border: none; cursor: pointer;
@@ -157,16 +161,25 @@ try {
     <form method="POST" action="perfil_accion.php" onsubmit="return validar()">
       <div class="field">
         <label for="password_actual">Contraseña actual *</label>
-        <input type="password" id="password_actual" name="password_actual" placeholder="••••••••" required/>
+        <div class="pwd-wrap">
+          <input type="password" id="password_actual" name="password_actual" placeholder="••••••••" required/>
+          <button type="button" class="pwd-toggle" onclick="togglePwd(this)" tabindex="-1"><i class="fa-solid fa-eye"></i></button>
+        </div>
       </div>
       <div class="field">
         <label for="password_nueva">Nueva contraseña *</label>
-        <input type="password" id="password_nueva" name="password_nueva" placeholder="••••••••" required minlength="8"/>
+        <div class="pwd-wrap">
+          <input type="password" id="password_nueva" name="password_nueva" placeholder="••••••••" required minlength="8"/>
+          <button type="button" class="pwd-toggle" onclick="togglePwd(this)" tabindex="-1"><i class="fa-solid fa-eye"></i></button>
+        </div>
         <span class="hint">Mínimo 8 caracteres.</span>
       </div>
       <div class="field">
         <label for="password_confirmar">Confirmar nueva contraseña *</label>
-        <input type="password" id="password_confirmar" name="password_confirmar" placeholder="••••••••" required minlength="8"/>
+        <div class="pwd-wrap">
+          <input type="password" id="password_confirmar" name="password_confirmar" placeholder="••••••••" required minlength="8"/>
+          <button type="button" class="pwd-toggle" onclick="togglePwd(this)" tabindex="-1"><i class="fa-solid fa-eye"></i></button>
+        </div>
       </div>
       <button type="submit" class="btn-save"><i class="fa-solid fa-check"></i> Actualizar contraseña</button>
     </form>
@@ -175,6 +188,12 @@ try {
 </div>
 
 <script>
+  function togglePwd(btn) {
+    const input = btn.closest('.pwd-wrap').querySelector('input');
+    const show  = input.type === 'password';
+    input.type  = show ? 'text' : 'password';
+    btn.querySelector('i').className = show ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye';
+  }
   function validar() {
     const nueva = document.getElementById('password_nueva').value;
     const conf  = document.getElementById('password_confirmar').value;
