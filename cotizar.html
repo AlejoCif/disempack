@@ -115,6 +115,20 @@
       transition: border-color .2s; outline: none; background: #fff;
     }
     .cot-field input:focus, .cot-field select:focus { border-color: #1c2f5e; }
+    .cot-field textarea {
+      border: 2px solid #e0e4ef; border-radius: 6px; padding: .75rem 1rem;
+      font-size: .92rem; font-family: inherit; color: #333; outline: none;
+      transition: border-color .2s; resize: vertical; min-height: 110px; width: 100%;
+    }
+    .cot-field textarea:focus { border-color: #1c2f5e; }
+    .cot-file-label {
+      display: inline-flex; align-items: center; gap: .5rem; margin-top: .4rem;
+      border: 2px dashed #c5d0e8; border-radius: 6px; padding: .7rem 1.2rem;
+      cursor: pointer; color: #666; font-size: .88rem; transition: border-color .2s, color .2s;
+    }
+    .cot-file-label:hover { border-color: #1c2f5e; color: #1c2f5e; }
+    .cot-img-preview { margin-top: .8rem; max-width: 220px; border-radius: 6px; overflow: hidden; border: 2px solid #e0e4ef; display: none; }
+    .cot-img-preview img { width: 100%; display: block; }
 
     /* Radio grid */
     .cot-radio-label { font-size: .8rem; font-weight: 700; color: #1c2f5e; text-transform: uppercase; letter-spacing: .06em; margin-bottom: .8rem; display: block; }
@@ -368,6 +382,22 @@
         </div>
       </div>
 
+      <div class="cot-field" style="margin-top:1.5rem;">
+        <label for="descripcion">Describe tu proyecto</label>
+        <textarea id="descripcion" name="descripcion" placeholder="Cuéntanos tu idea: materiales, cantidades, medidas u otros detalles relevantes..."></textarea>
+      </div>
+
+      <div class="cot-field">
+        <label>Imagen de referencia <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#999;">(opcional)</span></label>
+        <label class="cot-file-label" for="imagenRef">
+          <i class="fa-solid fa-image"></i> <span id="fileLabel">Seleccionar imagen</span>
+        </label>
+        <input type="file" id="imagenRef" name="imagenRef" accept="image/*" style="display:none;"/>
+        <div class="cot-img-preview" id="imgPreview">
+          <img id="imgPreviewImg" src="" alt="Vista previa"/>
+        </div>
+      </div>
+
       <div class="cot-submit-row">
         <button type="submit" class="cot-submit-btn">
           <i class="fa-brands fa-whatsapp" style="margin-right:.5rem;"></i>Enviar por WhatsApp
@@ -463,6 +493,22 @@
   });
 
   /* ── FORM SUBMIT → WHATSAPP ── */
+  document.getElementById('imagenRef').addEventListener('change', function() {
+    const file = this.files[0];
+    const preview = document.getElementById('imgPreview');
+    const previewImg = document.getElementById('imgPreviewImg');
+    const label = document.getElementById('fileLabel');
+    if (file) {
+      label.textContent = file.name;
+      const reader = new FileReader();
+      reader.onload = e => { previewImg.src = e.target.result; preview.style.display = 'block'; };
+      reader.readAsDataURL(file);
+    } else {
+      label.textContent = 'Seleccionar imagen';
+      preview.style.display = 'none';
+    }
+  });
+
   document.getElementById('cotizarForm').addEventListener('submit', (e) => {
     e.preventDefault();
     const nombre = document.getElementById('nombre').value.trim();
@@ -494,6 +540,14 @@
       msg += `🏢 Empresa: ${empresaNombre}\n`;
       msg += `💼 Cargo: ${cargo}\n`;
       msg += `📱 Teléfono: ${telefono}\n`;
+    }
+
+    const descripcion = document.getElementById('descripcion').value.trim();
+    if (descripcion) msg += `\n📝 Descripción del proyecto:\n${descripcion}\n`;
+
+    const imagenInput = document.getElementById('imagenRef');
+    if (imagenInput.files && imagenInput.files[0]) {
+      msg += `\n📎 Imagen de referencia: ${imagenInput.files[0].name} (la compartiré directamente en el chat)\n`;
     }
 
     const waNumber = '573183820863';
