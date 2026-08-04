@@ -1,6 +1,7 @@
 # ── INTRANET: archivos que viven solo en el servidor ──
 intranet/setup.php
 intranet/setup.lock
+intranet/db.php
 intranet/assets/*
 !intranet/assets/.htaccess
 
