@@ -1,0 +1,8 @@
+# ── HTTPS redirect ──
+# Activar SOLO después de confirmar que el candado aparece en la URL temporal
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# ── Bloquear acceso al repositorio git ──
+RedirectMatch 404 /\.git

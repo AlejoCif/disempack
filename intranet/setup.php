@@ -2,6 +2,16 @@
 // ════════════════════════════════════════════════════════════
 //  SETUP — Ejecutar UNA sola vez, luego ELIMINAR este archivo
 // ════════════════════════════════════════════════════════════
+
+// Lock file: bloquea ejecuciones simultáneas o repetidas
+// aunque unlink() falle por permisos, este archivo detiene todo
+$lockFile = __DIR__ . '/setup.lock';
+
+if (file_exists($lockFile)) {
+    http_response_code(403);
+    die('Setup ya fue ejecutado. Este script está deshabilitado. Elimina setup.php del servidor manualmente.');
+}
+
 require_once 'db.php';
 
 $mensaje = '';
@@ -19,44 +29,56 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (strlen($password) < 8) {
         $error = 'La contraseña debe tener al menos 8 caracteres.';
     } else {
+        // Crear lock ANTES de tocar la DB para cerrar la ventana de doble ejecución
+        file_put_contents($lockFile, date('Y-m-d H:i:s'));
+
+        $setupExitoso = false;
         try {
             $pdo = db();
 
-            // Crear tablas
             $pdo->exec("
                 CREATE TABLE IF NOT EXISTS usuarios (
-                    id           INT AUTO_INCREMENT PRIMARY KEY,
-                    nombre       VARCHAR(100)  NOT NULL,
-                    email        VARCHAR(255)  NOT NULL UNIQUE,
-                    password_hash VARCHAR(255) NOT NULL,
-                    rol          ENUM('admin','viewer') DEFAULT 'viewer',
-                    creado_en    TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                    id            INT AUTO_INCREMENT PRIMARY KEY,
+                    nombre        VARCHAR(100)  NOT NULL,
+                    email         VARCHAR(255)  NOT NULL UNIQUE,
+                    password_hash VARCHAR(255)  NOT NULL,
+                    rol           ENUM('admin','viewer') DEFAULT 'viewer',
+                    creado_en     TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
                 CREATE TABLE IF NOT EXISTS articulos (
-                    id           INT AUTO_INCREMENT PRIMARY KEY,
-                    nombre       VARCHAR(255)  NOT NULL,
-                    categoria    VARCHAR(100),
-                    descripcion  TEXT,
-                    archivo      VARCHAR(255)  NOT NULL,
-                    subido_por   INT,
-                    creado_en    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    id          INT AUTO_INCREMENT PRIMARY KEY,
+                    nombre      VARCHAR(255) NOT NULL,
+                    categoria   VARCHAR(100),
+                    descripcion TEXT,
+                    archivo     VARCHAR(255) NOT NULL,
+                    subido_por  INT,
+                    creado_en   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     FOREIGN KEY (subido_por) REFERENCES usuarios(id) ON DELETE SET NULL
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
             ");
 
-            // Crear usuario admin
             $hash = password_hash($password, PASSWORD_DEFAULT);
             $stmt = $pdo->prepare("INSERT INTO usuarios (nombre, email, password_hash, rol) VALUES (?, ?, ?, 'admin')");
             $stmt->execute([$nombre, $email, $hash]);
 
-            $mensaje = '¡Listo! Usuario administrador creado. <strong>Elimina este archivo (setup.php) ahora.</strong>';
+            $setupExitoso = true;
+
         } catch (PDOException $e) {
+            // Si algo falló, eliminamos el lock para permitir reintentar
+            @unlink($lockFile);
+
             if ($e->getCode() == 23000) {
                 $error = 'Ese correo ya existe en la base de datos.';
             } else {
-                $error = 'Error: ' . htmlspecialchars($e->getMessage());
+                $error = 'Error de base de datos: ' . htmlspecialchars($e->getMessage());
             }
+        }
+
+        if ($setupExitoso) {
+            // Intentar auto-borrado. Si falla por permisos, el lock ya protege.
+            @unlink(__FILE__);
+            $mensaje = '¡Listo! Tablas y administrador creados. setup.php ha sido eliminado automáticamente. <strong>Verifica en el File Manager que el archivo ya no existe — si sigue ahí, bórralo manualmente ahora.</strong>';
         }
     }
 }
@@ -92,7 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <img src="https://disempack.com.co/wp-content/uploads/2025/11/GENERICO-USOS-scaled.png" alt="Disempack"/>
   </div>
   <h1>Configuración Inicial</h1>
-  <div class="warning">⚠️ Ejecuta esto <strong>una sola vez</strong> y luego elimina este archivo del servidor.</div>
+  <div class="warning">⚠️ Ejecuta esto <strong>una sola vez</strong> y luego verifica que setup.php haya sido eliminado del servidor.</div>
 
   <?php if ($mensaje): ?>
     <div class="msg-ok"><?= $mensaje ?></div>
