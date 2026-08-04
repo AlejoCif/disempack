@@ -123,11 +123,13 @@
     .or-accordion .faq-item.open .faq-answer { display: block; }
 
     /* ── PROCESS 3-COL ── */
-    .or-process { padding: 4rem 2.5rem; background: #1c2f5e; }
-    .or-process-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 1100px; margin: 0 auto; }
-    .or-process-card { padding: 2rem; border-left: 3px solid #8dc63f; }
-    .or-process-card h4 { font-size: 1rem; font-weight: 800; color: #8dc63f; margin-bottom: 1rem; }
-    .or-process-card p { font-size: .88rem; color: #a8bbd8; line-height: 1.85; text-align: justify; }
+    .or-process { padding: 4rem 2.5rem; background: #092155; }
+    .or-values-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; max-width: 1100px; margin: 0 auto; }
+    .or-value-card { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 2.5rem 2rem; border: 1px solid rgba(255,255,255,.15); border-radius: 12px; }
+    .or-value-card img { width: 120px; height: 120px; margin-bottom: 1.2rem; }
+    .or-value-line { width: 36px; height: 3px; background: #93c526; border-radius: 2px; margin-bottom: 1.2rem; }
+    .or-value-card h4 { font-size: 1rem; font-weight: 700; color: #93c526; margin-bottom: .8rem; }
+    .or-value-card p { font-size: .88rem; color: #c8d8f0; line-height: 1.85; }
 
     /* ── MATERIALS ── */
     .or-materials { padding: 4rem 2.5rem; background: #fff; }
@@ -225,7 +227,7 @@
       .or-design-inner { grid-template-columns: 1fr; }
       .or-design-left img,
       .or-design-right img { height: 320px; }
-      .or-process-grid { grid-template-columns: 1fr; }
+      .or-values-grid { grid-template-columns: 1fr; }
       .or-materials-grid { grid-template-columns: 1fr; }
       .or-benefits-grid { grid-template-columns: 1fr; }
       .footer-top { grid-template-columns: 1fr; }
@@ -344,18 +346,24 @@
 
 <!-- ══ PROCESS 3-COL ══ -->
 <section class="or-process">
-  <div class="or-process-grid">
-    <div class="or-process-card">
-      <h4><i class="fa-solid fa-cubes" style="margin-right:.5rem;"></i>Construcción de Organizadores</h4>
-      <p>La construcción de nuestros organizadores personalizados comienza con una cuidadosa selección de materiales de alta calidad. Utilizamos técnicas avanzadas para garantizar que cada organizador cumpla con los estándares más exigentes de durabilidad y funcionalidad. El proceso incluye corte preciso, ensamblaje meticuloso y acabados detallados, asegurando que cada pieza sea única y adaptada a las necesidades específicas de nuestros clientes.</p>
+  <div class="or-values-grid">
+    <div class="or-value-card">
+      <img src="img/icons/1-construccion-organizadores.svg" alt="Construcción de Organizadores" loading="lazy" width="120" height="120"/>
+      <div class="or-value-line"></div>
+      <h4>Construcción de Organizadores</h4>
+      <p>Diseño y fabricación a medida. Cortes precisos, ensamblaje cuidadoso y acabados durables.</p>
     </div>
-    <div class="or-process-card">
-      <h4><i class="fa-solid fa-gears" style="margin-right:.5rem;"></i>Proceso de Fabricación</h4>
-      <p>Nuestro proceso de fabricación se centra en la eficiencia y la sostenibilidad. Empleamos maquinaria de última generación para optimizar el uso de materiales y reducir el desperdicio. Cada etapa del proceso es supervisada por expertos para asegurar que los organizadores no solo sean funcionales, sino también estéticamente agradables.</p>
+    <div class="or-value-card">
+      <img src="img/icons/2-proceso-fabricacion.svg" alt="Proceso de Fabricación" loading="lazy" width="120" height="120"/>
+      <div class="or-value-line"></div>
+      <h4>Proceso de Fabricación</h4>
+      <p>Tecnología eficiente en cada etapa para optimizar materiales, reducir desperdicios y asegurar calidad.</p>
     </div>
-    <div class="or-process-card">
-      <h4><i class="fa-solid fa-leaf" style="margin-right:.5rem;"></i>Materiales de Calidad</h4>
-      <p>Los materiales que utilizamos son seleccionados por su resistencia y versatilidad. Desde plásticos reciclados hasta compuestos innovadores, cada componente es elegido para maximizar la vida útil del organizador y minimizar el impacto ambiental.</p>
+    <div class="or-value-card">
+      <img src="img/icons/3-materiales-calidad.svg" alt="Materiales de Calidad" loading="lazy" width="120" height="120"/>
+      <div class="or-value-line"></div>
+      <h4>Materiales de Calidad</h4>
+      <p>Materiales resistentes, versátiles y sostenibles para soluciones funcionales y de larga vida útil.</p>
     </div>
   </div>
 </section>
