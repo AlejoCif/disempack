@@ -228,7 +228,6 @@
       box-shadow: 0 4px 20px rgba(37,211,102,.5); text-decoration: none; font-size: 1.8rem; transition: transform .2s;
     }
     .wa-fab:hover { transform: scale(1.1); }
-    .wa-fab img { width: 36px; height: 36px; border-radius: 50%; }
 
     @media (max-width: 900px) {
       .hamburger { display: flex; }
@@ -516,9 +515,7 @@
 
 <!-- WHATSAPP FAB -->
 <a href="https://wa.link/2ka87h" class="wa-fab" target="_blank" title="WhatsApp">
-  <img src="https://disempack.com.co/wp-content/uploads/2026/01/Logo-Whtsapp-Disempack-scaled.png"
-       alt="WhatsApp"
-       onerror="this.outerHTML='<span style=\'color:#fff;font-size:1.9rem;\'>💬</span>'"/>
+  <i class="fa-brands fa-whatsapp" style="color:#fff;font-size:2rem;"></i>
 </a>
 
 <script>
@@ -592,6 +589,19 @@
       navLinks.classList.remove('open');
     }
   });
+
+  /* ── WA FAB: raise near footer ── */
+  (function(){
+    const fab = document.querySelector('.wa-fab');
+    const footer = document.querySelector('footer');
+    if(!fab || !footer) return;
+    function checkFab(){
+      const fTop = footer.getBoundingClientRect().top;
+      const wH = window.innerHeight;
+      fab.style.bottom = fTop < wH ? (wH - fTop + 16) + 'px' : '';
+    }
+    window.addEventListener('scroll', checkFab, {passive:true});
+  })();
 </script>
 </body>
 </html>
