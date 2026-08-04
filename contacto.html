@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Impresión Digital - Disempack SAS</title>
+  <title>Contacto - Disempack SAS</title>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <style>
@@ -33,6 +33,7 @@
       border-radius: 4px; transition: color .15s, background .15s;
     }
     .nav-links > li > a:hover { color: #1c2f5e; background: #f5f6fa; }
+    .nav-links > li > a.active { color: #1c2f5e; font-weight: 700; }
     .nav-links > li > a .arrow { font-size: .6rem; color: #888; }
     .dropdown {
       display: none; position: absolute; top: 100%; left: 0;
@@ -61,115 +62,60 @@
     .search-box button:hover { background: #8dc63f; }
 
     /* ── HERO ── */
-    .id-hero {
-      position: relative;
-      width: 100%;
-      height: 600px;
-      background-image: url('https://disempack.com.co/wp-content/uploads/2026/01/0-ffcf752a-de9c-4fcc-b6fe-07b8f0072929-1000x1000.jpg');
-      background-size: cover;
-      background-position: center 50%;
-      overflow: hidden;
+    .contact-hero {
+      position: relative; width: 100%; height: 36.5vw; max-height: 500px; min-height: 280px; overflow: hidden;
+      background: linear-gradient(135deg, #1c2f5e 0%, #2a4a8a 100%);
+      display: flex; align-items: center; justify-content: center; text-align: center;
     }
-    .id-hero-overlay {
-      position: absolute; inset: 0;
-      background: rgba(28, 47, 94, .55);
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      text-align: center; padding: 2rem 2.5rem;
-    }
-    .id-hero-text-box {
-      background: rgba(10, 20, 50, .65);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-      border-radius: 10px;
-      padding: 2.5rem 3rem;
-      max-width: 860px;
-    }
-    .id-hero-text-box h1 {
-      font-size: 2.8rem; font-weight: 800; color: #fff;
-      margin-bottom: 1.2rem; letter-spacing: .03em; line-height: 1.2;
-    }
-    .id-hero-text-box h1 span { color: #8dc63f; }
-    .id-hero-text-box p { font-size: 1rem; color: #e0e8f8; line-height: 1.85; margin-bottom: 1.8rem; }
-    .id-hero-btn {
-      display: inline-block; background: #8dc63f; color: #fff; font-weight: 700;
-      font-size: .95rem; padding: .75rem 2.2rem; border-radius: 4px;
-      text-decoration: none; border: 2px solid #8dc63f; transition: background .2s, color .2s;
-    }
-    .id-hero-btn:hover { background: #fff; color: #8dc63f; }
+    .contact-hero h1 { font-size: 3rem; font-weight: 800; color: #fff; margin-bottom: .8rem; }
+    .contact-hero p { font-size: 1.1rem; color: #c5d4f0; max-width: 560px; line-height: 1.7; }
 
-    /* ── WHAT IS IT ── */
-    .id-what { padding: 4rem 2.5rem; background: #f7f9fc; }
-    .id-what-inner { max-width: 1200px; margin: 0 auto; }
-    .id-what-inner h4 { font-size: .9rem; font-weight: 700; color: #8dc63f; text-transform: uppercase; letter-spacing: .1em; margin-bottom: .5rem; }
-    .id-what-inner h2 { font-size: 1.9rem; font-weight: 700; color: #1c2f5e; margin-bottom: 2rem; }
-    .id-what-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
-    .id-what-cols p { font-size: .95rem; color: #444; line-height: 1.85; text-align: justify; }
-
-    /* ── APPLICATIONS ── */
-    .id-applications { background: #fff; padding: 4rem 2.5rem; }
-    .id-applications h2 { font-size: 2.2rem; font-weight: 700; color: #1c2f5e; text-align: center; margin-bottom: 2.5rem; }
-    .id-apps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 2rem; max-width: 1000px; margin: 0 auto; }
-    .id-app-item {
-      display: flex; align-items: center; gap: .75rem;
-      padding: .7rem 0; border-bottom: 1px solid #e8ecf4; font-size: .92rem; color: #333;
-    }
-    .id-app-item::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #8dc63f; flex-shrink: 0; }
-
-    /* ── BENEFITS ── */
-    .id-benefits { padding: 4rem 2.5rem; background: #f7f9fc; }
-    .id-benefits h2 { font-size: 2.2rem; font-weight: 700; color: #1c2f5e; text-align: center; margin-bottom: 2.5rem; }
-    .id-benefits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 900px; margin: 0 auto; }
-    .id-benefit-item { text-align: center; padding: 2rem 1.5rem; border-radius: 8px; border: 1px solid #e8ecf4; box-shadow: 0 2px 12px rgba(0,0,0,.05); background: #fff; }
-    .id-benefit-item i { font-size: 2.8rem; color: #8dc63f; margin-bottom: 1rem; }
-    .id-benefit-item h4 { font-size: 1.05rem; font-weight: 700; color: #1c2f5e; }
-
-    /* ── COMPARISON GRID ── */
-    .id-compare { padding: 4rem 2.5rem; background: #f0f2f7; }
-    .id-compare-header { text-align: center; max-width: 700px; margin: 0 auto 3rem; }
-    .id-compare-header h4 { font-size: .9rem; font-weight: 700; color: #8dc63f; text-transform: uppercase; letter-spacing: .1em; margin-bottom: .5rem; }
-    .id-compare-header h2 { font-size: 2.2rem; font-weight: 700; color: #1c2f5e; }
-    .id-cmp-grid { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 1rem; }
-    .id-cmp-row {
-      display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;
-      background: #fff; border-radius: 6px;
-      box-shadow: 0 2px 10px rgba(0,0,0,.06); overflow: hidden;
-    }
-    .id-cmp-label-cell {
-      padding: 1.6rem 1.8rem; display: flex; align-items: center;
-      font-size: 1rem; font-weight: 800; color: #1c2f5e;
-      border-right: 2px solid #f0f2f7;
-    }
-    .id-cmp-cell {
-      padding: 1.6rem 1rem; display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: .6rem; text-align: center;
-      border-right: 1px solid #f0f2f7;
-    }
-    .id-cmp-cell:last-child { border-right: none; }
-    .id-cmp-cell i { font-size: 2rem; color: #8dc63f; }
-    .id-cmp-cell span { font-size: .95rem; font-weight: 700; color: #8dc63f; }
-
-    @media (max-width: 700px) {
-      .id-cmp-row { grid-template-columns: 1fr 1fr; }
-      .id-cmp-label-cell { grid-column: 1 / -1; border-right: none; border-bottom: 2px solid #f0f2f7; }
+    /* ── CONTACT SECTION ── */
+    .contact-section {
+      max-width: 1100px; margin: 0 auto; padding: 5rem 2.5rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;
     }
 
-    /* ── CTA BANNER ── */
-    .id-cta-wrap { padding: 2rem 2.5rem 4rem; max-width: 1200px; margin: 0 auto; }
-    .id-cta-banner { position: relative; border-radius: 6px; overflow: hidden; }
-    .id-cta-bg { width: 100%; height: 220px; object-fit: cover; display: block; filter: brightness(.35) saturate(.6); }
-    .id-cta-overlay {
-      position: absolute; inset: 0;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      gap: 1.5rem; text-align: center; padding: 2rem;
+    .contact-info h2 { font-size: 1.8rem; font-weight: 700; color: #1c2f5e; margin-bottom: 2rem; }
+
+    .contact-item {
+      display: flex; gap: 1.2rem; align-items: flex-start; margin-bottom: 2rem;
     }
-    .id-cta-overlay h2 { font-size: 2rem; font-weight: 700; color: #fff; }
-    .id-cta-btn {
-      display: inline-block; background: #8dc63f; color: #fff; font-weight: 700;
-      font-size: .95rem; padding: .75rem 2.2rem; border-radius: 4px;
-      text-decoration: none; border: 2px solid #8dc63f; transition: background .2s, color .2s;
+    .contact-icon {
+      width: 48px; height: 48px; border-radius: 50%; background: #f0f4ff;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-size: 1.1rem; color: #1c2f5e;
     }
-    .id-cta-btn:hover { background: #fff; color: #8dc63f; }
+    .contact-item-text h4 { font-size: .85rem; font-weight: 700; color: #1c2f5e; text-transform: uppercase; letter-spacing: .06em; margin-bottom: .3rem; }
+    .contact-item-text p, .contact-item-text a {
+      font-size: .95rem; color: #555; line-height: 1.7; text-decoration: none; display: block;
+    }
+    .contact-item-text a:hover { color: #8dc63f; }
+
+    .contact-socials { display: flex; gap: .7rem; margin-top: .5rem; }
+    .contact-socials a {
+      width: 38px; height: 38px; border-radius: 50%; background: #f0f4ff;
+      display: flex; align-items: center; justify-content: center;
+      color: #1c2f5e; font-size: 1rem; text-decoration: none; transition: background .2s, color .2s;
+    }
+    .contact-socials a:hover { background: #8dc63f; color: #fff; }
+
+    .cta-btn {
+      display: inline-flex; align-items: center; gap: .5rem; margin-top: 2rem;
+      background: #8dc63f; color: #fff; font-weight: 700; font-size: .95rem;
+      padding: .85rem 2rem; border-radius: 100px; text-decoration: none;
+      transition: background .2s, transform .15s;
+    }
+    .cta-btn:hover { background: #7ab535; transform: translateY(-1px); }
+
+    /* ── MAP ── */
+    .contact-map { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-map h2 { font-size: 1.8rem; font-weight: 700; color: #1c2f5e; }
+    .map-wrap {
+      border-radius: 10px; overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,.1); border: 2px solid #e8ecf4;
+    }
+    .map-wrap iframe { display: block; width: 100%; height: 420px; border: none; }
 
     /* ── FOOTER ── */
     footer { background: #1c2f5e; color: #a8bbd8; padding: 3rem 3rem 1.5rem; }
@@ -205,34 +151,32 @@
       position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 999;
       width: 58px; height: 58px; border-radius: 50%; background: #25d366;
       display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 4px 20px rgba(37,211,102,.5); text-decoration: none; font-size: 1.8rem; transition: transform .2s;
+      box-shadow: 0 4px 20px rgba(37,211,102,.5); text-decoration: none;
+      font-size: 1.8rem; transition: transform .2s;
     }
     .wa-fab:hover { transform: scale(1.1); }
 
     @media (max-width: 900px) {
-      .hamburger { display: flex; }
-      nav { position: relative; }
       .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; background: #fff; padding: .5rem 0; border-top: 3px solid #8dc63f; box-shadow: 0 8px 24px rgba(0,0,0,.12); z-index: 199; }
       .nav-links.open { display: flex; }
       .nav-links > li > a { padding: .75rem 1.5rem; border-radius: 0; font-size: .9rem; }
-      .dropdown { position: static; display: block; border: none; border-top: 1px solid #f0f0f0; box-shadow: none; min-width: 0; border-radius: 0; }
+      .dropdown { position: static; box-shadow: none; border: none; border-top: none; border-left: 3px solid #8dc63f; margin-left: 1.5rem; }
       .dropdown li a { padding-left: 2.5rem; }
-      .id-what-cols { grid-template-columns: 1fr; }
-      .id-apps-grid { grid-template-columns: 1fr 1fr; }
-      .id-benefits-grid { grid-template-columns: 1fr; max-width: 360px; }
+      .hamburger { display: flex; }
+      .contact-hero h1 { font-size: 2rem; }
+      .contact-section { grid-template-columns: 1fr; gap: 2.5rem; padding: 3rem 1.5rem; }
+      .map-wrap iframe { height: 300px; }
       .footer-top { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-<!-- TOP BAR -->
 <div class="topbar">
-  <a href="#">Terms &amp; Conditions</a>
-  <a href="#">Privacy Policy</a>
+  <a href="tel:+573183820863">+57 318 382 0863</a>
+  <a href="mailto:info@disempack.com.co">info@disempack.com.co</a>
 </div>
 
-<!-- NAVBAR -->
 <nav>
   <a href="index.html" class="logo-wrap">
     <img src="img/GENERICO-USOS-scaled.png" alt="Disempack"/>
@@ -271,7 +215,7 @@
         <li><a href="#">Venta De Materia Prima</a></li>
       </ul>
     </li>
-    <li><a href="contacto.html">Contacto</a></li>
+    <li><a href="contacto.html" class="active">Contacto</a></li>
     <li><a href="cotizar.html">Cotizar</a></li>
   </ul>
   <button class="hamburger" id="hamburger" aria-label="Menú">
@@ -288,166 +232,87 @@
   </div>
 </div>
 
-<!-- ══ HERO ══ -->
-<section class="id-hero">
-  <div class="id-hero-overlay">
-    <div class="id-hero-text-box">
-      <h1>Impresión Digital <span>Industrial de Alta Precisión</span></h1>
-      <p>Descubre cómo personalizar tus proyectos con calidad excepcional y un enfoque sostenible, utilizando tecnología de vanguardia en impresión digital.</p>
-      <a href="cotizar.html" class="id-hero-btn">Cotiza tu proyecto</a>
+<!-- HERO -->
+<div class="contact-hero">
+  <div>
+    <h1>Contáctanos</h1>
+    <p>Estamos listos para ayudarte. Escríbenos, llámanos o visítanos en nuestra sede.</p>
+  </div>
+</div>
+
+<!-- CONTACT + MAP -->
+<div class="contact-section">
+
+  <div class="contact-info">
+    <h2>Información de Contacto</h2>
+
+    <div class="contact-item">
+      <div class="contact-icon"><i class="fa-solid fa-headset"></i></div>
+      <div class="contact-item-text">
+        <h4>Servicio al Cliente</h4>
+        <a href="tel:+573183820863">🇨🇴 +57 318 382 0863</a>
+      </div>
+    </div>
+
+    <div class="contact-item">
+      <div class="contact-icon"><i class="fa-solid fa-medal"></i></div>
+      <div class="contact-item-text">
+        <h4>Calidad</h4>
+        <a href="tel:+573011664304">🇨🇴 +57 301 166 4304</a>
+      </div>
+    </div>
+
+    <div class="contact-item">
+      <div class="contact-icon"><i class="fa-solid fa-handshake"></i></div>
+      <div class="contact-item-text">
+        <h4>Ventas</h4>
+        <a href="tel:+573005582389">🇨🇴 +57 300 558 2389</a>
+      </div>
+    </div>
+
+    <div class="contact-item">
+      <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+      <div class="contact-item-text">
+        <h4>Dirección</h4>
+        <p>37A sur No. 72L-95<br/>Bogotá, Colombia</p>
+      </div>
+    </div>
+
+    <div class="contact-item">
+      <div class="contact-icon"><i class="fa-solid fa-clock"></i></div>
+      <div class="contact-item-text">
+        <h4>Horarios</h4>
+        <p>Lunes a Viernes<br/>7:00am – 4:00pm</p>
+      </div>
+    </div>
+
+    <div class="contact-item">
+      <div class="contact-icon"><i class="fa-brands fa-whatsapp"></i></div>
+      <div class="contact-item-text">
+        <h4>Redes Sociales</h4>
+        <div class="contact-socials">
+          <a href="https://www.facebook.com/people/Disempack-SAS/100054201593487/?locale=es_LA" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/disempack" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/company/disempack/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <a href="cotizar.html" class="cta-btn">
+      <i class="fa-solid fa-file-invoice"></i> Solicitar Cotización
+    </a>
+  </div>
+
+  <div class="contact-map">
+    <h2>Nuestra Ubicación</h2>
+    <div class="map-wrap">
+      <iframe
+        src="https://maps.google.com/maps?q=37A+sur+No.+72L-95,+Bogot%C3%A1,+Colombia&output=embed&z=16"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
     </div>
   </div>
-</section>
 
-<!-- ══ QUÉ ES ══ -->
-<section class="id-what">
-  <div class="id-what-inner">
-    <h4>¿Qué es la Impresión Digital en Disempack?</h4>
-    <h2>Tecnología de Vanguardia a tu Servicio</h2>
-    <div class="id-what-cols">
-      <p>La impresión digital en Disempack ofrece soluciones avanzadas que superan las limitaciones de la impresión tradicional. Nuestra tecnología permite una personalización total, rapidez en la entrega y una calidad de impresión superior. A diferencia de la impresión tradicional, nuestra técnica industrial garantiza durabilidad y resistencia, ideal para aplicaciones exigentes.</p>
-      <p>Las ventajas competitivas de nuestra impresión digital incluyen la capacidad de producir tiradas cortas con alta eficiencia, la posibilidad de imprimir sobre una amplia variedad de materiales y un compromiso con la sostenibilidad mediante el uso de tintas ecoamigables.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ══ APPLICATIONS ══ -->
-<section class="id-applications">
-  <h2>Aplicaciones del Servicio</h2>
-  <div class="id-apps-grid">
-    <div class="id-app-item">Empaques Personalizados</div>
-    <div class="id-app-item">Displays para Puntos de Venta</div>
-    <div class="id-app-item">Invitaciones Personalizadas</div>
-
-    <div class="id-app-item">Material POP</div>
-    <div class="id-app-item">Folletos y Catálogos</div>
-    <div class="id-app-item">Sobres y Papelería</div>
-
-    <div class="id-app-item">Señalización</div>
-    <div class="id-app-item">Tarjetas de Presentación</div>
-    <div class="id-app-item">Packaging de Productos</div>
-
-    <div class="id-app-item">Piezas Industriales</div>
-    <div class="id-app-item">Calendarios Corporativos</div>
-    <div class="id-app-item">Material Promocional</div>
-
-    <div class="id-app-item">Etiquetas y Stickers</div>
-    <div class="id-app-item">Revistas y Publicaciones</div>
-    <div class="id-app-item">Decoración de Interiores</div>
-
-    <div class="id-app-item">Carteles Publicitarios</div>
-    <div class="id-app-item">Posters y Banners</div>
-    <div class="id-app-item">Gráficos para Vehículos</div>
-  </div>
-</section>
-
-<!-- ══ BENEFITS ══ -->
-<section class="id-benefits">
-  <h2>Beneficios para el Cliente</h2>
-  <div class="id-benefits-grid">
-    <div class="id-benefit-item">
-      <i class="fa-solid fa-sliders"></i>
-      <h4>Personalización Total</h4>
-    </div>
-    <div class="id-benefit-item">
-      <i class="fa-solid fa-truck-fast"></i>
-      <h4>Entrega Rápida</h4>
-    </div>
-    <div class="id-benefit-item">
-      <i class="fa-solid fa-medal"></i>
-      <h4>Calidad Superior</h4>
-    </div>
-  </div>
-</section>
-
-<!-- ══ COMPARISON GRID ══ -->
-<section class="id-compare">
-  <div class="id-compare-header">
-    <h4>Tecnología de Impresión</h4>
-    <h2>Comparativa de Impresión Digital</h2>
-  </div>
-  <div class="id-cmp-grid">
-
-    <!-- ROW 1: Tipo de Tinta -->
-    <div class="id-cmp-row">
-      <div class="id-cmp-label-cell">Tipo de Tinta</div>
-      <div class="id-cmp-cell">
-        <i class="fa-solid fa-person-running"></i>
-        <span>Tinta Base Agua</span>
-      </div>
-      <div class="id-cmp-cell">
-        <i class="fa-solid fa-print"></i>
-        <span>Tinta UV</span>
-      </div>
-      <div class="id-cmp-cell">
-        <i class="fa-solid fa-database"></i>
-        <span>Tinta Solvente</span>
-      </div>
-    </div>
-
-    <!-- ROW 2: Tiempo de Secado -->
-    <div class="id-cmp-row">
-      <div class="id-cmp-label-cell">Tiempo de Secado</div>
-      <div class="id-cmp-cell">
-        <i class="fa-solid fa-stopwatch-20"></i>
-        <span>Rápido</span>
-      </div>
-      <div class="id-cmp-cell">
-        <i class="fa-solid fa-bookmark"></i>
-        <span>Instantáneo</span>
-      </div>
-      <div class="id-cmp-cell">
-        <i class="fa-solid fa-chart-pie"></i>
-        <span>Lento</span>
-      </div>
-    </div>
-
-    <!-- ROW 3: Durabilidad -->
-    <div class="id-cmp-row">
-      <div class="id-cmp-label-cell">Durabilidad</div>
-      <div class="id-cmp-cell">
-        <i class="fa-solid fa-square-check"></i>
-        <span>Moderada</span>
-      </div>
-      <div class="id-cmp-cell">
-        <i class="fa-solid fa-coins"></i>
-        <span>Alta</span>
-      </div>
-      <div class="id-cmp-cell">
-        <i class="fa-solid fa-thumbs-up"></i>
-        <span>Baja</span>
-      </div>
-    </div>
-
-    <!-- ROW 4: Calidad del Color -->
-    <div class="id-cmp-row">
-      <div class="id-cmp-label-cell">Calidad del Color</div>
-      <div class="id-cmp-cell">
-        <i class="fa-solid fa-pencil"></i>
-        <span>Buena</span>
-      </div>
-      <div class="id-cmp-cell">
-        <i class="fa-solid fa-list-check"></i>
-        <span>Excelente</span>
-      </div>
-      <div class="id-cmp-cell">
-        <i class="fa-solid fa-list-check"></i>
-        <span>Aceptable</span>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ══ CTA ══ -->
-<div class="id-cta-wrap">
-  <div class="id-cta-banner">
-    <img class="id-cta-bg" src="https://disempack.com.co/wp-content/uploads/2026/01/0-ffcf752a-de9c-4fcc-b6fe-07b8f0072929-1000x1000.jpg" alt="Contáctanos"/>
-    <div class="id-cta-overlay">
-      <h2>Solicita Asesoría Personalizada</h2>
-      <a href="cotizar.html" class="id-cta-btn">Contáctanos Ahora</a>
-    </div>
-  </div>
 </div>
 
 <!-- FOOTER -->
@@ -495,7 +360,6 @@
 </a>
 
 <script>
-  /* ── SEARCH ── */
   const searchBtn = document.getElementById('searchBtn');
   const searchOverlay = document.getElementById('searchOverlay');
   const searchInput = document.getElementById('searchInput');
@@ -507,7 +371,6 @@
   searchSubmit.addEventListener('click', doSearch);
   searchInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') doSearch(); });
 
-  /* ── HAMBURGER MENU ── */
   const hamburger = document.getElementById('hamburger');
   const navLinks = document.querySelector('.nav-links');
   hamburger.addEventListener('click', (e) => {
