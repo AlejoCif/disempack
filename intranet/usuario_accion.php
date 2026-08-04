@@ -108,6 +108,38 @@ try {
             }
             break;
 
+        // ── RESET CONTRASEÑA (admin resetea a otro usuario) ────
+        case 'reset_password':
+            $id      = (int)($_POST['id']      ?? 0);
+            $password = trim($_POST['password'] ?? '');
+            $confirm  = trim($_POST['confirm']  ?? '');
+
+            if (!$id || !$password) {
+                $_SESSION['flash'] = 'ERROR: Datos incompletos.';
+                break;
+            }
+            if (strlen($password) < 8) {
+                $_SESSION['flash'] = 'ERROR: La contraseña debe tener al menos 8 caracteres.';
+                break;
+            }
+            if ($password !== $confirm) {
+                $_SESSION['flash'] = 'ERROR: Las contraseñas no coinciden.';
+                break;
+            }
+
+            $stmt = $pdo->prepare("SELECT nombre FROM usuarios WHERE id = ?");
+            $stmt->execute([$id]);
+            $user = $stmt->fetch();
+
+            if ($user) {
+                $hash = password_hash($password, PASSWORD_DEFAULT);
+                $pdo->prepare("UPDATE usuarios SET password_hash=? WHERE id=?")->execute([$hash, $id]);
+                $_SESSION['flash'] = "Contraseña de \"{$user['nombre']}\" reseteada correctamente.";
+            } else {
+                $_SESSION['flash'] = 'ERROR: Usuario no encontrado.';
+            }
+            break;
+
         default:
             $_SESSION['flash'] = 'ERROR: Acción desconocida.';
     }

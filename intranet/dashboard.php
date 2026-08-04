@@ -260,7 +260,8 @@ $categorias = [
     <?php if ($esAdmin): ?>
     <a href="usuarios.php" class="top-nav-btn"><i class="fa-solid fa-users"></i> Usuarios</a>
     <?php endif; ?>
-    <a href="logout.php" class="top-nav-btn"><i class="fa-solid fa-right-from-bracket"></i> Salir</a>
+    <a href="perfil.php"   class="top-nav-btn"><i class="fa-solid fa-circle-user"></i> Mi Perfil</a>
+    <a href="logout.php"   class="top-nav-btn"><i class="fa-solid fa-right-from-bracket"></i> Salir</a>
   </div>
 </div>
 

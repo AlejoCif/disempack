@@ -115,6 +115,13 @@ $miId = $_SESSION['usuario_id'];
       transition: background .15s;
     }
     .btn-del:hover { background: #fdd; }
+    .btn-reset {
+      background: #fff8e1; color: #b45309; border: none; border-radius: 6px;
+      padding: .4rem .85rem; font-size: .78rem; font-weight: 700; cursor: pointer;
+      font-family: inherit; display: flex; align-items: center; gap: .35rem;
+      transition: background .15s;
+    }
+    .btn-reset:hover { background: #fde68a; }
     .you-badge {
       font-size: .68rem; background: #fff3cd; color: #856404;
       padding: .15rem .5rem; border-radius: 100px; font-weight: 700;
@@ -181,6 +188,7 @@ $miId = $_SESSION['usuario_id'];
   <div class="topbar-right">
     <a href="dashboard.php" class="top-nav-btn"><i class="fa-solid fa-images"></i> Artículos</a>
     <a href="usuarios.php"  class="top-nav-btn active"><i class="fa-solid fa-users"></i> Usuarios</a>
+    <a href="perfil.php"    class="top-nav-btn"><i class="fa-solid fa-circle-user"></i> Mi Perfil</a>
     <a href="logout.php"    class="top-nav-btn"><i class="fa-solid fa-right-from-bracket"></i> Salir</a>
   </div>
 </div>
@@ -225,6 +233,9 @@ $miId = $_SESSION['usuario_id'];
             <div class="td-actions">
               <button class="btn-edit" onclick="abrirModalEditar(<?= htmlspecialchars(json_encode($u)) ?>)">
                 <i class="fa-solid fa-pen"></i> Editar
+              </button>
+              <button class="btn-reset" onclick="abrirModalReset(<?= $u['id'] ?>, '<?= htmlspecialchars(addslashes($u['nombre'])) ?>')">
+                <i class="fa-solid fa-key"></i> Reset
               </button>
               <?php if ($u['id'] != $miId): ?>
               <form method="POST" action="usuario_accion.php" onsubmit="return confirm('¿Eliminar a <?= htmlspecialchars(addslashes($u['nombre'])) ?>? Esta acción no se puede deshacer.');">
@@ -320,6 +331,37 @@ $miId = $_SESSION['usuario_id'];
   </div>
 </div>
 
+<!-- MODAL RESET CONTRASEÑA -->
+<div class="modal-overlay" id="modalReset">
+  <div class="modal">
+    <div class="modal-header">
+      <h2><i class="fa-solid fa-key" style="margin-right:.5rem;"></i>Reset Contraseña</h2>
+      <button class="modal-close" onclick="cerrarModal('modalReset')">&times;</button>
+    </div>
+    <form method="POST" action="usuario_accion.php" onsubmit="return validarReset()">
+      <input type="hidden" name="accion" value="reset_password"/>
+      <input type="hidden" name="id" id="r_id"/>
+      <div class="modal-body">
+        <p style="font-size:.88rem;color:#666;margin-bottom:1.2rem;">
+          Reseteando contraseña de: <strong id="r_nombre"></strong>
+        </p>
+        <div class="m-field">
+          <label for="r_password">Nueva contraseña * (mín. 8 caracteres)</label>
+          <input type="password" id="r_password" name="password" placeholder="••••••••" required minlength="8"/>
+        </div>
+        <div class="m-field">
+          <label for="r_confirm">Confirmar contraseña *</label>
+          <input type="password" id="r_confirm" name="confirm" placeholder="••••••••" required minlength="8"/>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-cancel" onclick="cerrarModal('modalReset')">Cancelar</button>
+        <button type="submit" class="btn-save"><i class="fa-solid fa-key"></i> Resetear</button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <script>
   function abrirModalNuevo() {
     document.getElementById('modalNuevo').classList.add('open');
@@ -332,6 +374,21 @@ $miId = $_SESSION['usuario_id'];
     document.getElementById('e_password').value = '';
     document.getElementById('e_rol').value     = u.rol;
     document.getElementById('modalEditar').classList.add('open');
+  }
+
+  function abrirModalReset(id, nombre) {
+    document.getElementById('r_id').value = id;
+    document.getElementById('r_nombre').textContent = nombre;
+    document.getElementById('r_password').value = '';
+    document.getElementById('r_confirm').value = '';
+    document.getElementById('modalReset').classList.add('open');
+  }
+
+  function validarReset() {
+    const p = document.getElementById('r_password').value;
+    const c = document.getElementById('r_confirm').value;
+    if (p !== c) { alert('Las contraseñas no coinciden.'); return false; }
+    return true;
   }
 
   function cerrarModal(id) {
