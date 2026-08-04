@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+
+  <path d="M32 6 L54 14 V30 C54 44 44 54 32 58 C20 54 10 44 10 30 V14 Z"
+        stroke="#011456" stroke-width="4" stroke-linejoin="round" fill="none"/>
+  <path d="M23 31 L29 37 L41 23" stroke="#011456" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <circle cx="49" cy="13" r="9" fill="#4bb81d"/>
+  <text x="49" y="17" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="white" text-anchor="middle">UV</text>
+
+</svg>
