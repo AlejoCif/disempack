@@ -107,10 +107,21 @@
       text-align: justify;
     }
     .pop-hero-text p strong { color: #8dc63f; }
+    .pop-hero-img-wrapper { position: relative; }
+    .pop-hero-img-accent {
+      position: absolute;
+      top: -20px; right: -20px;
+      width: 70%; height: 60%;
+      background: #1c2f5e;
+      clip-path: polygon(100% 0, 100% 100%, 0 0);
+      z-index: 0;
+      border-radius: 8px;
+    }
+    .pop-hero-img { position: relative; z-index: 1; }
     .pop-hero-img img {
       width: 100%;
       height: 480px;
-      object-fit: cover;
+      object-fit: contain;
       border-radius: 8px;
       box-shadow: 0 8px 32px rgba(0,0,0,.12);
       display: block;
@@ -550,8 +561,11 @@
     <h1>P.O.P</h1>
     <p>Desarrollamos soluciones estratégicas de exhibición y empaque que combinan funcionalidad, eficiencia logística y diseño. Creamos piezas a medida con materiales adecuados para cada entorno comercial. Contamos con experiencia en <strong>exhibidores, empaques promocionales y material publicitario,</strong> y trabajamos con materiales reciclados postconsumo para ofrecer productos de alta calidad con menor impacto ambiental.</p>
   </div>
-  <div class="pop-hero-img">
-    <img src="img/pop-bebidas.webp" alt="P.O.P Bebidas" width="1200" height="800" loading="eager"/>
+  <div class="pop-hero-img-wrapper">
+    <div class="pop-hero-img-accent"></div>
+    <div class="pop-hero-img">
+      <img src="img/pop-bebidas.webp" alt="P.O.P Bebidas" width="1200" height="800" loading="eager"/>
+    </div>
   </div>
 </section>
 
