@@ -99,10 +99,17 @@
       top: 0; right: 0;
       width: 55%; height: 100%;
       background: #1c2f5e;
-      clip-path: polygon(35% 0, 100% 0, 100% 100%, 0 100%);
+      clip-path: polygon(50% 0, 100% 0, 100% 100%, 20% 100%);
       z-index: 0;
     }
-    .pop-hero-text, .pop-hero-img-wrapper { position: relative; z-index: 1; }
+    .pop-hero-text { position: relative; z-index: 1; }
+    .pop-hero-img-wrapper {
+      position: relative; z-index: 1;
+      background: #fff;
+      padding: 12px;
+      border-radius: 12px;
+      box-shadow: 0 20px 40px rgba(0,0,0,.2);
+    }
     .pop-hero-text h1 {
       font-size: 3.5rem;
       font-weight: 800;
