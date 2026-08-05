@@ -85,6 +85,7 @@
 
     /* ── PAGE HERO ── */
     .pop-hero {
+      position: relative; overflow: hidden;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 3rem;
@@ -93,6 +94,15 @@
       margin: 0 auto;
       padding: 4rem 2.5rem;
     }
+    .pop-hero-bg-accent {
+      position: absolute;
+      top: 0; right: 0;
+      width: 55%; height: 100%;
+      background: #1c2f5e;
+      clip-path: polygon(35% 0, 100% 0, 100% 100%, 0 100%);
+      z-index: 0;
+    }
+    .pop-hero-text, .pop-hero-img-wrapper { position: relative; z-index: 1; }
     .pop-hero-text h1 {
       font-size: 3.5rem;
       font-weight: 800;
@@ -107,16 +117,6 @@
       text-align: justify;
     }
     .pop-hero-text p strong { color: #8dc63f; }
-    .pop-hero-img-wrapper { position: relative; }
-    .pop-hero-img-accent {
-      position: absolute;
-      top: -24px; right: -24px;
-      width: 45%; height: 40%;
-      background: #1c2f5e;
-      clip-path: polygon(100% 0, 100% 100%, 0 0);
-      z-index: 0;
-      border-radius: 8px;
-    }
     .pop-hero-img { position: relative; z-index: 1; }
     .pop-hero-img img {
       width: 100%;
@@ -125,7 +125,6 @@
       box-shadow: 0 8px 32px rgba(0,0,0,.12);
       display: block;
     }
-    .pop-hero-img-accent { display: block; background: #1c2f5e; }
 
     /* ── ESENCIA DEL POP ── */
     .pop-essence {
@@ -556,12 +555,12 @@
 
 <!-- ══ PAGE HERO ══ -->
 <section class="pop-hero">
+  <div class="pop-hero-bg-accent"></div>
   <div class="pop-hero-text">
     <h1>P.O.P</h1>
     <p>Desarrollamos soluciones estratégicas de exhibición y empaque que combinan funcionalidad, eficiencia logística y diseño. Creamos piezas a medida con materiales adecuados para cada entorno comercial. Contamos con experiencia en <strong>exhibidores, empaques promocionales y material publicitario,</strong> y trabajamos con materiales reciclados postconsumo para ofrecer productos de alta calidad con menor impacto ambiental.</p>
   </div>
   <div class="pop-hero-img-wrapper">
-    <div class="pop-hero-img-accent"></div>
     <div class="pop-hero-img">
       <img src="img/pop-bebidas.webp" alt="P.O.P Bebidas" width="1200" height="800" loading="eager"/>
     </div>
