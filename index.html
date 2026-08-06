@@ -515,27 +515,30 @@
     if (e.key === 'Escape') closeSearch();
   });
   const SITE_PAGES = [
-    { title: 'Impresión Digital', url: 'impresion-digital.html', keywords: 'impresion digital uv flatbed rotativa lona vinilo banner' },
-    { title: 'Blister y Skin', url: 'blister.html', keywords: 'blister skin empaque transparente pvc diseño desarrollo' },
-    { title: 'Termoformado', url: 'termoformado.html', keywords: 'termoformado plastico molde bandeja empaque' },
-    { title: 'Troquelado', url: 'clam-shell.html', keywords: 'troquelado clam shell corte punzon caja' },
-    { title: 'Organizadores', url: 'organizadores.html', keywords: 'organizador exhibidor punto de venta display carton' },
-    { title: 'Alcancias', url: 'alcancias.html', keywords: 'alcancia promocional personalizada plastico' },
-    { title: 'Recubrimientos', url: 'recubrimientos.html', keywords: 'recubrimiento barniz laminado acabado uv soft touch' },
-    { title: 'P.O.P', url: 'pop.html', keywords: 'pop material publicitario exhibicion punto de compra' },
-    { title: 'Señalización Corporativa', url: 'senalizacion-corporativa.html', keywords: 'senalizacion corporativa rotulo letrero logo empresa' },
-    { title: 'Cotizar', url: 'cotizar.html', keywords: 'cotizar cotizacion precio pedido contacto whatsapp' },
-    { title: 'Inicio', url: 'index.html', keywords: 'disempack empaque soluciones inicio home' },
+    { title: 'Impresión Digital',        url: 'impresion-digital.html',        keywords: 'impresion digital uv flatbed gran formato lona vinilo banner rotativa' },
+    { title: 'Blister y Skin',           url: 'blister.html',                  keywords: 'blister skin termosellado acetato pvc empaque transparente producto' },
+    { title: 'Cajas Plegadizas',         url: 'cajas-plegadizas.html',         keywords: 'cajas plegadizas caja plegable carton plegado estuche embalaje packaging' },
+    { title: 'Troquelado / Clam-Shell',  url: 'clam-shell.html',               keywords: 'clamshell troquelado corte punzon bisagra rigido molde' },
+    { title: 'Organizadores',            url: 'organizadores.html',            keywords: 'organizador exhibidor punto de venta display stand corrugado papeleria' },
+    { title: 'Alcancías',                url: 'alcancias.html',                keywords: 'alcancia alcancías promocional personalizada ahorro plastico figura' },
+    { title: 'Recubrimientos',           url: 'recubrimientos.html',           keywords: 'recubrimiento barniz laminado acabado uv soft touch plastificado textura' },
+    { title: 'P.O.P',                    url: 'pop.html',                      keywords: 'pop material publicitario exhibicion punto de compra merchandising visual' },
+    { title: 'Señalización Corporativa', url: 'senalizacion-corporativa.html', keywords: 'senalizacion corporativa rotulo letrero señal directorio retro iluminada' },
+    { title: 'Cotizar',                  url: 'cotizar.html',                  keywords: 'cotizar cotizacion precio pedido presupuesto whatsapp formulario' },
+    { title: 'Contacto',                 url: 'contacto.html',                 keywords: 'contacto telefono correo email direccion ubicacion mensaje' },
+    { title: 'Inicio',                   url: 'index.html',                    keywords: 'disempack empaque soluciones inicio home' },
   ];
   const searchResults = document.getElementById('searchResults');
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
 
   function renderResults(q) {
     const term = q.toLowerCase().trim();
     if (!term) { searchResults.innerHTML = ''; searchResults.classList.remove('has-results'); return; }
-    const hits = SITE_PAGES.filter(p =>
-      p.url !== 'index.html' &&
-      (p.title.toLowerCase().includes(term) || p.keywords.includes(term))
-    );
+    const hits = SITE_PAGES
+      .filter(p => p.url !== currentPage &&
+        (p.title.toLowerCase().includes(term) || p.keywords.includes(term)))
+      .map(p => ({ ...p, score: (p.title.toLowerCase().includes(term) ? 2 : 0) + (p.keywords.includes(term) ? 1 : 0) }))
+      .sort((a, b) => b.score - a.score);
     if (!hits.length) {
       searchResults.innerHTML = '<div class="search-result-empty">Sin resultados para "' + q + '"</div>';
     } else {
