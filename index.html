@@ -83,6 +83,19 @@
       background: #1c2f5e; color: #fff; border: none; padding: 0 1.4rem; font-size: 1.1rem; cursor: pointer;
     }
     .search-box button:hover { background: #8dc63f; }
+    .search-results {
+      background: #fff; border-radius: 0 0 8px 8px; width: 100%; max-width: 600px;
+      box-shadow: 0 8px 32px rgba(0,0,0,.2); max-height: 360px; overflow-y: auto;
+      display: none;
+    }
+    .search-results.has-results { display: block; }
+    .search-result-item {
+      display: block; padding: .85rem 1.2rem; text-decoration: none; color: #1c2f5e;
+      border-bottom: 1px solid #f0f0f0; font-size: .95rem; transition: background .12s;
+    }
+    .search-result-item:last-child { border-bottom: none; }
+    .search-result-item:hover { background: #f5f9ec; color: #8dc63f; }
+    .search-result-empty { padding: .85rem 1.2rem; color: #888; font-size: .9rem; }
 
     /* ── HERO SLIDER ── */
     .hero { position: relative; width: 100%; height: 36.5vw; max-height: 700px; min-height: 380px; overflow: hidden; }
@@ -301,9 +314,12 @@
 
 <!-- SEARCH OVERLAY -->
 <div class="search-overlay" id="searchOverlay">
-  <div class="search-box">
-    <input type="text" id="searchInput" placeholder="Buscar en Disempack…"/>
-    <button id="searchSubmit">🔍</button>
+  <div style="width:100%;max-width:600px;display:flex;flex-direction:column;align-items:stretch;">
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Buscar en Disempack…"/>
+      <button id="searchSubmit">🔍</button>
+    </div>
+    <div class="search-results" id="searchResults"></div>
   </div>
 </div>
 
@@ -486,18 +502,61 @@
     searchOverlay.classList.add('open');
     searchInput.focus();
   });
+  function closeSearch() {
+    searchOverlay.classList.remove('open');
+    searchInput.value = '';
+    document.getElementById('searchResults').innerHTML = '';
+    document.getElementById('searchResults').classList.remove('has-results');
+  }
   searchOverlay.addEventListener('click', (e) => {
-    if (e.target === searchOverlay) searchOverlay.classList.remove('open');
+    if (e.target === searchOverlay) closeSearch();
   });
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') searchOverlay.classList.remove('open');
+    if (e.key === 'Escape') closeSearch();
   });
-  function doSearch() {
-    const q = searchInput.value.trim();
-    if (q) window.open('https://disempack.com.co/?s=' + encodeURIComponent(q), '_blank');
+  const SITE_PAGES = [
+    { title: 'Impresión Digital', url: 'impresion-digital.html', keywords: 'impresion digital uv flatbed rotativa lona vinilo banner' },
+    { title: 'Blister y Skin', url: 'blister.html', keywords: 'blister skin empaque transparente pvc diseño desarrollo' },
+    { title: 'Termoformado', url: 'termoformado.html', keywords: 'termoformado plastico molde bandeja empaque' },
+    { title: 'Troquelado', url: 'clam-shell.html', keywords: 'troquelado clam shell corte punzon caja' },
+    { title: 'Organizadores', url: 'organizadores.html', keywords: 'organizador exhibidor punto de venta display carton' },
+    { title: 'Alcancias', url: 'alcancias.html', keywords: 'alcancia promocional personalizada plastico' },
+    { title: 'Recubrimientos', url: 'recubrimientos.html', keywords: 'recubrimiento barniz laminado acabado uv soft touch' },
+    { title: 'P.O.P', url: 'pop.html', keywords: 'pop material publicitario exhibicion punto de compra' },
+    { title: 'Señalización Corporativa', url: 'senalizacion-corporativa.html', keywords: 'senalizacion corporativa rotulo letrero logo empresa' },
+    { title: 'Cotizar', url: 'cotizar.html', keywords: 'cotizar cotizacion precio pedido contacto whatsapp' },
+    { title: 'Inicio', url: 'index.html', keywords: 'disempack empaque soluciones inicio home' },
+  ];
+  const searchResults = document.getElementById('searchResults');
+
+  function renderResults(q) {
+    const term = q.toLowerCase().trim();
+    if (!term) { searchResults.innerHTML = ''; searchResults.classList.remove('has-results'); return; }
+    const hits = SITE_PAGES.filter(p =>
+      p.url !== 'index.html' &&
+      (p.title.toLowerCase().includes(term) || p.keywords.includes(term))
+    );
+    if (!hits.length) {
+      searchResults.innerHTML = '<div class="search-result-empty">Sin resultados para "' + q + '"</div>';
+    } else {
+      searchResults.innerHTML = hits.map(p =>
+        '<a class="search-result-item" href="' + p.url + '">' + p.title + '</a>'
+      ).join('');
+    }
+    searchResults.classList.add('has-results');
   }
-  searchSubmit.addEventListener('click', doSearch);
-  searchInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') doSearch(); });
+
+  searchInput.addEventListener('input', () => renderResults(searchInput.value));
+  searchSubmit.addEventListener('click', () => {
+    const first = searchResults.querySelector('.search-result-item');
+    if (first) window.location.href = first.href;
+  });
+  searchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const first = searchResults.querySelector('.search-result-item');
+      if (first) window.location.href = first.href;
+    }
+  });
 
   /* ── HERO SLIDER ── */
   const slides = document.querySelectorAll('.slide');
