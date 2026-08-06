@@ -317,6 +317,14 @@
       box-shadow: 0 4px 20px rgba(37,211,102,.5); text-decoration: none; font-size: 1.8rem; transition: transform .2s;
     }
     .wa-fab:hover { transform: scale(1.1); }
+    .catalogos-fab {
+      position: fixed; bottom: 1.5rem; left: 1.5rem; z-index: 999;
+      width: 70px; height: auto;
+      transition: transform .2s;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,.3));
+    }
+    .catalogos-fab:hover { transform: scale(1.05); }
+    .catalogos-fab img { width: 100%; height: auto; display: block; }
 
     @media (max-width: 900px) {
       .hamburger { display: flex; }
@@ -664,6 +672,10 @@
 <a href="https://wa.link/2ka87h" class="wa-fab" target="_blank" title="WhatsApp">
   <i class="fa-brands fa-whatsapp" style="color:#fff;font-size:2rem;"></i>
 </a>
+<!-- CATALOGOS FAB -->
+<a href="catalogos.html" class="catalogos-fab" title="Catálogos">
+  <img src="img/catalogos-btn.webp" alt="Catálogos" width="70" height="203"/>
+</a>
 
 <script>
   /* ── SEARCH ── */
@@ -763,6 +775,18 @@
   /* ── WA FAB: raise near footer ── */
   (function(){
     const fab = document.querySelector('.wa-fab');
+    const footer = document.querySelector('footer');
+    if(!fab || !footer) return;
+    function checkFab(){
+      const fTop = footer.getBoundingClientRect().top;
+      const wH = window.innerHeight;
+      fab.style.bottom = fTop < wH ? (wH - fTop + 16) + 'px' : '';
+    }
+    window.addEventListener('scroll', checkFab, {passive:true});
+  })();
+  /* ── CATÁLOGOS FAB: raise near footer ── */
+  (function(){
+    const fab = document.querySelector('.catalogos-fab');
     const footer = document.querySelector('footer');
     if(!fab || !footer) return;
     function checkFab(){
