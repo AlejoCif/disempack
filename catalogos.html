@@ -124,7 +124,11 @@
       cursor: pointer; line-height: 1; z-index: 1001;
     }
     .flipbook-close:hover { color: #8dc63f; }
-    .flipbook-container { width: 90vw; max-width: 1000px; }
+    .flipbook-container {
+      width: min(90vw, 520px);
+      aspect-ratio: 500 / 707;
+      max-height: 85vh;
+    }
 
     /* ── FOOTER ── */
     footer { background: #1c2f5e; color: #a8bbd8; padding: 3rem 3rem 1.5rem; }
