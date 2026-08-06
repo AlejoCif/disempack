@@ -125,9 +125,15 @@
     }
     .flipbook-close:hover { color: #8dc63f; }
     .flipbook-container {
-      width: min(90vw, 520px);
-      aspect-ratio: 500 / 707;
+      width: min(90vw, 1060px);
+      aspect-ratio: 1000 / 707;
       max-height: 85vh;
+    }
+    @media (max-width: 768px) {
+      .flipbook-container {
+        width: min(90vw, 520px);
+        aspect-ratio: 500 / 707;
+      }
     }
 
     /* ── FOOTER ── */
