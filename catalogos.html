@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Contáctanos: escríbenos, llámanos o visítanos en nuestra sede en Bogotá. El equipo de Disempack SAS está listo para atenderte y resolver tus preguntas."/>
-  <title>Contáctanos - Disempack SAS Colombia</title>
+  <meta name="description" content="Catálogos digitales de Disempack SAS — explore nuestra línea completa de empaques, exhibición comercial e impresión digital."/>
+  <title>Catálogos Digitales - Disempack SAS</title>
   <link rel="icon" href="favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
@@ -12,6 +12,7 @@
   <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -39,7 +40,6 @@
       border-radius: 4px; transition: color .15s, background .15s;
     }
     .nav-links > li > a:hover { color: #1c2f5e; background: #f5f6fa; }
-    .nav-links > li > a.active { color: #1c2f5e; font-weight: 700; }
     .nav-links > li > a .arrow { font-size: .6rem; color: #888; }
     .dropdown {
       display: none; position: absolute; top: 100%; left: 0;
@@ -68,8 +68,7 @@
     .search-box button:hover { background: #8dc63f; }
     .search-results {
       background: #fff; border-radius: 0 0 8px 8px; width: 100%; max-width: 600px;
-      box-shadow: 0 8px 32px rgba(0,0,0,.2); max-height: 360px; overflow-y: auto;
-      display: none;
+      box-shadow: 0 8px 32px rgba(0,0,0,.2); max-height: 360px; overflow-y: auto; display: none;
     }
     .search-results.has-results { display: block; }
     .search-result-item {
@@ -80,61 +79,52 @@
     .search-result-item:hover { background: #f5f9ec; color: #8dc63f; }
     .search-result-empty { padding: .85rem 1.2rem; color: #888; font-size: .9rem; }
 
-    /* ── HERO ── */
-    .contact-hero {
-      position: relative; width: 100%; height: 36.5vw; max-height: 500px; min-height: 280px; overflow: hidden;
-      background: linear-gradient(135deg, #1c2f5e 0%, #2a4a8a 100%);
-      display: flex; align-items: center; justify-content: center; text-align: center;
+    /* ── PAGE HEADER ── */
+    .cat-header {
+      background: #1c2f5e; padding: 4rem 2.5rem 3.5rem;
+      text-align: center;
     }
-    .contact-hero h1 { font-size: 3rem; font-weight: 800; color: #fff; margin-bottom: .8rem; }
-    .contact-hero p { font-size: 1.1rem; color: #c5d4f0; max-width: 560px; line-height: 1.7; }
+    .cat-header h1 { font-size: 2.4rem; font-weight: 800; color: #fff; margin-bottom: .8rem; }
+    .cat-header p { font-size: 1rem; color: #a8bbd8; max-width: 560px; margin: 0 auto; line-height: 1.8; }
 
-    /* ── CONTACT SECTION ── */
-    .contact-section {
-      max-width: 1100px; margin: 0 auto; padding: 5rem 2.5rem;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;
+    /* ── CATALOG GRID ── */
+    .cat-section { padding: 4rem 2.5rem; background: #f7f9fc; }
+    .catalogo-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem; max-width: 1100px; margin: 0 auto;
     }
+    .catalogo-card {
+      background: #fff; border-radius: 10px; overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,.07);
+      display: flex; flex-direction: column;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .catalogo-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,.13); transform: translateY(-3px); }
+    .catalogo-card > img { width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block; }
+    .catalogo-card-body { padding: 1.5rem; display: flex; flex-direction: column; gap: .8rem; flex: 1; }
+    .catalogo-card h3 { font-size: 1.1rem; font-weight: 700; color: #1c2f5e; }
+    .catalogo-card p { font-size: .88rem; color: #555; line-height: 1.7; flex: 1; }
+    .btn-ver-catalogo {
+      display: inline-block; background: #8dc63f; color: #fff; font-weight: 700;
+      font-size: .88rem; padding: .65rem 1.5rem; border-radius: 4px; border: none;
+      cursor: pointer; transition: background .2s; align-self: flex-start;
+    }
+    .btn-ver-catalogo:hover { background: #75a832; }
 
-    .contact-info h2 { font-size: 1.8rem; font-weight: 700; color: #1c2f5e; margin-bottom: 2rem; }
-
-    .contact-item {
-      display: flex; gap: 1.2rem; align-items: flex-start; margin-bottom: 2rem;
+    /* ── FLIPBOOK MODAL ── */
+    .flipbook-modal {
+      display: none; position: fixed; inset: 0; z-index: 1000;
+      background: rgba(0,0,0,.88);
+      align-items: center; justify-content: center;
     }
-    .contact-icon {
-      width: 48px; height: 48px; border-radius: 50%; background: #f0f4ff;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; font-size: 1.1rem; color: #1c2f5e;
+    .flipbook-modal.open { display: flex; }
+    .flipbook-close {
+      position: absolute; top: 1rem; right: 1.2rem;
+      background: none; border: none; color: #fff; font-size: 2.2rem;
+      cursor: pointer; line-height: 1; z-index: 1001;
     }
-    .contact-item-text h3 { font-size: .85rem; font-weight: 700; color: #1c2f5e; text-transform: uppercase; letter-spacing: .06em; margin-bottom: .3rem; }
-    .contact-item-text p, .contact-item-text a {
-      font-size: .95rem; color: #555; line-height: 1.7; text-decoration: none; display: block;
-    }
-    .contact-item-text a:hover { color: #8dc63f; }
-
-    .contact-socials { display: flex; gap: .7rem; margin-top: .5rem; }
-    .contact-socials a {
-      width: 38px; height: 38px; border-radius: 50%; background: #f0f4ff;
-      display: flex; align-items: center; justify-content: center;
-      color: #1c2f5e; font-size: 1rem; text-decoration: none; transition: background .2s, color .2s;
-    }
-    .contact-socials a:hover { background: #8dc63f; color: #fff; }
-
-    .cta-btn {
-      display: inline-flex; align-items: center; gap: .5rem; margin-top: 2rem;
-      background: #8dc63f; color: #fff; font-weight: 700; font-size: .95rem;
-      padding: .85rem 2rem; border-radius: 100px; text-decoration: none;
-      transition: background .2s, transform .15s;
-    }
-    .cta-btn:hover { background: #7ab535; transform: translateY(-1px); }
-
-    /* ── MAP ── */
-    .contact-map { display: flex; flex-direction: column; gap: 1rem; }
-    .contact-map h2 { font-size: 1.8rem; font-weight: 700; color: #1c2f5e; }
-    .map-wrap {
-      border-radius: 10px; overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0,0,0,.1); border: 2px solid #e8ecf4;
-    }
-    .map-wrap iframe { display: block; width: 100%; height: 420px; border: none; }
+    .flipbook-close:hover { color: #8dc63f; }
+    .flipbook-container { width: 90vw; max-width: 1000px; }
 
     /* ── FOOTER ── */
     footer { background: #1c2f5e; color: #a8bbd8; padding: 3rem 3rem 1.5rem; }
@@ -146,7 +136,6 @@
     .footer-col a:hover { color: #8dc63f; }
     .footer-col-logo { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: .6rem; }
     .footer-col-logo img { height: 112px; object-fit: contain; max-width: 100%; }
-    .footer-divider { border: none; border-top: 1px solid rgba(255,255,255,.1); margin: 1.5rem 0; }
     .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
     .footer-bottom p { font-size: .78rem; color: #7a90b5; }
     .footer-socials { display: flex; gap: .8rem; }
@@ -170,40 +159,32 @@
       position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 999;
       width: 58px; height: 58px; border-radius: 50%; background: #25d366;
       display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 4px 20px rgba(37,211,102,.5); text-decoration: none;
-      font-size: 1.8rem; transition: transform .2s;
+      box-shadow: 0 4px 20px rgba(37,211,102,.5); text-decoration: none; font-size: 1.8rem; transition: transform .2s;
     }
     .wa-fab:hover { transform: scale(1.1); }
-    .catalogos-fab {
-      position: fixed; bottom: 1.5rem; left: 1.5rem; z-index: 999;
-      width: 70px; height: auto;
-      transition: transform .2s;
-      filter: drop-shadow(0 4px 12px rgba(0,0,0,.3));
-    }
-    .catalogos-fab:hover { transform: scale(1.05); }
-    .catalogos-fab img { width: 100%; height: auto; display: block; }
 
     @media (max-width: 900px) {
+      .hamburger { display: flex; }
+      nav { position: relative; }
       .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; background: #fff; padding: .5rem 0; border-top: 3px solid #8dc63f; box-shadow: 0 8px 24px rgba(0,0,0,.12); z-index: 199; }
       .nav-links.open { display: flex; }
       .nav-links > li > a { padding: .75rem 1.5rem; border-radius: 0; font-size: .9rem; }
-      .dropdown { position: static; box-shadow: none; border: none; border-top: none; border-left: 3px solid #8dc63f; margin-left: 1.5rem; }
+      .dropdown { position: static; display: block; border: none; border-top: 1px solid #f0f0f0; box-shadow: none; min-width: 0; border-radius: 0; }
       .dropdown li a { padding-left: 2.5rem; }
-      .hamburger { display: flex; }
-      .contact-hero h1 { font-size: 2rem; }
-      .contact-section { grid-template-columns: 1fr; gap: 2.5rem; padding: 3rem 1.5rem; }
-      .map-wrap iframe { height: 300px; }
+      .cat-header h1 { font-size: 1.7rem; }
       .footer-top { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
+<!-- TOP BAR -->
 <div class="topbar">
-  <a href="tel:+573183820863">+57 318 382 0863</a>
-  <a href="mailto:info@disempack.com.co">info@disempack.com.co</a>
+  <a href="#">Terms &amp; Conditions</a>
+  <a href="#">Privacy Policy</a>
 </div>
 
+<!-- NAVBAR -->
 <nav>
   <a href="index.html" class="logo-wrap">
     <img src="img/GENERICO-USOS-scaled.png" alt="Disempack"/>
@@ -243,7 +224,7 @@
       </ul>
     </li>
     <li><a href="catalogos.html">Catálogos</a></li>
-    <li><a href="contacto.html" class="active">Contacto</a></li>
+    <li><a href="contacto.html">Contacto</a></li>
     <li><a href="cotizar.html">Cotizar</a></li>
   </ul>
   <button class="hamburger" id="hamburger" aria-label="Menú">
@@ -254,99 +235,42 @@
 
 <!-- SEARCH OVERLAY -->
 <div class="search-overlay" id="searchOverlay">
-  <div style="width:100%;max-width:600px;display:flex;flex-direction:column;align-items:stretch;">
+  <div style="width:100%;max-width:600px;padding:0 1rem;">
     <div class="search-box">
-      <input type="text" id="searchInput" placeholder="Buscar en Disempack…"/>
+      <input type="text" id="searchInput" placeholder="Buscar productos o servicios…" autocomplete="off"/>
       <button id="searchSubmit">🔍</button>
     </div>
     <div class="search-results" id="searchResults"></div>
   </div>
 </div>
 
-<!-- HERO -->
-<div class="contact-hero">
-  <div>
-    <h1>Contáctanos</h1>
-    <p>Estamos listos para ayudarte. Escríbenos, llámanos o visítanos en nuestra sede.</p>
+<!-- PAGE HEADER -->
+<section class="cat-header">
+  <h1>Catálogos Digitales</h1>
+  <p>Explore nuestra línea completa de productos. Haga clic en cualquier catálogo para verlo página a página.</p>
+</section>
+
+<!-- CATALOG GRID -->
+<section class="cat-section">
+  <div class="catalogo-grid">
+    <div class="catalogo-card" data-catalogo="empaques">
+      <img src="img/catalogos/empaques/empaques-cover.webp" alt="Catálogo Empaques" loading="lazy"/>
+      <div class="catalogo-card-body">
+        <h3>Empaques</h3>
+        <p>Conoce nuestra línea completa de soluciones en empaques personalizados.</p>
+        <button class="btn-ver-catalogo" data-catalogo="empaques">Ver Catálogo</button>
+      </div>
+    </div>
+    <!-- Segundo catálogo se agrega aquí con la misma estructura -->
   </div>
+</section>
+
+<!-- FLIPBOOK MODAL -->
+<div class="flipbook-modal" id="flipbookModal">
+  <button class="flipbook-close" id="flipbookClose">&times;</button>
+  <div class="flipbook-container" id="flipbookContainer"></div>
 </div>
 
-<!-- CONTACT + MAP -->
-<div class="contact-section">
-
-  <div class="contact-info">
-    <h2>Información de Contacto</h2>
-
-    <div class="contact-item">
-      <div class="contact-icon"><i class="fa-solid fa-headset"></i></div>
-      <div class="contact-item-text">
-        <h3>Servicio al Cliente</h3>
-        <a href="tel:+573183820863">🇨🇴 +57 318 382 0863</a>
-      </div>
-    </div>
-
-    <div class="contact-item">
-      <div class="contact-icon"><i class="fa-solid fa-medal"></i></div>
-      <div class="contact-item-text">
-        <h3>Calidad</h3>
-        <a href="tel:+573011664304">🇨🇴 +57 301 166 4304</a>
-      </div>
-    </div>
-
-    <div class="contact-item">
-      <div class="contact-icon"><i class="fa-solid fa-handshake"></i></div>
-      <div class="contact-item-text">
-        <h3>Ventas</h3>
-        <a href="tel:+573005582389">🇨🇴 +57 300 558 2389</a>
-      </div>
-    </div>
-
-    <div class="contact-item">
-      <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
-      <div class="contact-item-text">
-        <h3>Dirección</h3>
-        <p>37A sur No. 72L-95<br/>Bogotá, Colombia</p>
-      </div>
-    </div>
-
-    <div class="contact-item">
-      <div class="contact-icon"><i class="fa-solid fa-clock"></i></div>
-      <div class="contact-item-text">
-        <h3>Horarios</h3>
-        <p>Lunes a Viernes<br/>7:00am – 4:00pm</p>
-      </div>
-    </div>
-
-    <div class="contact-item">
-      <div class="contact-icon"><i class="fa-brands fa-whatsapp"></i></div>
-      <div class="contact-item-text">
-        <h3>Redes Sociales</h3>
-        <div class="contact-socials">
-          <a href="https://www.facebook.com/people/Disempack-SAS/100054201593487/?locale=es_LA" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a>
-          <a href="https://www.instagram.com/disempack" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
-          <a href="https://www.linkedin.com/company/disempack/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a>
-        </div>
-      </div>
-    </div>
-
-    <a href="cotizar.html" class="cta-btn">
-      <i class="fa-solid fa-file-invoice"></i> Solicitar Cotización
-    </a>
-  </div>
-
-  <div class="contact-map">
-    <h2>Nuestra Ubicación</h2>
-    <div class="map-wrap">
-      <iframe
-        src="https://maps.google.com/maps?q=37A+sur+No.+72L-95,+Bogot%C3%A1,+Colombia&output=embed&z=16"
-        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-      </iframe>
-    </div>
-  </div>
-
-</div>
-
-<!-- FOOTER -->
 <footer>
   <div class="footer-top">
     <div class="footer-col">
@@ -370,8 +294,7 @@
     </div>
     <div class="footer-col-logo">
       <a href="https://disempack.cloud" target="_blank" rel="noopener">
-        <img src="img/disempack-footer-logo.webp" alt="Disempack - Ingreso Catálogo Interno"
-             loading="lazy" width="400" height="91"/>
+        <img src="img/disempack-footer-logo.webp" alt="Disempack" loading="lazy" width="400" height="91"/>
       </a>
       <div class="footer-socials">
         <a href="https://www.facebook.com/people/Disempack-SAS/100054201593487/?locale=es_LA" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a>
@@ -389,12 +312,9 @@
 <a href="https://wa.link/2ka87h" class="wa-fab" target="_blank" title="WhatsApp">
   <i class="fa-brands fa-whatsapp" style="color:#fff;font-size:2rem;"></i>
 </a>
-<!-- CATALOGOS FAB -->
-<a href="catalogos.html" class="catalogos-fab" title="Catálogos">
-  <img src="img/catalogos-btn-140.webp" alt="Catálogos" width="70" height="203"/>
-</a>
 
 <script>
+  /* ── SEARCH ── */
   const searchBtn = document.getElementById('searchBtn');
   const searchOverlay = document.getElementById('searchOverlay');
   const searchInput = document.getElementById('searchInput');
@@ -407,7 +327,16 @@
     document.getElementById('searchResults').classList.remove('has-results');
   }
   searchOverlay.addEventListener('click', (e) => { if (e.target === searchOverlay) closeSearch(); });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSearch(); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      if (document.getElementById('flipbookModal').classList.contains('open')) {
+        document.getElementById('flipbookModal').classList.remove('open');
+        if (currentPageFlip) { currentPageFlip.destroy(); currentPageFlip = null; }
+      } else {
+        closeSearch();
+      }
+    }
+  });
   const SITE_PAGES = [
     { title: 'Impresión Digital',        url: 'impresion-digital.html',        keywords: 'impresion digital uv flatbed gran formato lona vinilo banner rotativa' },
     { title: 'Blister y Skin',           url: 'blister.html',                  keywords: 'blister skin termosellado acetato pvc empaque transparente producto' },
@@ -418,43 +347,32 @@
     { title: 'Recubrimientos',           url: 'recubrimientos.html',           keywords: 'recubrimiento barniz laminado acabado uv soft touch plastificado textura' },
     { title: 'P.O.P',                    url: 'pop.html',                      keywords: 'pop material publicitario exhibicion punto de compra merchandising visual' },
     { title: 'Señalización Corporativa', url: 'senalizacion-corporativa.html', keywords: 'senalizacion corporativa rotulo letrero señal directorio retro iluminada' },
+    { title: 'Catálogos',                url: 'catalogos.html',                keywords: 'catalogo catalogos digital flipbook revista productos linea completa' },
     { title: 'Cotizar',                  url: 'cotizar.html',                  keywords: 'cotizar cotizacion precio pedido presupuesto whatsapp formulario' },
     { title: 'Contacto',                 url: 'contacto.html',                 keywords: 'contacto telefono correo email direccion ubicacion mensaje' },
     { title: 'Inicio',                   url: 'index.html',                    keywords: 'disempack empaque soluciones inicio home' },
   ];
   const searchResults = document.getElementById('searchResults');
   const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-
   function renderResults(q) {
     const term = q.toLowerCase().trim();
     if (!term) { searchResults.innerHTML = ''; searchResults.classList.remove('has-results'); return; }
     const hits = SITE_PAGES
-      .filter(p => p.url !== currentPage &&
-        (p.title.toLowerCase().includes(term) || p.keywords.includes(term)))
+      .filter(p => p.url !== currentPage && (p.title.toLowerCase().includes(term) || p.keywords.includes(term)))
       .map(p => ({ ...p, score: (p.title.toLowerCase().includes(term) ? 2 : 0) + (p.keywords.includes(term) ? 1 : 0) }))
       .sort((a, b) => b.score - a.score);
     if (!hits.length) {
       searchResults.innerHTML = '<div class="search-result-empty">Sin resultados para "' + q + '"</div>';
     } else {
-      searchResults.innerHTML = hits.map(p =>
-        '<a class="search-result-item" href="' + p.url + '">' + p.title + '</a>'
-      ).join('');
+      searchResults.innerHTML = hits.map(p => '<a class="search-result-item" href="' + p.url + '">' + p.title + '</a>').join('');
     }
     searchResults.classList.add('has-results');
   }
-
   searchInput.addEventListener('input', () => renderResults(searchInput.value));
-  searchSubmit.addEventListener('click', () => {
-    const first = searchResults.querySelector('.search-result-item');
-    if (first) window.location.href = first.href;
-  });
-  searchInput.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      const first = searchResults.querySelector('.search-result-item');
-      if (first) window.location.href = first.href;
-    }
-  });
+  searchSubmit.addEventListener('click', () => { const first = searchResults.querySelector('.search-result-item'); if (first) window.location.href = first.href; });
+  searchInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') { const first = searchResults.querySelector('.search-result-item'); if (first) window.location.href = first.href; } });
 
+  /* ── HAMBURGER MENU ── */
   const hamburger = document.getElementById('hamburger');
   const navLinks = document.querySelector('.nav-links');
   hamburger.addEventListener('click', (e) => {
@@ -481,18 +399,60 @@
     }
     window.addEventListener('scroll', checkFab, {passive:true});
   })();
-  /* ── CATÁLOGOS FAB: raise near footer ── */
-  (function(){
-    const fab = document.querySelector('.catalogos-fab');
-    const footer = document.querySelector('footer');
-    if(!fab || !footer) return;
-    function checkFab(){
-      const fTop = footer.getBoundingClientRect().top;
-      const wH = window.innerHeight;
-      fab.style.bottom = fTop < wH ? (wH - fTop + 16) + 'px' : '';
+
+  /* ── FLIPBOOK ── */
+  const CATALOGOS = {
+    empaques: {
+      title: "Empaques",
+      pages: [
+        "img/catalogos/empaques/page-1.webp",
+        "img/catalogos/empaques/page-2.webp",
+        "img/catalogos/empaques/page-3.webp",
+        "img/catalogos/empaques/page-4.webp",
+        "img/catalogos/empaques/page-5.webp",
+        "img/catalogos/empaques/page-6.webp",
+        "img/catalogos/empaques/page-7.webp"
+      ]
     }
-    window.addEventListener('scroll', checkFab, {passive:true});
-  })();
+    // segundo catálogo se agrega acá con la misma estructura
+  };
+
+  let currentPageFlip = null;
+
+  document.querySelectorAll('.btn-ver-catalogo').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const key = btn.dataset.catalogo;
+      const catalogo = CATALOGOS[key];
+      if (!catalogo) return;
+
+      if (currentPageFlip) { currentPageFlip.destroy(); currentPageFlip = null; }
+
+      const container = document.getElementById('flipbookContainer');
+      container.innerHTML = '';
+      document.getElementById('flipbookModal').classList.add('open');
+      currentPageFlip = new St.PageFlip(container, {
+        width: 500, height: 707,
+        size: 'stretch',
+        minWidth: 300, maxWidth: 1000,
+        minHeight: 420, maxHeight: 1400,
+        showCover: false,
+        usePortrait: true,
+      });
+      currentPageFlip.loadFromImages(catalogo.pages);
+    });
+  });
+
+  document.getElementById('flipbookClose').addEventListener('click', () => {
+    document.getElementById('flipbookModal').classList.remove('open');
+    if (currentPageFlip) { currentPageFlip.destroy(); currentPageFlip = null; }
+  });
+
+  /* ── CONTEXT MENU PROTECTION ── */
+  document.addEventListener('contextmenu', function(e) {
+    if (e.target.closest('.flipbook-container') || e.target.closest('.catalogo-card img')) {
+      e.preventDefault();
+    }
+  });
 </script>
 </body>
 </html>
