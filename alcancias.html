@@ -59,6 +59,19 @@
     .search-box input { flex: 1; border: none; outline: none; padding: .9rem 1.2rem; font-size: 1rem; font-family: inherit; }
     .search-box button { background: #1c2f5e; color: #fff; border: none; padding: 0 1.4rem; font-size: 1.1rem; cursor: pointer; }
     .search-box button:hover { background: #8dc63f; }
+    .search-results {
+      background: #fff; border-radius: 0 0 8px 8px; width: 100%; max-width: 600px;
+      box-shadow: 0 8px 32px rgba(0,0,0,.2); max-height: 360px; overflow-y: auto;
+      display: none;
+    }
+    .search-results.has-results { display: block; }
+    .search-result-item {
+      display: block; padding: .85rem 1.2rem; text-decoration: none; color: #1c2f5e;
+      border-bottom: 1px solid #f0f0f0; font-size: .95rem; transition: background .12s;
+    }
+    .search-result-item:last-child { border-bottom: none; }
+    .search-result-item:hover { background: #f5f9ec; color: #8dc63f; }
+    .search-result-empty { padding: .85rem 1.2rem; color: #888; font-size: .9rem; }
 
     /* ── HERO ── */
     .al-hero {
@@ -283,9 +296,12 @@
 
 <!-- SEARCH OVERLAY -->
 <div class="search-overlay" id="searchOverlay">
-  <div class="search-box">
-    <input type="text" id="searchInput" placeholder="Buscar en Disempack…"/>
-    <button id="searchSubmit">🔍</button>
+  <div style="width:100%;max-width:600px;display:flex;flex-direction:column;align-items:stretch;">
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Buscar en Disempack…"/>
+      <button id="searchSubmit">🔍</button>
+    </div>
+    <div class="search-results" id="searchResults"></div>
   </div>
 </div>
 
@@ -460,11 +476,60 @@
   const searchInput = document.getElementById('searchInput');
   const searchSubmit = document.getElementById('searchSubmit');
   searchBtn.addEventListener('click', () => { searchOverlay.classList.add('open'); searchInput.focus(); });
-  searchOverlay.addEventListener('click', (e) => { if (e.target === searchOverlay) searchOverlay.classList.remove('open'); });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') searchOverlay.classList.remove('open'); });
-  function doSearch() { const q = searchInput.value.trim(); if (q) window.open('https://disempack.com.co/?s=' + encodeURIComponent(q), '_blank'); }
-  searchSubmit.addEventListener('click', doSearch);
-  searchInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') doSearch(); });
+  function closeSearch() {
+    searchOverlay.classList.remove('open');
+    searchInput.value = '';
+    document.getElementById('searchResults').innerHTML = '';
+    document.getElementById('searchResults').classList.remove('has-results');
+  }
+  searchOverlay.addEventListener('click', (e) => { if (e.target === searchOverlay) closeSearch(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSearch(); });
+  const SITE_PAGES = [
+    { title: 'Impresión Digital',        url: 'impresion-digital.html',        keywords: 'impresion digital uv flatbed gran formato lona vinilo banner rotativa' },
+    { title: 'Blister y Skin',           url: 'blister.html',                  keywords: 'blister skin termosellado acetato pvc empaque transparente producto' },
+    { title: 'Cajas Plegadizas',         url: 'cajas-plegadizas.html',         keywords: 'cajas plegadizas caja plegable carton plegado estuche embalaje packaging' },
+    { title: 'Troquelado / Clam-Shell',  url: 'clam-shell.html',               keywords: 'clamshell troquelado corte punzon bisagra rigido molde' },
+    { title: 'Organizadores',            url: 'organizadores.html',            keywords: 'organizador exhibidor punto de venta display stand corrugado papeleria' },
+    { title: 'Alcancías',                url: 'alcancias.html',                keywords: 'alcancia alcancías promocional personalizada ahorro plastico figura' },
+    { title: 'Recubrimientos',           url: 'recubrimientos.html',           keywords: 'recubrimiento barniz laminado acabado uv soft touch plastificado textura' },
+    { title: 'P.O.P',                    url: 'pop.html',                      keywords: 'pop material publicitario exhibicion punto de compra merchandising visual' },
+    { title: 'Señalización Corporativa', url: 'senalizacion-corporativa.html', keywords: 'senalizacion corporativa rotulo letrero señal directorio retro iluminada' },
+    { title: 'Cotizar',                  url: 'cotizar.html',                  keywords: 'cotizar cotizacion precio pedido presupuesto whatsapp formulario' },
+    { title: 'Contacto',                 url: 'contacto.html',                 keywords: 'contacto telefono correo email direccion ubicacion mensaje' },
+    { title: 'Inicio',                   url: 'index.html',                    keywords: 'disempack empaque soluciones inicio home' },
+  ];
+  const searchResults = document.getElementById('searchResults');
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+
+  function renderResults(q) {
+    const term = q.toLowerCase().trim();
+    if (!term) { searchResults.innerHTML = ''; searchResults.classList.remove('has-results'); return; }
+    const hits = SITE_PAGES
+      .filter(p => p.url !== currentPage &&
+        (p.title.toLowerCase().includes(term) || p.keywords.includes(term)))
+      .map(p => ({ ...p, score: (p.title.toLowerCase().includes(term) ? 2 : 0) + (p.keywords.includes(term) ? 1 : 0) }))
+      .sort((a, b) => b.score - a.score);
+    if (!hits.length) {
+      searchResults.innerHTML = '<div class="search-result-empty">Sin resultados para "' + q + '"</div>';
+    } else {
+      searchResults.innerHTML = hits.map(p =>
+        '<a class="search-result-item" href="' + p.url + '">' + p.title + '</a>'
+      ).join('');
+    }
+    searchResults.classList.add('has-results');
+  }
+
+  searchInput.addEventListener('input', () => renderResults(searchInput.value));
+  searchSubmit.addEventListener('click', () => {
+    const first = searchResults.querySelector('.search-result-item');
+    if (first) window.location.href = first.href;
+  });
+  searchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const first = searchResults.querySelector('.search-result-item');
+      if (first) window.location.href = first.href;
+    }
+  });
 
   /* ── GALLERY CAROUSEL ── */
   const BASE = 'img/alcancias/';
