@@ -253,20 +253,21 @@
     /* ════════════════════════════════════
        SECTION 7 · CTA ROW
     ════════════════════════════════════ */
-    .cp-cta { padding: 3.5rem 2.5rem; background: #f7f9fc; border-top: 3px solid #8dc63f; }
-    .cp-cta-inner {
-      display: grid; grid-template-columns: 2fr 1fr;
-      gap: 2rem; max-width: 1100px; margin: 0 auto; align-items: center;
+    .cp-cta-wrap { padding: 2rem 2.5rem 4rem; max-width: 1200px; margin: 0 auto; }
+    .cp-cta-banner { position: relative; border-radius: 6px; overflow: hidden; }
+    .cp-cta-bg { width: 100%; height: 240px; object-fit: cover; display: block; filter: brightness(.3) saturate(.5); }
+    .cp-cta-overlay {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 1rem; text-align: center; padding: 2rem;
     }
-    .cp-cta-blurb { display: flex; align-items: flex-start; gap: 1.4rem; }
-    .cp-cta-blurb-icon { font-size: 2.8rem; color: #8dc63f; flex-shrink: 0; margin-top: .1rem; }
-    .cp-cta-blurb-text h3 { font-size: 1.1rem; font-weight: 700; color: #1c2f5e; margin-bottom: .6rem; }
-    .cp-cta-blurb-text p { font-size: .9rem; color: #555; line-height: 1.8; }
-    .cp-cta-right { text-align: right; }
+    .cp-cta-overlay h2 { font-size: 2rem; font-weight: 700; color: #fff; }
+    .cp-cta-overlay p { font-size: .92rem; color: #d0ddf5; max-width: 640px; line-height: 1.7; }
     .cp-cta-btn {
       display: inline-block; background: #8dc63f; color: #fff; font-weight: 700;
-      font-size: .95rem; padding: .8rem 2.2rem; border-radius: 4px;
+      font-size: .95rem; padding: .75rem 2.2rem; border-radius: 4px;
       text-decoration: none; border: 2px solid #8dc63f; transition: background .2s, color .2s;
+      margin-top: .5rem;
     }
     .cp-cta-btn:hover { background: #fff; color: #8dc63f; }
 
@@ -333,8 +334,7 @@
       .cp-gallery-4 { grid-template-columns: repeat(2, 1fr); }
       .cp-gallery-6 { grid-template-columns: repeat(3, 1fr); }
       .cp-faq-inner { grid-template-columns: 1fr; }
-      .cp-cta-inner { grid-template-columns: 1fr; }
-      .cp-cta-right { text-align: left; }
+      .cp-cta-overlay h2 { font-size: 1.3rem; }
       .footer-top { grid-template-columns: 1fr; }
           .cp-hero-content { background: rgba(10,20,50,.45); }
       .catalogos-fab { width: 48px; }
@@ -593,21 +593,17 @@
   </div>
 </section>
 
-<!-- ══ SECTION 7 · CTA ROW ══ -->
-<section class="cp-cta">
-  <div class="cp-cta-inner">
-    <div class="cp-cta-blurb">
-      <i class="fa-solid fa-box cp-cta-blurb-icon"></i>
-      <div class="cp-cta-blurb-text">
-        <h3>Cotiza tu Caja Plegadiza Ahora</h3>
-        <p>Descubre cómo nuestras cajas plegadizas pueden mejorar la presentación y logística de tus productos. Personaliza tu empaque con Disempack SAS y destaca en el mercado.</p>
-      </div>
-    </div>
-    <div class="cp-cta-right">
+<!-- ══ SECTION 7 · CTA ══ -->
+<div class="cp-cta-wrap">
+  <div class="cp-cta-banner">
+    <img class="cp-cta-bg" src="img/banner/cajas-plegadizas-header.webp" alt="Contáctanos" loading="lazy"/>
+    <div class="cp-cta-overlay">
+      <h2>Contáctanos para Soluciones Personalizadas</h2>
+      <p>Descubre cómo nuestras cajas plegadizas pueden mejorar la presentación y logística de tus productos. Personaliza tu empaque con Disempack SAS y destaca en el mercado.</p>
       <a href="cotizar.html" class="cp-cta-btn">Solicitar Cotización</a>
     </div>
   </div>
-</section>
+</div>
 
 <!-- FOOTER -->
 <footer>
