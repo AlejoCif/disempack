@@ -399,10 +399,12 @@
     navLinks.classList.toggle('open');
   });
   document.addEventListener('click', (e) => {
-    if (!navLinks.contains(e.target)) {
-      hamburger.classList.remove('open');
-      navLinks.classList.remove('open');
-    }
+    try {
+      if (e.target && !navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+        hamburger.classList.remove('open');
+        navLinks.classList.remove('open');
+      }
+    } catch(err) {}
   });
 
   /* ── WA FAB: raise near footer ── */
@@ -462,16 +464,34 @@
 
   let currentPageFlip = null;
 
+  function closeFlipbook() {
+    document.getElementById('flipbookModal').classList.remove('open');
+    if (currentPageFlip) {
+      try { currentPageFlip.destroy(); } catch(e) {}
+      currentPageFlip = null;
+    }
+    const old = document.getElementById('flipbookContainer');
+    if (old && old.parentNode) {
+      const fresh = document.createElement('div');
+      fresh.id = 'flipbookContainer';
+      fresh.className = 'flipbook-container';
+      old.parentNode.replaceChild(fresh, old);
+    }
+  }
+
+  document.getElementById('flipbookClose').addEventListener('click', closeFlipbook);
+  document.getElementById('flipbookModal').addEventListener('click', (e) => {
+    if (e.target === document.getElementById('flipbookModal')) closeFlipbook();
+  });
+
   document.querySelectorAll('.btn-ver-catalogo').forEach(btn => {
     btn.addEventListener('click', () => {
       const key = btn.dataset.catalogo;
       const catalogo = CATALOGOS[key];
       if (!catalogo) return;
 
-      if (currentPageFlip) { currentPageFlip.destroy(); currentPageFlip = null; }
-
+      closeFlipbook();
       const container = document.getElementById('flipbookContainer');
-      container.innerHTML = '';
       document.getElementById('flipbookModal').classList.add('open');
       currentPageFlip = new St.PageFlip(container, {
         width: 500, height: 707,
@@ -483,11 +503,6 @@
       });
       currentPageFlip.loadFromImages(catalogo.pages);
     });
-  });
-
-  document.getElementById('flipbookClose').addEventListener('click', () => {
-    document.getElementById('flipbookModal').classList.remove('open');
-    if (currentPageFlip) { currentPageFlip.destroy(); currentPageFlip = null; }
   });
 
   /* ── CONTEXT MENU PROTECTION ── */

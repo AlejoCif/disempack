@@ -629,10 +629,12 @@
     navLinks.classList.toggle('open');
   });
   document.addEventListener('click', (e) => {
-    if (!navLinks.contains(e.target)) {
-      hamburger.classList.remove('open');
-      navLinks.classList.remove('open');
-    }
+    try {
+      if (e.target && !navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+        hamburger.classList.remove('open');
+        navLinks.classList.remove('open');
+      }
+    } catch(err) {}
   });
 
   /* ── WA FAB: raise near footer ── */
