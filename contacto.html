@@ -87,9 +87,12 @@
       background-size: cover; background-position: center;
       display: flex; align-items: center; justify-content: center; text-align: center;
     }
-    .contact-hero-overlay {
-      position: absolute; inset: 0;
-      background: rgba(28,47,94,.65);
+    .contact-hero-content {
+      position: relative; z-index: 1; text-align: center;
+      background: rgba(10,20,50,.65); backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,.15); border-radius: 10px;
+      padding: 2.5rem 3.5rem; max-width: 700px; margin: 0 2rem;
     }
     .contact-hero h1 { font-size: 3rem; font-weight: 800; color: #fff; margin-bottom: .8rem; }
     .contact-hero p { font-size: 1.1rem; color: #c5d4f0; max-width: 560px; line-height: 1.7; }
@@ -273,8 +276,7 @@
 
 <!-- HERO -->
 <div class="contact-hero">
-  <div class="contact-hero-overlay"></div>
-  <div style="position:relative;z-index:1;">
+  <div class="contact-hero-content">
     <h1>Contáctanos</h1>
     <p>Estamos listos para ayudarte. Escríbenos, llámanos o visítanos en nuestra sede.</p>
   </div>
