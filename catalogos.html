@@ -464,24 +464,31 @@
 
   let currentPageFlip = null;
 
+  const flipbookModal = document.getElementById('flipbookModal');
+
+  function getOrCreateContainer() {
+    let c = flipbookModal.querySelector('.flipbook-container');
+    if (!c) {
+      c = document.createElement('div');
+      c.id = 'flipbookContainer';
+      c.className = 'flipbook-container';
+      flipbookModal.appendChild(c);
+    }
+    return c;
+  }
+
   function closeFlipbook() {
-    document.getElementById('flipbookModal').classList.remove('open');
+    flipbookModal.classList.remove('open');
     if (currentPageFlip) {
       try { currentPageFlip.destroy(); } catch(e) {}
       currentPageFlip = null;
     }
-    const old = document.getElementById('flipbookContainer');
-    if (old && old.parentNode) {
-      const fresh = document.createElement('div');
-      fresh.id = 'flipbookContainer';
-      fresh.className = 'flipbook-container';
-      old.parentNode.replaceChild(fresh, old);
-    }
+    getOrCreateContainer().innerHTML = '';
   }
 
   document.getElementById('flipbookClose').addEventListener('click', closeFlipbook);
-  document.getElementById('flipbookModal').addEventListener('click', (e) => {
-    if (e.target === document.getElementById('flipbookModal')) closeFlipbook();
+  flipbookModal.addEventListener('click', (e) => {
+    if (e.target === flipbookModal) closeFlipbook();
   });
 
   document.querySelectorAll('.btn-ver-catalogo').forEach(btn => {
@@ -491,8 +498,8 @@
       if (!catalogo) return;
 
       closeFlipbook();
-      const container = document.getElementById('flipbookContainer');
-      document.getElementById('flipbookModal').classList.add('open');
+      const container = getOrCreateContainer();
+      flipbookModal.classList.add('open');
       currentPageFlip = new St.PageFlip(container, {
         width: 500, height: 707,
         size: 'stretch',
