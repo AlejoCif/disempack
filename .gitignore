@@ -5,6 +5,9 @@ intranet/db.php
 intranet/assets/*
 !intranet/assets/.htaccess
 
+# ── CATÁLOGOS PDF (fuente, no sube al repo) ──
+*.pdf
+
 # ── EDITORES ──
 .vscode/
 .idea/
