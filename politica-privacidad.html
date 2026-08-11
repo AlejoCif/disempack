@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Política de Privacidad y Tratamiento de Datos Personales de Disempack SAS. Conoce cómo recopilamos, usamos y protegemos tu información personal."/>
+  <title>Política de Privacidad - Disempack SAS</title>
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Open Sans', sans-serif; color: #333; background: #fff; overflow-x: hidden; }
+
+    /* ── TOP BAR ── */
+    .topbar { background: #1c2f5e; padding: .35rem 2rem; display: flex; justify-content: flex-end; gap: 1.5rem; }
+    .topbar a { color: #ccd6f0; font-size: .75rem; text-decoration: none; transition: color .15s; }
+    .topbar a:hover { color: #fff; }
+
+    /* ── NAVBAR ── */
+    nav {
+      background: #fff; border-bottom: 1px solid #e8e8e8;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .6rem 2.5rem; position: sticky; top: 0; z-index: 200;
+      box-shadow: 0 2px 8px rgba(0,0,0,.07);
+    }
+    .logo-wrap { display: flex; align-items: center; text-decoration: none; }
+    .logo-wrap img { height: 52px; object-fit: contain; }
+    .nav-links { display: flex; align-items: center; gap: .05rem; list-style: none; }
+    .nav-links > li { position: relative; }
+    .nav-links > li > a {
+      display: flex; align-items: center; gap: .3rem; padding: .5rem .85rem;
+      font-size: .83rem; color: #333; text-decoration: none; font-weight: 600;
+      border-radius: 4px; transition: color .15s, background .15s;
+    }
+    .nav-links > li > a:hover { color: #1c2f5e; background: #f5f6fa; }
+    .nav-links > li > a .arrow { font-size: .6rem; color: #888; }
+    .dropdown {
+      display: none; position: absolute; top: 100%; left: 0;
+      background: #fff; border: 1px solid #e0e0e0; border-top: 3px solid #8dc63f;
+      border-radius: 0 0 6px 6px; min-width: 210px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.12); list-style: none; z-index: 300;
+    }
+    .nav-links > li:hover .dropdown { display: block; }
+    .dropdown li a {
+      display: block; padding: .6rem 1.2rem; font-size: .82rem; color: #444;
+      text-decoration: none; border-bottom: 1px solid #f0f0f0; transition: background .12s, color .12s;
+    }
+    .dropdown li:last-child a { border-bottom: none; }
+    .dropdown li a:hover { background: #f0f0f0; color: #555; }
+    .nav-search { font-size: 1rem; color: #555; cursor: pointer; padding: .4rem .6rem; border: none; background: none; }
+
+    /* ── SEARCH OVERLAY ── */
+    .search-overlay {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 500;
+      align-items: flex-start; justify-content: center; padding-top: 80px;
+    }
+    .search-overlay.open { display: flex; }
+    .search-box { background: #fff; border-radius: 8px; display: flex; width: 100%; max-width: 600px; box-shadow: 0 8px 32px rgba(0,0,0,.2); overflow: hidden; }
+    .search-box input { flex: 1; border: none; outline: none; padding: .9rem 1.2rem; font-size: 1rem; font-family: inherit; }
+    .search-box button { background: #1c2f5e; color: #fff; border: none; padding: 0 1.4rem; font-size: 1.1rem; cursor: pointer; }
+    .search-box button:hover { background: #8dc63f; }
+    .search-results {
+      background: #fff; border-radius: 0 0 8px 8px; width: 100%; max-width: 600px;
+      box-shadow: 0 8px 32px rgba(0,0,0,.2); max-height: 360px; overflow-y: auto;
+      display: none;
+    }
+    .search-results.has-results { display: block; }
+    .search-result-item {
+      display: block; padding: .85rem 1.2rem; text-decoration: none; color: #1c2f5e;
+      border-bottom: 1px solid #f0f0f0; font-size: .95rem; transition: background .12s;
+    }
+    .search-result-item:last-child { border-bottom: none; }
+    .search-result-item:hover { background: #f5f9ec; color: #8dc63f; }
+    .search-result-empty { padding: .85rem 1.2rem; color: #888; font-size: .9rem; }
+
+    /* ── HERO ── */
+    .pp-hero {
+      background: #1c2f5e; padding: 4rem 2rem 3.5rem;
+      text-align: center;
+    }
+    .pp-hero h1 { font-size: 2.6rem; font-weight: 800; color: #fff; margin-bottom: .7rem; }
+    .pp-hero p { font-size: 1rem; color: #a8bbd8; }
+    .pp-hero .pp-breadcrumb { font-size: .8rem; color: #7a90b5; margin-bottom: 1rem; }
+    .pp-hero .pp-breadcrumb a { color: #8dc63f; text-decoration: none; }
+    .pp-hero .pp-breadcrumb a:hover { text-decoration: underline; }
+
+    /* ── CONTENT ── */
+    .pp-wrap {
+      max-width: 860px; margin: 0 auto; padding: 4rem 2.5rem 5rem;
+    }
+    .pp-section { margin-bottom: 2.5rem; }
+    .pp-section h2 {
+      font-size: 1.05rem; font-weight: 700; color: #1c2f5e;
+      border-left: 4px solid #8dc63f; padding-left: .85rem;
+      margin-bottom: 1rem; text-transform: uppercase; letter-spacing: .04em;
+    }
+    .pp-section p {
+      font-size: .92rem; color: #444; line-height: 1.85; margin-bottom: .8rem;
+    }
+    .pp-section ul {
+      list-style: none; margin: .4rem 0 .8rem 0; display: flex; flex-direction: column; gap: .35rem;
+    }
+    .pp-section ul li {
+      font-size: .92rem; color: #444; line-height: 1.7;
+      padding-left: 1.3rem; position: relative;
+    }
+    .pp-section ul li::before {
+      content: ''; position: absolute; left: 0; top: .65em;
+      width: 6px; height: 6px; border-radius: 50%; background: #8dc63f;
+    }
+    .pp-section a { color: #1c2f5e; font-weight: 600; }
+    .pp-section a:hover { color: #8dc63f; }
+
+    .pp-contact-block {
+      background: #f7f9fc; border: 1px solid #e4eaf4; border-radius: 10px;
+      padding: 1.5rem 2rem; margin-top: .5rem; display: flex; flex-direction: column; gap: .5rem;
+    }
+    .pp-contact-block p { margin: 0; }
+    .pp-contact-block strong { color: #1c2f5e; display: inline-block; min-width: 110px; }
+
+    .pp-updated {
+      display: inline-block; background: #eef7e0; color: #5a8a1a;
+      font-size: .78rem; font-weight: 700; padding: .3rem .8rem; border-radius: 100px;
+      margin-bottom: 2.5rem; letter-spacing: .04em;
+    }
+
+    hr.pp-divider { border: none; border-top: 1px solid #e8ecf4; margin: 2.5rem 0; }
+
+    /* ── FOOTER ── */
+    footer { background: #1c2f5e; color: #a8bbd8; padding: 3rem 3rem 1.5rem; }
+    .footer-top { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3rem; align-items: start; margin-bottom: 2.5rem; }
+    .footer-col { display: flex; justify-content: center; }
+    .footer-col-inner { text-align: left; }
+    .footer-col h5 { font-size: .75rem; font-weight: 700; display: flex; align-items: center; gap: .4rem; color: #fff; margin-bottom: .6rem; text-transform: uppercase; letter-spacing: .06em; }
+    .footer-col p, .footer-col a { font-size: .84rem; color: #a8bbd8; text-decoration: none; line-height: 1.8; display: block; }
+    .footer-col a:hover { color: #8dc63f; }
+    .footer-col-logo { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: .6rem; }
+    .footer-col-logo img { height: 112px; object-fit: contain; max-width: 100%; }
+    .footer-divider { border: none; border-top: 1px solid rgba(255,255,255,.1); margin: 1.5rem 0; }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .footer-bottom p { font-size: .78rem; color: #7a90b5; }
+    .footer-socials { display: flex; gap: .8rem; }
+    .footer-socials a {
+      color: #a8bbd8; text-decoration: none; font-size: 1.4rem;
+      border: 1px solid rgba(255,255,255,.2); border-radius: 50%; width: 38px; height: 38px;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color .15s, color .15s;
+    }
+    .footer-socials a:hover { border-color: #8dc63f; color: #8dc63f; }
+
+    /* ── HAMBURGER ── */
+    .hamburger { display: none; flex-direction: column; justify-content: space-between; width: 28px; height: 20px; cursor: pointer; border: none; background: none; padding: 0; }
+    .hamburger span { display: block; width: 100%; height: 2px; background: #333; border-radius: 2px; transition: transform .3s, opacity .3s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+    /* ── WHATSAPP FAB ── */
+    .wa-fab {
+      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 999;
+      width: 58px; height: 58px; border-radius: 50%; background: #25d366;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,.5); text-decoration: none;
+      font-size: 1.8rem; transition: transform .2s;
+    }
+    .wa-fab:hover { transform: scale(1.1); }
+    .catalogos-fab {
+      position: fixed; bottom: 1.5rem; left: 1.5rem; z-index: 999;
+      width: 70px; height: auto;
+      transition: transform .2s;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,.3));
+    }
+    .catalogos-fab:hover { transform: scale(1.05); }
+    .catalogos-fab img { width: 100%; height: auto; display: block; }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; background: #fff; padding: .5rem 0; border-top: 3px solid #8dc63f; box-shadow: 0 8px 24px rgba(0,0,0,.12); z-index: 199; }
+      .nav-links.open { display: flex; }
+      .nav-links > li > a { padding: .75rem 1.5rem; border-radius: 0; font-size: .9rem; }
+      .dropdown { position: static; box-shadow: none; border: none; border-top: none; border-left: 3px solid #8dc63f; margin-left: 1.5rem; }
+      .dropdown li a { padding-left: 2.5rem; }
+      .hamburger { display: flex; }
+      .pp-hero h1 { font-size: 1.8rem; }
+      .pp-wrap { padding: 2.5rem 1.5rem 4rem; }
+      .footer-top { grid-template-columns: 1fr; }
+      .catalogos-fab { width: 48px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="#">Términos y Condiciones</a>
+  <a href="politica-privacidad.html" style="color:#fff;font-weight:700;">Política de Privacidad</a>
+  <a href="#">Nosotros</a>
+</div>
+
+<nav>
+  <a href="index.html" class="logo-wrap">
+    <img src="img/GENERICO-USOS-scaled.png" alt="Disempack"/>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li>
+      <a href="#">Exhibición Comercial <span class="arrow">▾</span></a>
+      <ul class="dropdown">
+        <li><a href="pop.html">P.O.P</a></li>
+        <li><a href="senalizacion-corporativa.html">Señalización Corporativa</a></li>
+        <li><a href="alcancias.html">Alcancías</a></li>
+        <li><a href="recubrimientos.html">Recubrimientos</a></li>
+      </ul>
+    </li>
+    <li><a href="impresion-digital.html">Impresión Digital</a></li>
+    <li>
+      <a href="#">Empaques <span class="arrow">▾</span></a>
+      <ul class="dropdown">
+        <li><a href="organizadores.html">Organizadores</a></li>
+        <li><a href="cajas-plegadizas.html">Cajas Plegadizas</a></li>
+        <li><a href="blister.html">Blister</a></li>
+        <li><a href="clam-shell.html">Clam Shell</a></li>
+      </ul>
+    </li>
+    <li style="display:none">
+      <a href="#">Procesos <span class="arrow">▾</span></a>
+      <ul class="dropdown">
+        <li><a href="impresion-digital.html">Impresión Digital</a></li>
+        <li><a href="blister.html">Diseño y Desarrollo</a></li>
+        <li><a href="clam-shell.html">Termoformado</a></li>
+        <li><a href="clam-shell.html">Troquelado</a></li>
+        <li><a href="#">Corte CNC</a></li>
+        <li><a href="#">Acondicionamiento De Productos</a></li>
+        <li><a href="#">Termosellado</a></li>
+        <li><a href="#">Venta De Materia Prima</a></li>
+      </ul>
+    </li>
+    <li><a href="contacto.html">Contacto</a></li>
+    <li><a href="cotizar.html">Cotizar</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+  <button class="nav-search" id="searchBtn">🔍</button>
+</nav>
+
+<!-- SEARCH OVERLAY -->
+<div class="search-overlay" id="searchOverlay">
+  <div style="width:100%;max-width:600px;display:flex;flex-direction:column;align-items:stretch;">
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Buscar en Disempack…"/>
+      <button id="searchSubmit">🔍</button>
+    </div>
+    <div class="search-results" id="searchResults"></div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="pp-hero">
+  <p class="pp-breadcrumb"><a href="index.html">Inicio</a> / Política de Privacidad</p>
+  <h1>Política de Privacidad</h1>
+  <p>Tratamiento de Datos Personales — Disempack S.A.S.</p>
+</div>
+
+<!-- CONTENT -->
+<div class="pp-wrap">
+
+  <span class="pp-updated"><i class="fa-solid fa-calendar-days"></i>&nbsp; Última actualización: Agosto de 2026</span>
+
+  <div class="pp-section">
+    <h2>1. Identificación del responsable</h2>
+    <p>DISEMPACK S.A.S., en adelante "Disempack", es responsable del tratamiento de los datos personales que sean recolectados, almacenados, utilizados, procesados, transmitidos o eventualmente suprimidos a través de su sitio web, formularios de contacto, solicitudes de cotización, comunicaciones comerciales y demás canales habilitados por la compañía.</p>
+    <div class="pp-contact-block">
+      <p><strong>Razón social:</strong> Disempack S.A.S.</p>
+      <p><strong>NIT:</strong> 900049588</p>
+      <p><strong>Dirección:</strong> Cl. 37a Sur #72L-95, Bogotá D.C., Colombia</p>
+      <p><strong>Correo:</strong> <a href="mailto:info@disempack.com.co">info@disempack.com.co</a></p>
+      <p><strong>Teléfono:</strong> <a href="tel:+573003252951">300 325 2951</a></p>
+      <p><strong>Sitio web:</strong> <a href="http://disempack.com.co" target="_blank" rel="noopener">disempack.com.co</a></p>
+    </div>
+  </div>
+
+  <hr class="pp-divider"/>
+
+  <div class="pp-section">
+    <h2>2. Objeto de la Política de Privacidad</h2>
+    <p>La presente Política de Privacidad y Tratamiento de Datos Personales tiene como finalidad informar a clientes, proveedores, usuarios, visitantes, prospectos comerciales y demás titulares de información acerca de la manera en que Disempack recopila, utiliza, almacena, protege y administra sus datos personales.</p>
+    <p>Disempack está comprometida con la protección de la privacidad y la seguridad de la información de sus usuarios. Cuando solicitamos información mediante formularios, correos electrónicos, comunicaciones comerciales u otros mecanismos, procuramos que los datos recolectados sean adecuados, pertinentes y necesarios para las finalidades previamente informadas.</p>
+    <p>La información suministrada por los titulares será utilizada únicamente de acuerdo con las finalidades señaladas en esta Política, las autorizaciones otorgadas y las disposiciones legales aplicables.</p>
+  </div>
+
+  <hr class="pp-divider"/>
+
+  <div class="pp-section">
+    <h2>3. Marco legal</h2>
+    <p>El tratamiento de datos personales realizado por Disempack se efectuará de conformidad con la Constitución Política de Colombia, la Ley Estatutaria 1581 de 2012, el Decreto 1074 de 2015 y las demás normas que modifiquen, adicionen, complementen o sustituyan el régimen colombiano de protección de datos personales.</p>
+    <p>Disempack aplicará los principios de legalidad, finalidad, libertad, veracidad o calidad, transparencia, acceso y circulación restringida, seguridad y confidencialidad en el tratamiento de la información.</p>
+  </div>
+
+  <hr class="pp-divider"/>
+
+  <div class="pp-section">
+    <h2>4. Información que podemos recopilar</h2>
+    <p>Dependiendo de la relación del usuario con Disempack y de los servicios utilizados en el sitio web, podremos recopilar información como:</p>
+    <ul>
+      <li>Nombre y apellidos.</li>
+      <li>Nombre de empresa o razón social.</li>
+      <li>Número de identificación o NIT, cuando sea necesario.</li>
+      <li>Cargo o actividad comercial.</li>
+      <li>Dirección, ciudad y país.</li>
+      <li>Número de teléfono o celular.</li>
+      <li>Dirección de correo electrónico.</li>
+      <li>Información suministrada en formularios de contacto y solicitudes de cotización.</li>
+      <li>Información relacionada con productos, servicios o proyectos de interés.</li>
+      <li>Archivos, imágenes, diseños o documentos enviados voluntariamente por el usuario.</li>
+      <li>Dirección IP, tipo de navegador y dispositivo, sistema operativo.</li>
+      <li>Fecha y hora de acceso, páginas visitadas dentro del sitio web.</li>
+      <li>Datos derivados del uso de cookies y tecnologías similares.</li>
+    </ul>
+    <p>Disempack procurará no solicitar información que no resulte necesaria para la finalidad correspondiente.</p>
+  </div>
+
+  <hr class="pp-divider"/>
+
+  <div class="pp-section">
+    <h2>5. Finalidades del tratamiento</h2>
+    <p>Los datos personales recolectados podrán ser utilizados para las siguientes finalidades:</p>
+    <ul>
+      <li>Atender solicitudes de información y consultas realizadas por medio del sitio web.</li>
+      <li>Elaborar, enviar y hacer seguimiento a cotizaciones.</li>
+      <li>Contactar a clientes y potenciales clientes; gestionar solicitudes comerciales.</li>
+      <li>Brindar información sobre los productos y servicios ofrecidos por Disempack.</li>
+      <li>Gestionar pedidos, proyectos y relaciones comerciales y contractuales.</li>
+      <li>Llevar registros administrativos, comerciales y contables; gestionar facturación y pago.</li>
+      <li>Gestionar solicitudes, quejas, reclamos, sugerencias o felicitaciones.</li>
+      <li>Mejorar la experiencia de navegación y analizar el funcionamiento del sitio web.</li>
+      <li>Realizar estadísticas y análisis internos.</li>
+      <li>Prevenir fraudes, accesos no autorizados y actividades que afecten la seguridad del sitio.</li>
+      <li>Enviar información comercial, publicitaria o promocional cuando exista autorización para ello.</li>
+      <li>Cumplir requerimientos emitidos por autoridades administrativas, judiciales o de control.</li>
+      <li>Cumplir cualquier otra finalidad debidamente informada y autorizada por el titular.</li>
+    </ul>
+  </div>
+
+  <hr class="pp-divider"/>
+
+  <div class="pp-section">
+    <h2>6. Autorización para el tratamiento</h2>
+    <p>Al proporcionar voluntariamente sus datos personales mediante los formularios, correos electrónicos, medios digitales u otros canales dispuestos por Disempack, el titular autoriza su tratamiento para las finalidades informadas, cuando dicha autorización sea requerida por la legislación aplicable.</p>
+    <p>Disempack conservará evidencia de las autorizaciones cuando corresponda. El titular podrá solicitar información sobre la autorización otorgada y podrá revocarla en los casos permitidos por la legislación colombiana.</p>
+  </div>
+
+  <hr class="pp-divider"/>
+
+  <div class="pp-section">
+    <h2>7. Datos sensibles</h2>
+    <p>Disempack no solicitará datos sensibles a través del sitio web salvo que sean estrictamente necesarios para una finalidad legítima y se cumplan los requisitos previstos por la legislación aplicable. Se consideran datos sensibles aquellos que pueden afectar la intimidad del titular o cuyo uso indebido pueda generar discriminación.</p>
+    <p>Cuando sea necesario recopilar esta clase de información, se informará al titular acerca del carácter facultativo de suministrarla y se solicitará la autorización correspondiente cuando sea exigible.</p>
+  </div>
+
+  <hr class="pp-divider"/>
+
+  <div class="pp-section">
+    <h2>8. Datos de niños, niñas y adolescentes</h2>
+    <p>El sitio web de Disempack está dirigido principalmente a personas mayores de edad y representantes de empresas u organizaciones. Disempack no busca recopilar intencionalmente información personal de niños, niñas o adolescentes.</p>
+    <p>Cuando resulte necesario tratar información de menores de edad, se respetará el interés superior del menor, sus derechos fundamentales y las disposiciones especiales establecidas por la legislación colombiana.</p>
+  </div>
+
+  <hr class="pp-divider"/>
+
+  <div class="pp-section">
+    <h2>9. Formularios de contacto y solicitudes de cotización</h2>
+    <p>Cuando un usuario completa un formulario de contacto, solicita una cotización o se comunica con Disempack por medios digitales, la información suministrada podrá ser utilizada para identificar al solicitante, comprender su requerimiento, elaborar propuestas comerciales, enviar cotizaciones, resolver preguntas y dar seguimiento a la oportunidad comercial.</p>
+    <p>La información podrá conservarse durante el tiempo razonablemente necesario para atender la solicitud y posteriormente durante los períodos exigidos por obligaciones legales, contractuales, contables o administrativas.</p>
+  </div>
+
+  <hr class="pp-divider"/>
+
+  <div class="pp-section">
+    <h2>10. Cookies</h2>
+    <p>El sitio web puede utilizar cookies y tecnologías similares para mejorar la navegación y comprender la manera en que los usuarios interactúan con el sitio. Entre sus funciones se encuentran:</p>
+    <ul>
+      <li>Recordar determinadas preferencias del usuario.</li>
+      <li>Facilitar el funcionamiento de algunas secciones del sitio.</li>
+      <li>Conocer información estadística sobre navegación y analizar tráfico.</li>
+      <li>Mejorar la experiencia del usuario y fortalecer la seguridad del sitio.</li>
+    </ul>
+    <p>El usuario puede configurar su navegador para rechazar, restringir o eliminar cookies. La desactivación de determinadas cookies puede afectar algunas funcionalidades del sitio web.</p>
+  </div>
+
+  <hr class="pp-divider"/>
+
+  <div class="pp-section">
+    <h2>11. Información técnica y registros de navegación</h2>
+    <p>Cuando un usuario visita nuestro sitio web, determinados sistemas pueden recopilar automáticamente información técnica como dirección IP, navegador utilizado, sistema operativo, páginas visitadas, duración de la sesión y datos generales de navegación. Esta información podrá utilizarse para administrar el sitio, detectar errores, prevenir incidentes de seguridad y mejorar la experiencia de los visitantes.</p>
+  </div>
+
+  <hr class="pp-divider"/>
+
+  <div class="pp-section">
+    <h2>12. Contenido incorporado y sitios de terceros</h2>
+    <p>Las páginas del sitio web de Disempack pueden incluir enlaces, mapas, videos, imágenes, botones de redes sociales u otros contenidos provenientes de plataformas externas. Al interactuar con dichos contenidos, el usuario puede estar sujeto a las políticas de privacidad de los respectivos terceros.</p>
+    <p>Disempack no controla las políticas de privacidad ni las prácticas implementadas por sitios web externos. Recomendamos consultar las políticas de privacidad de cada plataforma antes de proporcionar información personal.</p>
+  </div>
+
+  <hr class="pp-divider"/>
+
+  <div class="pp-section">
+    <h2>13. Redes sociales</h2>
+    <p>Disempack puede mantener presencia en diferentes redes sociales y plataformas digitales. La interacción del usuario con los perfiles oficiales de la compañía estará sujeta a los términos y políticas de privacidad establecidas por cada plataforma. La información suministrada directamente a Disempack mediante mensajes privados u otros mecanismos podrá ser utilizada para responder solicitudes y gestionar relaciones comerciales.</p>
+  </div>
+
+  <hr class="pp-divider"/>
+
+  <div class="pp-section">
+    <h2>14. Información comercial y comunicaciones publicitarias</h2>
+    <p>Cuando exista autorización o alguna otra base legítima aplicable, Disempack podrá utilizar los datos de contacto del titular para comunicar información acerca de productos, servicios, nuevas soluciones, proyectos, promociones, novedades comerciales, contenido institucional y eventos relacionados con la compañía.</p>
+    <p>El titular podrá solicitar en cualquier momento dejar de recibir comunicaciones comerciales mediante los mecanismos habilitados por Disempack.</p>
+  </div>
+
+  <hr class="pp-divider"/>
+
+  <div class="pp-section">
+    <h2>15. Transferencia y transmisión de información</h2>
+    <p>Disempack podrá utilizar proveedores tecnológicos, servicios de alojamiento web, plataformas de correo electrónico, sistemas de gestión comercial, herramientas de almacenamiento, analítica u otros proveedores necesarios para el funcionamiento de sus servicios. Cuando estos proveedores tengan acceso a datos personales, se procurará que dicho tratamiento se realice únicamente para las finalidades autorizadas y bajo condiciones apropiadas de confidencialidad y seguridad.</p>
+  </div>
+
+  <hr class="pp-divider"/>
+
+  <div class="pp-section">
+    <h2>16. Seguridad de la información</h2>
+    <p>Disempack adopta medidas administrativas, técnicas y organizacionales razonables orientadas a proteger los datos personales contra pérdida, alteración, uso indebido, consulta, acceso no autorizado, divulgación o tratamiento fraudulento. Entre estas medidas podrán encontrarse controles de acceso, gestión de contraseñas, actualizaciones de seguridad, copias de respaldo y restricciones de acceso a la información.</p>
+    <p>No obstante, ningún sistema conectado a Internet puede garantizar una seguridad absoluta. Disempack continuará evaluando y mejorando sus mecanismos de protección de acuerdo con sus capacidades y los riesgos identificados.</p>
+  </div>
+
+  <hr class="pp-divider"/>
+
+  <div class="pp-section">
+    <h2>17. Conservación de los datos</h2>
+    <p>Los datos personales serán conservados únicamente durante el tiempo necesario para cumplir las finalidades para las cuales fueron recopilados y durante los períodos adicionales que resulten necesarios para cumplir obligaciones legales, contractuales, contables, fiscales o administrativas. Una vez desaparezca la necesidad de conservar la información, Disempack podrá eliminarla, anonimizarla o restringir su utilización.</p>
+  </div>
+
+  <hr class="pp-divider"/>
+
+  <div class="pp-section">
+    <h2>18. Derechos de los titulares</h2>
+    <p>Los titulares de datos personales tienen derecho a:</p>
+    <ul>
+      <li>Conocer, actualizar y rectificar sus datos personales.</li>
+      <li>Solicitar prueba de la autorización otorgada cuando legalmente proceda.</li>
+      <li>Ser informados sobre el uso que se ha dado a sus datos personales.</li>
+      <li>Presentar consultas y reclamos relacionados con el tratamiento de su información.</li>
+      <li>Solicitar la corrección de información incompleta, inexacta o desactualizada.</li>
+      <li>Solicitar la supresión de sus datos cuando proceda.</li>
+      <li>Solicitar la revocación de la autorización cuando legalmente sea posible.</li>
+      <li>Acceder gratuitamente a sus datos personales de conformidad con la legislación aplicable.</li>
+      <li>Presentar quejas ante la Superintendencia de Industria y Comercio cuando corresponda, una vez agotado el trámite ante Disempack.</li>
+    </ul>
+  </div>
+
+  <hr class="pp-divider"/>
+
+  <div class="pp-section">
+    <h2>19. Procedimiento para consultas y reclamos</h2>
+    <p>El titular, sus causahabientes, representantes o personas legalmente autorizadas podrán presentar solicitudes relacionadas con sus datos personales utilizando los canales establecidos por Disempack. Las solicitudes deberán contener como mínimo:</p>
+    <ul>
+      <li>Nombre completo del titular y número de identificación.</li>
+      <li>Información de contacto.</li>
+      <li>Descripción clara de la solicitud y datos respecto de los cuales ejerce el derecho.</li>
+      <li>Documentos que soporten la solicitud, cuando sean necesarios.</li>
+    </ul>
+    <p>Las consultas y reclamos serán tramitados de conformidad con los procedimientos y términos establecidos en la Ley 1581 de 2012 y demás normas aplicables.</p>
+  </div>
+
+  <hr class="pp-divider"/>
+
+  <div class="pp-section">
+    <h2>20. Canal para ejercer los derechos</h2>
+    <p>Los titulares podrán ejercer sus derechos a través de los siguientes canales. En el asunto del correo electrónico se recomienda indicar: <em>"Solicitud de protección de datos personales"</em>.</p>
+    <div class="pp-contact-block">
+      <p><strong>Correo:</strong> <a href="mailto:info@disempack.com.co">info@disempack.com.co</a></p>
+      <p><strong>Dirección:</strong> Cl. 37a Sur #72L-95, Bogotá D.C.</p>
+      <p><strong>Teléfono:</strong> <a href="tel:+573003252951">300 325 2951</a></p>
+      <p><strong>Sitio web:</strong> <a href="http://disempack.com.co" target="_blank" rel="noopener">disempack.com.co</a></p>
+    </div>
+  </div>
+
+  <hr class="pp-divider"/>
+
+  <div class="pp-section">
+    <h2>21. Modificaciones a esta Política</h2>
+    <p>Disempack podrá modificar, actualizar o complementar esta Política de Privacidad cuando resulte necesario debido a cambios legales, regulatorios, tecnológicos, comerciales o relacionados con los servicios ofrecidos. Cuando se realicen cambios sustanciales, la versión actualizada será publicada en el sitio web indicando la fecha de su última modificación.</p>
+    <p>Se recomienda a los usuarios consultar periódicamente esta sección para conocer la versión vigente de la Política de Privacidad.</p>
+  </div>
+
+  <hr class="pp-divider"/>
+
+  <div class="pp-section">
+    <h2>22. Aceptación de la Política de Privacidad</h2>
+    <p>Al utilizar el sitio web y proporcionar información personal a través de los canales habilitados por Disempack, el usuario declara haber tenido la posibilidad de consultar esta Política de Privacidad. El suministro de información y su tratamiento se realizará de acuerdo con la legislación aplicable y, cuando corresponda, con base en la autorización otorgada por el titular.</p>
+  </div>
+
+  <hr class="pp-divider"/>
+
+  <div class="pp-section">
+    <h2>23. Nota legal sobre imágenes</h2>
+    <p>En este sitio aparecen imágenes de productos que ha realizado y proyectos en los cuales ha tenido participación Disempack. Se presentan como un apoyo para ilustrar las capacidades de producción de la empresa y los trabajos o propuestas que esta ha realizado.</p>
+    <p>Las marcas registradas y logotipos aquí mostrados son propiedad de sus respectivos dueños y son utilizadas únicamente con fines ilustrativos. El uso de estas imágenes no implica ninguna asociación, cesión o endoso de los propietarios de estas marcas hacia o con Disempack.</p>
+  </div>
+
+  <hr class="pp-divider"/>
+
+  <div class="pp-section">
+    <h2>24. Vigencia</h2>
+    <p>La presente Política de Privacidad y Tratamiento de Datos Personales entra en vigencia a partir de agosto de 2026 y permanecerá vigente mientras Disempack realice actividades de tratamiento de datos personales, sin perjuicio de las modificaciones que puedan efectuarse posteriormente.</p>
+    <p style="margin-top:1.2rem;font-weight:700;color:#1c2f5e;">DISEMPACK S.A.S. — Bogotá D.C., Colombia — <a href="http://disempack.com.co" target="_blank" rel="noopener">www.disempack.com.co</a></p>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-col">
+      <div class="footer-col-inner">
+        <h5><i class="fa-solid fa-headset"></i> Servicio al Cliente</h5>
+        <a href="tel:+573183820863">🇨🇴 +57 318 382 0863</a>
+        <h5 style="margin-top:1.2rem;"><i class="fa-solid fa-medal"></i> Calidad</h5>
+        <a href="tel:+573011664304">🇨🇴 +57 301 166 4304</a>
+        <h5 style="margin-top:1.2rem;"><i class="fa-solid fa-handshake"></i> Ventas</h5>
+        <a href="tel:+573005582389">🇨🇴 +57 300 558 2389</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-inner">
+        <h5><i class="fa-solid fa-location-dot"></i> Dirección</h5>
+        <p>37A sur No. 72L-95<br/>Bogotá, Colombia</p>
+        <a href="https://maps.google.com/?q=37A+sur+No.+72L-95,+Bogot%C3%A1,+Colombia" target="_blank" rel="noopener">📍 Ver en Google Maps</a>
+        <h5 style="margin-top:1.2rem;"><i class="fa-solid fa-clock"></i> Horarios</h5>
+        <p>Lunes a Viernes<br/>7:00am – 4:00pm</p>
+      </div>
+    </div>
+    <div class="footer-col-logo">
+      <a href="https://disempack.cloud" target="_blank" rel="noopener">
+        <img src="img/disempack-footer-logo.webp" alt="Disempack" loading="lazy" width="400" height="91"/>
+      </a>
+      <div class="footer-socials">
+        <a href="https://www.facebook.com/people/Disempack-SAS/100054201593487/?locale=es_LA" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/disempack" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://www.linkedin.com/company/disempack/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>By Disempack S.A.S - 2026</p>
+  </div>
+</footer>
+
+<!-- WHATSAPP FAB -->
+<a href="https://wa.link/2ka87h" class="wa-fab" target="_blank" title="WhatsApp">
+  <i class="fa-brands fa-whatsapp" style="color:#fff;font-size:2rem;"></i>
+</a>
+<!-- CATALOGOS FAB -->
+<a href="catalogos.html" class="catalogos-fab" title="Catálogos">
+  <img src="img/catalogos-btn-140.webp" alt="Catálogos" width="70" height="203"/>
+</a>
+
+<script>
+  const searchBtn = document.getElementById('searchBtn');
+  const searchOverlay = document.getElementById('searchOverlay');
+  const searchInput = document.getElementById('searchInput');
+  const searchSubmit = document.getElementById('searchSubmit');
+  searchBtn.addEventListener('click', () => { searchOverlay.classList.add('open'); searchInput.focus(); });
+  function closeSearch() {
+    searchOverlay.classList.remove('open');
+    searchInput.value = '';
+    document.getElementById('searchResults').innerHTML = '';
+    document.getElementById('searchResults').classList.remove('has-results');
+  }
+  searchOverlay.addEventListener('click', (e) => { if (e.target === searchOverlay) closeSearch(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSearch(); });
+  const SITE_PAGES = [
+    { title: 'Impresión Digital',        url: 'impresion-digital.html',        keywords: 'impresion digital uv flatbed gran formato lona vinilo banner rotativa' },
+    { title: 'Blister y Skin',           url: 'blister.html',                  keywords: 'blister skin termosellado acetato pvc empaque transparente producto' },
+    { title: 'Cajas Plegadizas',         url: 'cajas-plegadizas.html',         keywords: 'cajas plegadizas caja plegable carton plegado estuche embalaje packaging' },
+    { title: 'Troquelado / Clam-Shell',  url: 'clam-shell.html',               keywords: 'clamshell troquelado corte punzon bisagra rigido molde' },
+    { title: 'Organizadores',            url: 'organizadores.html',            keywords: 'organizador exhibidor punto de venta display stand corrugado papeleria' },
+    { title: 'Alcancías',                url: 'alcancias.html',                keywords: 'alcancia alcancías promocional personalizada ahorro plastico figura' },
+    { title: 'Recubrimientos',           url: 'recubrimientos.html',           keywords: 'recubrimiento barniz laminado acabado uv soft touch plastificado textura' },
+    { title: 'P.O.P',                    url: 'pop.html',                      keywords: 'pop material publicitario exhibicion punto de compra merchandising visual' },
+    { title: 'Señalización Corporativa', url: 'senalizacion-corporativa.html', keywords: 'senalizacion corporativa rotulo letrero señal directorio retro iluminada' },
+    { title: 'Catálogos',               url: 'catalogos.html',                keywords: 'catalogo catalogos digital flipbook revista productos linea completa' },
+    { title: 'Cotizar',                  url: 'cotizar.html',                  keywords: 'cotizar cotizacion precio pedido presupuesto whatsapp formulario' },
+    { title: 'Contacto',                 url: 'contacto.html',                 keywords: 'contacto telefono correo email direccion ubicacion mensaje' },
+    { title: 'Inicio',                   url: 'index.html',                    keywords: 'disempack empaque soluciones inicio home' },
+  ];
+  const searchResults = document.getElementById('searchResults');
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  function renderResults(q) {
+    const term = q.toLowerCase().trim();
+    if (!term) { searchResults.innerHTML = ''; searchResults.classList.remove('has-results'); return; }
+    const hits = SITE_PAGES
+      .filter(p => p.url !== currentPage &&
+        (p.title.toLowerCase().includes(term) || p.keywords.includes(term)))
+      .map(p => ({ ...p, score: (p.title.toLowerCase().includes(term) ? 2 : 0) + (p.keywords.includes(term) ? 1 : 0) }))
+      .sort((a, b) => b.score - a.score);
+    if (!hits.length) {
+      searchResults.innerHTML = '<div class="search-result-empty">Sin resultados para "' + q + '"</div>';
+    } else {
+      searchResults.innerHTML = hits.map(p =>
+        '<a class="search-result-item" href="' + p.url + '">' + p.title + '</a>'
+      ).join('');
+    }
+    searchResults.classList.add('has-results');
+  }
+  searchInput.addEventListener('input', () => renderResults(searchInput.value));
+  searchSubmit.addEventListener('click', () => {
+    const first = searchResults.querySelector('.search-result-item');
+    if (first) window.location.href = first.href;
+  });
+  searchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const first = searchResults.querySelector('.search-result-item');
+      if (first) window.location.href = first.href;
+    }
+  });
+
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.querySelector('.nav-links');
+  hamburger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    hamburger.classList.toggle('open');
+    navLinks.classList.toggle('open');
+  });
+  document.addEventListener('click', (e) => {
+    try {
+      if (e.target && !navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+        hamburger.classList.remove('open');
+        navLinks.classList.remove('open');
+      }
+    } catch(err) {}
+  });
+
+  (function(){
+    const fab = document.querySelector('.wa-fab');
+    const footer = document.querySelector('footer');
+    if(!fab || !footer) return;
+    function checkFab(){
+      const fTop = footer.getBoundingClientRect().top;
+      const wH = window.innerHeight;
+      fab.style.bottom = fTop < wH ? (wH - fTop + 16) + 'px' : '';
+    }
+    window.addEventListener('scroll', checkFab, {passive:true});
+  })();
+  (function(){
+    const fab = document.querySelector('.catalogos-fab');
+    const footer = document.querySelector('footer');
+    if(!fab || !footer) return;
+    function checkFab(){
+      const fTop = footer.getBoundingClientRect().top;
+      const wH = window.innerHeight;
+      fab.style.bottom = fTop < wH ? (wH - fTop + 16) + 'px' : '';
+    }
+    window.addEventListener('scroll', checkFab, {passive:true});
+  })();
+</script>
+</body>
+</html>
