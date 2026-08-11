@@ -144,6 +144,40 @@
     }
     .map-wrap iframe { display: block; width: 100%; height: 420px; border: none; }
 
+    /* ── TRABAJA CON NOSOTROS ── */
+    .tw-section {
+      background: #f7f9fc; border-top: 3px solid #8dc63f; padding: 5rem 2.5rem;
+    }
+    .tw-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+    }
+    .tw-text h2 { font-size: 1.9rem; font-weight: 800; color: #1c2f5e; margin-bottom: 1.2rem; }
+    .tw-text p { font-size: .97rem; color: #555; line-height: 1.85; margin-bottom: 1rem; }
+    .tw-text p:last-of-type { margin-bottom: 0; }
+    .tw-text strong { color: #1c2f5e; }
+    .tw-card {
+      background: #fff; border-radius: 14px; padding: 2.5rem;
+      box-shadow: 0 4px 24px rgba(0,0,0,.08); border-top: 4px solid #8dc63f;
+      display: flex; flex-direction: column; gap: 1.2rem;
+    }
+    .tw-card h3 { font-size: 1.1rem; font-weight: 700; color: #1c2f5e; }
+    .tw-card p { font-size: .88rem; color: #666; line-height: 1.7; margin: 0; }
+    .tw-btn {
+      display: inline-flex; align-items: center; gap: .55rem;
+      background: #8dc63f; color: #fff; font-weight: 700; font-size: .95rem;
+      padding: .85rem 2rem; border-radius: 100px; text-decoration: none;
+      transition: background .2s, transform .15s; align-self: flex-start;
+    }
+    .tw-btn:hover { background: #75a832; transform: translateY(-2px); }
+    .tw-areas {
+      display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .3rem;
+    }
+    .tw-tag {
+      background: #eef7e0; color: #4a7a1a; font-size: .78rem; font-weight: 700;
+      padding: .3rem .8rem; border-radius: 100px;
+    }
+
     /* ── FOOTER ── */
     footer { background: #1c2f5e; color: #a8bbd8; padding: 3rem 3rem 1.5rem; }
     .footer-top { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3rem; align-items: start; margin-bottom: 2.5rem; }
@@ -203,7 +237,8 @@
       .contact-section { grid-template-columns: 1fr; gap: 2.5rem; padding: 3rem 1.5rem; }
       .map-wrap iframe { height: 300px; }
       .footer-top { grid-template-columns: 1fr; }
-          .catalogos-fab { width: 48px; }
+      .catalogos-fab { width: 48px; }
+      .tw-inner { grid-template-columns: 1fr; gap: 2rem; }
 }
   </style>
 </head>
@@ -213,6 +248,7 @@
   <a href="terminos-condiciones.html">Términos y Condiciones</a>
   <a href="politica-privacidad.html">Política de Privacidad</a>
   <a href="nosotros.html">Nosotros</a>
+  <a href="contacto.html#trabaja-con-nosotros">Trabaja con nosotros</a>
 </div>
 
 <nav>
@@ -355,6 +391,38 @@
   </div>
 
 </div>
+
+<!-- TRABAJA CON NOSOTROS -->
+<section class="tw-section" id="trabaja-con-nosotros">
+  <div class="tw-inner">
+    <div class="tw-text">
+      <h2>Trabaja con nosotros</h2>
+      <p>En Disempack buscamos personas <strong>creativas, comprometidas y apasionadas</strong> por el diseño y la personalización industrial.</p>
+      <p>Si tienes experiencia o formación en alguna de estas áreas, queremos conocerte:</p>
+      <div class="tw-areas">
+        <span class="tw-tag">Diseño Gráfico</span>
+        <span class="tw-tag">Diseño Industrial</span>
+        <span class="tw-tag">Ing. Mecánica</span>
+        <span class="tw-tag">Producción</span>
+        <span class="tw-tag">Impresión Digital</span>
+        <span class="tw-tag">Termoformado</span>
+        <span class="tw-tag">Acabados</span>
+        <span class="tw-tag">Ventas</span>
+        <span class="tw-tag">Logística</span>
+        <span class="tw-tag">Administración</span>
+      </div>
+    </div>
+    <div class="tw-card">
+      <h3><i class="fa-solid fa-file-lines" style="color:#8dc63f;margin-right:.4rem;"></i> ¡Deja tu C.V. y únete al team!</h3>
+      <p>Envíanos tu hoja de vida al correo indicado. Adjunta tu CV y cuéntanos brevemente en qué área te especializas.</p>
+      <a class="tw-btn"
+         href="mailto:soledad.robayo@disempack.com.co,info@disempack.com.co?subject=Hoja%20de%20Vida%20-%20Disempack&body=Hola%2C%20adjunto%20mi%20hoja%20de%20vida%20y%20me%20gustar%C3%ADa%20hacer%20parte%20del%20equipo%20de%20Disempack.%0A%0A%C3%81rea%20de%20inter%C3%A9s%3A%20%0ANombre%3A%20%0ATel%C3%A9fono%3A%20">
+        <i class="fa-solid fa-paper-plane"></i> Enviar mi C.V.
+      </a>
+      <p style="font-size:.78rem;color:#999;"><i class="fa-solid fa-envelope" style="margin-right:.3rem;"></i>soledad.robayo@disempack.com.co<br><i class="fa-solid fa-envelope" style="margin-right:.3rem;"></i>info@disempack.com.co</p>
+    </div>
+  </div>
+</section>
 
 <!-- FOOTER -->
 <footer>
