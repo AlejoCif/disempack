@@ -11,7 +11,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png">
   <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha384-/o6I2CkkWC//PSjvWC/eYN7l3xM3tJm8ZzVkCOfp//W05QcE3mlGskpoHB6XqI+B" crossorigin="anonymous"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -622,7 +622,7 @@
 </footer>
 
 <!-- WHATSAPP FAB -->
-<a href="https://wa.link/2ka87h" class="wa-fab" target="_blank" title="WhatsApp">
+<a href="https://wa.me/573183820863" class="wa-fab" target="_blank" title="WhatsApp">
   <i class="fa-brands fa-whatsapp" style="color:#fff;font-size:2rem;"></i>
 </a>
 <!-- CATALOGOS FAB -->
@@ -665,18 +665,27 @@
 
   function renderResults(q) {
     const term = q.toLowerCase().trim();
-    if (!term) { searchResults.innerHTML = ''; searchResults.classList.remove('has-results'); return; }
+    searchResults.innerHTML = '';
+    searchResults.classList.remove('has-results');
+    if (!term) return;
     const hits = SITE_PAGES
       .filter(p => p.url !== currentPage &&
         (p.title.toLowerCase().includes(term) || p.keywords.includes(term)))
       .map(p => ({ ...p, score: (p.title.toLowerCase().includes(term) ? 2 : 0) + (p.keywords.includes(term) ? 1 : 0) }))
       .sort((a, b) => b.score - a.score);
     if (!hits.length) {
-      searchResults.innerHTML = '<div class="search-result-empty">Sin resultados para "' + q + '"</div>';
+      const empty = document.createElement('div');
+      empty.className = 'search-result-empty';
+      empty.textContent = 'Sin resultados para "' + term + '"';
+      searchResults.appendChild(empty);
     } else {
-      searchResults.innerHTML = hits.map(p =>
-        '<a class="search-result-item" href="' + p.url + '">' + p.title + '</a>'
-      ).join('');
+      hits.forEach(p => {
+        const a = document.createElement('a');
+        a.className = 'search-result-item';
+        a.href = p.url;
+        a.textContent = p.title;
+        searchResults.appendChild(a);
+      });
     }
     searchResults.classList.add('has-results');
   }
@@ -684,12 +693,12 @@
   searchInput.addEventListener('input', () => renderResults(searchInput.value));
   searchSubmit.addEventListener('click', () => {
     const first = searchResults.querySelector('.search-result-item');
-    if (first) window.location.href = first.href;
+    if (first && first.href && !first.href.startsWith('http')) window.location.href = first.href;
   });
   searchInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
       const first = searchResults.querySelector('.search-result-item');
-      if (first) window.location.href = first.href;
+      if (first && first.href && !first.href.startsWith('http')) window.location.href = first.href;
     }
   });
 
@@ -757,7 +766,8 @@
 <!-- COOKIE BANNER -->
 <script>
 (function(){
-  if(localStorage.getItem('disempack_consent')) return;
+  var _ck = localStorage.getItem('disempack_consent');
+  if(_ck){ try{ var _d=JSON.parse(_ck); if(new Date(_d.exp)>new Date()) return; }catch(e){} }
   var s = document.createElement('style');
   s.textContent = [
     '#ck{position:fixed;bottom:0;left:0;right:0;z-index:10000;background:#1c2f5e;',
@@ -782,11 +792,40 @@
   document.head.appendChild(s);
   var b = document.createElement('div');
   b.id = 'ck';
-  b.innerHTML = '<div id="ck-text"><strong style="color:#fff">Este sitio usa cookies</strong> para mejorar tu experiencia. Al continuar aceptas nuestros <a href="terminos-condiciones.html">T\u00e9rminos y Condiciones</a> y <a href="politica-privacidad.html">Pol\u00edtica de Privacidad</a>.</div><div id="ck-btns"><button class="ck-dec" id="ck-d">Solo esenciales</button><button class="ck-acc" id="ck-a">Aceptar todo</button></div>';
+  var ckText = document.createElement('div');
+  ckText.id = 'ck-text';
+  var ckStrong = document.createElement('strong');
+  ckStrong.style.color = '#fff';
+  ckStrong.textContent = 'Este sitio usa cookies';
+  var ckMsg = document.createTextNode(' para mejorar tu experiencia. Al continuar aceptas nuestros ');
+  var ckLink1 = document.createElement('a');
+  ckLink1.href = 'terminos-condiciones.html';
+  ckLink1.textContent = 'Términos y Condiciones';
+  var ckAnd = document.createTextNode(' y ');
+  var ckLink2 = document.createElement('a');
+  ckLink2.href = 'politica-privacidad.html';
+  ckLink2.textContent = 'Política de Privacidad';
+  var ckDot = document.createTextNode('.');
+  ckText.appendChild(ckStrong);
+  ckText.appendChild(ckMsg);
+  ckText.appendChild(ckLink1);
+  ckText.appendChild(ckAnd);
+  ckText.appendChild(ckLink2);
+  ckText.appendChild(ckDot);
+  var ckBtns = document.createElement('div');
+  ckBtns.id = 'ck-btns';
+  var ckDec = document.createElement('button');
+  ckDec.className = 'ck-dec'; ckDec.id = 'ck-d'; ckDec.textContent = 'Solo esenciales';
+  var ckAcc = document.createElement('button');
+  ckAcc.className = 'ck-acc'; ckAcc.id = 'ck-a'; ckAcc.textContent = 'Aceptar todo';
+  ckBtns.appendChild(ckDec);
+  ckBtns.appendChild(ckAcc);
+  b.appendChild(ckText);
+  b.appendChild(ckBtns);
   document.body.appendChild(b);
   setTimeout(function(){ b.classList.add('show'); }, 400);
   function dismiss(v){
-    localStorage.setItem('disempack_consent', v);
+    var exp = new Date(); exp.setFullYear(exp.getFullYear()+1); localStorage.setItem('disempack_consent', JSON.stringify({v:v,exp:exp.toISOString()}));
     b.style.transform = 'translateY(100%)';
     setTimeout(function(){ b.remove(); }, 400);
   }

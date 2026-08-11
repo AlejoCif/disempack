@@ -11,7 +11,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png">
   <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha384-/o6I2CkkWC//PSjvWC/eYN7l3xM3tJm8ZzVkCOfp//W05QcE3mlGskpoHB6XqI+B" crossorigin="anonymous"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -445,7 +445,7 @@
 </footer>
 
 <!-- WHATSAPP FAB -->
-<a href="https://wa.link/2ka87h" class="wa-fab" target="_blank" title="WhatsApp">
+<a href="https://wa.me/573183820863" class="wa-fab" target="_blank" title="WhatsApp">
   <i class="fa-brands fa-whatsapp" style="color:#fff;font-size:2rem;"></i>
 </a>
 <!-- CATALOGOS FAB -->
@@ -516,7 +516,8 @@
 <!-- COOKIE BANNER -->
 <script>
 (function(){
-  if(localStorage.getItem('disempack_consent')) return;
+  var _ck = localStorage.getItem('disempack_consent');
+  if(_ck){ try{ var _d=JSON.parse(_ck); if(new Date(_d.exp)>new Date()) return; }catch(e){} }
   var s = document.createElement('style');
   s.textContent = [
     '#ck{position:fixed;bottom:0;left:0;right:0;z-index:10000;background:#1c2f5e;',
