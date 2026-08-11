@@ -652,6 +652,24 @@
     document.getElementById('cotizarForm').style.display = 'none';
     document.getElementById('cotSuccess').style.display = 'block';
 
+    // Enviar copia al correo vía Formsubmit (fire-and-forget, no bloquea WhatsApp)
+    fetch('https://formsubmit.co/ajax/soledad.robayo@disempack.com.co', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        _subject: `Nueva cotización — ${producto.value} — Disempack`,
+        _template: 'table',
+        Nombre: nombre,
+        Correo: email,
+        Teléfono: telefono || '—',
+        Producto: producto.value,
+        'Tipo de cliente': esEmpresa ? 'Empresa' : 'A nombre propio',
+        Empresa: empresaNombre || '—',
+        Cargo: cargo || '—',
+        Descripción: descripcion || '—',
+      })
+    }).catch(() => {}); // silencia errores de red
+
     setTimeout(() => { window.open(waUrl, '_blank'); }, 800);
   });
 
