@@ -18,7 +18,8 @@ try {
     die('Error de base de datos: ' . htmlspecialchars($e->getMessage()));
 }
 
-$miId = $_SESSION['usuario_id'];
+$miId   = $_SESSION['usuario_id'];
+$nombre = $_SESSION['usuario_nombre'];
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -195,6 +196,9 @@ $miId = $_SESSION['usuario_id'];
     <span class="badge">Catálogo Interno</span>
   </div>
   <div class="topbar-right">
+    <span class="user">Hola, <strong><?= htmlspecialchars($nombre) ?></strong>
+      <small style="color:#8dc63f;margin-left:.3rem;">Admin</small>
+    </span>
     <a href="dashboard.php" class="top-nav-btn"><i class="fa-solid fa-images"></i> Artículos</a>
     <a href="usuarios.php"  class="top-nav-btn active"><i class="fa-solid fa-users"></i> Usuarios</a>
     <a href="perfil.php"    class="top-nav-btn"><i class="fa-solid fa-circle-user"></i> Mi Perfil</a>
