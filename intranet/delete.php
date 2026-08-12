@@ -25,7 +25,12 @@ try {
     $art  = $stmt->fetch();
 
     if ($art) {
-        $filePath = __DIR__ . '/assets/' . $art['archivo'];
+        // Nueva ubicación (fuera de public_html)
+        $filePath = dirname($_SERVER['DOCUMENT_ROOT']) . '/intranet_media/' . $art['archivo'];
+        // Fallback a ubicación antigua (assets/) por si acaso hay registros viejos
+        if (!file_exists($filePath)) {
+            $filePath = __DIR__ . '/assets/' . $art['archivo'];
+        }
         if (file_exists($filePath)) {
             @unlink($filePath);
         }

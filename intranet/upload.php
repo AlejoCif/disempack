@@ -56,7 +56,14 @@ if (!isset($mimeMap[$mimeReal])) {
 // Nombre de archivo seguro (UUID-like)
 $ext      = $mimeMap[$mimeReal];
 $filename = bin2hex(random_bytes(16)) . '.' . $ext;
-$destDir  = __DIR__ . '/assets/';
+
+// Guardar fuera de public_html para que el deploy de git no borre el archivo
+$destDir  = dirname($_SERVER['DOCUMENT_ROOT']) . '/intranet_media/';
+if (!is_dir($destDir) && !mkdir($destDir, 0750, true)) {
+    $_SESSION['flash'] = 'ERROR: No se pudo crear el directorio de almacenamiento.';
+    header('Location: dashboard.php');
+    exit;
+}
 $destPath = $destDir . $filename;
 
 if (!move_uploaded_file($file['tmp_name'], $destPath)) {

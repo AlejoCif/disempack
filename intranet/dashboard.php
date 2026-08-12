@@ -360,7 +360,7 @@ $categorias = [
   <div class="gallery">
     <?php foreach ($articulos as $art): ?>
     <div class="art-card">
-      <img class="art-img" src="assets/<?= htmlspecialchars($art['archivo']) ?>"
+      <img class="art-img" src="serve.php?f=<?= urlencode($art['archivo']) ?>"
            alt="<?= htmlspecialchars($art['nombre']) ?>"
            onclick="openLightbox(this.src)"/>
       <div class="art-body">
@@ -377,7 +377,7 @@ $categorias = [
         </div>
       </div>
       <div class="art-footer">
-        <a class="btn-download" href="assets/<?= htmlspecialchars($art['archivo']) ?>" download="<?= htmlspecialchars($art['nombre']) ?>">
+        <a class="btn-download" href="serve.php?f=<?= urlencode($art['archivo']) ?>&dl=1&name=<?= urlencode($art['nombre']) ?>" download="<?= htmlspecialchars($art['nombre']) ?>">
           <i class="fa-solid fa-download"></i> Descargar
         </a>
         <?php if ($esAdmin): ?>
