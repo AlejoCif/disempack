@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Termoformado industrial en Disempack SAS. Transformamos láminas plásticas mediante calor y moldeado para crear piezas precisas, funcionales y personalizadas."/>
+  <title>Termoformado Industrial — Disempack SAS</title>
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha384-/o6I2CkkWC//PSjvWC/eYN7l3xM3tJm8ZzVkCOfp//W05QcE3mlGskpoHB6XqI+B" crossorigin="anonymous"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://disempack.com.co/termoformado.html"/>
+  <meta property="og:title" content="Termoformado Industrial — Disempack SAS"/>
+  <meta property="og:description" content="Disempack SAS: fabricación de empaques, cajas plegadizas, impresión digital UV, blister, clam shell, señalización y material POP en Colombia."/>
+  <meta property="og:image" content="https://disempack.com.co/img/og-image.jpg"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:image" content="https://disempack.com.co/img/og-image.jpg"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Open Sans', sans-serif; color: #333; background: #fff; overflow-x: hidden; }
+
+    /* ── TOP BAR ── */
+    .topbar { background: #1c2f5e; padding: .35rem 2rem; display: flex; justify-content: flex-end; gap: 1.5rem; }
+    .topbar a { color: #ccd6f0; font-size: .75rem; text-decoration: none; transition: color .15s; }
+    .topbar a:hover { color: #fff; }
+
+    /* ── NAVBAR ── */
+    nav {
+      background: #fff; border-bottom: 1px solid #e8e8e8;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .6rem 2.5rem; position: sticky; top: 0; z-index: 200;
+      box-shadow: 0 2px 8px rgba(0,0,0,.07);
+    }
+    .logo-wrap { display: flex; align-items: center; text-decoration: none; }
+    .logo-wrap img { height: 52px; object-fit: contain; }
+    .nav-links { display: flex; align-items: center; gap: .05rem; list-style: none; }
+    .nav-links > li { position: relative; }
+    .nav-links > li > a {
+      display: flex; align-items: center; gap: .3rem; padding: .5rem .85rem;
+      font-size: .83rem; color: #333; text-decoration: none; font-weight: 600;
+      border-radius: 4px; transition: color .15s, background .15s;
+    }
+    .nav-links > li > a:hover { color: #1c2f5e; background: #f5f6fa; }
+    .nav-links > li > a .arrow { font-size: .6rem; color: #888; }
+    .dropdown {
+      display: none; position: absolute; top: 100%; left: 0;
+      background: #fff; border: 1px solid #e0e0e0; border-top: 3px solid #8dc63f;
+      border-radius: 0 0 6px 6px; min-width: 210px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.12); list-style: none; z-index: 300;
+    }
+    .nav-links > li:hover .dropdown { display: block; }
+    .dropdown li a {
+      display: block; padding: .6rem 1.2rem; font-size: .82rem; color: #444;
+      text-decoration: none; border-bottom: 1px solid #f0f0f0; transition: background .12s, color .12s;
+    }
+    .dropdown li:last-child a { border-bottom: none; }
+    .dropdown li a:hover { background: #f0f0f0; color: #555; }
+    .nav-search { font-size: 1rem; color: #555; cursor: pointer; padding: .4rem .6rem; border: none; background: none; }
+
+    /* ── SEARCH OVERLAY ── */
+    .search-overlay {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 500;
+      align-items: flex-start; justify-content: center; padding-top: 80px;
+    }
+    .search-overlay.open { display: flex; }
+    .search-box { background: #fff; border-radius: 8px; display: flex; width: 100%; max-width: 600px; box-shadow: 0 8px 32px rgba(0,0,0,.2); overflow: hidden; }
+    .search-box input { flex: 1; border: none; outline: none; padding: .9rem 1.2rem; font-size: 1rem; font-family: inherit; }
+    .search-box button { background: #1c2f5e; color: #fff; border: none; padding: 0 1.4rem; font-size: 1.1rem; cursor: pointer; }
+    .search-box button:hover { background: #8dc63f; }
+    .search-results {
+      background: #fff; border-radius: 0 0 8px 8px; width: 100%; max-width: 600px;
+      box-shadow: 0 8px 32px rgba(0,0,0,.2); max-height: 360px; overflow-y: auto; display: none;
+    }
+    .search-results.has-results { display: block; }
+    .search-result-item {
+      display: block; padding: .85rem 1.2rem; text-decoration: none; color: #1c2f5e;
+      border-bottom: 1px solid #f0f0f0; font-size: .95rem; transition: background .12s;
+    }
+    .search-result-item:last-child { border-bottom: none; }
+    .search-result-item:hover { background: #f5f9ec; color: #8dc63f; }
+    .search-result-empty { padding: .85rem 1.2rem; color: #888; font-size: .9rem; }
+
+    /* ── HAMBURGER ── */
+    .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: .4rem; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: #333; border-radius: 2px; transition: transform .3s, opacity .3s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ── HERO ── */
+    .tf-hero {
+      position: relative; width: 100%;
+      height: 36.5vw; max-height: 700px; min-height: 380px;
+      background-image: url('img/banner/termoformado-header.webp');
+      background-size: cover; background-position: center;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .tf-hero-overlay {
+      position: absolute; inset: 0; background: rgba(28,47,94,.55);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .tf-hero-box {
+      background: rgba(10,20,50,.65); backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: 10px; padding: 2.5rem 3rem; max-width: 860px;
+      text-align: center;
+    }
+    .tf-hero-box .tf-eyebrow { font-size: .8rem; font-weight: 700; color: #8dc63f; text-transform: uppercase; letter-spacing: .14em; margin-bottom: .6rem; }
+    .tf-hero-box h1 { font-size: 2.8rem; font-weight: 800; color: #fff; line-height: 1.2; margin-bottom: 1.1rem; }
+    .tf-hero-box h1 span { color: #8dc63f; }
+    .tf-hero-box p { font-size: 1rem; color: #d8e4f8; line-height: 1.8; margin-bottom: 1.8rem; }
+    .tf-hero-btn {
+      display: inline-block; background: #8dc63f; color: #fff; font-weight: 700;
+      font-size: .95rem; padding: .75rem 2.2rem; border-radius: 4px;
+      text-decoration: none; border: 2px solid #8dc63f; transition: background .2s, color .2s;
+    }
+    .tf-hero-btn:hover { background: #fff; color: #8dc63f; }
+
+    /* ── QUÉ ES ── */
+    .tf-what { padding: 5rem 2.5rem; background: #f7f9fc; }
+    .tf-what-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .tf-what-text h3 { font-size: .85rem; font-weight: 700; color: #8dc63f; text-transform: uppercase; letter-spacing: .12em; margin-bottom: .5rem; }
+    .tf-what-text h2 { font-size: 2rem; font-weight: 700; color: #1c2f5e; margin-bottom: 1.4rem; }
+    .tf-what-text p { font-size: .95rem; color: #555; line-height: 1.85; margin-bottom: 1rem; }
+    .tf-what-text p:last-child { margin-bottom: 0; }
+    .tf-what-icon { text-align: center; }
+    .tf-what-icon i { font-size: 9rem; color: #8dc63f; opacity: .18; }
+
+    /* ── APLICACIONES ── */
+    .tf-apps { padding: 5rem 2.5rem; background: #fff; }
+    .tf-apps-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+    .tf-apps-inner h2 { font-size: 2rem; font-weight: 700; color: #1c2f5e; margin-bottom: 2.5rem; }
+    .tf-apps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
+    .tf-app-item {
+      background: #f7f9fc; border-radius: 8px; padding: 1.4rem 1rem;
+      display: flex; flex-direction: column; align-items: center; gap: .7rem;
+      border: 1px solid #e8ecf4; transition: box-shadow .2s, transform .2s;
+    }
+    .tf-app-item:hover { box-shadow: 0 6px 20px rgba(28,47,94,.1); transform: translateY(-3px); }
+    .tf-app-item i { font-size: 1.8rem; color: #8dc63f; }
+    .tf-app-item span { font-size: .88rem; font-weight: 600; color: #1c2f5e; }
+
+    /* ── POR QUÉ ── */
+    .tf-why { padding: 5rem 2.5rem; background: #f7f9fc; }
+    .tf-why-inner { max-width: 1100px; margin: 0 auto; }
+    .tf-why-inner h2 { font-size: 2rem; font-weight: 700; color: #1c2f5e; text-align: center; margin-bottom: 2.5rem; }
+    .tf-why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+    .tf-why-card {
+      background: #fff; border-radius: 8px; padding: 2rem 1.5rem;
+      border-top: 4px solid #8dc63f; text-align: center;
+      box-shadow: 0 2px 12px rgba(28,47,94,.07);
+    }
+    .tf-why-card h3 { font-size: .9rem; font-weight: 800; color: #1c2f5e; text-transform: uppercase; letter-spacing: .08em; margin-bottom: .7rem; }
+    .tf-why-card p { font-size: .88rem; color: #666; line-height: 1.7; }
+
+    /* ── BANNER MEDIO ── */
+    .tf-mid-banner {
+      position: relative; padding: 5rem 2.5rem;
+      background: #1c2f5e; text-align: center; overflow: hidden;
+    }
+    .tf-mid-banner::before {
+      content: ''; position: absolute; inset: 0;
+      background: url('img/banner/termoformado-header.webp') center/cover no-repeat;
+      opacity: .12;
+    }
+    .tf-mid-banner-inner { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+    .tf-mid-banner h2 { font-size: 2.2rem; font-weight: 800; color: #fff; margin-bottom: .8rem; line-height: 1.25; }
+    .tf-mid-banner p { font-size: 1rem; color: #a8c4e8; margin-bottom: .6rem; letter-spacing: .06em; }
+
+    /* ── CTA FINAL ── */
+    .tf-cta { padding: 5rem 2.5rem; background: #fff; text-align: center; }
+    .tf-cta h2 { font-size: 2rem; font-weight: 700; color: #1c2f5e; margin-bottom: 1.8rem; }
+    .tf-cta-btn {
+      display: inline-block; background: #8dc63f; color: #fff; font-weight: 700;
+      font-size: 1rem; padding: .9rem 2.8rem; border-radius: 4px;
+      text-decoration: none; border: 2px solid #8dc63f; transition: background .2s, color .2s;
+    }
+    .tf-cta-btn:hover { background: #fff; color: #8dc63f; }
+
+    /* ── FOOTER ── */
+    footer { background: #1c2f5e; color: #a0b4d0; font-size: .85rem; }
+    .footer-top { display: flex; flex-wrap: wrap; gap: 2rem; padding: 3rem 2.5rem; max-width: 1200px; margin: 0 auto; }
+    .footer-col { flex: 1; min-width: 180px; }
+    .footer-col-inner { display: flex; flex-direction: column; gap: .5rem; }
+    .footer-col h5 { color: #fff; font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
+    .footer-col a { color: #a0b4d0; text-decoration: none; font-size: .85rem; transition: color .15s; }
+    .footer-col a:hover { color: #8dc63f; }
+    .footer-col p { line-height: 1.7; }
+    .footer-col-logo { flex: 1.5; min-width: 200px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; }
+    .footer-col-logo img { height: 112px; object-fit: contain; max-width: 100%; }
+    .footer-socials { display: flex; gap: .8rem; }
+    .footer-socials a { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,.1); display: flex; align-items: center; justify-content: center; color: #fff; font-size: .9rem; transition: background .2s; text-decoration: none; }
+    .footer-socials a:hover { background: #8dc63f; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.08); text-align: center; padding: 1.2rem 2rem; font-size: .78rem; color: #6a80a0; }
+
+    /* ── WA / CATÁLOGOS FAB ── */
+    .wa-fab {
+      position: fixed; bottom: 24px; right: 24px; z-index: 900;
+      background: #25d366; border-radius: 50%; width: 56px; height: 56px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,.25); transition: bottom .3s;
+    }
+    .wa-fab:hover { background: #1ebe5d; }
+    .catalogos-fab {
+      position: fixed; bottom: 24px; left: 24px; z-index: 900;
+      width: 70px; display: block; transition: bottom .3s;
+    }
+    .catalogos-fab img { width: 100%; height: auto; display: block; }
+
+    /* ── MOBILE ── */
+    @media(max-width:900px) {
+      .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; background: #fff; padding: .5rem 0; border-top: 3px solid #8dc63f; box-shadow: 0 8px 24px rgba(0,0,0,.12); z-index: 199; }
+      .nav-links.open { display: flex; }
+      .nav-links > li > a { padding: .75rem 1.5rem; }
+      .dropdown { position: static; box-shadow: none; border: none; border-left: 3px solid #8dc63f; margin-left: 1.5rem; display: none !important; }
+      .hamburger { display: flex; }
+      .tf-hero-box { padding: 1.8rem 1.5rem; }
+      .tf-hero-box h1 { font-size: 1.9rem; }
+      .tf-what-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .tf-what-icon { display: none; }
+      .tf-apps-grid { grid-template-columns: repeat(2, 1fr); }
+      .tf-why-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media(max-width:480px) {
+      .tf-apps-grid { grid-template-columns: 1fr 1fr; }
+      .tf-why-grid { grid-template-columns: 1fr 1fr; }
+      .tf-hero { min-height: 320px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <a href="terminos-condiciones.html">Términos y Condiciones</a>
+  <a href="politica-privacidad.html">Política de Privacidad</a>
+  <a href="nosotros.html">Nosotros</a>
+  <a href="contacto.html#trabaja-con-nosotros">Trabaja con nosotros</a>
+</div>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="index.html" class="logo-wrap">
+    <img src="img/GENERICO-USOS-scaled.png" alt="Disempack"/>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li>
+      <a href="#">Exhibición Comercial <span class="arrow">▾</span></a>
+      <ul class="dropdown">
+        <li><a href="pop.html">P.O.P</a></li>
+        <li><a href="senalizacion-corporativa.html">Señalización Corporativa</a></li>
+        <li><a href="alcancias.html">Alcancías</a></li>
+        <li><a href="recubrimientos.html">Recubrimientos</a></li>
+      </ul>
+    </li>
+    <li><a href="impresion-digital.html">Impresión Digital</a></li>
+    <li>
+      <a href="#">Empaques <span class="arrow">▾</span></a>
+      <ul class="dropdown">
+        <li><a href="organizadores.html">Organizadores</a></li>
+        <li><a href="cajas-plegadizas.html">Cajas Plegadizas</a></li>
+        <li><a href="blister.html">Blister</a></li>
+        <li><a href="clam-shell.html">Clam Shell</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">Procesos <span class="arrow">▾</span></a>
+      <ul class="dropdown">
+        <li><a href="impresion-digital.html">Impresión Digital</a></li>
+        <li><a href="blister.html">Diseño y Desarrollo</a></li>
+        <li><a href="termoformado.html" style="color:#1c2f5e;font-weight:700;">Termoformado</a></li>
+        <li><a href="clam-shell.html">Troquelado</a></li>
+        <li><a href="#">Corte CNC</a></li>
+        <li><a href="#">Acondicionamiento De Productos</a></li>
+        <li><a href="#">Termosellado</a></li>
+        <li><a href="#">Venta De Materia Prima</a></li>
+      </ul>
+    </li>
+    <li><a href="contacto.html">Contacto</a></li>
+    <li><a href="cotizar.html">Cotizar</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+  <button class="nav-search" id="searchBtn">🔍</button>
+</nav>
+
+<!-- SEARCH OVERLAY -->
+<div class="search-overlay" id="searchOverlay">
+  <div style="width:100%;max-width:600px;display:flex;flex-direction:column;align-items:stretch;">
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Buscar en Disempack…"/>
+      <button id="searchSubmit">🔍</button>
+    </div>
+    <div class="search-results" id="searchResults"></div>
+  </div>
+</div>
+
+<!-- ══ HERO ══ -->
+<section class="tf-hero">
+  <div class="tf-hero-overlay">
+    <div class="tf-hero-box">
+      <p class="tf-eyebrow">03. Termoformado</p>
+      <h1>Formamos soluciones <span>a la medida</span></h1>
+      <p>Transformamos láminas plásticas mediante calor y moldeado para crear piezas precisas y funcionales.</p>
+      <a href="cotizar.html" class="tf-hero-btn">Cotiza tu proyecto</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ QUÉ ES ══ -->
+<section class="tf-what">
+  <div class="tf-what-inner">
+    <div class="tf-what-text">
+      <h3>Proceso</h3>
+      <h2>¿Qué es el Termoformado?</h2>
+      <p>Es un proceso que permite moldear una lámina mediante temperatura y vacío o presión, adaptándola a una geometría específica.</p>
+      <p>Es ideal para desarrollar piezas ligeras, resistentes y personalizadas.</p>
+    </div>
+    <div class="tf-what-icon">
+      <i class="fa-solid fa-layer-group"></i>
+    </div>
+  </div>
+</section>
+
+<!-- ══ APLICACIONES ══ -->
+<section class="tf-apps">
+  <div class="tf-apps-inner">
+    <h2>Aplicaciones</h2>
+    <div class="tf-apps-grid">
+      <div class="tf-app-item">
+        <i class="fa-solid fa-box-open"></i>
+        <span>Blísteres</span>
+      </div>
+      <div class="tf-app-item">
+        <i class="fa-solid fa-cube"></i>
+        <span>Clamshell</span>
+      </div>
+      <div class="tf-app-item">
+        <i class="fa-solid fa-border-all"></i>
+        <span>Organizadores</span>
+      </div>
+      <div class="tf-app-item">
+        <i class="fa-solid fa-inbox"></i>
+        <span>Bandejas</span>
+      </div>
+      <div class="tf-app-item">
+        <i class="fa-solid fa-store"></i>
+        <span>Exhibidores</span>
+      </div>
+      <div class="tf-app-item">
+        <i class="fa-solid fa-gears"></i>
+        <span>Componentes especiales</span>
+      </div>
+      <div class="tf-app-item">
+        <i class="fa-solid fa-gift"></i>
+        <span>Empaques personalizados</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ POR QUÉ ══ -->
+<section class="tf-why">
+  <div class="tf-why-inner">
+    <h2>¿Por qué elegir Termoformado?</h2>
+    <div class="tf-why-grid">
+      <div class="tf-why-card">
+        <h3>Personalización</h3>
+        <p>Piezas adaptadas al producto.</p>
+      </div>
+      <div class="tf-why-card">
+        <h3>Precisión</h3>
+        <p>Formas definidas y repetibles.</p>
+      </div>
+      <div class="tf-why-card">
+        <h3>Versatilidad</h3>
+        <p>Aplicable a múltiples soluciones.</p>
+      </div>
+      <div class="tf-why-card">
+        <h3>Eficiencia</h3>
+        <p>Ideal para producciones industriales.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ BANNER MEDIO ══ -->
+<div class="tf-mid-banner">
+  <div class="tf-mid-banner-inner">
+    <h2>Forma, protección y funcionalidad</h2>
+    <p>Precisión &bull; Adaptabilidad &bull; Resistencia &bull; Diseño</p>
+  </div>
+</div>
+
+<!-- ══ CTA FINAL ══ -->
+<section class="tf-cta">
+  <h2>Dale forma a tu próximo proyecto.</h2>
+  <a href="cotizar.html" class="tf-cta-btn">Cotizar Termoformado</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-col">
+      <div class="footer-col-inner">
+        <h5><i class="fa-solid fa-headset"></i> Servicio al Cliente</h5>
+        <a href="tel:+573183820863">🇨🇴 +57 318 382 0863</a>
+        <h5 style="margin-top:1.2rem;"><i class="fa-solid fa-medal"></i> Calidad</h5>
+        <a href="tel:+573011664304">🇨🇴 +57 301 166 4304</a>
+        <h5 style="margin-top:1.2rem;"><i class="fa-solid fa-handshake"></i> Ventas</h5>
+        <a href="tel:+573005582389">🇨🇴 +57 300 558 2389</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-inner">
+        <h5><i class="fa-solid fa-location-dot"></i> Dirección</h5>
+        <p>37A sur No. 72L-95<br/>Bogotá, Colombia</p>
+        <a href="https://maps.google.com/?q=37A+sur+No.+72L-95,+Bogot%C3%A1,+Colombia" target="_blank" rel="noopener">📍 Ver en Google Maps</a>
+        <h5 style="margin-top:1.2rem;"><i class="fa-solid fa-clock"></i> Horarios</h5>
+        <p>Lunes a Viernes<br/>7:00am – 4:00pm</p>
+      </div>
+    </div>
+    <div class="footer-col-logo">
+      <a href="https://disempack.cloud" target="_blank" rel="noopener">
+        <img src="img/disempack-footer-logo.webp" alt="Disempack - Ingreso Catálogo Interno" loading="lazy" width="400" height="91"/>
+      </a>
+      <div class="footer-socials">
+        <a href="https://www.facebook.com/people/Disempack-SAS/100054201593487/?locale=es_LA" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/disempack" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://www.linkedin.com/company/disempack/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>By Disempack S.A.S - 2026</p>
+  </div>
+</footer>
+
+<!-- WHATSAPP FAB -->
+<a href="https://wa.me/573183820863" class="wa-fab" target="_blank" title="WhatsApp">
+  <i class="fa-brands fa-whatsapp" style="color:#fff;font-size:2rem;"></i>
+</a>
+<!-- CATÁLOGOS FAB -->
+<a href="catalogos.html" class="catalogos-fab" title="Catálogos">
+  <img src="img/catalogos-btn-140.webp" alt="Catálogos" width="70" height="203"/>
+</a>
+
+<script>
+  /* ── SEARCH ── */
+  const searchBtn = document.getElementById('searchBtn');
+  const searchOverlay = document.getElementById('searchOverlay');
+  const searchInput = document.getElementById('searchInput');
+  const searchSubmit = document.getElementById('searchSubmit');
+  searchBtn.addEventListener('click', () => { searchOverlay.classList.add('open'); searchInput.focus(); });
+  function closeSearch() {
+    searchOverlay.classList.remove('open');
+    searchInput.value = '';
+    document.getElementById('searchResults').innerHTML = '';
+    document.getElementById('searchResults').classList.remove('has-results');
+  }
+  searchOverlay.addEventListener('click', (e) => { if (e.target === searchOverlay) closeSearch(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSearch(); });
+
+  const SITE_PAGES = [
+    { title: 'Termoformado',              url: 'termoformado.html',             keywords: 'termoformado termico blister clamshell bandeja molde lamina plastico vacio presion' },
+    { title: 'Impresión Digital',         url: 'impresion-digital.html',        keywords: 'impresion digital uv flatbed gran formato lona vinilo banner rotativa' },
+    { title: 'Blister y Skin',            url: 'blister.html',                  keywords: 'blister skin termosellado acetato pvc empaque transparente producto' },
+    { title: 'Clam Shell',                url: 'clam-shell.html',               keywords: 'clamshell almeja bisagra contenedor plastico rigido empaque' },
+    { title: 'Cajas Plegadizas',          url: 'cajas-plegadizas.html',         keywords: 'caja plegadiza carton impresa troquelada empaque producto cosmetico' },
+    { title: 'Organizadores',             url: 'organizadores.html',            keywords: 'organizador escritorio papeleria oficina accesorios personalizados' },
+    { title: 'Alcancías',                 url: 'alcancias.html',                keywords: 'alcancia alcancías promocional personalizada ahorro plastico figura' },
+    { title: 'Recubrimientos',            url: 'recubrimientos.html',           keywords: 'recubrimiento barniz laminado acabado uv soft touch plastificado textura' },
+    { title: 'P.O.P',                     url: 'pop.html',                      keywords: 'pop material publicitario exhibicion punto de compra merchandising visual' },
+    { title: 'Señalización Corporativa',  url: 'senalizacion-corporativa.html', keywords: 'senalizacion corporativa rotulo letrero señal directorio retro iluminada' },
+    { title: 'Catálogos',                url: 'catalogos.html',                keywords: 'catalogo catalogos digital flipbook revista productos linea completa' },
+    { title: 'Cotizar',                   url: 'cotizar.html',                  keywords: 'cotizar cotizacion precio pedido presupuesto whatsapp formulario' },
+    { title: 'Contacto',                  url: 'contacto.html',                 keywords: 'contacto telefono correo email direccion ubicacion mensaje' },
+    { title: 'Inicio',                    url: 'index.html',                    keywords: 'disempack empaque soluciones inicio home' },
+  ];
+  const searchResults = document.getElementById('searchResults');
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+
+  function renderResults(q) {
+    const term = q.toLowerCase().trim();
+    searchResults.innerHTML = '';
+    searchResults.classList.remove('has-results');
+    if (!term) return;
+    const hits = SITE_PAGES
+      .filter(p => p.url !== currentPage &&
+        (p.title.toLowerCase().includes(term) || p.keywords.includes(term)))
+      .map(p => ({ ...p, score: (p.title.toLowerCase().includes(term) ? 2 : 0) + (p.keywords.includes(term) ? 1 : 0) }))
+      .sort((a, b) => b.score - a.score);
+    if (!hits.length) {
+      const empty = document.createElement('div');
+      empty.className = 'search-result-empty';
+      empty.textContent = 'Sin resultados para "' + term + '"';
+      searchResults.appendChild(empty);
+    } else {
+      hits.forEach(p => {
+        const a = document.createElement('a');
+        a.className = 'search-result-item';
+        a.href = p.url;
+        a.textContent = p.title;
+        searchResults.appendChild(a);
+      });
+    }
+    searchResults.classList.add('has-results');
+  }
+
+  searchInput.addEventListener('input', () => renderResults(searchInput.value));
+  searchSubmit.addEventListener('click', () => {
+    const first = searchResults.querySelector('.search-result-item');
+    if (first && first.href && !first.href.startsWith('http')) window.location.href = first.href;
+  });
+  searchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const first = searchResults.querySelector('.search-result-item');
+      if (first && first.href && !first.href.startsWith('http')) window.location.href = first.href;
+    }
+  });
+
+  /* ── HAMBURGER ── */
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.querySelector('.nav-links');
+  hamburger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    hamburger.classList.toggle('open');
+    navLinks.classList.toggle('open');
+  });
+  document.addEventListener('click', (e) => {
+    try {
+      if (e.target && !navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+        hamburger.classList.remove('open');
+        navLinks.classList.remove('open');
+      }
+    } catch(err) {}
+  });
+
+  /* ── WA FAB: raise near footer ── */
+  (function(){
+    const fab = document.querySelector('.wa-fab');
+    const footer = document.querySelector('footer');
+    if(!fab || !footer) return;
+    function checkFab(){
+      const fTop = footer.getBoundingClientRect().top;
+      const wH = window.innerHeight;
+      fab.style.bottom = fTop < wH ? (wH - fTop + 16) + 'px' : '';
+    }
+    window.addEventListener('scroll', checkFab, {passive:true});
+  })();
+  (function(){
+    const fab = document.querySelector('.catalogos-fab');
+    const footer = document.querySelector('footer');
+    if(!fab || !footer) return;
+    function checkFab(){
+      const fTop = footer.getBoundingClientRect().top;
+      const wH = window.innerHeight;
+      fab.style.bottom = fTop < wH ? (wH - fTop + 16) + 'px' : '';
+    }
+    window.addEventListener('scroll', checkFab, {passive:true});
+  })();
+</script>
+
+<!-- COOKIE BANNER -->
+<script>
+(function(){
+  var _ck = localStorage.getItem('disempack_consent');
+  if(_ck){ try{ var _d=JSON.parse(_ck); if(new Date(_d.exp)>new Date()) return; }catch(e){} }
+  var s = document.createElement('style');
+  s.textContent = [
+    '#ck{position:fixed;bottom:0;left:0;right:0;z-index:10000;background:#1c2f5e;',
+    'color:#c8d8f0;padding:1rem 2rem;display:flex;align-items:center;',
+    'justify-content:space-between;gap:1.2rem;flex-wrap:wrap;',
+    'box-shadow:0 -4px 20px rgba(0,0,0,.3);font-family:"Open Sans",sans-serif;',
+    'font-size:.82rem;line-height:1.6;',
+    'transform:translateY(100%);transition:transform .4s ease;}',
+    '#ck.show{transform:translateY(0);}',
+    '#ck a{color:#8dc63f;text-decoration:underline;}',
+    '#ck a:hover{color:#a5d95f;}',
+    '#ck-text{flex:1;min-width:200px;}',
+    '#ck-btns{display:flex;gap:.7rem;flex-shrink:0;}',
+    '.ck-acc{background:#8dc63f;color:#fff;border:none;font-family:inherit;',
+    'font-size:.82rem;font-weight:700;padding:.5rem 1.4rem;border-radius:4px;cursor:pointer;transition:background .2s;}',
+    '.ck-acc:hover{background:#75a832;}',
+    '.ck-dec{background:transparent;color:#a8bbd8;border:1px solid rgba(255,255,255,.2);',
+    'font-family:inherit;font-size:.82rem;padding:.5rem 1.2rem;border-radius:4px;cursor:pointer;transition:border-color .2s,color .2s;}',
+    '.ck-dec:hover{border-color:#8dc63f;color:#fff;}',
+    '@media(max-width:600px){#ck{padding:1rem 1.2rem;}#ck-btns{width:100%;justify-content:flex-end;}}'
+  ].join('');
+  document.head.appendChild(s);
+  var b = document.createElement('div');
+  b.id = 'ck';
+  var ckText = document.createElement('div');
+  ckText.id = 'ck-text';
+  var ckStrong = document.createElement('strong');
+  ckStrong.style.color = '#fff';
+  ckStrong.textContent = 'Este sitio usa cookies';
+  var ckMsg = document.createTextNode(' para mejorar tu experiencia. Al continuar aceptas nuestros ');
+  var ckLink1 = document.createElement('a');
+  ckLink1.href = 'terminos-condiciones.html';
+  ckLink1.textContent = 'Términos y Condiciones';
+  var ckAnd = document.createTextNode(' y ');
+  var ckLink2 = document.createElement('a');
+  ckLink2.href = 'politica-privacidad.html';
+  ckLink2.textContent = 'Política de Privacidad';
+  var ckDot = document.createTextNode('.');
+  ckText.appendChild(ckStrong);
+  ckText.appendChild(ckMsg);
+  ckText.appendChild(ckLink1);
+  ckText.appendChild(ckAnd);
+  ckText.appendChild(ckLink2);
+  ckText.appendChild(ckDot);
+  var ckBtns = document.createElement('div');
+  ckBtns.id = 'ck-btns';
+  var ckDec = document.createElement('button');
+  ckDec.className = 'ck-dec'; ckDec.id = 'ck-d'; ckDec.textContent = 'Solo esenciales';
+  var ckAcc = document.createElement('button');
+  ckAcc.className = 'ck-acc'; ckAcc.id = 'ck-a'; ckAcc.textContent = 'Aceptar todo';
+  ckBtns.appendChild(ckDec);
+  ckBtns.appendChild(ckAcc);
+  b.appendChild(ckText);
+  b.appendChild(ckBtns);
+  document.body.appendChild(b);
+  setTimeout(function(){ b.classList.add('show'); }, 400);
+  function dismiss(v){
+    var exp = new Date(); exp.setFullYear(exp.getFullYear()+1); localStorage.setItem('disempack_consent', JSON.stringify({v:v,exp:exp.toISOString()}));
+    b.style.transform = 'translateY(100%)';
+    setTimeout(function(){ b.remove(); }, 400);
+  }
+  document.getElementById('ck-a').onclick = function(){ dismiss('all'); };
+  document.getElementById('ck-d').onclick = function(){ dismiss('essential'); };
+})();
+</script>
+</body>
+</html>
