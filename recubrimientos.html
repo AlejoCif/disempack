@@ -124,6 +124,29 @@
     .rc-essence-right p { font-size: .95rem; color: #444; line-height: 1.85; margin-bottom: 1.5rem; text-align: justify; }
     .rc-essence-right img { width: 100%; border-radius: 6px; display: block; box-shadow: 0 4px 16px rgba(0,0,0,.1); }
 
+    /* ── VIDEOS ── */
+    .rc-videos { padding: 4rem 2.5rem; background: #fff; }
+    .rc-videos-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .rc-video-col { position: relative; border-radius: 10px; overflow: hidden; background: #000; }
+    .rc-video-col video { width: 100%; display: block; border-radius: 10px; }
+    .rc-mute-btn {
+      position: absolute; bottom: 12px; right: 12px; z-index: 10;
+      background: rgba(0,0,0,.55); border: none; border-radius: 50%;
+      width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: background .2s;
+    }
+    .rc-mute-btn:hover { background: rgba(0,0,0,.8); }
+    .rc-mute-btn svg { width: 18px; height: 18px; fill: #fff; }
+
+    /* ── TAP HANDLE GALLERY ── */
+    .rc-tap-gallery { padding: 2rem 2.5rem 4rem; background: #fff; }
+    .rc-tap-gallery-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .rc-tap-gallery-inner img {
+      width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 8px; display: block;
+      box-shadow: 0 2px 12px rgba(0,0,0,.08); transition: transform .3s, box-shadow .3s;
+    }
+    .rc-tap-gallery-inner img:hover { transform: scale(1.03); box-shadow: 0 8px 24px rgba(0,0,0,.18); }
+
     /* ── GALLERY ── */
     .rc-gallery { padding: 4rem 2.5rem; background: #fff; }
     .rc-gallery-header { text-align: center; max-width: 800px; margin: 0 auto 3rem; }
@@ -247,6 +270,8 @@
       .rc-faq-grid { grid-template-columns: 1fr; }
       .footer-top { grid-template-columns: 1fr; }
       .rc-carousel-item { flex: 0 0 50%; }
+      .rc-videos-inner { grid-template-columns: 1fr; }
+      .rc-tap-gallery-inner { grid-template-columns: repeat(3, 1fr); }
           .rc-hero-text-box { background: rgba(10,20,50,.45); }
       .rc-hero-text-box h1 { font-size: 1.8rem; }
       .rc-cta-overlay h2 { font-size: 1.3rem; }
@@ -357,6 +382,40 @@
       <br/>
       <img src="img/recubrimientos/tap-handle-esencia.webp" alt="Tap Handle para dispensador de bebidas" loading="lazy"/>
     </div>
+  </div>
+</section>
+
+<!-- ══ VIDEOS ══ -->
+<section class="rc-videos">
+  <div class="rc-videos-inner">
+
+    <div class="rc-video-col">
+      <video id="rcvid1" autoplay loop muted playsinline>
+        <source src="img/recubrimientos/Barbarian.mp4" type="video/mp4"/>
+      </video>
+      <button class="rc-mute-btn" id="rcMute1" title="Silenciar / Activar sonido">
+        <svg id="rcMuteIcon1" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
+      </button>
+    </div>
+
+    <div class="rc-video-col">
+      <video id="rcvid2" autoplay loop muted playsinline>
+        <source src="img/recubrimientos/BBC.mp4" type="video/mp4"/>
+      </video>
+      <button class="rc-mute-btn" id="rcMute2" title="Silenciar / Activar sonido">
+        <svg id="rcMuteIcon2" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ TAP HANDLE GALLERY ══ -->
+<section class="rc-tap-gallery">
+  <div class="rc-tap-gallery-inner">
+    <img src="img/recubrimientos/tap-handle-colombia-tomate.webp" alt="Tap Handle Colombia Tomate" loading="lazy"/>
+    <img src="img/recubrimientos/tap-handle-stella.webp" alt="Tap Handle Stella" loading="lazy"/>
+    <img src="img/recubrimientos/tap-hundle-club-colombia.webp" alt="Tap Handle Club Colombia" loading="lazy"/>
   </div>
 </section>
 
@@ -609,6 +668,22 @@
     requestAnimationFrame(animate);
   }
   animate();
+
+  /* ── VIDEO MUTE TOGGLES ── */
+  (function(){
+    const MUTED_ICON = '<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>';
+    const UNMUTED_ICON = '<path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>';
+    [[1,'rcMute1','rcMuteIcon1','rcvid1'],[2,'rcMute2','rcMuteIcon2','rcvid2']].forEach(function(t){
+      var btn = document.getElementById(t[1]);
+      var icon = document.getElementById(t[2]);
+      var vid = document.getElementById(t[3]);
+      if(!btn||!icon||!vid) return;
+      btn.addEventListener('click', function(){
+        vid.muted = !vid.muted;
+        icon.innerHTML = vid.muted ? MUTED_ICON : UNMUTED_ICON;
+      });
+    });
+  })();
 
   /* ── FAQ ── */
   document.querySelectorAll('.faq-question').forEach(btn => {
