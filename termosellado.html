@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Venta de materia prima plástica en Disempack SAS. Poliestireno, polipropileno, ABS, PVC y PET para termoformado, impresión, empaques y más."/>
-  <title>Venta de Materia Prima — Disempack SAS</title>
+  <meta name="description" content="Termosellado industrial en Disempack SAS. Sellado seguro por calor y presión para blísteres, empaques promocionales y presentaciones comerciales."/>
+  <title>Termosellado Industrial — Disempack SAS</title>
   <link rel="icon" href="favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
@@ -13,9 +13,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha384-/o6I2CkkWC//PSjvWC/eYN7l3xM3tJm8ZzVkCOfp//W05QcE3mlGskpoHB6XqI+B" crossorigin="anonymous"/>
   <meta property="og:type" content="website"/>
-  <meta property="og:url" content="https://disempack.com.co/materia-prima.html"/>
-  <meta property="og:title" content="Venta de Materia Prima — Disempack SAS"/>
-  <meta property="og:description" content="Suministramos láminas de poliestireno, polipropileno, ABS, PVC y PET para proyectos de termoformado, empaques, impresión y corte en Colombia."/>
+  <meta property="og:url" content="https://disempack.com.co/termosellado.html"/>
+  <meta property="og:title" content="Termosellado Industrial — Disempack SAS"/>
+  <meta property="og:description" content="Disempack SAS: sellado seguro por calor y presión para blísteres, empaques promocionales y presentaciones comerciales en Colombia."/>
   <meta property="og:image" content="https://disempack.com.co/img/og-image.jpg"/>
   <meta property="og:image:width" content="1200"/>
   <meta property="og:image:height" content="630"/>
@@ -91,90 +91,84 @@
     .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
     /* ── HERO ── */
-    .mp-hero {
+    .ts-hero {
       position: relative; width: 100%;
       height: 36.5vw; max-height: 700px; min-height: 380px;
-      background-image: url('img/banner/materia-prima-header.webp');
+      background-image: url('img/banner/termosellado-header.webp');
       background-size: cover; background-position: center;
       background-color: #1c2f5e;
       display: flex; align-items: center; justify-content: center;
     }
-    .mp-hero-overlay { position: absolute; inset: 0; background: rgba(28,47,94,.55); display: flex; align-items: center; justify-content: center; }
-    .mp-hero-box {
+    .ts-hero-overlay { position: absolute; inset: 0; background: rgba(28,47,94,.55); display: flex; align-items: center; justify-content: center; }
+    .ts-hero-box {
       background: rgba(10,20,50,.65); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
       border-radius: 10px; padding: 2.5rem 3rem; max-width: 860px; text-align: center;
     }
-    .mp-hero-box h1 { font-size: 2.8rem; font-weight: 800; color: #fff; line-height: 1.2; margin-bottom: 1.1rem; }
-    .mp-hero-box h1 span { color: #8dc63f; }
-    .mp-hero-box p { font-size: 1rem; color: #d8e4f8; line-height: 1.8; margin-bottom: 1.8rem; }
-    .mp-btn {
+    .ts-hero-box h1 { font-size: 2.8rem; font-weight: 800; color: #fff; line-height: 1.2; margin-bottom: 1.1rem; }
+    .ts-hero-box h1 span { color: #8dc63f; }
+    .ts-hero-box p { font-size: 1rem; color: #d8e4f8; line-height: 1.8; margin-bottom: 1.8rem; }
+    .ts-btn {
       display: inline-block; background: #8dc63f; color: #fff; font-weight: 700;
       font-size: .95rem; padding: .75rem 2.2rem; border-radius: 4px;
       text-decoration: none; border: 2px solid #8dc63f; transition: background .2s, color .2s;
     }
-    .mp-btn:hover { background: #fff; color: #8dc63f; }
+    .ts-btn:hover { background: #fff; color: #8dc63f; }
 
-    /* ── MATERIALES ── */
-    .mp-materiales { padding: 5rem 2.5rem; background: #fff; }
-    .mp-materiales-inner { max-width: 1100px; margin: 0 auto; }
-    .mp-materiales-inner > h2 { font-size: 2rem; font-weight: 700; color: #1c2f5e; text-align: center; margin-bottom: .6rem; }
-    .mp-materiales-inner > p.mp-sub { font-size: 1rem; color: #666; text-align: center; margin-bottom: 3rem; }
-    .mp-mat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.8rem; }
-    .mp-mat-card {
-      background: #f7f9fc; border-radius: 10px; padding: 2rem 2rem 2rem 2.2rem;
-      border-left: 5px solid #8dc63f;
-      box-shadow: 0 2px 12px rgba(28,47,94,.07);
-    }
-    .mp-mat-card h3 { font-size: 1.05rem; font-weight: 800; color: #1c2f5e; margin-bottom: .7rem; }
-    .mp-mat-card p { font-size: .9rem; color: #555; line-height: 1.75; }
-    .mp-mat-card .mp-badge {
-      display: inline-block; background: #e6f2d5; color: #4d7a1a; font-size: .75rem;
-      font-weight: 700; padding: .2rem .7rem; border-radius: 20px; margin-bottom: .8rem;
-    }
+    /* ── INTRO ── */
+    .ts-intro { padding: 5rem 2.5rem; background: #f7f9fc; }
+    .ts-intro-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .ts-intro-text h3 { font-size: .85rem; font-weight: 700; color: #8dc63f; text-transform: uppercase; letter-spacing: .12em; margin-bottom: .5rem; }
+    .ts-intro-text h2 { font-size: 2rem; font-weight: 700; color: #1c2f5e; margin-bottom: 1.4rem; }
+    .ts-intro-text p { font-size: .95rem; color: #555; line-height: 1.85; margin-bottom: 1rem; }
+    .ts-intro-text p:last-child { margin-bottom: 0; }
+    .ts-intro-icon { text-align: center; }
+    .ts-intro-icon i { font-size: 9rem; color: #8dc63f; opacity: .18; }
 
-    /* ── INTRO / EL MATERIAL CORRECTO ── */
-    .mp-intro { padding: 5rem 2.5rem; background: #f7f9fc; }
-    .mp-intro-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-    .mp-intro-text h3 { font-size: .85rem; font-weight: 700; color: #8dc63f; text-transform: uppercase; letter-spacing: .12em; margin-bottom: .5rem; }
-    .mp-intro-text h2 { font-size: 2rem; font-weight: 700; color: #1c2f5e; margin-bottom: 1.4rem; }
-    .mp-intro-text p { font-size: .95rem; color: #555; line-height: 1.85; margin-bottom: 1.2rem; }
-    .mp-apps-label { font-size: .8rem; font-weight: 700; color: #1c2f5e; text-transform: uppercase; letter-spacing: .1em; margin-bottom: .8rem; }
-    .mp-apps-tags { display: flex; flex-wrap: wrap; gap: .5rem; }
-    .mp-apps-tags span {
-      display: inline-block; background: #e6f2d5; color: #3a6010;
-      font-size: .82rem; font-weight: 600; padding: .3rem .9rem; border-radius: 20px;
+    /* ── APLICACIONES ── */
+    .ts-apps { padding: 5rem 2.5rem; background: #fff; }
+    .ts-apps-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+    .ts-apps-inner h2 { font-size: 2rem; font-weight: 700; color: #1c2f5e; margin-bottom: 2.5rem; }
+    .ts-apps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+    .ts-app-item {
+      background: #f7f9fc; border-radius: 8px; padding: 1.4rem 1rem;
+      display: flex; flex-direction: column; align-items: center; gap: .7rem;
+      border: 1px solid #e8ecf4; transition: box-shadow .2s, transform .2s;
     }
-    .mp-intro-icon { text-align: center; }
-    .mp-intro-icon i { font-size: 9rem; color: #8dc63f; opacity: .18; }
+    .ts-app-item:hover { box-shadow: 0 6px 20px rgba(28,47,94,.1); transform: translateY(-3px); }
+    .ts-app-item i { font-size: 1.8rem; color: #8dc63f; }
+    .ts-app-item span { font-size: .88rem; font-weight: 600; color: #1c2f5e; }
 
-    /* ── COMPRA SEGÚN TU NECESIDAD ── */
-    .mp-why { padding: 5rem 2.5rem; background: #fff; }
-    .mp-why-inner { max-width: 1100px; margin: 0 auto; }
-    .mp-why-inner h2 { font-size: 2rem; font-weight: 700; color: #1c2f5e; text-align: center; margin-bottom: .5rem; }
-    .mp-why-inner > p { font-size: .95rem; color: #888; text-align: center; margin-bottom: 2.5rem; }
-    .mp-why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
-    .mp-why-card {
-      background: #f7f9fc; border-radius: 8px; padding: 2rem 1.5rem;
+    /* ── BENEFICIOS ── */
+    .ts-why { padding: 5rem 2.5rem; background: #f7f9fc; }
+    .ts-why-inner { max-width: 1100px; margin: 0 auto; }
+    .ts-why-inner h2 { font-size: 2rem; font-weight: 700; color: #1c2f5e; text-align: center; margin-bottom: 2.5rem; }
+    .ts-why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+    .ts-why-card {
+      background: #fff; border-radius: 8px; padding: 2rem 1.5rem;
       border-top: 4px solid #8dc63f; text-align: center;
       box-shadow: 0 2px 12px rgba(28,47,94,.07);
     }
-    .mp-why-card i { font-size: 2rem; color: #8dc63f; margin-bottom: .9rem; }
-    .mp-why-card h3 { font-size: .9rem; font-weight: 800; color: #1c2f5e; text-transform: uppercase; letter-spacing: .08em; margin-bottom: .7rem; }
-    .mp-why-card p { font-size: .87rem; color: #666; line-height: 1.7; }
+    .ts-why-card h3 { font-size: .9rem; font-weight: 800; color: #1c2f5e; text-transform: uppercase; letter-spacing: .08em; margin-bottom: .7rem; }
+    .ts-why-card p { font-size: .88rem; color: #666; line-height: 1.7; }
+
+    /* ── PRE-BANNER ── */
+    .ts-pre-banner { padding: 3.5rem 2.5rem; background: #fff; text-align: center; }
+    .ts-pre-banner h2 { font-size: 2rem; font-weight: 800; color: #1c2f5e; margin-bottom: .6rem; }
+    .ts-pre-banner p { font-size: 1rem; color: #8dc63f; font-weight: 600; letter-spacing: .06em; }
 
     /* ── CTA BANNER ── */
-    .mp-cta-wrap { padding: 2rem 2.5rem 4rem; max-width: 1200px; margin: 0 auto; }
-    .mp-cta-banner {
+    .ts-cta-wrap { padding: 2rem 2.5rem 4rem; max-width: 1200px; margin: 0 auto; }
+    .ts-cta-banner {
       position: relative; padding: 5rem 2.5rem;
       background: #1c2f5e; text-align: center; overflow: hidden; border-radius: 10px;
     }
-    .mp-cta-banner::before {
+    .ts-cta-banner::before {
       content: ''; position: absolute; inset: 0;
-      background: url('img/banner/materia-prima-header.webp') center/cover no-repeat;
+      background: url('img/banner/termosellado-header.webp') center/cover no-repeat;
       opacity: .12;
     }
-    .mp-cta-inner { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
-    .mp-cta-inner h2 { font-size: 2.2rem; font-weight: 800; color: #fff; margin-bottom: 1.6rem; line-height: 1.25; }
+    .ts-cta-inner { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+    .ts-cta-inner h2 { font-size: 2.2rem; font-weight: 800; color: #fff; margin-bottom: 1.6rem; line-height: 1.25; }
 
     /* ── FOOTER ── */
     footer { background: #1c2f5e; color: #a0b4d0; font-size: .85rem; }
@@ -208,12 +202,12 @@
       .nav-links > li > a { padding: .75rem 1.5rem; }
       .dropdown { position: static; box-shadow: none; border: none; border-left: 3px solid #8dc63f; margin-left: 1.5rem; display: none !important; }
       .hamburger { display: flex; }
-      .mp-hero-box { padding: 1.8rem 1.5rem; }
-      .mp-hero-box h1 { font-size: 1.9rem; }
-      .mp-mat-grid { grid-template-columns: 1fr; }
-      .mp-intro-inner { grid-template-columns: 1fr; gap: 2rem; }
-      .mp-intro-icon { display: none; }
-      .mp-why-grid { grid-template-columns: repeat(2, 1fr); }
+      .ts-hero-box { padding: 1.8rem 1.5rem; }
+      .ts-hero-box h1 { font-size: 1.9rem; }
+      .ts-intro-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .ts-intro-icon { display: none; }
+      .ts-apps-grid { grid-template-columns: repeat(2, 1fr); }
+      .ts-why-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
@@ -260,8 +254,8 @@
         <li><a href="troquelado.html">Troquelado</a></li>
         <li><a href="#">Corte CNC</a></li>
         <li><a href="#">Acondicionamiento De Productos</a></li>
-        <li><a href="termosellado.html">Termosellado</a></li>
-        <li><a href="materia-prima.html" style="color:#1c2f5e;font-weight:700;">Venta De Materia Prima</a></li>
+        <li><a href="termosellado.html" style="color:#1c2f5e;font-weight:700;">Termosellado</a></li>
+        <li><a href="materia-prima.html">Venta De Materia Prima</a></li>
       </ul>
     </li>
     <li><a href="contacto.html">Contacto</a></li>
@@ -284,111 +278,101 @@
 </div>
 
 <!-- ══ HERO ══ -->
-<section class="mp-hero">
-  <div class="mp-hero-overlay">
-    <div class="mp-hero-box">
-      <h1>Materiales para <span>transformar grandes ideas</span></h1>
-      <p>Suministramos láminas y rollos de materiales plásticos de alta calidad para procesos industriales y creativos.</p>
-      <a href="cotizar.html" class="mp-btn">Consultar Disponibilidad</a>
+<section class="ts-hero">
+  <div class="ts-hero-overlay">
+    <div class="ts-hero-box">
+      <h1>Sellado seguro para una <span>presentación profesional</span></h1>
+      <p>Integramos materiales mediante calor y presión para obtener empaques protegidos, funcionales y listos para exhibición.</p>
+      <a href="cotizar.html" class="ts-btn">Cotiza tu proyecto</a>
     </div>
   </div>
 </section>
 
-<!-- ══ MATERIALES ══ -->
-<section class="mp-materiales">
-  <div class="mp-materiales-inner">
-    <h2>Suministramos materia prima</h2>
-    <p class="mp-sub">Contamos con materiales disponibles en diferentes formatos y calibres para adaptarse a cada proceso productivo.</p>
-    <div class="mp-mat-grid">
-
-      <div class="mp-mat-card">
-        <span class="mp-badge">Láminas</span>
-        <h3>Poliestireno (PS)</h3>
-        <p>Formatos disponibles: 100 cm × 200 cm y 120 cm × 240 cm<br/>Calibres del 20 al 120</p>
-      </div>
-
-      <div class="mp-mat-card">
-        <span class="mp-badge">Láminas</span>
-        <h3>Polipropileno (PP)</h3>
-        <p>Formatos disponibles: 100 cm × 200 cm y 120 cm × 240 cm<br/>Calibres del 20 al 120</p>
-      </div>
-
-      <div class="mp-mat-card">
-        <span class="mp-badge">Sobre pedido</span>
-        <h3>ABS</h3>
-        <p>Formatos hasta 120 cm × 240 cm<br/>Calibres del 20 al 300</p>
-      </div>
-
-      <div class="mp-mat-card">
-        <span class="mp-badge">Rollos</span>
-        <h3>PVC y PET</h3>
-        <p>Rollos de aproximadamente 40 a 50 kg<br/>Ancho: 50 cm</p>
-      </div>
-
+<!-- ══ INTRO ══ -->
+<section class="ts-intro">
+  <div class="ts-intro-inner">
+    <div class="ts-intro-text">
+      <h3>Proceso</h3>
+      <h2>Protección que también comunica</h2>
+      <p>El termosellado permite unir componentes de un empaque mediante la aplicación controlada de temperatura y presión.</p>
+      <p>Es especialmente útil para soluciones que requieren protección, presentación y estabilidad durante su manipulación.</p>
+    </div>
+    <div class="ts-intro-icon">
+      <i class="fa-solid fa-fire-flame-curved"></i>
     </div>
   </div>
 </section>
 
-<!-- ══ EL MATERIAL CORRECTO ══ -->
-<section class="mp-intro">
-  <div class="mp-intro-inner">
-    <div class="mp-intro-text">
-      <h3>Asesoría</h3>
-      <h2>El material correcto para cada proyecto</h2>
-      <p>Seleccionar una materia prima adecuada es fundamental para lograr resistencia, apariencia y funcionalidad.</p>
-      <p>En Disempack te ayudamos a encontrar materiales de acuerdo con las necesidades de cada aplicación y proceso productivo.</p>
-      <p class="mp-apps-label">Soluciones para</p>
-      <div class="mp-apps-tags">
-        <span>Termoformado</span>
-        <span>Impresión digital</span>
-        <span>Exhibición comercial</span>
-        <span>Empaques</span>
-        <span>Corte y mecanizado</span>
-        <span>Desarrollo de productos</span>
+<!-- ══ APLICACIONES ══ -->
+<section class="ts-apps">
+  <div class="ts-apps-inner">
+    <h2>Aplicaciones</h2>
+    <div class="ts-apps-grid">
+      <div class="ts-app-item">
+        <i class="fa-solid fa-layer-group"></i>
+        <span>Blíster con cartón</span>
       </div>
-    </div>
-    <div class="mp-intro-icon">
-      <i class="fa-solid fa-layer-group"></i>
+      <div class="ts-app-item">
+        <i class="fa-solid fa-gift"></i>
+        <span>Empaques promocionales</span>
+      </div>
+      <div class="ts-app-item">
+        <i class="fa-solid fa-basket-shopping"></i>
+        <span>Productos de consumo</span>
+      </div>
+      <div class="ts-app-item">
+        <i class="fa-solid fa-store"></i>
+        <span>Artículos para retail</span>
+      </div>
+      <div class="ts-app-item">
+        <i class="fa-solid fa-shapes"></i>
+        <span>Piezas termoformadas</span>
+      </div>
+      <div class="ts-app-item">
+        <i class="fa-solid fa-briefcase"></i>
+        <span>Presentaciones comerciales</span>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ══ COMPRA SEGÚN TU NECESIDAD ══ -->
-<section class="mp-why">
-  <div class="mp-why-inner">
-    <h2>Compra según tu necesidad</h2>
-    <p>Flexibilidad en formatos, calibres y cantidades.</p>
-    <div class="mp-why-grid">
-      <div class="mp-why-card">
-        <i class="fa-solid fa-expand"></i>
-        <h3>Formatos</h3>
-        <p>Opciones adaptadas a diferentes procesos.</p>
+<!-- ══ BENEFICIOS ══ -->
+<section class="ts-why">
+  <div class="ts-why-inner">
+    <h2>Beneficios</h2>
+    <div class="ts-why-grid">
+      <div class="ts-why-card">
+        <h3>Sellado uniforme</h3>
+        <p>Acabados limpios y consistentes.</p>
       </div>
-      <div class="mp-why-card">
-        <i class="fa-solid fa-sliders"></i>
-        <h3>Calibres</h3>
-        <p>Alternativas según resistencia y aplicación.</p>
+      <div class="ts-why-card">
+        <h3>Protección</h3>
+        <p>Mayor seguridad para el producto.</p>
       </div>
-      <div class="mp-why-card">
-        <i class="fa-solid fa-comments"></i>
-        <h3>Asesoría</h3>
-        <p>Te orientamos en la elección del material.</p>
+      <div class="ts-why-card">
+        <h3>Presentación</h3>
+        <p>Una solución lista para exhibición.</p>
       </div>
-      <div class="mp-why-card">
-        <i class="fa-solid fa-boxes-stacked"></i>
-        <h3>Disponibilidad</h3>
-        <p>Consulta referencias y cantidades con nuestro equipo.</p>
+      <div class="ts-why-card">
+        <h3>Eficiencia</h3>
+        <p>Procesos adaptados a producción en serie.</p>
       </div>
     </div>
   </div>
 </section>
+
+<!-- ══ PRE-BANNER ══ -->
+<div class="ts-pre-banner">
+  <h2>Protección desde el empaque</h2>
+  <p>Seguridad &bull; Presentación &bull; Precisión &bull; Calidad</p>
+</div>
 
 <!-- ══ CTA BANNER ══ -->
-<div class="mp-cta-wrap">
-  <div class="mp-cta-banner">
-    <div class="mp-cta-inner">
-      <h2>Encuentra la materia prima que necesitas.</h2>
-      <a href="cotizar.html" class="mp-btn">Solicitar Cotización</a>
+<div class="ts-cta-wrap">
+  <div class="ts-cta-banner">
+    <div class="ts-cta-inner">
+      <h2>Dale a tu producto un empaque listo para destacar.</h2>
+      <a href="cotizar.html" class="ts-btn">Cotizar Termosellado</a>
     </div>
   </div>
 </div>
@@ -454,6 +438,7 @@
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSearch(); });
 
   const SITE_PAGES = [
+    { title: 'Termosellado',                url: 'termosellado.html',             keywords: 'termosellado sellado calor presion blister carton empaque retail promocional exhibicion' },
     { title: 'Venta de Materia Prima',      url: 'materia-prima.html',            keywords: 'materia prima polimero lamina rollo poliestireno polipropileno abs pvc pet calibre formato plastico' },
     { title: 'Troquelado',                  url: 'troquelado.html',               keywords: 'troquelado troquel corte perforado caja empaque separador inserto pieza' },
     { title: 'Diseño y Desarrollo',         url: 'diseno-desarrollo.html',        keywords: 'diseño desarrollo producto prototipo ingenieria concepto funcional fabricacion' },
