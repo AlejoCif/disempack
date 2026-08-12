@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Diseño y desarrollo de productos en Disempack SAS. Transformamos ideas en soluciones funcionales y atractivas, desde el concepto hasta la producción."/>
-  <title>Diseño y Desarrollo de Productos — Disempack SAS</title>
+  <meta name="description" content="Troquelado industrial en Disempack SAS. Cortes precisos y consistentes para cajas, empaques, material POP y piezas personalizadas."/>
+  <title>Troquelado Industrial — Disempack SAS</title>
   <link rel="icon" href="favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
@@ -13,8 +13,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha384-/o6I2CkkWC//PSjvWC/eYN7l3xM3tJm8ZzVkCOfp//W05QcE3mlGskpoHB6XqI+B" crossorigin="anonymous"/>
   <meta property="og:type" content="website"/>
-  <meta property="og:url" content="https://disempack.com.co/diseno-desarrollo.html"/>
-  <meta property="og:title" content="Diseño y Desarrollo de Productos — Disempack SAS"/>
+  <meta property="og:url" content="https://disempack.com.co/troquelado.html"/>
+  <meta property="og:title" content="Troquelado Industrial — Disempack SAS"/>
   <meta property="og:description" content="Disempack SAS: fabricación de empaques, cajas plegadizas, impresión digital UV, blister, clam shell, señalización y material POP en Colombia."/>
   <meta property="og:image" content="https://disempack.com.co/img/og-image.jpg"/>
   <meta property="og:image:width" content="1200"/>
@@ -26,12 +26,10 @@
     html { scroll-behavior: smooth; }
     body { font-family: 'Open Sans', sans-serif; color: #333; background: #fff; overflow-x: hidden; }
 
-    /* ── TOP BAR ── */
     .topbar { background: #1c2f5e; padding: .35rem 2rem; display: flex; justify-content: flex-end; gap: 1.5rem; }
     .topbar a { color: #ccd6f0; font-size: .75rem; text-decoration: none; transition: color .15s; }
     .topbar a:hover { color: #fff; }
 
-    /* ── NAVBAR ── */
     nav {
       background: #fff; border-bottom: 1px solid #e8e8e8;
       display: flex; align-items: center; justify-content: space-between;
@@ -64,7 +62,6 @@
     .dropdown li a:hover { background: #f0f0f0; color: #555; }
     .nav-search { font-size: 1rem; color: #555; cursor: pointer; padding: .4rem .6rem; border: none; background: none; }
 
-    /* ── SEARCH OVERLAY ── */
     .search-overlay {
       display: none; position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 500;
       align-items: flex-start; justify-content: center; padding-top: 80px;
@@ -87,7 +84,6 @@
     .search-result-item:hover { background: #f5f9ec; color: #8dc63f; }
     .search-result-empty { padding: .85rem 1.2rem; color: #888; font-size: .9rem; }
 
-    /* ── HAMBURGER ── */
     .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: .4rem; }
     .hamburger span { display: block; width: 24px; height: 2px; background: #333; border-radius: 2px; transition: transform .3s, opacity .3s; }
     .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
@@ -95,80 +91,84 @@
     .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
     /* ── HERO ── */
-    .dd-hero {
+    .tr-hero {
       position: relative; width: 100%;
       height: 36.5vw; max-height: 700px; min-height: 380px;
-      background-image: url('img/banner/diseno-desarrollo-header.webp');
+      background-image: url('img/banner/troquelado-header.webp');
       background-size: cover; background-position: center;
       display: flex; align-items: center; justify-content: center;
     }
-    .dd-hero-overlay {
-      position: absolute; inset: 0; background: rgba(28,47,94,.55);
-      display: flex; align-items: center; justify-content: center;
-    }
-    .dd-hero-box {
-      background: rgba(10,20,50,.65); backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
+    .tr-hero-overlay { position: absolute; inset: 0; background: rgba(28,47,94,.55); display: flex; align-items: center; justify-content: center; }
+    .tr-hero-box {
+      background: rgba(10,20,50,.65); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
       border-radius: 10px; padding: 2.5rem 3rem; max-width: 860px; text-align: center;
     }
-    .dd-hero-box .dd-eyebrow { font-size: .8rem; font-weight: 700; color: #8dc63f; text-transform: uppercase; letter-spacing: .14em; margin-bottom: .6rem; }
-    .dd-hero-box h1 { font-size: 2.8rem; font-weight: 800; color: #fff; line-height: 1.2; margin-bottom: 1.1rem; }
-    .dd-hero-box h1 span { color: #8dc63f; }
-    .dd-hero-box p { font-size: 1rem; color: #d8e4f8; line-height: 1.8; margin-bottom: 1.8rem; }
-    .dd-hero-btn {
+    .tr-eyebrow { font-size: .8rem; font-weight: 700; color: #8dc63f; text-transform: uppercase; letter-spacing: .14em; margin-bottom: .6rem; }
+    .tr-hero-box h1 { font-size: 2.8rem; font-weight: 800; color: #fff; line-height: 1.2; margin-bottom: 1.1rem; }
+    .tr-hero-box h1 span { color: #8dc63f; }
+    .tr-hero-box p { font-size: 1rem; color: #d8e4f8; line-height: 1.8; margin-bottom: 1.8rem; }
+    .tr-btn {
       display: inline-block; background: #8dc63f; color: #fff; font-weight: 700;
       font-size: .95rem; padding: .75rem 2.2rem; border-radius: 4px;
       text-decoration: none; border: 2px solid #8dc63f; transition: background .2s, color .2s;
     }
-    .dd-hero-btn:hover { background: #fff; color: #8dc63f; }
+    .tr-btn:hover { background: #fff; color: #8dc63f; }
 
     /* ── INTRO ── */
-    .dd-intro { padding: 5rem 2.5rem; background: #f7f9fc; }
-    .dd-intro-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-    .dd-intro-text h3 { font-size: .85rem; font-weight: 700; color: #8dc63f; text-transform: uppercase; letter-spacing: .12em; margin-bottom: .5rem; }
-    .dd-intro-text h2 { font-size: 2rem; font-weight: 700; color: #1c2f5e; margin-bottom: 1.4rem; }
-    .dd-intro-text p { font-size: .95rem; color: #555; line-height: 1.85; margin-bottom: 1rem; }
-    .dd-intro-text p:last-child { margin-bottom: 0; }
-    .dd-intro-icon { text-align: center; }
-    .dd-intro-icon i { font-size: 9rem; color: #8dc63f; opacity: .18; }
+    .tr-intro { padding: 5rem 2.5rem; background: #f7f9fc; }
+    .tr-intro-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .tr-intro-text h3 { font-size: .85rem; font-weight: 700; color: #8dc63f; text-transform: uppercase; letter-spacing: .12em; margin-bottom: .5rem; }
+    .tr-intro-text h2 { font-size: 2rem; font-weight: 700; color: #1c2f5e; margin-bottom: 1.4rem; }
+    .tr-intro-text p { font-size: .95rem; color: #555; line-height: 1.85; margin-bottom: 1rem; }
+    .tr-intro-text p:last-child { margin-bottom: 0; }
+    .tr-intro-icon { text-align: center; }
+    .tr-intro-icon i { font-size: 9rem; color: #8dc63f; opacity: .18; }
 
-    /* ── PROCESO ── */
-    .dd-process { padding: 5rem 2.5rem; background: #fff; }
-    .dd-process-inner { max-width: 1100px; margin: 0 auto; }
-    .dd-process-inner h2 { font-size: 2rem; font-weight: 700; color: #1c2f5e; text-align: center; margin-bottom: 3rem; }
-    .dd-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
-    .dd-step {
-      text-align: center; padding: 2.5rem 1.5rem;
-      position: relative;
+    /* ── APLICACIONES ── */
+    .tr-apps { padding: 5rem 2.5rem; background: #fff; }
+    .tr-apps-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+    .tr-apps-inner h2 { font-size: 2rem; font-weight: 700; color: #1c2f5e; margin-bottom: 2.5rem; }
+    .tr-apps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
+    .tr-app-item {
+      background: #f7f9fc; border-radius: 8px; padding: 1.4rem 1rem;
+      display: flex; flex-direction: column; align-items: center; gap: .7rem;
+      border: 1px solid #e8ecf4; transition: box-shadow .2s, transform .2s;
     }
-    .dd-step:not(:last-child)::after {
-      content: ''; position: absolute; top: 3.2rem; right: 0;
-      width: 1px; height: 60px; background: #e0e4ef;
+    .tr-app-item:hover { box-shadow: 0 6px 20px rgba(28,47,94,.1); transform: translateY(-3px); }
+    .tr-app-item i { font-size: 1.8rem; color: #8dc63f; }
+    .tr-app-item span { font-size: .88rem; font-weight: 600; color: #1c2f5e; }
+
+    /* ── VENTAJAS ── */
+    .tr-why { padding: 5rem 2.5rem; background: #f7f9fc; }
+    .tr-why-inner { max-width: 1100px; margin: 0 auto; }
+    .tr-why-inner h2 { font-size: 2rem; font-weight: 700; color: #1c2f5e; text-align: center; margin-bottom: 2.5rem; }
+    .tr-why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+    .tr-why-card {
+      background: #fff; border-radius: 8px; padding: 2rem 1.5rem;
+      border-top: 4px solid #8dc63f; text-align: center;
+      box-shadow: 0 2px 12px rgba(28,47,94,.07);
     }
-    .dd-step-num {
-      width: 60px; height: 60px; border-radius: 50%;
-      background: #1c2f5e; color: #fff;
-      font-size: 1.4rem; font-weight: 800;
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 1.2rem;
-    }
-    .dd-step h3 { font-size: 1rem; font-weight: 800; color: #1c2f5e; text-transform: uppercase; letter-spacing: .08em; margin-bottom: .6rem; }
-    .dd-step p { font-size: .88rem; color: #666; line-height: 1.7; }
+    .tr-why-card h3 { font-size: .9rem; font-weight: 800; color: #1c2f5e; text-transform: uppercase; letter-spacing: .08em; margin-bottom: .7rem; }
+    .tr-why-card p { font-size: .88rem; color: #666; line-height: 1.7; }
+
+    /* ── PRE-BANNER ── */
+    .tr-pre-banner { padding: 3.5rem 2.5rem; background: #fff; text-align: center; }
+    .tr-pre-banner h2 { font-size: 2rem; font-weight: 800; color: #1c2f5e; margin-bottom: .6rem; }
+    .tr-pre-banner p { font-size: 1rem; color: #8dc63f; font-weight: 600; letter-spacing: .06em; }
 
     /* ── CTA BANNER ── */
-    .dd-cta-wrap { padding: 2rem 2.5rem 4rem; max-width: 1200px; margin: 0 auto; }
-    .dd-cta-banner {
+    .tr-cta-wrap { padding: 2rem 2.5rem 4rem; max-width: 1200px; margin: 0 auto; }
+    .tr-cta-banner {
       position: relative; padding: 5rem 2.5rem;
-      background: #1c2f5e; text-align: center; overflow: hidden;
-      border-radius: 10px;
+      background: #1c2f5e; text-align: center; overflow: hidden; border-radius: 10px;
     }
-    .dd-cta-banner::before {
+    .tr-cta-banner::before {
       content: ''; position: absolute; inset: 0;
-      background: url('img/banner/diseno-desarrollo-header.webp') center/cover no-repeat;
+      background: url('img/banner/troquelado-header.webp') center/cover no-repeat;
       opacity: .12;
     }
-    .dd-cta-inner { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
-    .dd-cta-inner h2 { font-size: 2.2rem; font-weight: 800; color: #fff; margin-bottom: 1.6rem; line-height: 1.25; }
+    .tr-cta-inner { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+    .tr-cta-inner h2 { font-size: 2.2rem; font-weight: 800; color: #fff; margin-bottom: 1.6rem; line-height: 1.25; }
 
     /* ── FOOTER ── */
     footer { background: #1c2f5e; color: #a0b4d0; font-size: .85rem; }
@@ -186,7 +186,6 @@
     .footer-socials a:hover { background: #8dc63f; }
     .footer-bottom { border-top: 1px solid rgba(255,255,255,.08); text-align: center; padding: 1.2rem 2rem; font-size: .78rem; color: #6a80a0; }
 
-    /* ── FABs ── */
     .wa-fab {
       position: fixed; bottom: 24px; right: 24px; z-index: 900;
       background: #25d366; border-radius: 50%; width: 56px; height: 56px;
@@ -197,28 +196,23 @@
     .catalogos-fab { position: fixed; bottom: 24px; left: 24px; z-index: 900; width: 70px; display: block; transition: bottom .3s; }
     .catalogos-fab img { width: 100%; height: auto; display: block; }
 
-    /* ── MOBILE ── */
     @media(max-width:900px) {
       .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; background: #fff; padding: .5rem 0; border-top: 3px solid #8dc63f; box-shadow: 0 8px 24px rgba(0,0,0,.12); z-index: 199; }
       .nav-links.open { display: flex; }
       .nav-links > li > a { padding: .75rem 1.5rem; }
       .dropdown { position: static; box-shadow: none; border: none; border-left: 3px solid #8dc63f; margin-left: 1.5rem; display: none !important; }
       .hamburger { display: flex; }
-      .dd-hero-box { padding: 1.8rem 1.5rem; }
-      .dd-hero-box h1 { font-size: 1.9rem; }
-      .dd-intro-inner { grid-template-columns: 1fr; gap: 2rem; }
-      .dd-intro-icon { display: none; }
-      .dd-steps { grid-template-columns: 1fr 1fr; }
-      .dd-step:not(:last-child)::after { display: none; }
-    }
-    @media(max-width:480px) {
-      .dd-steps { grid-template-columns: 1fr 1fr; }
+      .tr-hero-box { padding: 1.8rem 1.5rem; }
+      .tr-hero-box h1 { font-size: 1.9rem; }
+      .tr-intro-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .tr-intro-icon { display: none; }
+      .tr-apps-grid { grid-template-columns: repeat(2, 1fr); }
+      .tr-why-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
 <body>
 
-<!-- TOP BAR -->
 <div class="topbar">
   <a href="terminos-condiciones.html">Términos y Condiciones</a>
   <a href="politica-privacidad.html">Política de Privacidad</a>
@@ -226,7 +220,6 @@
   <a href="contacto.html#trabaja-con-nosotros">Trabaja con nosotros</a>
 </div>
 
-<!-- NAVBAR -->
 <nav>
   <a href="index.html" class="logo-wrap">
     <img src="img/GENERICO-USOS-scaled.png" alt="Disempack"/>
@@ -256,9 +249,9 @@
       <a href="#">Procesos <span class="arrow">▾</span></a>
       <ul class="dropdown">
         <li><a href="impresion-digital.html">Impresión Digital</a></li>
-        <li><a href="diseno-desarrollo.html" style="color:#1c2f5e;font-weight:700;">Diseño y Desarrollo</a></li>
+        <li><a href="diseno-desarrollo.html">Diseño y Desarrollo</a></li>
         <li><a href="termoformado.html">Termoformado</a></li>
-        <li><a href="troquelado.html">Troquelado</a></li>
+        <li><a href="troquelado.html" style="color:#1c2f5e;font-weight:700;">Troquelado</a></li>
         <li><a href="#">Corte CNC</a></li>
         <li><a href="#">Acondicionamiento De Productos</a></li>
         <li><a href="#">Termosellado</a></li>
@@ -274,7 +267,6 @@
   <button class="nav-search" id="searchBtn">🔍</button>
 </nav>
 
-<!-- SEARCH OVERLAY -->
 <div class="search-overlay" id="searchOverlay">
   <div style="width:100%;max-width:600px;display:flex;flex-direction:column;align-items:stretch;">
     <div class="search-box">
@@ -286,67 +278,106 @@
 </div>
 
 <!-- ══ HERO ══ -->
-<section class="dd-hero">
-  <div class="dd-hero-overlay">
-    <div class="dd-hero-box">
-      <p class="dd-eyebrow">Diseño y Desarrollo</p>
-      <h1>Transformamos ideas en <span>productos reales</span></h1>
-      <p>Transformamos ideas en productos funcionales, atractivos y listos para producir.</p>
-      <a href="cotizar.html" class="dd-hero-btn">Cotiza tu proyecto</a>
+<section class="tr-hero">
+  <div class="tr-hero-overlay">
+    <div class="tr-hero-box">
+      <p class="tr-eyebrow">04. Troquelado</p>
+      <h1>Cortes precisos. <span>Resultados consistentes</span></h1>
+      <p>Transformamos materiales mediante cortes y formas definidas para obtener piezas listas para ensamblar, plegar o producir.</p>
+      <a href="cotizar.html" class="tr-btn">Cotiza tu proyecto</a>
     </div>
   </div>
 </section>
 
 <!-- ══ INTRO ══ -->
-<section class="dd-intro">
-  <div class="dd-intro-inner">
-    <div class="dd-intro-text">
-      <h3>Nuestro enfoque</h3>
-      <h2>Diseñamos pensando en producir</h2>
-      <p>En Disempack desarrollamos soluciones a la medida, integrando diseño, ingeniería y conocimiento de materiales para convertir cada idea en un producto viable y funcional.</p>
-      <p>Acompañamos el proyecto desde el concepto inicial hasta la definición final para producción.</p>
+<section class="tr-intro">
+  <div class="tr-intro-inner">
+    <div class="tr-intro-text">
+      <h3>Proceso</h3>
+      <h2>Precisión en cada pieza</h2>
+      <p>El troquelado permite cortar, marcar o perforar materiales siguiendo una geometría determinada.</p>
+      <p>Es un proceso ideal para fabricar piezas repetitivas con precisión y eficiencia.</p>
     </div>
-    <div class="dd-intro-icon">
-      <i class="fa-solid fa-pen-ruler"></i>
+    <div class="tr-intro-icon">
+      <i class="fa-solid fa-scissors"></i>
     </div>
   </div>
 </section>
 
-<!-- ══ PROCESO ══ -->
-<section class="dd-process">
-  <div class="dd-process-inner">
-    <h2>Nuestro proceso</h2>
-    <div class="dd-steps">
-      <div class="dd-step">
-        <div class="dd-step-num">1</div>
-        <h3>Idea</h3>
-        <p>Entendemos tu necesidad y objetivo.</p>
+<!-- ══ APLICACIONES ══ -->
+<section class="tr-apps">
+  <div class="tr-apps-inner">
+    <h2>Aplicaciones</h2>
+    <div class="tr-apps-grid">
+      <div class="tr-app-item">
+        <i class="fa-solid fa-box"></i>
+        <span>Cajas plegadizas</span>
       </div>
-      <div class="dd-step">
-        <div class="dd-step-num">2</div>
-        <h3>Diseño</h3>
-        <p>Desarrollamos una propuesta funcional y visual.</p>
+      <div class="tr-app-item">
+        <i class="fa-solid fa-gift"></i>
+        <span>Empaques</span>
       </div>
-      <div class="dd-step">
-        <div class="dd-step-num">3</div>
-        <h3>Prototipo</h3>
-        <p>Validamos dimensiones, materiales y funcionamiento.</p>
+      <div class="tr-app-item">
+        <i class="fa-solid fa-store"></i>
+        <span>Material P.O.P.</span>
       </div>
-      <div class="dd-step">
-        <div class="dd-step-num">4</div>
-        <h3>Producción</h3>
-        <p>Preparamos el proyecto para su fabricación.</p>
+      <div class="tr-app-item">
+        <i class="fa-solid fa-table-cells"></i>
+        <span>Separadores</span>
+      </div>
+      <div class="tr-app-item">
+        <i class="fa-solid fa-puzzle-piece"></i>
+        <span>Insertos</span>
+      </div>
+      <div class="tr-app-item">
+        <i class="fa-solid fa-bullhorn"></i>
+        <span>Piezas publicitarias</span>
+      </div>
+      <div class="tr-app-item">
+        <i class="fa-solid fa-gears"></i>
+        <span>Componentes personalizados</span>
       </div>
     </div>
   </div>
 </section>
+
+<!-- ══ VENTAJAS ══ -->
+<section class="tr-why">
+  <div class="tr-why-inner">
+    <h2>Ventajas</h2>
+    <div class="tr-why-grid">
+      <div class="tr-why-card">
+        <h3>Precisión</h3>
+        <p>Cortes definidos y uniformes.</p>
+      </div>
+      <div class="tr-why-card">
+        <h3>Repetibilidad</h3>
+        <p>Consistencia entre piezas.</p>
+      </div>
+      <div class="tr-why-card">
+        <h3>Productividad</h3>
+        <p>Optimización de procesos de fabricación.</p>
+      </div>
+      <div class="tr-why-card">
+        <h3>Personalización</h3>
+        <p>Geometrías adaptadas a cada proyecto.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PRE-BANNER ══ -->
+<div class="tr-pre-banner">
+  <h2>Cada corte cuenta</h2>
+  <p>Precisión &bull; Eficiencia &bull; Uniformidad &bull; Personalización</p>
+</div>
 
 <!-- ══ CTA BANNER ══ -->
-<div class="dd-cta-wrap">
-  <div class="dd-cta-banner">
-    <div class="dd-cta-inner">
-      <h2>¿Tienes una idea? Hagámosla realidad.</h2>
-      <a href="cotizar.html" class="dd-hero-btn">Cotizar Proyecto</a>
+<div class="tr-cta-wrap">
+  <div class="tr-cta-banner">
+    <div class="tr-cta-inner">
+      <h2>Convierte tu diseño en una pieza lista para producir.</h2>
+      <a href="cotizar.html" class="tr-btn">Solicitar Cotización</a>
     </div>
   </div>
 </div>
@@ -389,17 +420,14 @@
   </div>
 </footer>
 
-<!-- WHATSAPP FAB -->
 <a href="https://wa.me/573183820863" class="wa-fab" target="_blank" title="WhatsApp">
   <i class="fa-brands fa-whatsapp" style="color:#fff;font-size:2rem;"></i>
 </a>
-<!-- CATÁLOGOS FAB -->
 <a href="catalogos.html" class="catalogos-fab" title="Catálogos">
   <img src="img/catalogos-btn-140.webp" alt="Catálogos" width="70" height="203"/>
 </a>
 
 <script>
-  /* ── SEARCH ── */
   const searchBtn = document.getElementById('searchBtn');
   const searchOverlay = document.getElementById('searchOverlay');
   const searchInput = document.getElementById('searchInput');
@@ -415,6 +443,7 @@
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSearch(); });
 
   const SITE_PAGES = [
+    { title: 'Troquelado',                url: 'troquelado.html',               keywords: 'troquelado troquel corte perforado caja empaque separador inserto pieza' },
     { title: 'Diseño y Desarrollo',       url: 'diseno-desarrollo.html',        keywords: 'diseño desarrollo producto prototipo ingenieria concepto funcional fabricacion' },
     { title: 'Termoformado',              url: 'termoformado.html',             keywords: 'termoformado termico blister clamshell bandeja molde lamina plastico vacio presion' },
     { title: 'Impresión Digital',         url: 'impresion-digital.html',        keywords: 'impresion digital uv flatbed gran formato lona vinilo banner rotativa' },
@@ -473,7 +502,6 @@
     }
   });
 
-  /* ── HAMBURGER ── */
   const hamburger = document.getElementById('hamburger');
   const navLinks = document.querySelector('.nav-links');
   hamburger.addEventListener('click', (e) => {
@@ -490,7 +518,6 @@
     } catch(err) {}
   });
 
-  /* ── FABs: raise near footer ── */
   (function(){
     const fab = document.querySelector('.wa-fab');
     const footer = document.querySelector('footer');
@@ -507,72 +534,30 @@
   })();
 </script>
 
-<!-- COOKIE BANNER -->
 <script>
 (function(){
   var _ck = localStorage.getItem('disempack_consent');
   if(_ck){ try{ var _d=JSON.parse(_ck); if(new Date(_d.exp)>new Date()) return; }catch(e){} }
   var s = document.createElement('style');
-  s.textContent = [
-    '#ck{position:fixed;bottom:0;left:0;right:0;z-index:10000;background:#1c2f5e;',
-    'color:#c8d8f0;padding:1rem 2rem;display:flex;align-items:center;',
-    'justify-content:space-between;gap:1.2rem;flex-wrap:wrap;',
-    'box-shadow:0 -4px 20px rgba(0,0,0,.3);font-family:"Open Sans",sans-serif;',
-    'font-size:.82rem;line-height:1.6;',
-    'transform:translateY(100%);transition:transform .4s ease;}',
-    '#ck.show{transform:translateY(0);}',
-    '#ck a{color:#8dc63f;text-decoration:underline;}',
-    '#ck a:hover{color:#a5d95f;}',
-    '#ck-text{flex:1;min-width:200px;}',
-    '#ck-btns{display:flex;gap:.7rem;flex-shrink:0;}',
-    '.ck-acc{background:#8dc63f;color:#fff;border:none;font-family:inherit;',
-    'font-size:.82rem;font-weight:700;padding:.5rem 1.4rem;border-radius:4px;cursor:pointer;transition:background .2s;}',
-    '.ck-acc:hover{background:#75a832;}',
-    '.ck-dec{background:transparent;color:#a8bbd8;border:1px solid rgba(255,255,255,.2);',
-    'font-family:inherit;font-size:.82rem;padding:.5rem 1.2rem;border-radius:4px;cursor:pointer;transition:border-color .2s,color .2s;}',
-    '.ck-dec:hover{border-color:#8dc63f;color:#fff;}',
-    '@media(max-width:600px){#ck{padding:1rem 1.2rem;}#ck-btns{width:100%;justify-content:flex-end;}}'
-  ].join('');
+  s.textContent = ['#ck{position:fixed;bottom:0;left:0;right:0;z-index:10000;background:#1c2f5e;','color:#c8d8f0;padding:1rem 2rem;display:flex;align-items:center;','justify-content:space-between;gap:1.2rem;flex-wrap:wrap;','box-shadow:0 -4px 20px rgba(0,0,0,.3);font-family:"Open Sans",sans-serif;','font-size:.82rem;line-height:1.6;','transform:translateY(100%);transition:transform .4s ease;}','#ck.show{transform:translateY(0);}','#ck a{color:#8dc63f;text-decoration:underline;}','#ck a:hover{color:#a5d95f;}','#ck-text{flex:1;min-width:200px;}','#ck-btns{display:flex;gap:.7rem;flex-shrink:0;}','.ck-acc{background:#8dc63f;color:#fff;border:none;font-family:inherit;','font-size:.82rem;font-weight:700;padding:.5rem 1.4rem;border-radius:4px;cursor:pointer;transition:background .2s;}','.ck-acc:hover{background:#75a832;}','.ck-dec{background:transparent;color:#a8bbd8;border:1px solid rgba(255,255,255,.2);','font-family:inherit;font-size:.82rem;padding:.5rem 1.2rem;border-radius:4px;cursor:pointer;transition:border-color .2s,color .2s;}','.ck-dec:hover{border-color:#8dc63f;color:#fff;}','@media(max-width:600px){#ck{padding:1rem 1.2rem;}#ck-btns{width:100%;justify-content:flex-end;}}'].join('');
   document.head.appendChild(s);
-  var b = document.createElement('div');
-  b.id = 'ck';
-  var ckText = document.createElement('div');
-  ckText.id = 'ck-text';
-  var ckStrong = document.createElement('strong');
-  ckStrong.style.color = '#fff';
-  ckStrong.textContent = 'Este sitio usa cookies';
+  var b = document.createElement('div'); b.id = 'ck';
+  var ckText = document.createElement('div'); ckText.id = 'ck-text';
+  var ckStrong = document.createElement('strong'); ckStrong.style.color = '#fff'; ckStrong.textContent = 'Este sitio usa cookies';
   var ckMsg = document.createTextNode(' para mejorar tu experiencia. Al continuar aceptas nuestros ');
-  var ckLink1 = document.createElement('a');
-  ckLink1.href = 'terminos-condiciones.html';
-  ckLink1.textContent = 'Términos y Condiciones';
+  var ckLink1 = document.createElement('a'); ckLink1.href = 'terminos-condiciones.html'; ckLink1.textContent = 'Términos y Condiciones';
   var ckAnd = document.createTextNode(' y ');
-  var ckLink2 = document.createElement('a');
-  ckLink2.href = 'politica-privacidad.html';
-  ckLink2.textContent = 'Política de Privacidad';
+  var ckLink2 = document.createElement('a'); ckLink2.href = 'politica-privacidad.html'; ckLink2.textContent = 'Política de Privacidad';
   var ckDot = document.createTextNode('.');
-  ckText.appendChild(ckStrong);
-  ckText.appendChild(ckMsg);
-  ckText.appendChild(ckLink1);
-  ckText.appendChild(ckAnd);
-  ckText.appendChild(ckLink2);
-  ckText.appendChild(ckDot);
-  var ckBtns = document.createElement('div');
-  ckBtns.id = 'ck-btns';
-  var ckDec = document.createElement('button');
-  ckDec.className = 'ck-dec'; ckDec.id = 'ck-d'; ckDec.textContent = 'Solo esenciales';
-  var ckAcc = document.createElement('button');
-  ckAcc.className = 'ck-acc'; ckAcc.id = 'ck-a'; ckAcc.textContent = 'Aceptar todo';
-  ckBtns.appendChild(ckDec);
-  ckBtns.appendChild(ckAcc);
-  b.appendChild(ckText);
-  b.appendChild(ckBtns);
+  ckText.appendChild(ckStrong); ckText.appendChild(ckMsg); ckText.appendChild(ckLink1); ckText.appendChild(ckAnd); ckText.appendChild(ckLink2); ckText.appendChild(ckDot);
+  var ckBtns = document.createElement('div'); ckBtns.id = 'ck-btns';
+  var ckDec = document.createElement('button'); ckDec.className = 'ck-dec'; ckDec.id = 'ck-d'; ckDec.textContent = 'Solo esenciales';
+  var ckAcc = document.createElement('button'); ckAcc.className = 'ck-acc'; ckAcc.id = 'ck-a'; ckAcc.textContent = 'Aceptar todo';
+  ckBtns.appendChild(ckDec); ckBtns.appendChild(ckAcc);
+  b.appendChild(ckText); b.appendChild(ckBtns);
   document.body.appendChild(b);
   setTimeout(function(){ b.classList.add('show'); }, 400);
-  function dismiss(v){
-    var exp = new Date(); exp.setFullYear(exp.getFullYear()+1); localStorage.setItem('disempack_consent', JSON.stringify({v:v,exp:exp.toISOString()}));
-    b.style.transform = 'translateY(100%)';
-    setTimeout(function(){ b.remove(); }, 400);
-  }
+  function dismiss(v){ var exp = new Date(); exp.setFullYear(exp.getFullYear()+1); localStorage.setItem('disempack_consent', JSON.stringify({v:v,exp:exp.toISOString()})); b.style.transform = 'translateY(100%)'; setTimeout(function(){ b.remove(); }, 400); }
   document.getElementById('ck-a').onclick = function(){ dismiss('all'); };
   document.getElementById('ck-d').onclick = function(){ dismiss('essential'); };
 })();
