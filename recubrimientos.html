@@ -125,6 +125,7 @@
     .rc-essence-right img { width: 100%; border-radius: 6px; display: block; box-shadow: 0 4px 16px rgba(0,0,0,.1); }
 
     /* ── VIDEOS ── */
+    .rc-media-block { display: flex; flex-direction: column; }
     .rc-videos { padding: 4rem 2.5rem; background: #fff; }
     .rc-videos-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
     .rc-video-col { position: relative; border-radius: 10px; overflow: hidden; background: #000; aspect-ratio: 16/9; }
@@ -274,6 +275,7 @@
       .rc-carousel-item { flex: 0 0 50%; }
       .rc-videos-inner { grid-template-columns: 1fr; }
       .rc-tap-gallery-inner { grid-template-columns: repeat(3, 1fr); }
+      .rc-tap-gallery { order: -1; }
           .rc-hero-text-box { background: rgba(10,20,50,.45); }
       .rc-hero-text-box h1 { font-size: 1.8rem; }
       .rc-cta-overlay h2 { font-size: 1.3rem; }
@@ -387,6 +389,9 @@
   </div>
 </section>
 
+<!-- ══ VIDEOS + GALERÍA (wrapper para reordenar en mobile) ══ -->
+<div class="rc-media-block">
+
 <!-- ══ VIDEOS ══ -->
 <section class="rc-videos">
   <div class="rc-videos-inner">
@@ -421,6 +426,8 @@
     <img src="img/recubrimientos/tap-hundle-club-colombia.webp" alt="Tap Handle Club Colombia" loading="lazy"/>
   </div>
 </section>
+
+</div><!-- /rc-media-block -->
 
 <!-- ══ GALLERY ══ -->
 <section class="rc-gallery">
