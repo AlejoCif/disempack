@@ -189,10 +189,13 @@
     .tw-file-wrap {
       border: 2px dashed #c8d8f0; border-radius: 8px; padding: 1.2rem;
       text-align: center; cursor: pointer; transition: border-color .2s, background .2s;
-      background: #f7f9fc;
+      background: #f7f9fc; position: relative;
     }
     .tw-file-wrap:hover { border-color: #8dc63f; background: #f2fae8; }
-    .tw-file-wrap input[type="file"] { display: none; }
+    .tw-file-wrap input[type="file"] {
+      position: absolute; inset: 0; opacity: 0; cursor: pointer;
+      width: 100%; height: 100%; z-index: 1;
+    }
     .tw-file-label { font-size: .85rem; color: #777; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: .4rem; }
     .tw-file-label i { font-size: 1.6rem; color: #8dc63f; }
     .tw-file-name { font-size: .8rem; color: #1c2f5e; font-weight: 700; margin-top: .2rem; }
@@ -468,7 +471,7 @@
         <input type="text"  name="area"     placeholder="Área de interés (ej: Diseño Gráfico)"/>
 
         <div class="tw-file-wrap" id="twFileWrap">
-          <label class="tw-file-label" for="cvFile">
+          <label class="tw-file-label">
             <i class="fa-solid fa-cloud-arrow-up"></i>
             <span id="twFileText">Adjuntar C.V. (PDF, DOC, DOCX)</span>
           </label>
@@ -626,7 +629,6 @@
   const twFileText = document.getElementById('twFileText');
   const twFileName = document.getElementById('twFileName');
   if (cvFile) {
-    twFileWrap.addEventListener('click', () => cvFile.click());
     cvFile.addEventListener('change', function() {
       if (this.files[0]) {
         twFileText.textContent = 'Archivo seleccionado:';
